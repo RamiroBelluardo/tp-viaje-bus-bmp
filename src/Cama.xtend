@@ -1,0 +1,4 @@
+
+class Cama extends TipoAsiento{
+	
+}

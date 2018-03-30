@@ -1,0 +1,4 @@
+
+class Ejecutivo extends TipoAsiento{
+	
+}
