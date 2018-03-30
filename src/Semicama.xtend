@@ -1,4 +1,2 @@
-
-class Semicama extends TipoAsiento{
-	
+class Semicama extends TipoAsiento {
 }

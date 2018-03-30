@@ -17,7 +17,7 @@ class Viaje {
 	}
 
 	def precio() {
-		precioBase + precioServicios // + precioMicro + precioFinde
+		precioBase + precioServicios + precioMicro // + precioFinde
 	}
 
 	def precioBase() {
@@ -38,6 +38,13 @@ class Viaje {
 			res += s.precio
 		}
 		res
+	}
+
+	def precioMicro() {
+		/*
+		 * Retorna el precio del viaje con el porcentaje del tipo de asiento agregado.
+		 */
+		(precioBase + precioServicios) * micro.tipoDeAsiento.porcentaje / 100
 	}
 
 }
