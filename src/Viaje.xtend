@@ -46,5 +46,9 @@ class Viaje {
 		 */
 		(precioBase + precioServicios) * micro.tipoDeAsiento.porcentaje / 100
 	}
+	
+	def verAsientosDisponibles() {
+		micro.asientosDisponibles()
+	}
 
 }

@@ -17,4 +17,15 @@ class Micro {
 		this.tipoDeAsiento = tipoAsiento
 		this.tieneTele = tieneTele
 	}
+	
+	def agregarAsiento(Asiento asiento){
+		asiento.numero = asientos.size+1
+		asientos.add(asiento)
+	}
+	def asientosDisponibles() {
+		asientos
+				.filter [asiento| asiento.estaDisponible]
+		
+	}
+	
 }
