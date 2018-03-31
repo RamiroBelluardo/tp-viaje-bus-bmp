@@ -17,7 +17,7 @@ class Viaje {
 	}
 
 	def precio() {
-		precioBase + precioServicios + precioMicro // + precioFinde
+		precioBase + precioServicios + precioMicro + precioFinde
 	}
 
 	def precioBase() {
@@ -42,11 +42,31 @@ class Viaje {
 
 	def precioMicro() {
 		/*
-		 * Retorna el precio del viaje con el porcentaje del tipo de asiento agregado.
+		 * Retorna el precio adicional por el tipo de asiento.
 		 */
 		(precioBase + precioServicios) * micro.tipoDeAsiento.porcentaje / 100
 	}
-	
+
+	def precioFinde() {
+		/*
+		 * Retorna el precio adicional si es fin de semana.
+		 */
+		if (esFinde(fechaPartida)) {
+			(precioBase + precioServicios + precioMicro) * 10 / 100
+		}
+	}
+
+	def esFinde(LocalDateTime fechaPartida) {
+		/*
+		 * Retorna si la fecha por parametro es fin de semana.
+		 */
+		val int SABADO = 6;
+		val int DOMINGO = 7;
+
+		fechaPartida.getDayOfWeek() == SABADO || fechaPartida.getDayOfWeek() == DOMINGO
+
+	}
+
 	def verAsientosDisponibles() {
 		micro.asientosDisponibles()
 	}
