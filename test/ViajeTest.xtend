@@ -8,9 +8,9 @@ class ViajeTest {
 
 	public Viaje viaje
 	Viaje viaje2
-	LocalDateTime fechaPartida
+	public LocalDateTime fechaPartida
 	LocalDateTime fechaPartida2
-	LocalDateTime fechaLlegada
+	public LocalDateTime fechaLlegada
 	LocalDateTime fechaLlegada2
 	Micro micro
 	List<Servicio> servicios

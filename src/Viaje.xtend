@@ -4,8 +4,8 @@ import java.util.List
 
 class Viaje {
 
-	LocalDateTime fechaPartida
-	LocalDateTime fechaLlegada
+	public LocalDateTime fechaPartida
+	public LocalDateTime fechaLlegada
 	Micro micro
 	List<Servicio> servicios
 	public List<String> recorrido
