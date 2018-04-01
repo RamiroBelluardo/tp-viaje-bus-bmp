@@ -6,7 +6,7 @@ import static org.junit.Assert.*
 
 class ViajeTest {
 
-	Viaje viaje
+	public Viaje viaje
 	Viaje viaje2
 	LocalDateTime fechaPartida
 	LocalDateTime fechaPartida2
@@ -14,9 +14,11 @@ class ViajeTest {
 	LocalDateTime fechaLlegada2
 	Micro micro
 	List<Servicio> servicios
+	List<String> recorrido
 	Asiento asiento1
 	Asiento asiento2
 	Asiento asiento3
+	public List<Viaje> viajesTest
 
 	@Before
 	def void init() {
@@ -36,8 +38,14 @@ class ViajeTest {
 		servicios = newArrayList
 		servicios.add(new Almuerzo)
 		servicios.add(new Merienda)
-		viaje = new Viaje(fechaPartida, fechaLlegada, micro, servicios)
-		viaje2 = new Viaje(fechaPartida2, fechaLlegada2, micro, servicios)
+		recorrido = newArrayList
+		recorrido.add("Buenos Aires")
+		recorrido.add("Rio de Janeiro")
+		viaje = new Viaje(fechaPartida, fechaLlegada, micro, servicios, recorrido)
+		viaje2 = new Viaje(fechaPartida2, fechaLlegada2, micro, servicios, recorrido)
+		viajesTest = newArrayList
+		viajesTest.add(viaje)
+	// viajes.add(viaje2)
 	}
 
 	@Test

@@ -8,12 +8,15 @@ class Viaje {
 	LocalDateTime fechaLlegada
 	Micro micro
 	List<Servicio> servicios
+	public List<String> recorrido
 
-	new(LocalDateTime fechaPartida, LocalDateTime fechaLlegada, Micro micro, List<Servicio> servicios) {
+	new(LocalDateTime fechaPartida, LocalDateTime fechaLlegada, Micro micro, List<Servicio> servicios,
+		List<String> recorrido) {
 		this.fechaPartida = fechaPartida
 		this.fechaLlegada = fechaLlegada
 		this.micro = micro
-		this.servicios = servicios;
+		this.servicios = servicios
+		this.recorrido = recorrido
 	}
 
 	def precio() {
