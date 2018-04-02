@@ -1,6 +1,8 @@
 import org.junit.Test
 import org.junit.Before
 import static org.junit.Assert.*
+import ar.edu.unq.viajebus.TipoAsiento.Ejecutivo
+import ar.edu.unq.viajebus.Micro.Micro
 
 class MicroTest {
 

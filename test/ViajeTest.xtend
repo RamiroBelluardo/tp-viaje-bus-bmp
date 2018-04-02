@@ -4,6 +4,9 @@ import org.junit.Before
 import org.junit.Test
 import static org.junit.Assert.*
 import org.eclipse.xtend.lib.annotations.Accessors
+import ar.edu.unq.viajebus.Micro.*
+import ar.edu.unq.viajebus.Servicios.*
+import ar.edu.unq.viajebus.TipoAsiento.*
 
 @Accessors
 class ViajeTest {

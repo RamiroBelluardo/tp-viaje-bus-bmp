@@ -1,2 +1,0 @@
-class Semicama extends TipoAsiento {
-}

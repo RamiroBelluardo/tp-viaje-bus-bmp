@@ -2,6 +2,8 @@ import org.junit.Before
 import org.junit.Test
 import static org.junit.Assert.*
 import org.joda.time.LocalDateTime
+import ar.edu.unq.viajebus.Buscador.Buscador
+import ar.edu.unq.viajebus.Micro.*
 
 class BuscadorTest extends ViajeTest {
 

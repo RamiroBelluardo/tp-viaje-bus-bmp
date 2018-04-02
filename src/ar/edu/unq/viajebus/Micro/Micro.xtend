@@ -1,5 +1,8 @@
+package ar.edu.unq.viajebus.Micro
+
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
+import ar.edu.unq.viajebus.TipoAsiento.TipoAsiento
 
 @Accessors
 class Micro {

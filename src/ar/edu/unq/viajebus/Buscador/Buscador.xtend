@@ -1,5 +1,8 @@
+package ar.edu.unq.viajebus.Buscador
+
 import java.util.List
 import org.joda.time.LocalDateTime
+import ar.edu.unq.viajebus.Micro.Viaje
 
 class Buscador {
 	public List<Viaje> viajes

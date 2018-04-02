@@ -1,3 +1,5 @@
+package ar.edu.unq.viajebus.Cliente
+
 import org.eclipse.xtend.lib.annotations.Accessors
 
 @Accessors

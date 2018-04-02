@@ -1,7 +1,10 @@
+package ar.edu.unq.viajebus.Micro
+
 import org.joda.time.LocalDateTime
 import org.joda.time.Minutes
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
+import ar.edu.unq.viajebus.Servicios.Servicio
 
 @Accessors
 class Viaje {
