@@ -1,22 +1,23 @@
 import org.joda.time.LocalDateTime
 import org.joda.time.Minutes
 import java.util.List
+import org.eclipse.xtend.lib.annotations.Accessors
 
+@Accessors
 class Viaje {
 
-	public LocalDateTime fechaPartida
-	public LocalDateTime fechaLlegada
+	LocalDateTime fechaPartida
+	LocalDateTime fechaLlegada
 	Micro micro
 	List<Servicio> servicios
-	public List<String> recorrido
+	List<String> recorrido
 
-	new(LocalDateTime fechaPartida, LocalDateTime fechaLlegada, Micro micro, List<Servicio> servicios,
-		List<String> recorrido) {
+	new(LocalDateTime fechaPartida, LocalDateTime fechaLlegada, Micro micro) {
 		this.fechaPartida = fechaPartida
 		this.fechaLlegada = fechaLlegada
 		this.micro = micro
-		this.servicios = servicios
-		this.recorrido = recorrido
+		this.servicios = newArrayList
+		this.recorrido = newArrayList
 	}
 
 	def precio() {
@@ -54,12 +55,12 @@ class Viaje {
 		/*
 		 * Retorna el precio adicional si es fin de semana.
 		 */
-		if (esFinde(fechaPartida)) {
+		if (esFinde) {
 			(precioBase + precioServicios + precioMicro) * 10 / 100
 		}
 	}
 
-	def esFinde(LocalDateTime fechaPartida) {
+	def esFinde() {
 		/*
 		 * Retorna si la fecha por parametro es fin de semana.
 		 */
@@ -72,6 +73,14 @@ class Viaje {
 
 	def verAsientosDisponibles() {
 		micro.asientosDisponibles()
+	}
+
+	def agregarServicio(Servicio servicio) {
+		this.servicios.add(servicio)
+	}
+
+	def agregarCiudad(String ciudad) {
+		recorrido.add(ciudad)
 	}
 
 }
