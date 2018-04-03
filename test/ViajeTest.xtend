@@ -29,9 +29,7 @@ class ViajeTest {
 	def void init() {
 		asiento1 = new Asiento
 		asiento2 = new Asiento
-		asiento3 = new Asiento => [
-			reservar
-		]
+		asiento3 = new Asiento
 		fechaPartida = new LocalDateTime(2018, 03, 30, 12, 00) // Viernes
 		fechaPartida2 = new LocalDateTime(2018, 03, 31, 12, 00) // Sabado
 		fechaLlegada = new LocalDateTime(2018, 03, 30, 14, 00)
@@ -172,8 +170,18 @@ class ViajeTest {
 	@Test
 	def verCantidadDeAsientosDisponibles() {
 		viaje = new Viaje(fechaPartida, fechaLlegada, microCama)
-		assertEquals(viaje.verAsientosDisponibles.size(), 2, 0)
-		assertFalse(viaje.verAsientosDisponibles.size == 3)
+		assertEquals(viaje.verAsientosDisponibles.size(), 3)
+	}
+
+	@Test
+	def verCantidadDeAsientosReservados() {
+		viaje = new Viaje(fechaPartida, fechaLlegada, microCama)
+		assertEquals(viaje.verAsientosReservados.size(), 0)
+		assertEquals(viaje.verAsientosDisponibles.size(), 3)
+		viaje.micro.reservar(3)
+		assertEquals(viaje.verAsientosReservados.size(), 1)
+		assertEquals(viaje.verAsientosDisponibles.size(), 2)
+
 	}
 
 }

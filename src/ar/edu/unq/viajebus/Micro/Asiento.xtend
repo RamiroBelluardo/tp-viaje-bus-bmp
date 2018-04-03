@@ -6,12 +6,10 @@ import ar.edu.unq.viajebus.EstadoDeAsiento.Disponible
 
 @Accessors
 class Asiento {
-	int numero
-	//boolean disponibilidad
+	Integer numero
 	EstadoDeAsiento estado
 
 	new() {
-		//this.disponibilidad = true
 		this.estado = new Disponible
 	}
 	

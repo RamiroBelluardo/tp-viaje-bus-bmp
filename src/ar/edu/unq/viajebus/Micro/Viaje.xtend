@@ -77,6 +77,10 @@ class Viaje {
 	def verAsientosDisponibles() {
 		micro.asientosDisponibles()
 	}
+	
+	def verAsientosReservados(){
+		micro.asientosReservados
+	}
 
 //	def nrosDeAsientosDisponibles() {
 //		var List<Integer> nrosDisponibles = newArrayList
