@@ -5,6 +5,11 @@ import org.joda.time.Minutes
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import ar.edu.unq.viajebus.Servicios.Servicio
+import org.uqbar.commons.model.exceptions.UserException
+import EstadoDeViaje.EstadoDeViaje
+import EstadoDeViaje.Eliminado
+import EstadoDeViaje.Aprobado
+import EstadoDeViaje.ViajeCancelado
 
 @Accessors
 class Viaje {
@@ -14,6 +19,8 @@ class Viaje {
 	Micro micro
 	List<Servicio> servicios
 	List<String> recorrido
+	List<Pasaje> pasajes
+	EstadoDeViaje estado
 
 	new(LocalDateTime fechaPartida, LocalDateTime fechaLlegada, Micro micro) {
 		this.fechaPartida = fechaPartida
@@ -21,6 +28,8 @@ class Viaje {
 		this.micro = micro
 		this.servicios = newArrayList
 		this.recorrido = newArrayList
+		this.pasajes = newArrayList
+		this.estado = new Aprobado
 	}
 
 	def precio() {
@@ -77,8 +86,8 @@ class Viaje {
 	def verAsientosDisponibles() {
 		micro.asientosDisponibles()
 	}
-	
-	def verAsientosReservados(){
+
+	def verAsientosReservados() {
 		micro.asientosReservados
 	}
 
@@ -90,14 +99,24 @@ class Viaje {
 //		}
 //		nrosDisponibles
 //	}
-	
-
 	def agregarServicio(Servicio servicio) {
 		this.servicios.add(servicio)
 	}
 
 	def agregarCiudad(String ciudad) {
 		recorrido.add(ciudad)
+	}
+
+	def cancelar() {
+		this.estado.cancelar(this)
+	}
+
+	def eliminar() {
+		this.estado.eliminar(this)
+	}
+
+	def hayPasajesVendidos() {
+		!pasajes.isEmpty
 	}
 
 }

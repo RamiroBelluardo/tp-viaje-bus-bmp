@@ -7,6 +7,17 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import ar.edu.unq.viajebus.Micro.*
 import ar.edu.unq.viajebus.Servicios.*
 import ar.edu.unq.viajebus.TipoAsiento.*
+import ar.edu.unq.viajebus.Cliente.Cliente
+import ar.edu.unq.viajebus.EstadoDePasaje.ListoParaComprar
+import org.mockito.Mock
+import ar.edu.unq.viajebus.Mailing.GMailSender
+import org.mockito.MockitoAnnotations
+import ar.edu.unq.viajebus.EstadoDePasaje.Cancelado
+import EstadoDeViaje.Eliminado
+import ar.edu.unq.viajebus.EstadoDePasaje.Confirmado
+import EstadoDeViaje.Aprobado
+import EstadoDeViaje.ViajeCancelado
+import org.uqbar.commons.model.exceptions.UserException
 
 @Accessors
 class ViajeTest {
@@ -24,9 +35,14 @@ class ViajeTest {
 	Asiento asiento2
 	Asiento asiento3
 	List<Viaje> viajesTest
+	Pasaje pasaje
+	Cliente lucas
+	@Mock GMailSender notificador
 
 	@Before
 	def void init() {
+		MockitoAnnotations.initMocks(this)
+		GMailSender.config(notificador)
 		asiento1 = new Asiento
 		asiento2 = new Asiento
 		asiento3 = new Asiento
@@ -40,6 +56,7 @@ class ViajeTest {
 		microCama.agregarAsiento(asiento3)
 		microEjecutivo = new Micro("BBB222", new Ejecutivo, false)
 		microSemicama = new Micro("AB123AB", new Semicama, true)
+		lucas = new Cliente("Lucas", "Piergiacomi", "11.111.111", "lg.piergiacomi@gmail.com", "44445555")
 	}
 
 	@Test
@@ -181,7 +198,50 @@ class ViajeTest {
 		viaje.micro.reservar(3)
 		assertEquals(viaje.verAsientosReservados.size(), 1)
 		assertEquals(viaje.verAsientosDisponibles.size(), 2)
+	}
 
+	@Test
+	def alComprarPasajeSeAgregaAlViaje() {
+		viaje = new Viaje(fechaPartida, fechaLlegada, microCama)
+		pasaje = new Pasaje(lucas, viaje, 1)
+		assertEquals(viaje.pasajes.size, 0)
+		pasaje.confirmar
+		assertEquals(viaje.pasajes.get(0), pasaje)
+	}
+
+	@Test
+	def cancelarViajeSinPasaje() {
+		viaje = new Viaje(fechaPartida, fechaLlegada, microCama)
+		assertEquals(viaje.estado.class, Aprobado)
+		viaje.cancelar
+		assertEquals(viaje.estado.class, ViajeCancelado)
+	}
+
+	@Test
+	def cancelarViajeConPasaje() {
+		viaje = new Viaje(fechaPartida, fechaLlegada, microCama)
+		pasaje = new Pasaje(lucas, viaje, 1)
+		assertEquals(viaje.estado.class, Aprobado)
+		pasaje.confirmar
+		assertEquals(viaje.pasajes.get(0).estado.class, Confirmado)
+		viaje.cancelar
+		assertEquals(viaje.estado.class, ViajeCancelado)
+		assertEquals(viaje.pasajes.get(0).estado.class, Cancelado)
+	}
+
+	@Test
+	def eliminarViajeSinPasaje() {
+		viaje = new Viaje(fechaPartida, fechaLlegada, microCama)
+		viaje.eliminar
+		assertEquals(viaje.estado.class, Eliminado)
+	}
+
+	@Test(expected=UserException)
+	def void eliminarViajeConPasaje() {
+		viaje = new Viaje(fechaPartida, fechaLlegada, microCama)
+		pasaje = new Pasaje(lucas, viaje, 1)
+		pasaje.confirmar
+		viaje.eliminar
 	}
 
 }
