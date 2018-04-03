@@ -3,6 +3,7 @@ package ar.edu.unq.viajebus.Micro
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import ar.edu.unq.viajebus.TipoAsiento.TipoAsiento
+import ar.edu.unq.viajebus.EstadoDeAsiento.Disponible
 
 @Accessors
 class Micro {
@@ -25,8 +26,8 @@ class Micro {
 	}
 
 	def asientosDisponibles() {
-		asientos.filter[asiento|asiento.estaDisponible]
-
+		asientos.filter[asiento|asiento.estado instanceof Disponible]
 	}
+	
 
 }

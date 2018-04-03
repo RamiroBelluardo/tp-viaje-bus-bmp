@@ -18,6 +18,14 @@
 		</plugins>
 	</build>
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/org.uqbar-project/arena-xtend-parent -->
+		<dependency>
+			<groupId>org.uqbar-project</groupId>
+			<artifactId>arena-xtend-parent</artifactId>
+			<version>3.6.3</version>
+			<type>pom</type>
+		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/junit/junit -->
 		<dependency>
 			<groupId>junit</groupId>

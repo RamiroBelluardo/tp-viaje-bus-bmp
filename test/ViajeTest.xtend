@@ -30,7 +30,7 @@ class ViajeTest {
 		asiento1 = new Asiento
 		asiento2 = new Asiento
 		asiento3 = new Asiento => [
-			disponibilidad = false;
+			reservar
 		]
 		fechaPartida = new LocalDateTime(2018, 03, 30, 12, 00) // Viernes
 		fechaPartida2 = new LocalDateTime(2018, 03, 31, 12, 00) // Sabado

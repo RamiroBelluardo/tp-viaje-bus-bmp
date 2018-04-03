@@ -1,6 +1,8 @@
 package ar.edu.unq.viajebus.Cliente
 
 import org.eclipse.xtend.lib.annotations.Accessors
+import ar.edu.unq.viajebus.Micro.Viaje
+import ar.edu.unq.viajebus.Micro.Pasaje
 
 @Accessors
 class Cliente {
@@ -18,5 +20,7 @@ class Cliente {
 		this.mail = mail
 		this.telefono = telefono
 	}
+	
+
 	
 }

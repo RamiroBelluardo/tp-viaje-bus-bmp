@@ -78,6 +78,16 @@ class Viaje {
 		micro.asientosDisponibles()
 	}
 
+//	def nrosDeAsientosDisponibles() {
+//		var List<Integer> nrosDisponibles = newArrayList
+//
+//		for (Asiento a : micro.asientosDisponibles) {
+//			nrosDisponibles.add(a.numero)
+//		}
+//		nrosDisponibles
+//	}
+	
+
 	def agregarServicio(Servicio servicio) {
 		this.servicios.add(servicio)
 	}
