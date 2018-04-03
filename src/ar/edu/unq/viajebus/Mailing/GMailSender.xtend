@@ -55,13 +55,13 @@ class GMailSender {
 	}
 
 	def notificarCompraDePasaje(Pasaje pasaje) {
-		this.sendMail(pasaje.cliente.mail, "ViajeBus: Compra realizada con Exito", "Estimado/a " + pasaje.cliente.nombre +
-			", usted a efectuado la compra del siguiente Pasaje.\n\n numero de Asiento:"+ pasaje.asiento.numero + "\n\n fecha de partida:"+pasaje.viaje.fechaPartida +"\n\n precio: " +pasaje.viaje.precio+ "\n\nMuchas gracias por elegirnos!\n\n ViajeBus")
+		this.sendMail(pasaje.cliente.mail, "ViajeBus: Compra realizada con éxito", "Estimado/a " + pasaje.cliente.nombre +
+			", usted ha efectuado la compra del siguiente pasaje.\n\n Número de asiento:"+ pasaje.asiento.numero + "\n\n Fecha de partida:"+pasaje.viaje.fechaPartida +"\n\n Precio: " +pasaje.viaje.precio+ "\n\n Muchas gracias por elegirnos!\n\n ViajeBus")
 	}
 
 	def notificarCancelacionDePasaje(Pasaje pasaje) {
 		this.sendMail(pasaje.cliente.mail, "ViajeBus: Pasaje cancelado", "Estimado/a " + pasaje.cliente.nombre +
-			", lamento informale que el siguiente Pasaje ha sido cancelado. \n\n numero de Asiento:"+ pasaje.asiento.numero + "\n\n fecha de partida:"+pasaje.viaje.fechaPartida + "\n\n Disculpe las molestias y Muchas gracias por elegirnos!\n\n ViajeBus")
+			", lamento informale que el siguiente pasaje ha sido cancelado. \n\n numero de Asiento:"+ pasaje.asiento.numero + "\n\n fecha de partida:"+pasaje.viaje.fechaPartida + "\n\n Disculpe las molestias y muchas gracias por elegirnos!\n\n ViajeBus")
 	}
 
 		}

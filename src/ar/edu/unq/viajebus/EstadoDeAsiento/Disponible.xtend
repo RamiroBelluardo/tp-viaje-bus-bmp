@@ -5,13 +5,11 @@ import org.uqbar.commons.model.exceptions.UserException
 class Disponible extends EstadoDeAsiento{
 	
 	override proximo() {
-		// Manda mail
 		new Reservado
-		
 	}
 	
 	override previo() {
-		throw new UserException("El asiento se encuentra disponible")
+		throw new UserException("El asiento ya se encuentra disponible")
 	}
 	
 }

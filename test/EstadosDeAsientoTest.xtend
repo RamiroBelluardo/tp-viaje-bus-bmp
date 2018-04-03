@@ -6,11 +6,15 @@ import ar.edu.unq.viajebus.EstadoDeAsiento.Reservado
 import org.uqbar.commons.model.exceptions.UserException
 import ar.edu.unq.viajebus.EstadoDeAsiento.Disponible
 
+
+
 class EstadosDeAsientoTest {
 	Asiento asiento
+	
 
 	@Before
 	def void init() {
+
 		asiento = new Asiento()
 	}
 	

@@ -8,6 +8,7 @@ import ar.edu.unq.viajebus.EstadoDeAsiento.Disponible
 class Asiento {
 	Integer numero
 	EstadoDeAsiento estado
+	Micro micro
 
 	new() {
 		this.estado = new Disponible

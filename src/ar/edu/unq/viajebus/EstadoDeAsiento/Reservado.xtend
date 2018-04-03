@@ -9,8 +9,8 @@ class Reservado extends EstadoDeAsiento{
 	}
 	
 	override previo() {
-		// Manda mail
 		new Disponible
 	}
 	
+
 }
