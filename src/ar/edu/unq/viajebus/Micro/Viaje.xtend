@@ -65,7 +65,7 @@ class Viaje {
 
 	def esFinde() {
 		/*
-		 * Retorna si la fecha por parametro es fin de semana.
+		 * Retorna si la fecha de partida del viaje es fin de semana.
 		 */
 		val int SABADO = 6;
 		val int DOMINGO = 7;
