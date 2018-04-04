@@ -1,3 +1,5 @@
+package ar.edu.unq.viajebus.Test
+
 import java.util.List
 import org.joda.time.LocalDateTime
 import org.junit.Before

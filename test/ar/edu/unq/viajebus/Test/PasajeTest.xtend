@@ -1,3 +1,5 @@
+package ar.edu.unq.viajebus.Test
+
 import ar.edu.unq.viajebus.Cliente.Cliente
 import ar.edu.unq.viajebus.Micro.Viaje
 import org.junit.Before

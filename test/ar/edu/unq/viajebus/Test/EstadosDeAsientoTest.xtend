@@ -1,3 +1,5 @@
+package ar.edu.unq.viajebus.Test
+
 import ar.edu.unq.viajebus.Micro.Asiento
 import org.junit.Before
 import org.junit.Test
