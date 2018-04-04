@@ -18,6 +18,7 @@ class BuscadorTest extends ViajeTest {
 		viaje.agregarCiudad("Rio de Janeiro")
 		viajesTest = newArrayList
 		viajesTest.add(viaje)
+		viajeQueNoPaso = new Viaje(fechaPartida3, fechaLlegada3, microCama)
 		buscador = new Buscador => [
 			viajes = viajesTest
 		]
@@ -38,6 +39,11 @@ class BuscadorTest extends ViajeTest {
 	def buscarViajePorFechaLlegada() {
 		fecha = new LocalDateTime(2018, 03, 30, 14, 00)
 		assertEquals(buscador.buscarViajePorFechaLlegada(fecha).get(0), viaje)
+	}
+
+	@Test
+	def buscarViajesQueNoPasaron() {
+		assertEquals(buscador.buscarViajesQueNoPasaron.size, 1)
 	}
 
 }

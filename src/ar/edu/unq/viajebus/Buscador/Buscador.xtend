@@ -3,10 +3,11 @@ package ar.edu.unq.viajebus.Buscador
 import java.util.List
 import org.joda.time.LocalDateTime
 import ar.edu.unq.viajebus.Micro.Viaje
-
+import ar.edu.unq.viajebus.Micro.Pasaje
 
 class Buscador {
 	public List<Viaje> viajes
+	public List<Pasaje> pasajes
 
 	def buscarViajePorCiudad(String ciudad) {
 		viajes.filter[viajes|viajes.recorrido.contains(ciudad)]
@@ -24,4 +25,10 @@ class Buscador {
 			  .filter[viajes|viajes.fechaLlegada.getMonthOfYear.equals(fecha.getMonthOfYear)]
 			  .filter[viajes|viajes.fechaLlegada.getYear.equals(fecha.getYear)]
 	}
+	
+	def buscarViajesQueNoPasaron() {
+		val LocalDateTime now = LocalDateTime.now
+		viajes.filter[viajes | viajes.fechaPartida.isBefore(now)]
+	}
+	
 }

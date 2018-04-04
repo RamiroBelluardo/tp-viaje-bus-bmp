@@ -21,13 +21,16 @@ import org.uqbar.commons.model.exceptions.UserException
 
 @Accessors
 class ViajeTest {
-
+	
 	Viaje viaje
 	Viaje viajeFinde
+	Viaje viajeQueNoPaso
 	LocalDateTime fechaPartida
 	LocalDateTime fechaPartida2
+	LocalDateTime fechaPartida3
 	LocalDateTime fechaLlegada
 	LocalDateTime fechaLlegada2
+	LocalDateTime fechaLlegada3
 	Micro microCama
 	Micro microEjecutivo
 	Micro microSemicama
@@ -48,8 +51,10 @@ class ViajeTest {
 		asiento3 = new Asiento
 		fechaPartida = new LocalDateTime(2018, 03, 30, 12, 00) // Viernes
 		fechaPartida2 = new LocalDateTime(2018, 03, 31, 12, 00) // Sabado
+		fechaPartida3 = new LocalDateTime(2018, 07, 05, 10, 00)
 		fechaLlegada = new LocalDateTime(2018, 03, 30, 14, 00)
 		fechaLlegada2 = new LocalDateTime(2018, 03, 31, 14, 00)
+		fechaLlegada3 = new LocalDateTime(2018, 12, 13, 14, 00)
 		microCama = new Micro("AAA111", new Cama, false)
 		microCama.agregarAsiento(asiento1)
 		microCama.agregarAsiento(asiento2)
