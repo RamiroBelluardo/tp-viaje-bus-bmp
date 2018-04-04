@@ -144,7 +144,27 @@ class ViajeTest {
 		// Tiene almuerzo y cena = 240 + 50 = $290
 		// Es semicama (queda igual)
 		// No viaja fin de semana 
-		assertTrue(viaje.precio == 340)
+		assertTrue(viaje.precio == 290)
+	}
+
+	@Test
+	def calcularPrecioDeUnViajeConServicioDeDesayunoYMeriendaYNoViajaFinde() {
+		viaje = new Viaje(fechaPartida, fechaLlegada, microSemicama)
+		viaje.agregarServicio(new Desayuno)
+		viaje.agregarServicio(new Merienda)
+		// 120 min * 2 = $240
+		// Tiene almuerzo y cena = 240 + 30 = $270
+		// Es semicama (queda igual)
+		// No viaja fin de semana 
+		assertTrue(viaje.precio == 270)
+	}
+
+	@Test
+	def agregarElMismoServicio2Veces() {
+		viaje = new Viaje(fechaPartida, fechaLlegada, microSemicama)
+		viaje.agregarServicio(new Desayuno)
+		viaje.agregarServicio(new Desayuno)
+		assertEquals(viaje.servicios.size, 1)
 	}
 
 	@Test

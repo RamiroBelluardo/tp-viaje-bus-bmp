@@ -1,15 +1,17 @@
 package ar.edu.unq.viajebus.Micro
 
-import org.joda.time.LocalDateTime
-import org.joda.time.Minutes
+import EstadoDeViaje.Aprobado
+import EstadoDeViaje.Eliminado
+import EstadoDeViaje.EstadoDeViaje
+import EstadoDeViaje.ViajeCancelado
+import ar.edu.unq.viajebus.Servicios.Desayuno
+import ar.edu.unq.viajebus.Servicios.Servicio
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
-import ar.edu.unq.viajebus.Servicios.Servicio
+import org.joda.time.LocalDateTime
+import org.joda.time.Minutes
 import org.uqbar.commons.model.exceptions.UserException
-import EstadoDeViaje.EstadoDeViaje
-import EstadoDeViaje.Eliminado
-import EstadoDeViaje.Aprobado
-import EstadoDeViaje.ViajeCancelado
+import java.util.Set
 
 @Accessors
 class Viaje {
@@ -53,18 +55,18 @@ class Viaje {
 		for (Servicio s : servicios) {
 			res += s.precio
 		}
-		//Cuando salga del for deberiamos preguntar si tiene desayuno y merienda o cena y almuerzo y restar lo que corresponda
+		 
+		  		if (contieneDesayunoYMerienda) {
+		  			res -= 30
+		  		}
+
+		 		if (contieneAlmuerzoYCena) {
+		  			res -= 50
+		  		}
+		 
 		res
 	}
 
-	/*def precioServicios() {
-	 * 	//var double res = 0
-
-	 * 	for (Servicio s : servicios) {
-	 * 		res += s.precio
-	 * 	}
-	 * 	res
-	 }*/
 	def precioMicro() {
 		/*
 		 * Retorna el precio adicional por el tipo de asiento.
@@ -109,10 +111,36 @@ class Viaje {
 //		nrosDisponibles
 //	}
 	def agregarServicio(Servicio servicio) {
-		if (!servicios.contains(servicio)) {
-			this.servicios.add(servicio)
+		if (servicios.filter[servicio2|servicio2.nombre == servicio.nombre].isEmpty) {
+			servicios.add(servicio)
 		}
+	}
 
+	def findInstance(Set<Servicio> servicios, String className) {
+		var boolean tag = false;
+		for (var int i = 0; i < servicios.size(); i++) {
+			if (servicios.get(i).getClass().getName().equals(className)) {
+				tag = true;
+				i = servicios.size
+			}
+		}
+		return tag;
+	}
+
+	def contieneDesayunoYMerienda() {
+		val String desayuno = "Desayuno"
+		val String merienda = "Merienda"
+
+		!servicios.filter[servicio|servicio.nombre == desayuno].isEmpty  &&
+		!servicios.filter[servicio|servicio.nombre == merienda].isEmpty
+	}
+
+	def contieneAlmuerzoYCena() {
+		val String almuerzo = "Almuerzo"
+		val String cena = "Cena"
+
+		!servicios.filter[servicio|servicio.nombre == almuerzo].isEmpty  &&
+		!servicios.filter[servicio|servicio.nombre == cena].isEmpty  
 	}
 
 	def agregarCiudad(String ciudad) {
