@@ -63,7 +63,7 @@ class ViajeTest {
 	def calcularPrecioDeUnViajeSinServiciosTipoDeAsientoCamaYNoViajaFinde() {
 		// 120 min * 2 = $240
 		// No tiene servicios
-		// 10% más por ser cama = $264
+		// 10% mï¿½s por ser cama = $264
 		// No viaja fin de semana 
 		viaje = new Viaje(fechaPartida, fechaLlegada, microCama)
 		assertTrue(viaje.precio == 264)
@@ -73,7 +73,7 @@ class ViajeTest {
 	def calcularPrecioDeUnViajeSinServiciosTipoDeAsientoEjecutivoYNoViajaFinde() {
 		// 120 min * 2 = $240
 		// No tiene servicios
-		// 20% más por ser ejecutivo = $288
+		// 20% mï¿½s por ser ejecutivo = $288
 		// No viaja fin de semana 
 		viaje = new Viaje(fechaPartida, fechaLlegada, microEjecutivo)
 		assertTrue(viaje.precio == 288)
@@ -135,17 +135,18 @@ class ViajeTest {
 		assertTrue(viaje.precio == 290)
 	}
 
-//	@Test
-//	def calcularPrecioDeUnViajeConServicioDeAlmuerzoYCenaYNoViajaFinde() {
-//		viaje = new Viaje(fechaPartida, fechaLlegada, microSemicama)
-//		viaje.agregarServicio(new Almuerzo)
-//		viaje.agregarServicio(new Cena)
-//		// 120 min * 2 = $240
-//		// Tiene almuerzo y cena = 240 + 50 = $290
-//		// Es semicama (queda igual)
-//		// No viaja fin de semana 
-//		assertTrue(viaje.precio == 290)
-//	}
+	@Test
+	def calcularPrecioDeUnViajeConServicioDeAlmuerzoYCenaYNoViajaFinde() {
+		viaje = new Viaje(fechaPartida, fechaLlegada, microSemicama)
+		viaje.agregarServicio(new Almuerzo)
+		viaje.agregarServicio(new Cena)
+		// 120 min * 2 = $240
+		// Tiene almuerzo y cena = 240 + 50 = $290
+		// Es semicama (queda igual)
+		// No viaja fin de semana 
+		assertTrue(viaje.precio == 340)
+	}
+
 	@Test
 	def calcularPrecioDeUnViajeConServicioDeMeriendaYCenaYNoViajaFinde() {
 		viaje = new Viaje(fechaPartida, fechaLlegada, microSemicama)

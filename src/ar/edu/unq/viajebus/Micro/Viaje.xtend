@@ -53,9 +53,18 @@ class Viaje {
 		for (Servicio s : servicios) {
 			res += s.precio
 		}
+		//Cuando salga del for deberiamos preguntar si tiene desayuno y merienda o cena y almuerzo y restar lo que corresponda
 		res
 	}
 
+	/*def precioServicios() {
+	 * 	//var double res = 0
+
+	 * 	for (Servicio s : servicios) {
+	 * 		res += s.precio
+	 * 	}
+	 * 	res
+	 }*/
 	def precioMicro() {
 		/*
 		 * Retorna el precio adicional por el tipo de asiento.
@@ -100,7 +109,10 @@ class Viaje {
 //		nrosDisponibles
 //	}
 	def agregarServicio(Servicio servicio) {
-		this.servicios.add(servicio)
+		if (!servicios.contains(servicio)) {
+			this.servicios.add(servicio)
+		}
+
 	}
 
 	def agregarCiudad(String ciudad) {
