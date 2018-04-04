@@ -6,14 +6,14 @@ import java.util.List
 
 @Accessors
 class Cliente {
-	
+
 	String nombre
 	String apellido
 	String dni
 	String mail
 	String telefono
 	List<Pasaje> pasajes
-	
+
 	new(String nombre, String apellido, String dni, String mail, String telefono) {
 		this.nombre = nombre
 		this.apellido = apellido
@@ -22,11 +22,9 @@ class Cliente {
 		this.telefono = telefono
 		this.pasajes = newArrayList
 	}
-	
-	def agregarPasaje(Pasaje pasaje){
+
+	def agregarPasaje(Pasaje pasaje) {
 		this.pasajes.add(pasaje)
 	}
-	
 
-	
 }

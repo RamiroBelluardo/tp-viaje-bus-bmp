@@ -1,4 +1,4 @@
-package EstadoDeViaje
+package ar.edu.unq.viajebus.EstadoDeViaje
 
 import ar.edu.unq.viajebus.Micro.Viaje
 import org.uqbar.commons.model.exceptions.UserException

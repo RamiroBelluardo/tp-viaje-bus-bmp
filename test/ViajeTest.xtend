@@ -13,10 +13,10 @@ import org.mockito.Mock
 import ar.edu.unq.viajebus.Mailing.GMailSender
 import org.mockito.MockitoAnnotations
 import ar.edu.unq.viajebus.EstadoDePasaje.Cancelado
-import EstadoDeViaje.Eliminado
+import ar.edu.unq.viajebus.EstadoDeViaje.Eliminado
 import ar.edu.unq.viajebus.EstadoDePasaje.Confirmado
-import EstadoDeViaje.Aprobado
-import EstadoDeViaje.ViajeCancelado
+import ar.edu.unq.viajebus.EstadoDeViaje.Aprobado
+import ar.edu.unq.viajebus.EstadoDeViaje.ViajeCancelado
 import org.uqbar.commons.model.exceptions.UserException
 
 @Accessors
@@ -24,7 +24,6 @@ class ViajeTest {
 	
 	Viaje viaje
 	Viaje viajeFinde
-	Viaje viajeQueNoPaso
 	LocalDateTime fechaPartida
 	LocalDateTime fechaPartida2
 	LocalDateTime fechaPartida3

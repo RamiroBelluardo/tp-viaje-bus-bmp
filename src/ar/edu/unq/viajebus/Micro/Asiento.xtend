@@ -13,14 +13,13 @@ class Asiento {
 	new() {
 		this.estado = new Disponible
 	}
-	
+
 	def reservar() {
 		this.estado.siguiente(this)
 	}
-	
+
 	def liberar() {
 		this.estado.anterior(this)
 	}
-
 
 }

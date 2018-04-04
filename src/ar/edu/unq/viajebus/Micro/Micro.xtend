@@ -45,7 +45,7 @@ class Micro {
 	def reservar(Integer nroAsiento) {
 		asientos.filter[asiento|asiento.numero == nroAsiento].get(0).reservar
 	}
-	
+
 	def liberarAsiento(Integer nroAsiento) {
 		asientos.filter[asiento|asiento.numero == nroAsiento].get(0).liberar
 	}

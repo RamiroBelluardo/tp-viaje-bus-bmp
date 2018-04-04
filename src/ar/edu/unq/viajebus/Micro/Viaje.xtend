@@ -1,9 +1,6 @@
 package ar.edu.unq.viajebus.Micro
 
-import EstadoDeViaje.Aprobado
-import EstadoDeViaje.Eliminado
-import EstadoDeViaje.EstadoDeViaje
-import EstadoDeViaje.ViajeCancelado
+
 import ar.edu.unq.viajebus.Servicios.Desayuno
 import ar.edu.unq.viajebus.Servicios.Servicio
 import java.util.List
@@ -12,6 +9,8 @@ import org.joda.time.LocalDateTime
 import org.joda.time.Minutes
 import org.uqbar.commons.model.exceptions.UserException
 import java.util.Set
+import ar.edu.unq.viajebus.EstadoDeViaje.EstadoDeViaje
+import ar.edu.unq.viajebus.EstadoDeViaje.Aprobado
 
 @Accessors
 class Viaje {
@@ -114,17 +113,6 @@ class Viaje {
 		if (servicios.filter[servicio2|servicio2.nombre == servicio.nombre].isEmpty) {
 			servicios.add(servicio)
 		}
-	}
-
-	def findInstance(Set<Servicio> servicios, String className) {
-		var boolean tag = false;
-		for (var int i = 0; i < servicios.size(); i++) {
-			if (servicios.get(i).getClass().getName().equals(className)) {
-				tag = true;
-				i = servicios.size
-			}
-		}
-		return tag;
 	}
 
 	def contieneDesayunoYMerienda() {

@@ -9,6 +9,7 @@ class BuscadorTest extends ViajeTest {
 
 	Buscador buscador
 	LocalDateTime fecha
+	Viaje viajeQueNoPaso
 	Pasaje pasajeQueNoPaso
 
 	@Before
@@ -53,7 +54,6 @@ class BuscadorTest extends ViajeTest {
 	def buscarViajesQueNoPasaron() {
 		assertEquals(buscador.buscarViajesQueNoPasaron.size, 1)
 		assertEquals(buscador.buscarViajesQueNoPasaron.get(0), viajeQueNoPaso)
-
 	}
 
 	@Test
