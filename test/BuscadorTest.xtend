@@ -9,6 +9,7 @@ class BuscadorTest extends ViajeTest {
 
 	Buscador buscador
 	LocalDateTime fecha
+	Pasaje pasajeQueNoPaso
 
 	@Before
 	override void init() {
@@ -17,10 +18,17 @@ class BuscadorTest extends ViajeTest {
 		viaje.agregarCiudad("Buenos Aires")
 		viaje.agregarCiudad("Rio de Janeiro")
 		viajesTest = newArrayList
+		pasajesTest = newArrayList
+		pasaje = new Pasaje(lucas, viaje, 1)
+		pasajesTest.add(pasaje)
 		viajesTest.add(viaje)
 		viajeQueNoPaso = new Viaje(fechaPartida3, fechaLlegada3, microCama)
+		pasajeQueNoPaso = new Pasaje(lucas, viajeQueNoPaso, 1)
+		viajesTest.add(viajeQueNoPaso)
+		pasajesTest.add(pasajeQueNoPaso)
 		buscador = new Buscador => [
 			viajes = viajesTest
+			pasajes = pasajesTest
 		]
 	}
 
@@ -44,6 +52,13 @@ class BuscadorTest extends ViajeTest {
 	@Test
 	def buscarViajesQueNoPasaron() {
 		assertEquals(buscador.buscarViajesQueNoPasaron.size, 1)
+		assertEquals(buscador.buscarViajesQueNoPasaron.get(0), viajeQueNoPaso)
+
 	}
 
+	@Test
+	def buscarPasajeQueNoPasaron() {
+		assertEquals(buscador.buscarPasajesQueNoPasaron.size, 1)
+		assertEquals(buscador.buscarPasajesQueNoPasaron.get(0), pasajeQueNoPaso)
+	}
 }

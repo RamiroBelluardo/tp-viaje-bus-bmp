@@ -28,7 +28,14 @@ class Buscador {
 	
 	def buscarViajesQueNoPasaron() {
 		val LocalDateTime now = LocalDateTime.now
-		viajes.filter[viajes | viajes.fechaPartida.isBefore(now)]
+		viajes.filter[viajes | viajes.fechaPartida.isAfter(now)]
+	}
+	
+	def buscarPasajesQueNoPasaron() {
+		val LocalDateTime now = LocalDateTime.now
+		pasajes.filter[pasajes | pasajes.viaje.fechaPartida.isAfter(now)]
+	
 	}
 	
 }
+	

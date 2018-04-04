@@ -38,6 +38,7 @@ class ViajeTest {
 	Asiento asiento2
 	Asiento asiento3
 	List<Viaje> viajesTest
+	List<Pasaje> pasajesTest
 	Pasaje pasaje
 	Cliente lucas
 	@Mock GMailSender notificador
