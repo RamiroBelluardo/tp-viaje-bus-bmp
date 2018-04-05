@@ -38,7 +38,7 @@ class MicroTest {
 	def asientosDisponiblesDeUnMicro(){
 		assertEquals(microEjecutivo.asientosDisponibles.size(), 1)
 		assertEquals(microEjecutivo.asientosReservados.size(), 0)
-		microEjecutivo.reservar(1)
+		microEjecutivo.reservarAsiento(1)
 		assertEquals(microEjecutivo.asientosDisponibles.size(), 0)
 		assertEquals(microEjecutivo.asientosReservados.size(), 1)
 		

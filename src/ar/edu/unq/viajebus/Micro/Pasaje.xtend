@@ -33,7 +33,7 @@ class Pasaje {
 	def confirmar() {
 		this.viaje.pasajes.add(this)
 		this.estado.siguiente(this)
-		this.viaje.micro.reservar(this.asiento.numero)
+		this.viaje.micro.reservarAsiento(this.asiento.numero)
 	}
 
 }

@@ -101,14 +101,6 @@ class Viaje {
 		micro.asientosReservados
 	}
 
-//	def nrosDeAsientosDisponibles() {
-//		var List<Integer> nrosDisponibles = newArrayList
-//
-//		for (Asiento a : micro.asientosDisponibles) {
-//			nrosDisponibles.add(a.numero)
-//		}
-//		nrosDisponibles
-//	}
 	def agregarServicio(Servicio servicio) {
 		if (servicios.filter[servicio2|servicio2.nombre == servicio.nombre].isEmpty) {
 			servicios.add(servicio)
@@ -132,7 +124,9 @@ class Viaje {
 	}
 
 	def agregarCiudad(String ciudad) {
-		recorrido.add(ciudad)
+		if (recorrido.filter[ciu|ciu == ciudad].isEmpty) {
+			recorrido.add(ciudad)
+		}
 	}
 
 	def cancelar() {

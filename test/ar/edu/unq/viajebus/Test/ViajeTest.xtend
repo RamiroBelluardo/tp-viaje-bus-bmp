@@ -223,7 +223,7 @@ class ViajeTest {
 		viaje = new Viaje(fechaPartida, fechaLlegada, microCama)
 		assertEquals(viaje.verAsientosReservados.size(), 0)
 		assertEquals(viaje.verAsientosDisponibles.size(), 3)
-		viaje.micro.reservar(3)
+		viaje.micro.reservarAsiento(3)
 		assertEquals(viaje.verAsientosReservados.size(), 1)
 		assertEquals(viaje.verAsientosDisponibles.size(), 2)
 	}
@@ -270,6 +270,17 @@ class ViajeTest {
 		pasaje = new Pasaje(lucas, viaje, 1)
 		pasaje.confirmar
 		viaje.eliminar
+	}
+	
+	@Test
+	def void agregarMismaCiudadDosVeces(){
+		viaje = new Viaje(fechaPartida, fechaLlegada, microCama)
+		assertEquals(viaje.recorrido.size, 0)
+		viaje.agregarCiudad("Buenos Aires")
+		assertEquals(viaje.recorrido.size, 1)
+		assertEquals(viaje.recorrido.get(0), "Buenos Aires")
+		viaje.agregarCiudad("Buenos Aires")
+		assertEquals(viaje.recorrido.size, 1)
 	}
 
 }
