@@ -1,25 +1,33 @@
 package ar.edu.unq.viajebus.Test
 
+import ar.edu.unq.viajebus.Cliente.Cliente
+import ar.edu.unq.viajebus.EstadoDePasaje.Cancelado
+import ar.edu.unq.viajebus.EstadoDePasaje.Confirmado
+import ar.edu.unq.viajebus.EstadoDeViaje.Aprobado
+import ar.edu.unq.viajebus.EstadoDeViaje.Eliminado
+import ar.edu.unq.viajebus.EstadoDeViaje.ViajeCancelado
+import ar.edu.unq.viajebus.Mailing.GMailSender
+import ar.edu.unq.viajebus.Micro.Asiento
+import ar.edu.unq.viajebus.Micro.Micro
+import ar.edu.unq.viajebus.Micro.Pasaje
+import ar.edu.unq.viajebus.Micro.Viaje
+import ar.edu.unq.viajebus.Servicios.Almuerzo
+import ar.edu.unq.viajebus.Servicios.Cena
+import ar.edu.unq.viajebus.Servicios.Desayuno
+import ar.edu.unq.viajebus.Servicios.Merienda
+import ar.edu.unq.viajebus.TipoAsiento.Cama
+import ar.edu.unq.viajebus.TipoAsiento.Ejecutivo
+import ar.edu.unq.viajebus.TipoAsiento.Semicama
 import java.util.List
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.joda.time.LocalDateTime
 import org.junit.Before
 import org.junit.Test
-import static org.junit.Assert.*
-import org.eclipse.xtend.lib.annotations.Accessors
-import ar.edu.unq.viajebus.Micro.*
-import ar.edu.unq.viajebus.Servicios.*
-import ar.edu.unq.viajebus.TipoAsiento.*
-import ar.edu.unq.viajebus.Cliente.Cliente
-import ar.edu.unq.viajebus.EstadoDePasaje.ListoParaComprar
 import org.mockito.Mock
-import ar.edu.unq.viajebus.Mailing.GMailSender
 import org.mockito.MockitoAnnotations
-import ar.edu.unq.viajebus.EstadoDePasaje.Cancelado
-import ar.edu.unq.viajebus.EstadoDeViaje.Eliminado
-import ar.edu.unq.viajebus.EstadoDePasaje.Confirmado
-import ar.edu.unq.viajebus.EstadoDeViaje.Aprobado
-import ar.edu.unq.viajebus.EstadoDeViaje.ViajeCancelado
 import org.uqbar.commons.model.exceptions.UserException
+
+import static org.junit.Assert.*
 
 @Accessors
 class ViajeTest {

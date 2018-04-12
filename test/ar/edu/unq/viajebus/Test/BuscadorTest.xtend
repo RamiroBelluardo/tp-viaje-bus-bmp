@@ -1,11 +1,13 @@
 package ar.edu.unq.viajebus.Test
 
+import ar.edu.unq.viajebus.Buscador.Buscador
+import ar.edu.unq.viajebus.Micro.Pasaje
+import ar.edu.unq.viajebus.Micro.Viaje
+import org.joda.time.LocalDateTime
 import org.junit.Before
 import org.junit.Test
+
 import static org.junit.Assert.*
-import org.joda.time.LocalDateTime
-import ar.edu.unq.viajebus.Buscador.Buscador
-import ar.edu.unq.viajebus.Micro.*
 
 class BuscadorTest extends ViajeTest {
 

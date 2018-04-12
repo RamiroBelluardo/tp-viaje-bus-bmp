@@ -1,16 +1,12 @@
 package ar.edu.unq.viajebus.Micro
 
-
-import ar.edu.unq.viajebus.Servicios.Desayuno
+import ar.edu.unq.viajebus.EstadoDeViaje.Aprobado
+import ar.edu.unq.viajebus.EstadoDeViaje.EstadoDeViaje
 import ar.edu.unq.viajebus.Servicios.Servicio
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.joda.time.LocalDateTime
 import org.joda.time.Minutes
-import org.uqbar.commons.model.exceptions.UserException
-import java.util.Set
-import ar.edu.unq.viajebus.EstadoDeViaje.EstadoDeViaje
-import ar.edu.unq.viajebus.EstadoDeViaje.Aprobado
 
 @Accessors
 class Viaje {

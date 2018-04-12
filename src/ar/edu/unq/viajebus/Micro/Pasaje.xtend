@@ -1,12 +1,9 @@
 package ar.edu.unq.viajebus.Micro
 
 import ar.edu.unq.viajebus.Cliente.Cliente
-import org.eclipse.xtend.lib.annotations.Accessors
 import ar.edu.unq.viajebus.EstadoDePasaje.EstadoDePasaje
-import ar.edu.unq.viajebus.EstadoDePasaje.Cancelado
-import ar.edu.unq.viajebus.EstadoDePasaje.Confirmado
 import ar.edu.unq.viajebus.EstadoDePasaje.ListoParaComprar
-import ar.edu.unq.viajebus.Mailing.GMailSender
+import org.eclipse.xtend.lib.annotations.Accessors
 
 @Accessors
 class Pasaje {
