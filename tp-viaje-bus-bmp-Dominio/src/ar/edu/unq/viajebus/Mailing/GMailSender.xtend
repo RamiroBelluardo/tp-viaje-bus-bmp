@@ -26,7 +26,6 @@ class GMailSender {
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to))
 			message.subject = subject
 			message.text = text
-
 			Transport.send(message)
 
 		} catch (MessagingException e) {
