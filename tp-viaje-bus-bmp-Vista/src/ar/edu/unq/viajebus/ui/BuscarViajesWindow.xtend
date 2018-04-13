@@ -30,95 +30,83 @@ class BuscarViajesWindow extends TransactionalDialog<BuscadorViajes> {
 		this.createGridActions(mainPanel)
 	}
 
+	def crearLabelYTextBox(Panel panel, String texto, String valor) {
+		new Label(panel) => [
+			text = texto
+			foreground = Color.BLUE
+		]
+
+		new TextBox(panel) => [
+			// value <=> valor
+			width = 200
+		]
+	}
+
 	override protected createFormPanel(Panel mainPanel) {
+
 		val searchFormPanel = new Panel(mainPanel) => [
 			layout = new ColumnLayout(2)
 		]
 
-		new Label(searchFormPanel) => [
-			text = "Ciudad:"
-			foreground = Color.BLUE
-		]
-
-		new TextBox(searchFormPanel) => [
-			//value <=> "example.recorrido"
-			width = 200
-		]
-
-		new Label(searchFormPanel) => [
-			text = "Partida:"
-			foreground = Color.BLUE
-		]
-
-		new TextBox(searchFormPanel) => [
-			//value <=> "example.fechaPartida"
-			width = 200
-		]
-
-		new Label(searchFormPanel) => [
-			text = "Llegada:"
-			foreground = Color.BLUE
-		]
-
-		new TextBox(searchFormPanel) => [
-			//value <=> "example.fechaLlegada"
-			width = 200
-		]
+		crearLabelYTextBox(searchFormPanel, "Ciudad:", "FALTA COMPLETAR")
+		crearLabelYTextBox(searchFormPanel, "Partida:", "FALTA COMPLETAR")
+		crearLabelYTextBox(searchFormPanel, "Llegada:", "FALTA COMPLETAR")
 	}
 
 	override protected addActions(Panel actionsPanel) {
 		new Button(actionsPanel) => [
 			caption = "Buscar"
-			//onClick[modelObject.search]
+			// onClick[modelObject.search]
 			disableOnError
 		]
 	}
 
 	def createResultsGrid(Panel mainPanel) {
 		var table = new Table<Viaje>(mainPanel, Viaje) => [
-			//items <=> "resultados"
-			//value <=> "viajeSeleccionado"
+			// items <=> "resultados"
+			// value <=> "viajeSeleccionado"
 		]
 		this.describeResultsGrid(table)
 	}
 
 	def void describeResultsGrid(Table<Viaje> table) {
+
 		new Column<Viaje>(table) => [
 			title = "Partida"
-			//bindContentsToProperty("fechaPartida")
+			// bindContentsToProperty("fechaPartida")
 			fixedSize = 200
 		]
 
 		new Column<Viaje>(table) => [
 			title = "Destino"
-			//bindContentsToProperty("destino")
+			// bindContentsToProperty("destino")
 			fixedSize = 200
 		]
 
 		new Column<Viaje>(table) => [
 			title = "Micro"
-			//bindContentsToProperty("micro")
+			// bindContentsToProperty("micro")
 			fixedSize = 100
 		]
 
 		new Column<Viaje>(table) => [
 			title = "Precio"
-			//bindContentsToProperty("precio")
+			// bindContentsToProperty("precio")
 			fixedSize = 100
 		]
 	}
-	
-	def void createGridActions(Panel mainPanel){
-		
+
+	def void createGridActions(Panel mainPanel) {
+
 		val actionsPanel = new Panel(mainPanel).layout = new HorizontalLayout
-		
+
 		new Button(actionsPanel) => [
 			caption = "Aceptar"
 			onClick[this.accept]
 			setAsDefault
 			disableOnError
 		]
-		
+
 		new Button(actionsPanel) => [
 			caption = "Cancelar"
 			onClick[this.cancel]
