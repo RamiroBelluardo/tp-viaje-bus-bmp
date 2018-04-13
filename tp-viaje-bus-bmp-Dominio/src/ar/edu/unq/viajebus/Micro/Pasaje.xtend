@@ -4,8 +4,10 @@ import ar.edu.unq.viajebus.Cliente.Cliente
 import ar.edu.unq.viajebus.EstadoDePasaje.EstadoDePasaje
 import ar.edu.unq.viajebus.EstadoDePasaje.ListoParaComprar
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.uqbar.commons.model.annotations.Observable
 
 @Accessors
+@Observable
 class Pasaje {
 
 	Cliente cliente
