@@ -7,9 +7,12 @@ import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.joda.time.LocalDateTime
 import org.joda.time.Minutes
+import org.uqbar.commons.model.Entity
+import org.uqbar.commons.model.annotations.Observable
 
 @Accessors
-class Viaje {
+@Observable
+class Viaje extends Entity implements Cloneable{
 
 	LocalDateTime fechaPartida
 	LocalDateTime fechaLlegada
