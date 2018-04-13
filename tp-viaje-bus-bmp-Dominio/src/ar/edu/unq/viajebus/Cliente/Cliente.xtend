@@ -12,6 +12,7 @@ class Cliente {
 	String dni
 	String mail
 	String telefono
+	
 	List<Pasaje> pasajes
 
 	new(String nombre, String apellido, String dni, String mail, String telefono) {
