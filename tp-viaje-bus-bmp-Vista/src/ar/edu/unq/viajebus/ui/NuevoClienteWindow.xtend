@@ -1,19 +1,16 @@
 package ar.edu.unq.viajebus.ui
 
 import applicationModel.ClienteAppModel
+import java.awt.Color
+import org.uqbar.arena.aop.windows.TransactionalDialog
 import org.uqbar.arena.layout.ColumnLayout
-import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.TextBox
-import org.uqbar.arena.windows.Dialog
 import org.uqbar.arena.windows.WindowOwner
-import java.awt.Color
-import ar.edu.unq.viajebus.ui.BuscarViajesWindow
-import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 
-class NuevoClienteWindow extends Dialog<ClienteAppModel> {
+class NuevoClienteWindow extends TransactionalDialog<ClienteAppModel> {
 
 	new(WindowOwner parent) {
 		super(parent, new ClienteAppModel)

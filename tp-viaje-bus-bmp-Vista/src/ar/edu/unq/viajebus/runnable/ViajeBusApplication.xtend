@@ -5,6 +5,7 @@ import ar.edu.unq.viajebus.ui.BuscarViajesWindow
 import ar.edu.unq.viajebus.ui.PantallaPrincipalWindow
 import ar.edu.unq.viajebus.ui.NuevoClienteWindow
 import ar.edu.unq.viajebus.Cliente.Cliente
+import ar.edu.unq.viajebus.ui.VerPasajeWindow
 
 class ViajeBusApplication extends Application {
 
@@ -13,7 +14,7 @@ class ViajeBusApplication extends Application {
 	}
 
 	override protected createMainWindow() {
-		new BuscarViajesWindow(this)
+		new VerPasajeWindow(this)
 	}
 
 }
