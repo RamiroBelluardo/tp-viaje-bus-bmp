@@ -11,7 +11,6 @@ import org.uqbar.arena.windows.Dialog
 import org.uqbar.arena.windows.WindowOwner
 import java.awt.Color
 import ar.edu.unq.viajebus.ui.BuscarViajesWindow
-
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 
 class NuevoClienteWindow extends Dialog<ClienteAppModel> {
