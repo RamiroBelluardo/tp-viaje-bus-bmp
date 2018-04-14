@@ -13,7 +13,6 @@ import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.widgets.tables.Column
 import org.uqbar.arena.widgets.tables.Table
 import org.uqbar.arena.windows.WindowOwner
-
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 
 class BuscarViajesWindow extends TransactionalDialog<BuscadorViajes> {

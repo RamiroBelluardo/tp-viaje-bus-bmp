@@ -10,6 +10,7 @@ import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.Selector
 import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.windows.WindowOwner
+import org.uqbar.arena.layout.HorizontalLayout
 
 class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 
@@ -28,6 +29,7 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 
 		new Button(panelClientes) => [
 			caption = "Nuevo"
+			onClick[nuevoCliente]
 		]
 
 		new Selector(panelClientes) => [
@@ -65,6 +67,25 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 
 		crearAsientos(panelAsientos, 24)
 
+		createGridActions(mainPanel)
+
+	}
+
+	def void createGridActions(Panel mainPanel) {
+
+		val actionsPanel = new Panel(mainPanel).layout = new HorizontalLayout
+
+		new Button(actionsPanel) => [
+			caption = "Aceptar"
+			onClick[this.accept]
+			setAsDefault
+			disableOnError
+		]
+
+		new Button(actionsPanel) => [
+			caption = "Cancelar"
+			onClick[this.cancel]
+		]
 	}
 
 	def crearAsientos(Panel panel, int nroAsientos) {
@@ -72,6 +93,10 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 			new Label(panel).text = i.toString
 			new CheckBox(panel) => []
 		}
+	}
+
+	def nuevoCliente() {
+		PantallaPrincipalWindow.openDialog(new NuevoClienteWindow(this))
 	}
 
 }

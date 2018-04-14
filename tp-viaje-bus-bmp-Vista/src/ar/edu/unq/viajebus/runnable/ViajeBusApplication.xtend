@@ -15,7 +15,7 @@ class ViajeBusApplication extends Application {
 	}
 
 	override protected createMainWindow() {
-		new CrearPasajeWindow(this)
+		new PantallaPrincipalWindow(this)
 	}
 
 }

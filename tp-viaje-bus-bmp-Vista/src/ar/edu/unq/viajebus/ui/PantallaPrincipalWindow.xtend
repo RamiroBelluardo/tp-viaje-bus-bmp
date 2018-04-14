@@ -12,6 +12,7 @@ import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.widgets.Label
 import ar.edu.unq.viajebus.Micro.Pasaje
+import org.uqbar.arena.windows.Dialog
 
 class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 
@@ -157,13 +158,27 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 		panelButtons.layout = new VerticalLayout
 		new Button(panelButtons) => [
 			caption = "Crear"
+			onClick[crearPasaje]
 		]
 		new Button(panelButtons) => [
 			caption = "Ver"
+			onClick[verPasaje]
 		]
 		new Button(panelButtons) => [
 			caption = "Cancelar"
 		]
+	}
+
+	def crearPasaje() {
+		openDialog(new CrearPasajeWindow(this))
+	}
+
+	def verPasaje() {
+		openDialog(new VerPasajeWindow(this))
+	}
+
+	def static openDialog(Dialog<?> dialog) {
+		dialog.open
 	}
 
 	override protected addActions(Panel actionsPanel) {
