@@ -20,60 +20,82 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 	}
 
 	override protected createFormPanel(Panel mainPanel) {
-		val panelClientes = new Panel(mainPanel)
-		panelClientes.layout = new ColumnLayout(2)
+		mainPanel.layout = new HorizontalLayout
+		val panelIzquierdo = new Panel(mainPanel)
+		val panelDerecho = new Panel(mainPanel)
 
-		new Label(panelClientes) => [
-			text = "Cliente"
+		val panelCliente = new Panel(panelIzquierdo) => [
+			layout = new ColumnLayout(2)
 		]
 
-		new Button(panelClientes) => [
+		new Label(panelCliente) => [
+			text = "Cliente"
+			fontSize = 15
+		]
+
+		new Button(panelCliente) => [
 			caption = "Nuevo"
+			width = 100
 			onClick[nuevoCliente]
 		]
 
-		new Selector(panelClientes) => [
+		new Selector(panelIzquierdo) => [
 			allowNull = false
 		]
 
-		val panelViajes = new Panel(mainPanel)
-		panelViajes.layout = new ColumnLayout(2)
+		val panelViaje = new Panel(panelIzquierdo) => [
+			layout = new ColumnLayout(2)
+		]
 
-		new Label(panelViajes) => [
+		new Label(panelViaje) => [
 			text = "Viaje"
+			fontSize = 15
 		]
 
-		new Button(panelViajes) => [
+		new Button(panelViaje) => [
 			caption = "Buscar"
+			width = 100
 		]
 
-		new TextBox(panelViajes) => []
+		new TextBox(panelViaje) => [
+			width = 100
+		]
 
-		val panelPrecios = new Panel(mainPanel)
-		panelPrecios.layout = new ColumnLayout(2)
-
+		val panelPrecios = new Panel(panelIzquierdo) => [
+			layout = new ColumnLayout(2)
+		]
 		new Label(panelPrecios) => [
 			text = "Precio"
+			fontSize = 15
 		]
 
 		new TextBox(panelPrecios) => []
 
-		new Label(mainPanel) => [
-			text = "Asiento:"
+		val panelAsiento = new Panel(panelDerecho) => [
+			layout = new ColumnLayout(2)
 		]
 
-		val panelAsientos = new Panel(mainPanel)
-		panelAsientos.layout = new ColumnLayout(8)
+		new Label(panelAsiento) => [
+			text = "Asiento:"
+			fontSize = 15
+		]
 
+		new Label(panelAsiento) => [
+			text = "12"
+			fontSize = 15
+		]
+
+		val panelAsientos = new Panel(panelDerecho)
+		panelAsientos.layout = new ColumnLayout(8)
 		crearAsientos(panelAsientos, 24)
 
-		createGridActions(mainPanel)
+		createGridActions(panelDerecho)
 
 	}
 
-	def void createGridActions(Panel mainPanel) {
+	def void createGridActions(Panel panel) {
 
-		val actionsPanel = new Panel(mainPanel).layout = new HorizontalLayout
+		val actionsPanel = new Panel(panel).layout = new ColumnLayout(2)
 
 		new Button(actionsPanel) => [
 			caption = "Aceptar"
