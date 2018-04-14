@@ -30,7 +30,7 @@ class BuscarViajesWindow extends TransactionalDialog<BuscadorViajes> {
 		this.createGridActions(mainPanel)
 	}
 
-	def crearLabelYTextBox(Panel panel, String texto, String valor) {
+	def static crearLabelYTextBox(Panel panel, String texto, String valor) {
 		new Label(panel) => [
 			text = texto
 			foreground = Color.BLUE
@@ -39,6 +39,7 @@ class BuscarViajesWindow extends TransactionalDialog<BuscadorViajes> {
 		new TextBox(panel) => [
 			// value <=> valor
 			width = 200
+
 		]
 	}
 
