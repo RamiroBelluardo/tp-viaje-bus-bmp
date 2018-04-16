@@ -144,9 +144,12 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 		panelButtons.layout = new VerticalLayout
 		new Button(panelButtons) => [
 			caption = "Crear"
+			onClick[crearViaje]
+			
 		]
 		new Button(panelButtons) => [
 			caption = "Editar"
+			onClick[editarViaje]
 		]
 		new Button(panelButtons) => [
 			caption = "Eliminar"
@@ -176,7 +179,12 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 	def verPasaje() {
 		openDialog(new VerPasajeWindow(this))
 	}
-
+	def crearViaje() {
+		openDialog(new CrearViajeWindow(this))
+	}
+	def editarViaje(){
+		openDialog(new EditarViajeWindow(this))
+	}
 	def static openDialog(Dialog<?> dialog) {
 		dialog.open
 	}
