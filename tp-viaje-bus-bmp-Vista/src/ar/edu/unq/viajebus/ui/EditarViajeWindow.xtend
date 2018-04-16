@@ -74,21 +74,27 @@ class EditarViajeWindow extends TransactionalDialog<ViajeAppModel> {
 
 		new TextBox(panelInfo) => [
 			fontSize = 10
+			width = 200
 		]
 		new Label(panelInfo) => [
 			text = "Llegada"
 			fontSize = 15
+
 		]
 
 		new TextBox(panelInfo) => [
 			fontSize = 10
+			width = 200
+
 		]
 		new Label(panelInfo) => [
 			text = "Micro"
 			fontSize = 15
 		]
 
-		new Selector(panelInfo) => []
+		new Selector(panelInfo) => [
+			width = 150
+		]
 		new Label(panelInfo) => [
 			text = "Servicios:"
 			fontSize = 15
@@ -114,11 +120,12 @@ class EditarViajeWindow extends TransactionalDialog<ViajeAppModel> {
 			text = "Cena"
 		]
 		new Label(panelInfo) => [
-			text = "Precio:"
+			text = "Precio Final:"
 			fontSize = 15
 		]
 		new TextBox(panelInfo) => [
 			fontSize = 10
+			width = 50
 		]
 		createGridActions(panelDerecho)
 	}
