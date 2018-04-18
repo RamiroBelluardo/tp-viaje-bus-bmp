@@ -49,5 +49,15 @@ class Micro {
 	def liberarAsiento(Integer nroAsiento) {
 		asientos.filter[asiento|asiento.numero == nroAsiento].get(0).liberar
 	}
+		
+	def porcentajeVendido() {
+		if (asientos.size == 0){
+			return 0
+		}
+		else {		
+			asientosReservados.size * 100 / asientos.size
+		}
+	}
+	
 
 }
