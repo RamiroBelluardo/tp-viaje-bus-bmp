@@ -11,6 +11,7 @@ import org.uqbar.arena.widgets.Selector
 import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.windows.WindowOwner
 import org.uqbar.arena.layout.HorizontalLayout
+import org.uqbar.arena.windows.Dialog
 
 class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 
@@ -54,6 +55,7 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 
 		new Button(panelViaje) => [
 			caption = "Buscar"
+			onClick[buscarViaje]
 			width = 100
 		]
 
@@ -69,7 +71,7 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 			fontSize = 15
 		]
 
-		new TextBox(panelPrecios) => []
+		new Label(panelPrecios) => []
 
 		val panelAsiento = new Panel(panelDerecho) => [
 			layout = new ColumnLayout(2)
@@ -95,7 +97,7 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 
 	def void createGridActions(Panel panel) {
 
-		val actionsPanel = new Panel(panel).layout = new ColumnLayout(2)
+		val actionsPanel = new Panel(panel).layout = new ColumnLayout(4)
 
 		new Button(actionsPanel) => [
 			caption = "Aceptar"
@@ -119,6 +121,13 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 
 	def nuevoCliente() {
 		PantallaPrincipalWindow.openDialog(new NuevoClienteWindow(this))
+	}
+	
+	def buscarViaje(){
+		openDialog(new BuscarViajesWindow(this))
+	}
+	def static openDialog(Dialog<?> dialog) {
+		dialog.open
 	}
 
 }

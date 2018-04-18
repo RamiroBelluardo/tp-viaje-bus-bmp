@@ -13,7 +13,6 @@ import org.uqbar.arena.layout.HorizontalLayout
 import applicationModel.ViajeAppModel
 import org.uqbar.arena.widgets.List
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-import ar.edu.unq.viajebus.Servicios.Desayuno
 
 class EditarViajeWindow extends TransactionalDialog<ViajeAppModel> {
 
@@ -101,7 +100,7 @@ class EditarViajeWindow extends TransactionalDialog<ViajeAppModel> {
 		]
 
 		val panelServicios = new Panel(panelInfo) => [
-			layout = new ColumnLayout(4)
+			layout = new ColumnLayout(2)
 		]
 		new CheckBox(panelServicios) => []
 		new Label(panelServicios) => [
@@ -123,7 +122,7 @@ class EditarViajeWindow extends TransactionalDialog<ViajeAppModel> {
 			text = "Precio Final:"
 			fontSize = 15
 		]
-		new TextBox(panelInfo) => [
+		new Label(panelInfo) => [
 			fontSize = 10
 			width = 50
 		]
@@ -144,7 +143,6 @@ class EditarViajeWindow extends TransactionalDialog<ViajeAppModel> {
 		new Button(actionsPanel) => [
 			caption = "Cancelar"
 			onClick[this.cancel]
-			setAsDefault
 			disableOnError
 		]
 
