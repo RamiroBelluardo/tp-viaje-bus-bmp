@@ -17,6 +17,7 @@ import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
+import org.uqbar.arena.bindings.NotNullObservable
 
 class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 
@@ -57,7 +58,7 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 
 		var table = new Table<Viaje>(mainPanel, Viaje) => [
 			items <=> "viajes"
-			//value <=> "viajeSeleccionado"
+			value <=> "viajeSeleccionado"
 			numberVisibleRows = 5
 		]
 		this.crearColumnasViaje(table)
@@ -116,7 +117,7 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 
 		var table = new Table<Pasaje>(mainPanel, Pasaje) => [
 			items <=> "pasajes"
-			// value <=> "pasajeSeleccionado"
+			value <=> "pasajeSeleccionado"
 			numberVisibleRows = 5
 		]
 		this.crearColumnasPasaje(table)
@@ -181,6 +182,7 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 	}
 
 	def crearBotonesViajes(Panel mainPanel) {
+		val elementSelected = new NotNullObservable("viajeSeleccionado")		
 		val panelButtons = new Panel(mainPanel)
 		panelButtons.layout = new VerticalLayout
 		new Button(panelButtons) => [
@@ -191,13 +193,16 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 		new Button(panelButtons) => [
 			caption = "Editar"
 			onClick[editarViaje]
+			bindEnabled(elementSelected)	
 		]
 		new Button(panelButtons) => [
 			caption = "Eliminar"
+			bindEnabled(elementSelected)
 		]
 	}
 
 	def crearBotonesPasajes(Panel mainPanel) {
+		val elementSelected = new NotNullObservable("pasajeSeleccionado")	
 		val panelButtons = new Panel(mainPanel)
 		panelButtons.layout = new VerticalLayout
 		new Button(panelButtons) => [
@@ -207,9 +212,11 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 		new Button(panelButtons) => [
 			caption = "Ver"
 			onClick[verPasaje]
+			bindEnabled(elementSelected)
 		]
 		new Button(panelButtons) => [
 			caption = "Cancelar"
+			bindEnabled(elementSelected)
 		]
 	}
 
