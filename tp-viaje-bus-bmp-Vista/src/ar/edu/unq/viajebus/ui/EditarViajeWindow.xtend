@@ -2,12 +2,10 @@ package ar.edu.unq.viajebus.ui
 
 import applicationModel.ViajeAppModel
 import ar.edu.unq.viajebus.Micro.Micro
-import ar.edu.unq.viajebus.runnable.DateTransformer
 import org.uqbar.arena.aop.windows.TransactionalDialog
 import org.uqbar.arena.bindings.NotNullObservable
 import org.uqbar.arena.bindings.PropertyAdapter
 import org.uqbar.arena.layout.ColumnLayout
-import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.CheckBox
 import org.uqbar.arena.widgets.Label
@@ -18,6 +16,7 @@ import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
+import transformer.LocalDateTimeTransformer
 
 class EditarViajeWindow extends TransactionalDialog<ViajeAppModel> {
 
@@ -27,7 +26,6 @@ class EditarViajeWindow extends TransactionalDialog<ViajeAppModel> {
 	}
 
 	override protected createFormPanel(Panel mainPanel) {
-		mainPanel.layout = new HorizontalLayout
 		val panelIzquierdo = new Panel(mainPanel)
 		val panelDerecho = new Panel(mainPanel)
 
@@ -80,7 +78,7 @@ class EditarViajeWindow extends TransactionalDialog<ViajeAppModel> {
 		]
 
 		new TextBox(panelInfo) => [
-			(value <=> "viajeSeleccionado.fechaPartida").transformer = new DateTransformer
+			(value <=> "viajeSeleccionado.fechaPartida").transformer = new LocalDateTimeTransformer
 
 			fontSize = 10
 			width = 200
@@ -93,7 +91,7 @@ class EditarViajeWindow extends TransactionalDialog<ViajeAppModel> {
 		]
 
 		new TextBox(panelInfo) => [
-			(value <=> "viajeSeleccionado.fechaLlegada").transformer = new DateTransformer
+			(value <=> "viajeSeleccionado.fechaLlegada").transformer = new LocalDateTimeTransformer
 			fontSize = 10
 			width = 200
 
