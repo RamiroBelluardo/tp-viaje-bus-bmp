@@ -38,7 +38,7 @@ class RepoViajes {
 		val llegadaMicro1 = new LocalDateTime(2018, 3, 31, 14, 00)
 		val partidaMicro2 = new LocalDateTime(2018, 1, 1, 00, 00)
 		val llegadaMicro2 = new LocalDateTime(2018, 1, 2, 00, 00)
-		val partidaMicro3 = new LocalDateTime(2018,6,13,21,15) 
+		val partidaMicro3 = new LocalDateTime(2018, 2, 22, 17, 20) 
 		val llegadaMicro3 = new LocalDateTime(2018, 2, 23, 15, 45)
 
 		val viaje = new Viaje(partidaMicro1, llegadaMicro1, micro1)

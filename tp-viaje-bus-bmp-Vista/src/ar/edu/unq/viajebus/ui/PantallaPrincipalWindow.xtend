@@ -128,7 +128,7 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 		new Column<Pasaje>(table) => [
 			title = "Cliente"
 			bindContentsToProperty("cliente").transformer = [Cliente c |
-				c.nombre
+				'''«c.nombre» «c.apellido»'''
 			]
 			fixedSize = 150
 		]
