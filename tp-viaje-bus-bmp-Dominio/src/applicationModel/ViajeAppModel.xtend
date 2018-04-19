@@ -1,14 +1,16 @@
 package applicationModel
 
+import ar.edu.unq.viajebus.Buscador.Buscador
+import ar.edu.unq.viajebus.Micro.Micro
 import ar.edu.unq.viajebus.Micro.Viaje
+import ar.edu.unq.viajebus.Servicios.Servicio
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.uqbar.commons.model.Entity
 import org.uqbar.commons.model.annotations.TransactionalAndObservable
+import repo.RepoMicros
 import repo.RepoPasajes
 import repo.RepoViajes
-import repo.RepoMicros
-import ar.edu.unq.viajebus.Micro.Micro
-import org.uqbar.commons.model.Entity
-import ar.edu.unq.viajebus.Servicios.Servicio
+import java.util.List
 
 @Accessors
 @TransactionalAndObservable
@@ -21,6 +23,10 @@ class ViajeAppModel extends Entity implements Cloneable {
 	String ciudadSeleccionada
 	Micro microSeleccionado
 	Servicio servicio
+	Buscador buscador
+	List<Viaje> resultados
+	String fechaPartidaSeleccionada
+	String fechaLlegadaSeleccionada
 
 	new() {
 		repoViajes = RepoViajes.instance
@@ -28,6 +34,7 @@ class ViajeAppModel extends Entity implements Cloneable {
 		repoMicros = RepoMicros.instance
 		viajeSeleccionado = new Viaje
 		microSeleccionado = new Micro
+		buscador = new Buscador
 	}
 
 	def getViajes() {
@@ -52,6 +59,25 @@ class ViajeAppModel extends Entity implements Cloneable {
 	
 	def void agregarServicio(){
 		viajeSeleccionado.agregarServicio(servicio)
+	}
+	
+	def search(){
+		//resultados = viajes.filter[viajes|viajes.recorrido.contains(ciudadSeleccionada)].toList
+		resultados = viajes.filter[viajes|this.match(ciudadSeleccionada, viajes.recorrido) 
+			&& this.match(fechaPartidaSeleccionada, viajes.fechaPartida)
+			&& this.match(fechaLlegadaSeleccionada, viajes.fechaLlegada)
+		].toList
+	}
+	
+
+	def match(Object expectedValue, Object realValue) {
+		if (expectedValue == null) {
+			return true
+		}
+		if (realValue == null) {
+			return false
+		}
+		realValue.toString().toLowerCase().contains(expectedValue.toString().toLowerCase())
 	}
 
 }

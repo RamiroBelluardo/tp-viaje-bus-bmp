@@ -51,17 +51,17 @@ class RepoViajes extends CollectionBasedRepo<Viaje>{
 		#[viaje, viaje2, viaje3]
 	}
 
-	def buscarPorMicro(Micro micro) {
-		viajes.filter[viaje|viaje.micro.equals(micro)].toList
-	}
-
-	def buscarPorPartida(LocalDateTime partida) {
-		viajes.filter[viaje|viaje.fechaPartida.equals(partida)].toList
-	}
-
-	def buscarPorLlegada(LocalDateTime llegada) {
-		viajes.filter[viaje|viaje.fechaLlegada.equals(llegada)].toList
-	}
+//	def buscarPorMicro(Micro micro) {
+//		viajes.filter[viaje|viaje.micro.equals(micro)].toList
+//	}
+//
+//	def buscarPorPartida(LocalDateTime partida) {
+//		viajes.filter[viaje|viaje.fechaPartida.equals(partida)].toList
+//	}
+//
+//	def buscarPorLlegada(LocalDateTime llegada) {
+//		viajes.filter[viaje|viaje.fechaLlegada.equals(llegada)].toList
+//	}
 
  
   	def void create(LocalDateTime pFechaPartida, LocalDateTime pFechaLlegada, Micro pMicro) {

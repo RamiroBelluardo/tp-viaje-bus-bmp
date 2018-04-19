@@ -1,10 +1,14 @@
 package ar.edu.unq.viajebus.Buscador
 
-import java.util.List
-import org.joda.time.LocalDateTime
-import ar.edu.unq.viajebus.Micro.Viaje
 import ar.edu.unq.viajebus.Micro.Pasaje
+import ar.edu.unq.viajebus.Micro.Viaje
+import java.util.List
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.joda.time.LocalDateTime
+import org.uqbar.commons.model.annotations.TransactionalAndObservable
 
+@Accessors
+@TransactionalAndObservable
 class Buscador {
 	public List<Viaje> viajes
 	public List<Pasaje> pasajes

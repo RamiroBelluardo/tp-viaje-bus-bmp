@@ -24,8 +24,8 @@ class NuevoClienteWindow extends TransactionalDialog<ClienteAppModel> {
 		val editorPanel = new Panel(mainPanel)
 		editorPanel.layout = new ColumnLayout(2)
 
-		BuscarViajesWindow.crearLabelYTextBox(editorPanel, "Nombre", "nombre")
-		BuscarViajesWindow.crearLabelYTextBox(editorPanel, "Apellido", "apellido")
+		BuscarViajesWindow.crearLabelYTextBox(editorPanel, "Nombre", "clienteSeleccionado.nombre")
+		BuscarViajesWindow.crearLabelYTextBox(editorPanel, "Apellido", "clienteSeleccionado.apellido")
 
 		new Label(editorPanel) => [
 			text = "DNI (sin puntos)"
@@ -49,7 +49,7 @@ class NuevoClienteWindow extends TransactionalDialog<ClienteAppModel> {
 			width = 200
 		]
 
-		BuscarViajesWindow.crearLabelYTextBox(editorPanel, "TelÃ©fono", "telefono")
+		BuscarViajesWindow.crearLabelYTextBox(editorPanel, "Teléfono", "clienteSeleccionado.telefono")
 		createGridActions(editorPanel)
 	}
 
