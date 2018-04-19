@@ -72,7 +72,7 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 				val dias = f.getDayOfMonth().toString
 				val meses = f.getMonthOfYear().toString
 				val anios = f.getYear().toString
-				val res = '''«dias»/«meses»/«anios»'''
+				val res = '''Â«diasÂ»/Â«mesesÂ»/Â«aniosÂ»'''
 				res
 			]
 			fixedSize = 200
@@ -84,7 +84,7 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 				val dias = f.getDayOfMonth().toString
 				val meses = f.getMonthOfYear().toString
 				val anios = f.getYear().toString
-				val res = '''«dias»/«meses»/«anios»'''
+				val res = '''Â«diasÂ»/Â«mesesÂ»/Â«aniosÂ»'''
 				res
 			]
 			fixedSize = 200
@@ -98,16 +98,16 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 
 		new Column<Viaje>(table) => [
 			title = "Precio"
-			bindContentsToProperty("precio").transformer = [double p |
-				'''$«p»'''
+			bindContentsToProperty("precio").transformer = [ double p |
+				'''$Â«pÂ»'''
 			]
 			fixedSize = 115
 		]
 
 		new Column<Viaje>(table) => [
 			title = "Vendido"
-			bindContentsToProperty("micro.porcentajeVendido").transformer = [int p |
-				'''«p»%'''
+			bindContentsToProperty("micro.porcentajeVendido").transformer = [ int p |
+				'''Â«pÂ»%'''
 			]
 			fixedSize = 115
 		]
@@ -127,8 +127,8 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 
 		new Column<Pasaje>(table) => [
 			title = "Cliente"
-			bindContentsToProperty("cliente").transformer = [Cliente c |
-				'''«c.nombre» «c.apellido»'''
+			bindContentsToProperty("cliente").transformer = [ Cliente c |
+				'''Â«c.nombreÂ» Â«c.apellidoÂ»'''
 			]
 			fixedSize = 150
 		]
@@ -139,7 +139,7 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 				val dias = f.getDayOfMonth().toString
 				val meses = f.getMonthOfYear().toString
 				val anios = f.getYear().toString
-				val res = '''«dias»/«meses»/«anios»'''
+				val res = '''Â«diasÂ»/Â«mesesÂ»/Â«aniosÂ»'''
 				res
 			]
 			fixedSize = 200
@@ -151,7 +151,7 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 				val dias = f.getDayOfMonth().toString
 				val meses = f.getMonthOfYear().toString
 				val anios = f.getYear().toString
-				val res = '''«dias»/«meses»/«anios»'''
+				val res = '''Â«diasÂ»/Â«mesesÂ»/Â«aniosÂ»'''
 				res
 			]
 			fixedSize = 200
@@ -162,7 +162,7 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 			bindContentsToProperty("viaje.fechaPartida").transformer = [ LocalDateTime f |
 				val horas = f.getHourOfDay.toString
 				val minutos = f.getMinuteOfHour.toString
-				val res = '''«horas»:«minutos»'''
+				val res = '''Â«horasÂ»:Â«minutosÂ»'''
 				res
 			]
 			fixedSize = 75
@@ -182,18 +182,18 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 	}
 
 	def crearBotonesViajes(Panel mainPanel) {
-		val elementSelected = new NotNullObservable("viajeSeleccionado")		
+		val elementSelected = new NotNullObservable("viajeSeleccionado")
 		val panelButtons = new Panel(mainPanel)
 		panelButtons.layout = new VerticalLayout
 		new Button(panelButtons) => [
 			caption = "Crear"
 			onClick[crearViaje]
-			
+
 		]
 		new Button(panelButtons) => [
 			caption = "Editar"
 			onClick[editarViaje]
-			bindEnabled(elementSelected)	
+			bindEnabled(elementSelected)
 		]
 		new Button(panelButtons) => [
 			caption = "Eliminar"
@@ -202,7 +202,7 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 	}
 
 	def crearBotonesPasajes(Panel mainPanel) {
-		val elementSelected = new NotNullObservable("pasajeSeleccionado")	
+		val elementSelected = new NotNullObservable("pasajeSeleccionado")
 		val panelButtons = new Panel(mainPanel)
 		panelButtons.layout = new VerticalLayout
 		new Button(panelButtons) => [
@@ -227,12 +227,15 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 	def verPasaje() {
 		openDialog(new VerPasajeWindow(this))
 	}
+
 	def crearViaje() {
 		openDialog(new CrearViajeWindow(this))
 	}
-	def editarViaje(){
+
+	def editarViaje() {
 		openDialog(new EditarViajeWindow(this))
 	}
+
 	def static openDialog(Dialog<?> dialog) {
 		dialog.open
 	}

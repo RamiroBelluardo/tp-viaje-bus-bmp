@@ -31,6 +31,10 @@ class Viaje extends Entity implements Cloneable{
 		this.pasajes = newArrayList
 		this.estado = new Aprobado
 	}
+	
+	new() {
+		this.recorrido = newArrayList
+	}
 
 	def precio() {
 		precioBase + precioServicios + precioMicro + precioFinde
@@ -126,6 +130,13 @@ class Viaje extends Entity implements Cloneable{
 		if (recorrido.filter[ciu|ciu == ciudad].isEmpty) {
 			recorrido.add(ciudad)
 		}
+	}
+	
+	def quitarCiudad(String ciudad) {
+		if(!recorrido.filter[ciu | ciu == ciudad].isEmpty) {
+			recorrido.remove(ciudad)
+		}
+		
 	}
 
 	def cancelar() {

@@ -5,8 +5,10 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import ar.edu.unq.viajebus.TipoAsiento.TipoAsiento
 import ar.edu.unq.viajebus.EstadoDeAsiento.Disponible
 import ar.edu.unq.viajebus.EstadoDeAsiento.Reservado
+import org.uqbar.commons.model.annotations.Observable
 
 @Accessors
+@Observable
 class Micro {
 
 	String patente
@@ -19,6 +21,9 @@ class Micro {
 		this.asientos = newArrayList
 		this.tipoDeAsiento = tipoAsiento
 		this.tieneTele = tieneTele
+	}
+
+	new() {
 	}
 
 	def agregarAsiento(Asiento asiento) {
@@ -49,15 +54,13 @@ class Micro {
 	def liberarAsiento(Integer nroAsiento) {
 		asientos.filter[asiento|asiento.numero == nroAsiento].get(0).liberar
 	}
-		
+
 	def porcentajeVendido() {
-		if (asientos.size == 0){
+		if (asientos.size == 0) {
 			return 0
-		}
-		else {		
+		} else {
 			asientosReservados.size * 100 / asientos.size
 		}
 	}
-	
 
 }

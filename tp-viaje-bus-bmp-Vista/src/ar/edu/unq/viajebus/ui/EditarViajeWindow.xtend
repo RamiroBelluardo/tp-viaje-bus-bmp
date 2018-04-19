@@ -1,17 +1,22 @@
 package ar.edu.unq.viajebus.ui
 
+import applicationModel.ViajeAppModel
+import ar.edu.unq.viajebus.Micro.Micro
+import ar.edu.unq.viajebus.runnable.DateTransformer
 import org.uqbar.arena.aop.windows.TransactionalDialog
+import org.uqbar.arena.bindings.NotNullObservable
+import org.uqbar.arena.bindings.PropertyAdapter
 import org.uqbar.arena.layout.ColumnLayout
+import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.CheckBox
 import org.uqbar.arena.widgets.Label
+import org.uqbar.arena.widgets.List
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.Selector
 import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.windows.WindowOwner
-import org.uqbar.arena.layout.HorizontalLayout
-import applicationModel.ViajeAppModel
-import org.uqbar.arena.widgets.List
+
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 
 class EditarViajeWindow extends TransactionalDialog<ViajeAppModel> {
@@ -36,13 +41,14 @@ class EditarViajeWindow extends TransactionalDialog<ViajeAppModel> {
 		]
 
 		new List(panelRecorrido) => [
-			// items <=> "recorrido"
-			// value <=> "recorridoSeleccionado"
+			items <=> "viajeSeleccionado.recorrido"
+			value <=> "ciudadSeleccionada"
 			width = 300
 
 		]
 
 		new TextBox(panelRecorrido) => [
+			value <=> "example"
 			width = 100
 		]
 
@@ -51,15 +57,17 @@ class EditarViajeWindow extends TransactionalDialog<ViajeAppModel> {
 		]
 		new Button(panelBotones) => [
 			caption = "Agregar"
-			// onClick[]
+			onClick[modelObject.agregarCiudad]
 			setAsDefault
 			disableOnError
 		]
 		new Button(panelBotones) => [
+			val elementSelected = new NotNullObservable("ciudadSeleccionada")
 			caption = "Quitar"
-			// onClick[]
+			onClick[modelObject.quitarCiudad]
 			setAsDefault
 			disableOnError
+			bindEnabled(elementSelected)
 		]
 
 		val panelInfo = new Panel(panelDerecho) => [
@@ -72,9 +80,12 @@ class EditarViajeWindow extends TransactionalDialog<ViajeAppModel> {
 		]
 
 		new TextBox(panelInfo) => [
+			(value <=> "viajeSeleccionado.fechaPartida").transformer = new DateTransformer
+
 			fontSize = 10
 			width = 200
 		]
+
 		new Label(panelInfo) => [
 			text = "Llegada"
 			fontSize = 15
@@ -82,6 +93,7 @@ class EditarViajeWindow extends TransactionalDialog<ViajeAppModel> {
 		]
 
 		new TextBox(panelInfo) => [
+			(value <=> "viajeSeleccionado.fechaLlegada").transformer = new DateTransformer
 			fontSize = 10
 			width = 200
 
@@ -91,7 +103,9 @@ class EditarViajeWindow extends TransactionalDialog<ViajeAppModel> {
 			fontSize = 15
 		]
 
-		new Selector(panelInfo) => [
+		new Selector<Micro>(panelInfo) => [
+			(items <=> "micros").adapter = new PropertyAdapter(Micro, "patente")
+			value <=> "microSeleccionado"
 			width = 150
 		]
 		new Label(panelInfo) => [
@@ -148,4 +162,16 @@ class EditarViajeWindow extends TransactionalDialog<ViajeAppModel> {
 
 	}
 
+/* 
+ * 	def getRepoViajes() {
+ * 		RepoViajes.instance
+ * 	}
+
+ * 	override executeTask() {
+
+ * 		repoViajes.create(modelObject.viajeSeleccionado)
+
+ * 		super.executeTask()
+ * 	}
+ */
 }
