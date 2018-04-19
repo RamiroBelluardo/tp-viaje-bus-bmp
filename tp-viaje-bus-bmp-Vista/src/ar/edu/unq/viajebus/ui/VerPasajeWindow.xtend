@@ -12,6 +12,9 @@ import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.windows.WindowOwner
 import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.windows.Dialog
+import org.uqbar.arena.bindings.PropertyAdapter
+import ar.edu.unq.viajebus.Cliente.Cliente
+import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 
 class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 
@@ -40,8 +43,11 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 			onClick[nuevoCliente]
 		]
 
-		new Selector(panelIzquierdo) => [
+		new Selector<Cliente>(panelIzquierdo) => [
 			allowNull = false
+			(items <=> "clientes").adapter = new PropertyAdapter(Cliente, "nombre")
+			//value <=> "microSeleccionado"
+			width = 150
 		]
 
 		val panelViaje = new Panel(panelIzquierdo) => [

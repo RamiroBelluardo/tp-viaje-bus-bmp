@@ -7,8 +7,9 @@ import ar.edu.unq.viajebus.TipoAsiento.Cama
 import ar.edu.unq.viajebus.TipoAsiento.Ejecutivo
 import ar.edu.unq.viajebus.TipoAsiento.Semicama
 import org.joda.time.LocalDateTime
+import org.uqbar.commons.model.CollectionBasedRepo
 
-class RepoViajes {
+class RepoViajes extends CollectionBasedRepo<Viaje>{
 
 	static RepoViajes instance
 
@@ -62,26 +63,26 @@ class RepoViajes {
 		viajes.filter[viaje|viaje.fechaLlegada.equals(llegada)].toList
 	}
 
-/* 
- * 	def void create(LocalDateTime pFechaPartida, LocalDateTime pFechaLlegada, Micro pMicro) {
- * 		this.create(new Viaje => [
- * 			fechaPartida = pFechaPartida
- * 			fechaLlegada = pFechaLlegada
- * 			micro = pMicro
- * 		])
- * 	}
+ 
+  	def void create(LocalDateTime pFechaPartida, LocalDateTime pFechaLlegada, Micro pMicro) {
+  		this.create(new Viaje => [
+  			fechaPartida = pFechaPartida
+  			fechaLlegada = pFechaLlegada
+  			micro = pMicro
+ 		])
+  	}
 
 
- * 	override protected getCriterio(Viaje example) {
- * 		null
- * 	}
+  	override protected getCriterio(Viaje example) {
+  		null
+  	}
 
- * 	override createExample() {
- * 		new Viaje
- * 	}
+  	override createExample() {
+  		new Viaje
+  	}
 
- * 	override getEntityType() {
- * 		typeof(Viaje)
- * 	}
- */
+  	override getEntityType() {
+  		typeof(Viaje)
+  	}
+ 
 }

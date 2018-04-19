@@ -2,6 +2,7 @@ package ar.edu.unq.viajebus.ui
 
 import applicationModel.ViajeAppModel
 import ar.edu.unq.viajebus.Micro.Micro
+import ar.edu.unq.viajebus.Micro.Viaje
 import org.uqbar.arena.aop.windows.TransactionalDialog
 import org.uqbar.arena.bindings.NotNullObservable
 import org.uqbar.arena.bindings.PropertyAdapter
@@ -14,9 +15,11 @@ import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.Selector
 import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.windows.WindowOwner
+import repo.RepoViajes
+import transformer.LocalDateTimeTransformer
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-import transformer.LocalDateTimeTransformer
+import ar.edu.unq.viajebus.Servicios.Desayuno
 
 class EditarViajeWindow extends TransactionalDialog<ViajeAppModel> {
 
@@ -114,7 +117,10 @@ class EditarViajeWindow extends TransactionalDialog<ViajeAppModel> {
 		val panelServicios = new Panel(panelInfo) => [
 			layout = new ColumnLayout(2)
 		]
-		new CheckBox(panelServicios) => []
+		new CheckBox(panelServicios) => [
+			//enabled <=> []
+			//value <=> [modelObject.agregarServicio()]
+		]
 		new Label(panelServicios) => [
 			text = "Desayuno"
 		]
@@ -160,16 +166,16 @@ class EditarViajeWindow extends TransactionalDialog<ViajeAppModel> {
 
 	}
 
-/* 
- * 	def getRepoViajes() {
- * 		RepoViajes.instance
- * 	}
+ 
+  	def getRepoViajes() {
+  		RepoViajes.instance
+  	}
 
- * 	override executeTask() {
+  	override executeTask() {
 
- * 		repoViajes.create(modelObject.viajeSeleccionado)
+  		repoViajes.create(modelObject.viajeSeleccionado)
 
- * 		super.executeTask()
- * 	}
- */
+  		super.executeTask()
+  	}
+ 
 }

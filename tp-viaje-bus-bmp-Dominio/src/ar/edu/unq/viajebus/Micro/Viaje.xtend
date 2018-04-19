@@ -8,10 +8,10 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.joda.time.LocalDateTime
 import org.joda.time.Minutes
 import org.uqbar.commons.model.Entity
-import org.uqbar.commons.model.annotations.Observable
+import org.uqbar.commons.model.annotations.TransactionalAndObservable
 
 @Accessors
-@Observable
+@TransactionalAndObservable
 class Viaje extends Entity implements Cloneable{
 
 	LocalDateTime fechaPartida
@@ -21,6 +21,7 @@ class Viaje extends Entity implements Cloneable{
 	List<String> recorrido
 	List<Pasaje> pasajes
 	EstadoDeViaje estado
+	
 
 	new(LocalDateTime fechaPartida, LocalDateTime fechaLlegada, Micro micro) {
 		this.fechaPartida = fechaPartida

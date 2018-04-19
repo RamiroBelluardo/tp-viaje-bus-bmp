@@ -8,6 +8,7 @@ import repo.RepoViajes
 import repo.RepoMicros
 import ar.edu.unq.viajebus.Micro.Micro
 import org.uqbar.commons.model.Entity
+import ar.edu.unq.viajebus.Servicios.Servicio
 
 @Accessors
 @TransactionalAndObservable
@@ -19,6 +20,7 @@ class ViajeAppModel extends Entity implements Cloneable {
 	String example
 	String ciudadSeleccionada
 	Micro microSeleccionado
+	Servicio servicio
 
 	new() {
 		repoViajes = RepoViajes.instance
@@ -46,6 +48,10 @@ class ViajeAppModel extends Entity implements Cloneable {
 
 	def quitarCiudad() {
 		viajeSeleccionado.quitarCiudad(ciudadSeleccionada)
+	}
+	
+	def void agregarServicio(){
+		viajeSeleccionado.agregarServicio(servicio)
 	}
 
 }

@@ -1,14 +1,14 @@
 package ar.edu.unq.viajebus.Micro
 
-import java.util.List
-import org.eclipse.xtend.lib.annotations.Accessors
-import ar.edu.unq.viajebus.TipoAsiento.TipoAsiento
 import ar.edu.unq.viajebus.EstadoDeAsiento.Disponible
 import ar.edu.unq.viajebus.EstadoDeAsiento.Reservado
-import org.uqbar.commons.model.annotations.Observable
+import ar.edu.unq.viajebus.TipoAsiento.TipoAsiento
+import java.util.List
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.uqbar.commons.model.annotations.TransactionalAndObservable
 
 @Accessors
-@Observable
+@TransactionalAndObservable
 class Micro {
 
 	String patente

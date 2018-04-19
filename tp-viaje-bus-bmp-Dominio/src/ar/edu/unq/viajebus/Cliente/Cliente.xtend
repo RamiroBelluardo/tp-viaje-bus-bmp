@@ -3,8 +3,10 @@ package ar.edu.unq.viajebus.Cliente
 import org.eclipse.xtend.lib.annotations.Accessors
 import ar.edu.unq.viajebus.Micro.Pasaje
 import java.util.List
+import org.uqbar.commons.model.annotations.Observable
 
 @Accessors
+@Observable
 class Cliente {
 
 	String nombre
@@ -12,7 +14,7 @@ class Cliente {
 	String dni
 	String mail
 	String telefono
-	
+
 	List<Pasaje> pasajes
 
 	new(String nombre, String apellido, String dni, String mail, String telefono) {
