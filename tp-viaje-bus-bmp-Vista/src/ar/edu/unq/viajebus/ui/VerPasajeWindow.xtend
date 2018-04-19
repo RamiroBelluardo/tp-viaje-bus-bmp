@@ -1,6 +1,5 @@
 package ar.edu.unq.viajebus.ui
 
-import applicationModel.PasajeAppModel
 import org.uqbar.arena.aop.windows.TransactionalDialog
 import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.widgets.Button
@@ -15,11 +14,12 @@ import org.uqbar.arena.windows.Dialog
 import org.uqbar.arena.bindings.PropertyAdapter
 import ar.edu.unq.viajebus.Cliente.Cliente
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
+import applicationModel.ClienteAppModel
 
-class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
+class VerPasajeWindow extends TransactionalDialog<ClienteAppModel> {
 
 	new(WindowOwner parent) {
-		super(parent, new PasajeAppModel)
+		super(parent, new ClienteAppModel)
 		title = "Viaje Bus"
 	}
 

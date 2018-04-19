@@ -1,14 +1,17 @@
 package ar.edu.unq.viajebus.ui
 
-import applicationModel.ClienteAppModel
 import java.awt.Color
 import org.uqbar.arena.aop.windows.TransactionalDialog
 import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.Label
+import org.uqbar.arena.widgets.NumericField
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.windows.WindowOwner
+
+import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
+import applicationModel.ClienteAppModel
 
 class NuevoClienteWindow extends TransactionalDialog<ClienteAppModel> {
 
@@ -25,13 +28,13 @@ class NuevoClienteWindow extends TransactionalDialog<ClienteAppModel> {
 		BuscarViajesWindow.crearLabelYTextBox(editorPanel, "Apellido", "apellido")
 
 		new Label(editorPanel) => [
-			text = "DNI"
+			text = "DNI (sin puntos)"
 			foreground = Color.BLUE
 		]
 
-		new TextBox(editorPanel) => [
+		new NumericField(editorPanel) => [
 			// Hay que validad el formato
-			// (value <=> "dni").transformer = new DNITransformer
+			(value <=> "clienteSeleccionado.dni")
 			width = 200
 		]
 
