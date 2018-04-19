@@ -19,7 +19,7 @@ class Pasaje {
 		this.cliente = cliente
 		cliente.pasajes.add(this)
 		this.viaje = viaje
-		this.asiento = viaje.micro.asiento(nroAsiento)
+		//this.asiento = viaje.micro.asiento(nroAsiento)
 		this.estado = new ListoParaComprar
 	}
 

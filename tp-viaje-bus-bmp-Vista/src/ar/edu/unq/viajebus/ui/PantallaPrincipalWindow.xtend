@@ -1,23 +1,22 @@
 package ar.edu.unq.viajebus.ui
 
 import applicationModel.PrincipalAppModel
+import ar.edu.unq.viajebus.Cliente.Cliente
+import ar.edu.unq.viajebus.Micro.Pasaje
 import ar.edu.unq.viajebus.Micro.Viaje
+import org.joda.time.LocalDateTime
+import org.uqbar.arena.layout.HorizontalLayout
+import org.uqbar.arena.layout.VerticalLayout
+import org.uqbar.arena.widgets.Button
+import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.tables.Column
 import org.uqbar.arena.widgets.tables.Table
+import org.uqbar.arena.windows.Dialog
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
-import org.uqbar.arena.layout.VerticalLayout
-import org.uqbar.arena.widgets.Button
-import org.uqbar.arena.layout.HorizontalLayout
-import org.uqbar.arena.widgets.Label
-import ar.edu.unq.viajebus.Micro.Pasaje
-import org.uqbar.arena.windows.Dialog
-import org.joda.time.LocalDateTime
-
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-
 
 class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 
@@ -116,7 +115,7 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 	def crearTablaPasajes(Panel mainPanel) {
 
 		var table = new Table<Pasaje>(mainPanel, Pasaje) => [
-			// items <=> "pasajes"
+			items <=> "pasajes"
 			// value <=> "pasajeSeleccionado"
 			numberVisibleRows = 5
 		]
@@ -127,37 +126,56 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 
 		new Column<Pasaje>(table) => [
 			title = "Cliente"
-			//bindContentsToProperty("cliente")
+			bindContentsToProperty("cliente").transformer = [Cliente c |
+				c.nombre
+			]
 			fixedSize = 150
 		]
 
 		new Column<Pasaje>(table) => [
 			title = "Partida"
-			//bindContentsToProperty("viaje.fechaPartida")
+			bindContentsToProperty("viaje.fechaPartida").transformer = [ LocalDateTime f |
+				val dias = f.getDayOfMonth().toString
+				val meses = f.getMonthOfYear().toString
+				val anios = f.getYear().toString
+				val res = '''«dias»/«meses»/«anios»'''
+				res
+			]
 			fixedSize = 200
 		]
 
 		new Column<Pasaje>(table) => [
 			title = "Llegada"
-			//bindContentsToProperty("viaje.fechaLlegada")
+			bindContentsToProperty("viaje.fechaLlegada").transformer = [ LocalDateTime f |
+				val dias = f.getDayOfMonth().toString
+				val meses = f.getMonthOfYear().toString
+				val anios = f.getYear().toString
+				val res = '''«dias»/«meses»/«anios»'''
+				res
+			]
 			fixedSize = 200
 		]
 
 		new Column<Pasaje>(table) => [
 			title = "Hora Partida"
-			// bindContentsToProperty("horaPartida")
+			bindContentsToProperty("viaje.fechaPartida").transformer = [ LocalDateTime f |
+				val horas = f.getHourOfDay.toString
+				val minutos = f.getMinuteOfHour.toString
+				val res = '''«horas»:«minutos»'''
+				res
+			]
 			fixedSize = 75
 		]
 
 		new Column<Pasaje>(table) => [
 			title = "Asiento"
-			// bindContentsToProperty("nroAsiento")
+			bindContentsToProperty("asiento")
 			fixedSize = 50
 		]
 
 		new Column<Pasaje>(table) => [
 			title = "Pago"
-			// bindContentsToProperty("tipoPago")
+			bindContentsToProperty("asiento")
 			fixedSize = 75
 		]
 	}
