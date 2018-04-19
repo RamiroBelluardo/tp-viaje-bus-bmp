@@ -34,7 +34,7 @@ class NuevoClienteWindow extends TransactionalDialog<ClienteAppModel> {
 
 		new NumericField(editorPanel) => [
 			// Hay que validad el formato
-			(value <=> "clienteSeleccionado.dni")
+			value <=> "clienteSeleccionado.dni"
 			width = 200
 		]
 
@@ -45,7 +45,7 @@ class NuevoClienteWindow extends TransactionalDialog<ClienteAppModel> {
 
 		new TextBox(editorPanel) => [
 			// Hay que validar el formato
-			// (value <=> "mail").transformer = new MailTransformer
+			value <=> "clienteSeleccionado.mail"
 			width = 200
 		]
 

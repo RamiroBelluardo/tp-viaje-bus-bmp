@@ -9,8 +9,8 @@ import org.uqbar.commons.model.Entity
 
 @Accessors
 @Observable
-class Cliente extends Entity implements Cloneable{
-	
+class Cliente extends Entity implements Cloneable {
+
 	static final int MAX_DIGITOS = 7
 
 	String nombre
@@ -29,24 +29,32 @@ class Cliente extends Entity implements Cloneable{
 		this.telefono = telefono
 		this.pasajes = newArrayList
 	}
-	
-	new(){
-		
+
+	new() {
 	}
 
 	def agregarPasaje(Pasaje pasaje) {
 		this.pasajes.add(pasaje)
 	}
-	
-		
-	def void setdni(String unDNI) {
+
+	def void setDni(String unDNI) {
 		if (unDNI === "" || unDNI.length <= MAX_DIGITOS) {
-			throw new UserException("El DNI debe tener minimamente 8 dígitos")
-		}			
-//		if (!unDNI.charAt(2).equals(".") || !unDNI.charAt(6).equals(".")){
-//			throw new UserException("El DNI debe tener el formato nn.nnn.nnn")		
-//		}
+			throw new UserException("El DNI debe tener minimamente 8 dï¿½gitos")
+		}
+		if (unDNI.charAt(2).toString !== (".")){// || unDNI.charAt(6).equals(".")) {
+			throw new UserException("El DNI debe tener el formato nn.nnn.nnn")
+		}
 		this.dni = unDNI
+	}
+
+	def void setMail(String unMail) {
+		if (!unMail.contains("@")) {
+			throw new UserException("El Mail debe contener @")
+		}
+		if (!unMail.contains(".com")) {
+			throw new UserException("Mail invÃ¡lido")
+		}
+		this.mail = unMail
 	}
 
 }
