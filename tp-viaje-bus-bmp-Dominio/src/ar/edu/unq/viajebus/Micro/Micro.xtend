@@ -6,10 +6,12 @@ import ar.edu.unq.viajebus.TipoAsiento.TipoAsiento
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.TransactionalAndObservable
+import org.uqbar.commons.model.Entity
+import org.uqbar.commons.model.annotations.Dependencies
 
 @Accessors
 @TransactionalAndObservable
-class Micro {
+class Micro extends Entity implements Cloneable{
 
 	String patente
 	List<Asiento> asientos
@@ -24,6 +26,7 @@ class Micro {
 	}
 
 	new() {
+		this.asientos = newArrayList
 	}
 
 	def agregarAsiento(Asiento asiento) {

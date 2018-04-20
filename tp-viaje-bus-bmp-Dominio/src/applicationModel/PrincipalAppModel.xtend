@@ -1,30 +1,33 @@
 package applicationModel
 
+import ar.edu.unq.viajebus.Micro.Viaje
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.uqbar.commons.applicationContext.ApplicationContext
 import org.uqbar.commons.model.annotations.Observable
 import repo.RepoViajes
-import repo.RepoPasajes
+import java.util.List
 import ar.edu.unq.viajebus.Micro.Pasaje
-import ar.edu.unq.viajebus.Micro.Viaje
 
 @Accessors
 @Observable
 class PrincipalAppModel {
-	RepoViajes repoViajes
-	RepoPasajes repoPasajes	
+	Viaje example = new Viaje
+	List<Viaje> resultadosViaje
 	Viaje viajeSeleccionado
+	
 	Pasaje pasajeSeleccionado
 	
-	new(){
-		repoViajes = RepoViajes.instance
-		repoPasajes = RepoPasajes.instance
+	
+	def crearViaje (Viaje viaje) {
+		repoViajes.create(viaje)
+		search
 	}
 	
-	def getViajes() {
-		repoViajes.viajes
+	def void search() { 
+		resultadosViaje = repoViajes.search(example.origen, example.destino, example.fechaPartida, example.fechaLlegada)
 	}
 	
-	def getPasajes() {
-		repoPasajes.pasajes
+	def RepoViajes getRepoViajes() {
+		ApplicationContext.instance.getSingleton(typeof(Viaje))
 	}
 }

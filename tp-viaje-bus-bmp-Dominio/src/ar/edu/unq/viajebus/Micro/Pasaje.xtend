@@ -5,13 +5,15 @@ import ar.edu.unq.viajebus.EstadoDePasaje.EstadoDePasaje
 import ar.edu.unq.viajebus.EstadoDePasaje.ListoParaComprar
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
+import org.uqbar.commons.model.Entity
 
 @Accessors
 @Observable
-class Pasaje {
+class Pasaje extends Entity implements Cloneable{
 
 	Cliente cliente
 	Viaje viaje
+	Integer nroAsiento
 	Asiento asiento
 	EstadoDePasaje estado
 
@@ -19,8 +21,13 @@ class Pasaje {
 		this.cliente = cliente
 		cliente.pasajes.add(this)
 		this.viaje = viaje
+		this.nroAsiento = nroAsiento
 		this.asiento = viaje.micro.asiento(nroAsiento)
 		this.estado = new ListoParaComprar
+	}
+	
+	new(){
+		
 	}
 
 	def cancelar() {

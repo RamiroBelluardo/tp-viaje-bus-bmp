@@ -3,7 +3,9 @@ package ar.edu.unq.viajebus.Micro
 import org.eclipse.xtend.lib.annotations.Accessors
 import ar.edu.unq.viajebus.EstadoDeAsiento.EstadoDeAsiento
 import ar.edu.unq.viajebus.EstadoDeAsiento.Disponible
+import org.uqbar.commons.model.annotations.TransactionalAndObservable
 
+@TransactionalAndObservable
 @Accessors
 class Asiento {
 	Integer numero

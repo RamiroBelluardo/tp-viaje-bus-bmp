@@ -2,7 +2,6 @@ package ar.edu.unq.viajebus.ui
 
 import applicationModel.ViajeAppModel
 import ar.edu.unq.viajebus.Micro.Micro
-import ar.edu.unq.viajebus.Micro.Viaje
 import org.uqbar.arena.aop.windows.TransactionalDialog
 import org.uqbar.arena.bindings.NotNullObservable
 import org.uqbar.arena.bindings.PropertyAdapter
@@ -19,15 +18,16 @@ import repo.RepoViajes
 import transformer.LocalDateTimeTransformer
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-import ar.edu.unq.viajebus.Servicios.Desayuno
 
 class EditarViajeWindow extends TransactionalDialog<ViajeAppModel> {
 
-	new(WindowOwner parent) {
-		super(parent, new ViajeAppModel)
-		title = "Editar viaje"
-		
-		
+	new(WindowOwner parent, ViajeAppModel model) {
+		super(parent, model)
+		title = defaultTitle		
+	}
+	
+	def defaultTitle(){
+		"Editar viaje"
 	}
 
 	override protected createFormPanel(Panel mainPanel) {
@@ -106,7 +106,7 @@ class EditarViajeWindow extends TransactionalDialog<ViajeAppModel> {
 		]
 
 		new Selector<Micro>(panelInfo) => [
-			(items <=> "micros").adapter = new PropertyAdapter(Micro, "patente")
+			(items <=> "resultadosMicro").adapter = new PropertyAdapter(Micro, "patente")
 			value <=> "microSeleccionado"
 			width = 150
 		]
@@ -119,24 +119,33 @@ class EditarViajeWindow extends TransactionalDialog<ViajeAppModel> {
 			layout = new ColumnLayout(2)
 		]
 		new CheckBox(panelServicios) => [
-			//enabled <=> []
 			value <=> "tieneDesayuno"
+		]
+		
+		new Label(panelServicios) => [
+			value <=> "tieneServicioDesayuno"
 		]
 		new Label(panelServicios) => [
 			text = "Desayuno"
 		]
-		new CheckBox(panelServicios) => []
-		new Label(panelServicios) => [
-			text = "Almuerzo"
-		]
-		new CheckBox(panelServicios) => []
-		new Label(panelServicios) => [
-			text = "Merienda"
-		]
-		new CheckBox(panelServicios) => []
-		new Label(panelServicios) => [
-			text = "Cena"
-		]
+//		new CheckBox(panelServicios) => [
+//			value <=> "tieneAlmuerzo"
+//		]
+//		new Label(panelServicios) => [
+//			text = "Almuerzo"
+//		]
+//		new CheckBox(panelServicios) => [
+//			value <=> "tieneMerienda"
+//		]
+//		new Label(panelServicios) => [
+//			text = "Merienda"
+//		]
+//		new CheckBox(panelServicios) => [
+//			value <=> "tieneCena"
+//		]
+//		new Label(panelServicios) => [
+//			text = "Cena"
+//		]
 		new Label(panelInfo) => [
 			text = "Precio Final:"
 			fontSize = 15
@@ -168,16 +177,5 @@ class EditarViajeWindow extends TransactionalDialog<ViajeAppModel> {
 
 	}
 
- 
-  	def getRepoViajes() {
-  		RepoViajes.instance
-  	}
-
-  	override executeTask() {
-
-  		repoViajes.create(modelObject.viajeSeleccionado)
-
-  		super.executeTask()
-  	}
  
 }

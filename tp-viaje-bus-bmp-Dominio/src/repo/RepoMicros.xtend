@@ -1,29 +1,42 @@
 package repo
 
 import ar.edu.unq.viajebus.Micro.Micro
-import ar.edu.unq.viajebus.TipoAsiento.Ejecutivo
-import ar.edu.unq.viajebus.TipoAsiento.Semicama
-import ar.edu.unq.viajebus.TipoAsiento.Cama
+import ar.edu.unq.viajebus.TipoAsiento.TipoAsiento
+import org.uqbar.commons.model.CollectionBasedRepo
+import org.uqbar.commons.model.annotations.Observable
 
-class RepoMicros {
+@Observable
+class RepoMicros extends CollectionBasedRepo<Micro> {
 
-	static RepoMicros instance
-
-	static def getInstance() {
-		if (instance === null) {
-			instance = new RepoMicros
-		}
-		instance
+	// ********************************************************
+	// ** Altas y bajas
+	// ********************************************************
+	def Micro create(String mPatente, TipoAsiento mTipoDeAsiento, Boolean mTieneTele) {
+		val micro = new Micro => [
+			patente = mPatente
+			tipoDeAsiento = mTipoDeAsiento
+			tieneTele = mTieneTele
+		]
+		this.create(micro)
+		micro
 	}
-
-	// MICRO:    new(String patente, TipoAsiento tipoAsiento, Boolean tieneTele)
-	def getMicros() {
-
-		val micro1 = new Micro("ABC123", new Cama, true)
-		val micro2 = new Micro("AB123AB", new Semicama, false)
-		val micro3 = new Micro("DCR283", new Ejecutivo, true)
-
-		#[micro1, micro2, micro3]
+	
+	override protected getCriterio(Micro example) {
+		null
+	}
+	
+	override createExample() {
+		new Micro
+	}
+	
+	override getEntityType() {
+		typeof(Micro)
+	}
+	
+	def search() {
+		allInstances
 	}
 
 }
+
+

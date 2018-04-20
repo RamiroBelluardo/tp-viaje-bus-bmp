@@ -12,11 +12,11 @@ class ClienteAppModel {
 	RepoClientes repoClientes
 	Cliente clienteSeleccionado = new Cliente
 
-	new() {
-		repoClientes = RepoClientes.instance
-	}
-
-	def getClientes() {
-		repoClientes.clientes
-	}
+//	new() {
+//		repoClientes = RepoClientes.instance
+//	}
+//
+//	def getClientes() {
+//		repoClientes.clientes
+//	}
 }

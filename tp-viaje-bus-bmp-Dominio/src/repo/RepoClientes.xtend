@@ -1,23 +1,37 @@
 package repo
 
 import ar.edu.unq.viajebus.Cliente.Cliente
+import org.uqbar.commons.model.CollectionBasedRepo
+import org.uqbar.commons.model.annotations.Observable
 
-class RepoClientes {
+@Observable
+class RepoClientes extends CollectionBasedRepo<Cliente> {
 
-	static RepoClientes instance
-
-	static def getInstance() {
-		if (instance === null) {
-			instance = new RepoClientes
-		}
-		instance
+	// ********************************************************
+	// ** Altas y bajas
+	// ********************************************************
+	def Cliente create(String cNombre, String cApellido, String cDni, String cMail, String cTelefono) {
+		val cliente = new Cliente => [
+			nombre = cNombre
+			apellido = cApellido
+			dni = cDni
+			mail = cMail
+			telefono = cTelefono
+		]
+		this.create(cliente)
+		cliente
+	}
+	
+	override protected getCriterio(Cliente example) {
+		null
+	}
+	
+	override createExample() {
+		new Cliente
+	}
+	
+	override getEntityType() {
+		typeof(Cliente)
 	}
 
-	// CLIENTE:  new(String nombre, String apellido, String dni, String mail, String telefono)
-	def getClientes() {
-
-		val cliente1 = new Cliente("Lucas", "Pier", "111111", "lg.piergiacomi@gmail.com", "44444444")
-
-		#[cliente1]
-	}
 }

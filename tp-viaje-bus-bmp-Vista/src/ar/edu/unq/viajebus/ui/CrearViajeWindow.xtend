@@ -1,13 +1,17 @@
 package ar.edu.unq.viajebus.ui
 
-import org.uqbar.arena.windows.WindowOwner
 import applicationModel.ViajeAppModel
+import org.uqbar.arena.windows.WindowOwner
 
 class CrearViajeWindow extends EditarViajeWindow {
 
-	new(WindowOwner parent) {
-		super(parent)
-		title = "Crear viaje"
+	new(WindowOwner parent, ViajeAppModel model) {
+		super(parent, model)
+		modelObject.search
+	}
+
+	override defaultTitle() {
+		"Crear viaje"
 	}
 
 }

@@ -23,9 +23,8 @@ class Viaje extends Entity implements Cloneable{
 	List<String> recorrido
 	List<Pasaje> pasajes
 	EstadoDeViaje estado
-	
-	
-	
+	String origen
+	String destino
 
 	new(LocalDateTime fechaPartida, LocalDateTime fechaLlegada, Micro micro) {
 		this.fechaPartida = fechaPartida
@@ -43,7 +42,8 @@ class Viaje extends Entity implements Cloneable{
 
 	@Dependencies("precioBase", "precioServicios")
 	def double getPrecio() {
-		precioBase + precioServicios //+ precioMicro + precioFinde
+		2
+		//precioBase + precioServicios + precioMicro + precioFinde
 	}
 
 	@Dependencies("minutos")
@@ -64,7 +64,6 @@ class Viaje extends Entity implements Cloneable{
 		 }
 	}
 
-	@Dependencies("servicios", "precio")
 	def precioServicios() {
 		var double res = 0
 
@@ -165,8 +164,11 @@ class Viaje extends Entity implements Cloneable{
 		!pasajes.isEmpty
 	}
 	
-	def tieneServicio(Class<?> servicio) {
-		false //this.servicios.exists[serv | serv.class == servicio]
+	def getOrigen(){
+		this.recorrido.head
 	}
-
+	
+	def getDestino(){
+		this.recorrido.last
+	}
 }

@@ -5,6 +5,7 @@ import ar.edu.unq.viajebus.Cliente.Cliente
 import ar.edu.unq.viajebus.Micro.Pasaje
 import ar.edu.unq.viajebus.Micro.Viaje
 import org.joda.time.LocalDateTime
+import org.uqbar.arena.bindings.NotNullObservable
 import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.layout.VerticalLayout
 import org.uqbar.arena.widgets.Button
@@ -17,12 +18,13 @@ import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-import org.uqbar.arena.bindings.NotNullObservable
+import applicationModel.ViajeAppModel
 
 class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 
 	new(WindowOwner parent) {
 		super(parent, new PrincipalAppModel)
+		modelObject.search()
 	}
 
 	override protected createFormPanel(Panel mainPanel) {
@@ -49,15 +51,15 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 		this.crearTablaViajes(panelViajes)
 		this.crearBotonesViajes(panelViajes)
 
-		this.crearTablaPasajes(panelPasajes)
-		this.crearBotonesPasajes(panelPasajes)
+//		this.crearTablaPasajes(panelPasajes)
+//		this.crearBotonesPasajes(panelPasajes)
 
 	}
 
 	def crearTablaViajes(Panel mainPanel) {
 
-		var table = new Table<Viaje>(mainPanel, Viaje) => [
-			items <=> "viajes"
+		var table = new Table<Viaje>(mainPanel, typeof(Viaje)) => [
+			items <=> "resultadosViaje"
 			value <=> "viajeSeleccionado"
 			numberVisibleRows = 5
 		]
@@ -187,12 +189,12 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 		panelButtons.layout = new VerticalLayout
 		new Button(panelButtons) => [
 			caption = "Crear"
-			onClick[crearViaje]
+			onClick[this.crearViaje]
 
 		]
 		new Button(panelButtons) => [
 			caption = "Editar"
-			onClick[editarViaje]
+//			onClick[editarViaje]
 			bindEnabled(elementSelected)
 		]
 		new Button(panelButtons) => [
@@ -207,7 +209,7 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 		panelButtons.layout = new VerticalLayout
 		new Button(panelButtons) => [
 			caption = "Crear"
-			onClick[crearPasaje]
+			onClick[this.crearPasaje]
 		]
 		new Button(panelButtons) => [
 			caption = "Ver"
@@ -229,12 +231,16 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 	}
 
 	def crearViaje() {
-		openDialog(new CrearViajeWindow(this))
+		val viaje = new Viaje
+		new CrearViajeWindow(this, new ViajeAppModel) => [
+			onAccept[this.modelObject.crearViaje(viaje)]
+			open
+		]
 	}
-
-	def editarViaje() {
-		openDialog(new EditarViajeWindow(this))
-	}
+//
+//	def editarViaje() {
+//		openDialog(new EditarViajeWindow(this))
+//	}
 
 	def static openDialog(Dialog<?> dialog) {
 		dialog.open

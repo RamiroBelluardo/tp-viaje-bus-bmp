@@ -37,28 +37,28 @@ class Cliente extends Entity implements Cloneable {
 		this.pasajes.add(pasaje)
 	}
 
-	def void setDni(String unDNI) {
-		if (unDNI === "" || unDNI.length <= MAX_DIGITOS) {
-			throw new UserException("El DNI debe tener minimamente 8 d�gitos")
-		}
-		if (unDNI.charAt(2) !== ".".charAt(0)){// || unDNI.charAt(6).equals(".")) {
-			throw new UserException("El DNI debe tener el formato nn.nnn.nnn")
-		}
-		this.dni = unDNI
-	}
+//	def void setDni(String unDNI) {
+//		if (unDNI === "" || unDNI.length <= MAX_DIGITOS) {
+//			throw new UserException("El DNI debe tener minimamente 8 d�gitos")
+//		}
+//		if (unDNI.charAt(2) !== ".".charAt(0)){// || unDNI.charAt(6).equals(".")) {
+//			throw new UserException("El DNI debe tener el formato nn.nnn.nnn")
+//		}
+//		this.dni = unDNI
+//	}
 
 	def getValido() {
 		this.dni == ""
 	}
 
-	def void setMail(String unMail) {
-		if (!unMail.contains("@")) {
-			throw new UserException("El Mail debe contener @")
-		}
-		if (!unMail.contains(".com")) {
-			throw new UserException("Mail inválido")
-		}
-		this.mail = unMail
-	}
+//	def void setMail(String unMail) {
+//		if (!unMail.contains("@")) {
+//			throw new UserException("El Mail debe contener @")
+//		}
+//		if (!unMail.contains(".com")) {
+//			throw new UserException("Mail inválido")
+//		}
+//		this.mail = unMail
+//	}
 
 }
