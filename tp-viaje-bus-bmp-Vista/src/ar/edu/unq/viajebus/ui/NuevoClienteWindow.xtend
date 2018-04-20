@@ -33,7 +33,6 @@ class NuevoClienteWindow extends TransactionalDialog<ClienteAppModel> {
 		]
 
 		new NumericField(editorPanel) => [
-			// Hay que validad el formato
 			value <=> "clienteSeleccionado.dni"
 			width = 200
 		]
@@ -44,7 +43,6 @@ class NuevoClienteWindow extends TransactionalDialog<ClienteAppModel> {
 		]
 
 		new TextBox(editorPanel) => [
-			// Hay que validar el formato
 			value <=> "clienteSeleccionado.mail"
 			width = 200
 		]
@@ -60,6 +58,7 @@ class NuevoClienteWindow extends TransactionalDialog<ClienteAppModel> {
 			onClick[this.accept]
 			setAsDefault
 			disableOnError
+			bindEnabledToProperty("clienteSeleccionado.valido")
 			alignCenter
 		]
 

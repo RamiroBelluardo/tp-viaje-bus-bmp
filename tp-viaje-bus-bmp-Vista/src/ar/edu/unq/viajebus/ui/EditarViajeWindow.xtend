@@ -25,7 +25,9 @@ class EditarViajeWindow extends TransactionalDialog<ViajeAppModel> {
 
 	new(WindowOwner parent) {
 		super(parent, new ViajeAppModel)
-		title = "Viaje Bus"
+		title = "Editar viaje"
+		
+		
 	}
 
 	override protected createFormPanel(Panel mainPanel) {
@@ -82,7 +84,6 @@ class EditarViajeWindow extends TransactionalDialog<ViajeAppModel> {
 
 		new TextBox(panelInfo) => [
 			(value <=> "viajeSeleccionado.fechaPartida").transformer = new LocalDateTimeTransformer
-
 			fontSize = 10
 			width = 200
 		]
@@ -119,7 +120,7 @@ class EditarViajeWindow extends TransactionalDialog<ViajeAppModel> {
 		]
 		new CheckBox(panelServicios) => [
 			//enabled <=> []
-			//value <=> [modelObject.agregarServicio()]
+			value <=> "tieneDesayuno"
 		]
 		new Label(panelServicios) => [
 			text = "Desayuno"
@@ -141,6 +142,7 @@ class EditarViajeWindow extends TransactionalDialog<ViajeAppModel> {
 			fontSize = 15
 		]
 		new Label(panelInfo) => [
+			value <=> "viajeSeleccionado.precio"
 			fontSize = 10
 			width = 50
 		]

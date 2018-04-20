@@ -9,6 +9,8 @@ import org.joda.time.LocalDateTime
 import org.joda.time.Minutes
 import org.uqbar.commons.model.Entity
 import org.uqbar.commons.model.annotations.TransactionalAndObservable
+import org.uqbar.commons.model.annotations.Dependencies
+import ar.edu.unq.viajebus.Servicios.Desayuno
 
 @Accessors
 @TransactionalAndObservable
@@ -21,6 +23,8 @@ class Viaje extends Entity implements Cloneable{
 	List<String> recorrido
 	List<Pasaje> pasajes
 	EstadoDeViaje estado
+	
+	
 	
 
 	new(LocalDateTime fechaPartida, LocalDateTime fechaLlegada, Micro micro) {
@@ -37,21 +41,30 @@ class Viaje extends Entity implements Cloneable{
 		this.recorrido = newArrayList
 	}
 
-	def precio() {
-		precioBase + precioServicios + precioMicro + precioFinde
+	@Dependencies("precioBase", "precioServicios")
+	def double getPrecio() {
+		precioBase + precioServicios //+ precioMicro + precioFinde
 	}
 
-	def precioBase() {
+	@Dependencies("minutos")
+	def getPrecioBase() {
 		minutos * 2
 	}
 
-	def minutos() {
+	@Dependencies("fechaPartida", "fechaLlegada")
+	def getMinutos() {
 		/*
 		 * Retorna el tiempo que recorre el micro en minutos
 		 */
-		Minutes.minutesBetween(fechaPartida, fechaLlegada).minutes
+		 if(fechaPartida == null || fechaLlegada == null){
+		 	return 0
+		 }
+		 else{
+			Minutes.minutesBetween(fechaPartida, fechaLlegada).minutes	 	
+		 }
 	}
 
+	@Dependencies("servicios", "precio")
 	def precioServicios() {
 		var double res = 0
 
@@ -150,6 +163,10 @@ class Viaje extends Entity implements Cloneable{
 
 	def hayPasajesVendidos() {
 		!pasajes.isEmpty
+	}
+	
+	def tieneServicio(Class<?> servicio) {
+		false //this.servicios.exists[serv | serv.class == servicio]
 	}
 
 }

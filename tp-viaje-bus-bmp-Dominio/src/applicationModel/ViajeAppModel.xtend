@@ -3,14 +3,16 @@ package applicationModel
 import ar.edu.unq.viajebus.Buscador.Buscador
 import ar.edu.unq.viajebus.Micro.Micro
 import ar.edu.unq.viajebus.Micro.Viaje
+import ar.edu.unq.viajebus.Servicios.Desayuno
 import ar.edu.unq.viajebus.Servicios.Servicio
+import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.Entity
+import org.uqbar.commons.model.annotations.Dependencies
 import org.uqbar.commons.model.annotations.TransactionalAndObservable
 import repo.RepoMicros
 import repo.RepoPasajes
 import repo.RepoViajes
-import java.util.List
 
 @Accessors
 @TransactionalAndObservable
@@ -36,6 +38,14 @@ class ViajeAppModel extends Entity implements Cloneable {
 		microSeleccionado = new Micro
 		buscador = new Buscador
 	}
+	
+	def setTieneDesayuno(Boolean tiene){
+		tiene
+	}
+
+	def getTieneDesayuno(){
+		viajeSeleccionado.tieneServicio(Desayuno)
+	}
 
 	def getViajes() {
 		repoViajes.viajes
@@ -56,19 +66,19 @@ class ViajeAppModel extends Entity implements Cloneable {
 	def quitarCiudad() {
 		viajeSeleccionado.quitarCiudad(ciudadSeleccionada)
 	}
-	
-	def void agregarServicio(){
+
+	def agregarServicio() {
 		viajeSeleccionado.agregarServicio(servicio)
 	}
-	
-	def search(){
-		//resultados = viajes.filter[viajes|viajes.recorrido.contains(ciudadSeleccionada)].toList
-		resultados = viajes.filter[viajes|this.match(ciudadSeleccionada, viajes.recorrido) 
-			&& this.match(fechaPartidaSeleccionada, viajes.fechaPartida)
-			&& this.match(fechaLlegadaSeleccionada, viajes.fechaLlegada)
+
+	def search() {
+		// resultados = viajes.filter[viajes|viajes.recorrido.contains(ciudadSeleccionada)].toList
+		resultados = viajes.filter [ viajes |
+			this.match(ciudadSeleccionada, viajes.recorrido) &&
+				this.match(fechaPartidaSeleccionada, viajes.fechaPartida) &&
+				this.match(fechaLlegadaSeleccionada, viajes.fechaLlegada)
 		].toList
 	}
-	
 
 	def match(Object expectedValue, Object realValue) {
 		if (expectedValue == null) {

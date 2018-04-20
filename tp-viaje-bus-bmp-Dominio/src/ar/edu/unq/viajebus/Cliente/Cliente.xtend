@@ -41,10 +41,14 @@ class Cliente extends Entity implements Cloneable {
 		if (unDNI === "" || unDNI.length <= MAX_DIGITOS) {
 			throw new UserException("El DNI debe tener minimamente 8 d�gitos")
 		}
-		if (unDNI.charAt(2).toString !== (".")){// || unDNI.charAt(6).equals(".")) {
+		if (unDNI.charAt(2) !== ".".charAt(0)){// || unDNI.charAt(6).equals(".")) {
 			throw new UserException("El DNI debe tener el formato nn.nnn.nnn")
 		}
 		this.dni = unDNI
+	}
+
+	def getValido() {
+		this.dni == ""
 	}
 
 	def void setMail(String unMail) {

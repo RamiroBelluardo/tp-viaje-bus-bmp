@@ -10,6 +10,8 @@ import org.joda.time.LocalDateTime
 class RepoPasajes {
 
 	static RepoPasajes instance
+	
+	RepoViajes repoViajes = RepoViajes.instance
 
 	static def getInstance() {
 		if (instance === null) {
@@ -28,9 +30,9 @@ class RepoPasajes {
 		val partidaMicro1 = new LocalDateTime(2018, 6, 13, 21, 15)
 		val llegadaMicro1 = new LocalDateTime(2018, 6, 14, 22, 30)
 
-		val viaje = new Viaje(partidaMicro1, llegadaMicro1, micro1)
+		//val viaje = new Viaje(partidaMicro1, llegadaMicro1, micro1)
 
-		// val viaje1 = repoViajes.viajes.get(0)
+		val viaje = repoViajes.viajes.get(0)
 		val cliente1 = new Cliente("Lucas", "Pier", "111111", "lg.piergiacomi@gmail.com", "44444444")
 		val Integer nro = 1
 		val pasaje1 = new Pasaje(cliente1, viaje, nro)
