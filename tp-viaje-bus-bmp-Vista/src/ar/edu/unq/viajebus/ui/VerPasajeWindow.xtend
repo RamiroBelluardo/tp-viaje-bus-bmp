@@ -43,7 +43,7 @@ class VerPasajeWindow extends TransactionalDialog<Pasaje> {
 		new Button(panelCliente) => [
 			caption = "Nuevo"
 			width = 100
-		// onClick[nuevoCliente]
+		 onClick[nuevoCliente]
 		]
 
 		new Selector<Cliente>(panelIzquierdo) => [
@@ -130,9 +130,9 @@ class VerPasajeWindow extends TransactionalDialog<Pasaje> {
 		}
 	}
 
-//	def nuevoCliente() {
-//		PantallaPrincipalWindow.openDialog(new NuevoClienteWindow(this))
-//	}
+	def nuevoCliente() {
+		PantallaPrincipalWindow.openDialog(new NuevoClienteWindow(this))
+	}
 	def buscarViaje() {
 		openDialog(new BuscarViajesWindow(this))
 	}

@@ -17,6 +17,7 @@ import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 import org.joda.time.LocalDateTime
+import org.uqbar.arena.windows.Dialog
 
 class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 
@@ -192,7 +193,7 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 		]
 		new Button(panelButtons) => [
 			caption = "Editar"
-		onClick[editarViaje]
+			onClick[editarViaje]
 			bindEnabled(elementSelected)
 		]
 		new Button(panelButtons) => [
@@ -235,15 +236,17 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 			open
 		]
 	}
+
 	def void editarViaje() {
-		val viaje= modelObject.viajeSeleccionado
+		val viaje = modelObject.viajeSeleccionado
 		new EditarViajeWindow(this, viaje) => [
 			open
 		]
 	}
-	def void eliminarViaje(){
+
+	def void eliminarViaje() {
 		this.modelObject.eliminarViaje
-		
+
 	}
 
 	def void crearPasaje() {
@@ -257,4 +260,7 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 	override protected addActions(Panel actionsPanel) {
 	}
 
+	def static openDialog(Dialog<?> dialog) {
+		dialog.open
+	}
 }
