@@ -14,7 +14,6 @@ import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.Selector
 import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.windows.WindowOwner
-import repo.RepoViajes
 import transformer.LocalDateTimeTransformer
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
@@ -23,10 +22,10 @@ class EditarViajeWindow extends TransactionalDialog<ViajeAppModel> {
 
 	new(WindowOwner parent, ViajeAppModel model) {
 		super(parent, model)
-		title = defaultTitle		
+		title = defaultTitle
 	}
-	
-	def defaultTitle(){
+
+	def defaultTitle() {
 		"Editar viaje"
 	}
 
@@ -44,14 +43,14 @@ class EditarViajeWindow extends TransactionalDialog<ViajeAppModel> {
 		]
 
 		new List(panelRecorrido) => [
-			items <=> "viajeSeleccionado.recorrido"
+			items <=> "example.recorrido"
 			value <=> "ciudadSeleccionada"
 			width = 300
 
 		]
 
 		new TextBox(panelRecorrido) => [
-			value <=> "example"
+			value <=> "ciudadSeleccionada"
 			width = 100
 		]
 
@@ -83,7 +82,7 @@ class EditarViajeWindow extends TransactionalDialog<ViajeAppModel> {
 		]
 
 		new TextBox(panelInfo) => [
-			(value <=> "viajeSeleccionado.fechaPartida").transformer = new LocalDateTimeTransformer
+			(value <=> "example.fechaPartida").transformer = new LocalDateTimeTransformer
 			fontSize = 10
 			width = 200
 		]
@@ -95,7 +94,7 @@ class EditarViajeWindow extends TransactionalDialog<ViajeAppModel> {
 		]
 
 		new TextBox(panelInfo) => [
-			(value <=> "viajeSeleccionado.fechaLlegada").transformer = new LocalDateTimeTransformer
+			(value <=> "example.fechaLlegada").transformer = new LocalDateTimeTransformer
 			fontSize = 10
 			width = 200
 
@@ -121,7 +120,7 @@ class EditarViajeWindow extends TransactionalDialog<ViajeAppModel> {
 		new CheckBox(panelServicios) => [
 			value <=> "tieneDesayuno"
 		]
-		
+
 		new Label(panelServicios) => [
 			value <=> "tieneServicioDesayuno"
 		]
@@ -151,10 +150,12 @@ class EditarViajeWindow extends TransactionalDialog<ViajeAppModel> {
 			fontSize = 15
 		]
 		new Label(panelInfo) => [
-			value <=> "viajeSeleccionado.precio"
+			// Hacer que salga el precio con la palabra pesos o la letra p
+			value <=> "example.precio"
 			fontSize = 10
 			width = 50
 		]
+
 		createGridActions(panelDerecho)
 	}
 
@@ -177,5 +178,4 @@ class EditarViajeWindow extends TransactionalDialog<ViajeAppModel> {
 
 	}
 
- 
 }

@@ -18,13 +18,13 @@ class ViajeAppModel extends Entity implements Cloneable {
 	
 	List<Micro> resultadosMicro
 
+	Viaje example = new Viaje
+	List<Viaje> resultadosViaje
 	Viaje viajeSeleccionado
-	String example
 	String ciudadSeleccionada
 	Micro microSeleccionado
 	Servicio servicio
 	Buscador buscador
-	List<Viaje> resultados
 	String fechaPartidaSeleccionada
 	String fechaLlegadaSeleccionada
 	Boolean tieneDesayuno = false
@@ -63,15 +63,15 @@ class ViajeAppModel extends Entity implements Cloneable {
     }
 
 	def agregarCiudad() {
-		viajeSeleccionado.agregarCiudad(example)
+		example.agregarCiudad(ciudadSeleccionada)
 	}
 
 	def quitarCiudad() {
-		viajeSeleccionado.quitarCiudad(ciudadSeleccionada)
+		example.quitarCiudad(ciudadSeleccionada)
 	}
 
 	def agregarServicio() {
-		viajeSeleccionado.agregarServicio(servicio)
+		example.agregarServicio(servicio)
 	}
 
 

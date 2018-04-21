@@ -54,9 +54,9 @@ class GMailSender {
 	}
 
 	def notificarCompraDePasaje(Pasaje pasaje) {
-		this.sendMail(pasaje.cliente.mail, "ViajeBus: Compra realizada con éxito",
+		this.sendMail(pasaje.cliente.mail, "ViajeBus: Compra realizada con ï¿½xito",
 			"Estimado/a " + pasaje.cliente.nombre +
-				", usted ha efectuado la compra del siguiente pasaje.\n\n Número de asiento:" + pasaje.asiento.numero +
+				", usted ha efectuado la compra del siguiente pasaje.\n\n Nï¿½mero de asiento:" + pasaje.asiento.numero +
 				"\n\n Fecha de partida:" + pasaje.viaje.fechaPartida + "\n\n Precio: " + pasaje.viaje.precio +
 				"\n\n Muchas gracias por elegirnos!\n\n ViajeBus")
 	}

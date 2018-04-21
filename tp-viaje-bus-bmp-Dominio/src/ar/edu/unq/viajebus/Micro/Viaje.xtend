@@ -8,9 +8,8 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.joda.time.LocalDateTime
 import org.joda.time.Minutes
 import org.uqbar.commons.model.Entity
-import org.uqbar.commons.model.annotations.TransactionalAndObservable
 import org.uqbar.commons.model.annotations.Dependencies
-import ar.edu.unq.viajebus.Servicios.Desayuno
+import org.uqbar.commons.model.annotations.TransactionalAndObservable
 
 @Accessors
 @TransactionalAndObservable
@@ -23,8 +22,8 @@ class Viaje extends Entity implements Cloneable{
 	List<String> recorrido
 	List<Pasaje> pasajes
 	EstadoDeViaje estado
-	String origen
-	String destino
+	//String origen
+	//String destino
 
 	new(LocalDateTime fechaPartida, LocalDateTime fechaLlegada, Micro micro) {
 		this.fechaPartida = fechaPartida
@@ -40,10 +39,10 @@ class Viaje extends Entity implements Cloneable{
 		this.recorrido = newArrayList
 	}
 
-	@Dependencies("precioBase", "precioServicios")
+	@Dependencies("precioBase")
 	def double getPrecio() {
-		2
-		//precioBase + precioServicios + precioMicro + precioFinde
+		
+		precioBase //+ precioServicios + precioMicro + precioFinde
 	}
 
 	@Dependencies("minutos")
@@ -56,7 +55,7 @@ class Viaje extends Entity implements Cloneable{
 		/*
 		 * Retorna el tiempo que recorre el micro en minutos
 		 */
-		 if(fechaPartida == null || fechaLlegada == null){
+		 if(fechaPartida === null || fechaLlegada === null){
 		 	return 0
 		 }
 		 else{
