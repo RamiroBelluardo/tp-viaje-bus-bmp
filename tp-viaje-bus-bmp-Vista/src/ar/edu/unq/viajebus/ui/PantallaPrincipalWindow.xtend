@@ -197,6 +197,7 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 		]
 		new Button(panelButtons) => [
 			caption = "Eliminar"
+			onClick[this.eliminarViaje]
 			bindEnabled(elementSelected)
 		]
 	}
@@ -233,6 +234,9 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 			onAccept[this.modelObject.crearViaje(viaje)]
 			open
 		]
+	}
+	def void eliminarViaje(){
+		this.modelObject.eliminarViaje
 	}
 
 	def void crearPasaje() {

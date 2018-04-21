@@ -43,4 +43,8 @@ class PrincipalAppModel {
 	def RepoPasajes getRepoPasajes() {
 		ApplicationContext.instance.getSingleton(typeof(Pasaje))
 	}
+	def eliminarViaje(){
+		repoViajes.delete(viajeSeleccionado)
+	}
 }
+
