@@ -9,14 +9,15 @@ import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.Selector
+import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.windows.WindowOwner
 import org.uqbar.commons.applicationContext.ApplicationContext
 import repo.RepoMicros
+import transformer.LocalDateTimeTransformer
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 import org.uqbar.arena.widgets.List
-import org.uqbar.arena.widgets.TextBox
-import transformer.LocalDateTimeTransformer
+import org.uqbar.arena.bindings.NotNullObservable
 
 class EditarViajeWindow extends TransactionalDialog<Viaje> {
 
@@ -37,41 +38,42 @@ class EditarViajeWindow extends TransactionalDialog<Viaje> {
 			layout = new ColumnLayout(1)
 		]
 
-//		new Label(panelRecorrido) => [
-//			text = "Recorrido"
-//			fontSize = 15
-//		]
-//
-//		new List(panelRecorrido) => [
-//			items <=> "recorrido"
-//			value <=> "ciudadSeleccionada"
-//			width = 300
-//
-//		]
+		new Label(panelRecorrido) => [
+			text = "Recorrido"
+			fontSize = 15
+		]
 
-//		new TextBox(panelRecorrido) => [
-//			value <=> "ciudadSeleccionada"
-//			width = 100
-//		]
+		new List(panelRecorrido) => [
+			items <=> "recorrido"
+			value <=> "ciudadSeleccionada"
+			width = 300
 
-//		val panelBotones = new Panel(panelIzquierdo) => [
-//			layout = new ColumnLayout(4)
-//		]
-//
-//		new Button(panelBotones) => [
-//			caption = "Agregar"
-//			// onClick[modelObject.agregarCiudad]
-//			setAsDefault
-//			disableOnError
-//		]
-//		new Button(panelBotones) => [
-//			// val elementSelected = new NotNullObservable("ciudadSeleccionada")
-//			caption = "Quitar"
-//			// onClick[modelObject.quitarCiudad]
-//			setAsDefault
-//			disableOnError
-//		// bindEnabled(elementSelected)
-//		]
+		]
+
+		new TextBox(panelRecorrido) => [
+			value <=> "ciudadSeleccionada"
+			width = 100
+		]
+
+		val panelBotones = new Panel(panelIzquierdo) => [
+			layout = new ColumnLayout(4)
+		]
+
+		new Button(panelBotones) => [
+			caption = "Agregar"
+			onClick[modelObject.agregarCiudad(modelObject.ciudadSeleccionada)]
+			setAsDefault
+			disableOnError
+		]
+
+		new Button(panelBotones) => [
+			val elementSelected = new NotNullObservable("ciudadSeleccionada")
+			caption = "Quitar"
+			onClick[modelObject.quitarCiudad(modelObject.ciudadSeleccionada)]
+			setAsDefault
+			disableOnError
+			bindEnabled(elementSelected)
+		]
 
 		val panelInfo = new Panel(panelDerecho) => [
 			layout = new ColumnLayout(2)

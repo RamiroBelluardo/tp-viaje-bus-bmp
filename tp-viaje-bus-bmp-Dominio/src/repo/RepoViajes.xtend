@@ -5,7 +5,6 @@ import ar.edu.unq.viajebus.Micro.Viaje
 import org.joda.time.LocalDateTime
 import org.uqbar.commons.model.CollectionBasedRepo
 import org.uqbar.commons.model.annotations.Observable
-import org.apache.commons.collections15.Predicate
 
 @Observable
 class RepoViajes extends CollectionBasedRepo<Viaje> {

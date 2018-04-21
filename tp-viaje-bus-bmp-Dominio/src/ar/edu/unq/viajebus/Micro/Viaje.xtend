@@ -24,6 +24,7 @@ class Viaje extends Entity implements Cloneable{
 	EstadoDeViaje estado
 	String origen
 	String destino
+	String ciudadSeleccionada
 
 	new(LocalDateTime fechaPartida, LocalDateTime fechaLlegada, Micro micro) {
 		this.fechaPartida = fechaPartida
@@ -183,5 +184,7 @@ class Viaje extends Entity implements Cloneable{
 	def getDestino(){
 		this.recorrido.last
 	}
+	
+	
 	
 }

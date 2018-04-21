@@ -4,7 +4,6 @@ import applicationModel.PrincipalAppModel
 import ar.edu.unq.viajebus.Cliente.Cliente
 import ar.edu.unq.viajebus.Micro.Pasaje
 import ar.edu.unq.viajebus.Micro.Viaje
-import org.joda.time.LocalDateTime
 import org.uqbar.arena.bindings.NotNullObservable
 import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.layout.VerticalLayout
