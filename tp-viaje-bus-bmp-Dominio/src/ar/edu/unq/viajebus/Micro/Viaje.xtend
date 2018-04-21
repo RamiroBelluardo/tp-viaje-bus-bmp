@@ -106,21 +106,21 @@ class Viaje extends Entity implements Cloneable{
 	}
 
 	
-	def getPrecioMicro() {
-		/*
-		 * Retorna el precio adicional por el tipo de asiento.
-		 */
-		(precioBase + precioServicios) * 2//micro.tipoDeAsiento.porcentaje / 100
-	}
-
-	def precioFinde() {
-		/*
-		 * Retorna el precio adicional si es fin de semana.
-		 */
-		if (esFinde) {
-			(precioBase + precioServicios + precioMicro) * 10 / 100
-		}
-	}
+//	def getPrecioMicro() {
+//		/*
+//		 * Retorna el precio adicional por el tipo de asiento.
+//		 */
+//		(precioBase + precioServicios) * 2//micro.tipoDeAsiento.porcentaje / 100
+//	}
+//
+//	def precioFinde() {
+//		/*
+//		 * Retorna el precio adicional si es fin de semana.
+//		 */
+//		if (esFinde) {
+//			(precioBase + precioServicios + precioMicro) * 10 / 100
+//		}
+//	}
 
 	def esFinde() {
 		/*

@@ -135,7 +135,6 @@ class EditarViajeWindow extends TransactionalDialog<Viaje> {
 		new Label(panelServicios) => [
 			text = "Desayuno"
 		]
-
 //		new Label(panelServicios) => [
 //			value <=> "tieneDesayunoAndMerienda"
 //		]
@@ -174,7 +173,6 @@ class EditarViajeWindow extends TransactionalDialog<Viaje> {
 			fontSize = 10
 			width = 50
 		]
-
 	// createGridActions(panelDerecho)
 	}
 

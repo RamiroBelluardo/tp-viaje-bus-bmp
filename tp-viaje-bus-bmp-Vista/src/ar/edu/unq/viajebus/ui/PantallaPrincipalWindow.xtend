@@ -16,6 +16,7 @@ import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
+import org.joda.time.LocalDateTime
 
 class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 
@@ -67,27 +68,25 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 
 		new Column<Viaje>(table) => [
 			title = "Partida"
-			bindContentsToProperty("fechaPartida")
-//			.transformer = [ LocalDateTime f |
-//				val dias = f.getDayOfMonth().toString
-//				val meses = f.getMonthOfYear().toString
-//				val anios = f.getYear().toString
-//				val res = '''«dias»/«meses»/«anios»'''
-//				res
-//			]
+			bindContentsToProperty("fechaPartida").transformer = [ LocalDateTime f |
+				val dias = f.getDayOfMonth().toString
+				val meses = f.getMonthOfYear().toString
+				val anios = f.getYear().toString
+				val res = '''«dias»/«meses»/«anios»'''
+				res
+			]
 			fixedSize = 200
 		]
 
 		new Column<Viaje>(table) => [
 			title = "Destino"
-			bindContentsToProperty("fechaLlegada")
-//			.transformer = [ LocalDateTime f |
-//				val dias = f.getDayOfMonth().toString
-//				val meses = f.getMonthOfYear().toString
-//				val anios = f.getYear().toString
-//				val res = '''«dias»/«meses»/«anios»'''
-//				res
-//			]
+			bindContentsToProperty("fechaLlegada").transformer = [ LocalDateTime f |
+				val dias = f.getDayOfMonth().toString
+				val meses = f.getMonthOfYear().toString
+				val anios = f.getYear().toString
+				val res = '''«dias»/«meses»/«anios»'''
+				res
+			]
 			fixedSize = 200
 		]
 
@@ -136,39 +135,36 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 
 		new Column<Pasaje>(table) => [
 			title = "Partida"
-			bindContentsToProperty("viaje.fechaPartida")
-//			.transformer = [ LocalDateTime f |
-//				val dias = f.getDayOfMonth().toString
-//				val meses = f.getMonthOfYear().toString
-//				val anios = f.getYear().toString
-//				val res = '''«dias»/«meses»/«anios»'''
-//				res
-//			]
+			bindContentsToProperty("viaje.fechaPartida").transformer = [ LocalDateTime f |
+				val dias = f.getDayOfMonth().toString
+				val meses = f.getMonthOfYear().toString
+				val anios = f.getYear().toString
+				val res = '''«dias»/«meses»/«anios»'''
+				res
+			]
 			fixedSize = 200
 		]
 
 		new Column<Pasaje>(table) => [
 			title = "Llegada"
-			bindContentsToProperty("viaje.fechaLlegada")
-//			.transformer = [ LocalDateTime f |
-//				val dias = f.getDayOfMonth().toString
-//				val meses = f.getMonthOfYear().toString
-//				val anios = f.getYear().toString
-//				val res = '''«dias»/«meses»/«anios»'''
-//				res
-//			]
+			bindContentsToProperty("viaje.fechaLlegada").transformer = [ LocalDateTime f |
+				val dias = f.getDayOfMonth().toString
+				val meses = f.getMonthOfYear().toString
+				val anios = f.getYear().toString
+				val res = '''«dias»/«meses»/«anios»'''
+				res
+			]
 			fixedSize = 200
 		]
 
 		new Column<Pasaje>(table) => [
 			title = "Hora Partida"
-			bindContentsToProperty("viaje.fechaPartida")
-//			.transformer = [ LocalDateTime f |
-//				val horas = f.getHourOfDay.toString
-//				val minutos = f.getMinuteOfHour.toString
-//				val res = '''«horas»:«minutos»'''
-//				res
-//			]
+			bindContentsToProperty("viaje.fechaPartida").transformer = [ LocalDateTime f |
+				val horas = f.getHourOfDay.toString
+				val minutos = f.getMinuteOfHour.toString
+				val res = '''«horas»:«minutos»'''
+				res
+			]
 			fixedSize = 75
 		]
 
@@ -211,7 +207,7 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 		panelButtons.layout = new VerticalLayout
 		new Button(panelButtons) => [
 			caption = "Crear"
-//			onClick[this.crearPasaje]
+			onClick[this.crearPasaje]
 		]
 		new Button(panelButtons) => [
 			caption = "Ver"
@@ -235,6 +231,14 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 		val viaje = new Viaje
 		new CrearViajeWindow(this, viaje) => [
 			onAccept[this.modelObject.crearViaje(viaje)]
+			open
+		]
+	}
+
+	def void crearPasaje() {
+		val pasaje = new Pasaje
+		new CrearPasajeWindow(this, pasaje) => [
+			onAccept[this.modelObject.crearPasaje(pasaje)]
 			open
 		]
 	}

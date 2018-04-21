@@ -46,7 +46,6 @@ class Cliente extends Entity implements Cloneable {
 //		}
 //		this.dni = unDNI
 //	}
-
 	def getValido() {
 		this.dni == ""
 	}
@@ -60,5 +59,4 @@ class Cliente extends Entity implements Cloneable {
 //		}
 //		this.mail = unMail
 //	}
-
 }

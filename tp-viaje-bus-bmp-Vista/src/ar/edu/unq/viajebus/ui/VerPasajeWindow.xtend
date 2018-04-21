@@ -1,24 +1,27 @@
 package ar.edu.unq.viajebus.ui
 
+import ar.edu.unq.viajebus.Cliente.Cliente
+import ar.edu.unq.viajebus.Micro.Pasaje
 import org.uqbar.arena.aop.windows.TransactionalDialog
+import org.uqbar.arena.bindings.ObservableProperty
 import org.uqbar.arena.layout.ColumnLayout
+import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.CheckBox
 import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.Selector
 import org.uqbar.arena.widgets.TextBox
-import org.uqbar.arena.windows.WindowOwner
-import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.windows.Dialog
-import org.uqbar.arena.bindings.PropertyAdapter
-import ar.edu.unq.viajebus.Cliente.Cliente
+import org.uqbar.arena.windows.WindowOwner
+import org.uqbar.commons.applicationContext.ApplicationContext
+import repo.RepoClientes
+
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-import applicationModel.ClienteAppModel
 
-class VerPasajeWindow extends TransactionalDialog<ClienteAppModel> {
+class VerPasajeWindow extends TransactionalDialog<Pasaje> {
 
-	new(WindowOwner parent, ClienteAppModel model) {
+	new(WindowOwner parent, Pasaje model) {
 		super(parent, model)
 		title = "Viaje Bus"
 	}
@@ -45,7 +48,9 @@ class VerPasajeWindow extends TransactionalDialog<ClienteAppModel> {
 
 		new Selector<Cliente>(panelIzquierdo) => [
 			allowNull = false
-			(items <=> "clientes").adapter = new PropertyAdapter(Cliente, "nombre")
+			value <=> "cliente"
+			val propiedadClientes = bindItems(new ObservableProperty(repoClientes, "clientes"))
+			propiedadClientes.adaptWith(typeof(Cliente), "nombre")
 			// value <=> "microSeleccionado"
 			width = 150
 		]
@@ -61,7 +66,7 @@ class VerPasajeWindow extends TransactionalDialog<ClienteAppModel> {
 
 		new Button(panelViaje) => [
 			caption = "Buscar"
-			onClick[buscarViaje]
+			//onClick[buscarViaje]
 			width = 100
 		]
 
@@ -128,13 +133,16 @@ class VerPasajeWindow extends TransactionalDialog<ClienteAppModel> {
 //	def nuevoCliente() {
 //		PantallaPrincipalWindow.openDialog(new NuevoClienteWindow(this))
 //	}
-
 	def buscarViaje() {
 		openDialog(new BuscarViajesWindow(this))
 	}
 
 	def static openDialog(Dialog<?> dialog) {
 		dialog.open
+	}
+
+	def getRepoClientes() {
+		ApplicationContext.instance.getSingleton(Cliente) as RepoClientes
 	}
 
 }

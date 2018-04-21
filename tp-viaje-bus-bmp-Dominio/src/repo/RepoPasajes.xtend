@@ -23,20 +23,29 @@ class RepoPasajes extends CollectionBasedRepo<Pasaje> {
 		pasaje
 	}
 
-	override protected getCriterio(Pasaje example) {
-		null
+	def search(Cliente cliente) {
+		allInstances.filter[pasaje|this.match(cliente, pasaje.cliente)].toList
 	}
 
-	override createExample() {
-		new Pasaje
+	def match(Object expectedValue, Object realValue) {
+		if (expectedValue === null) {
+			return true
+		}
+		if (realValue === null) {
+			return false
+		}
+		realValue.toString().toLowerCase().contains(expectedValue.toString().toLowerCase())
 	}
 
 	override getEntityType() {
 		typeof(Pasaje)
 	}
 
-	def search() {
-		allInstances
+	override createExample() {
+		new Pasaje
 	}
 
+	override protected getCriterio(Pasaje example) {
+		null
+	}
 }

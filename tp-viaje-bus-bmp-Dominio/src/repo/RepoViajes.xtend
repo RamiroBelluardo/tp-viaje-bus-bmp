@@ -20,9 +20,6 @@ class RepoViajes extends CollectionBasedRepo<Viaje> {
 		])
 	}
 
-	override void validateCreate(Viaje viaje) {
-	}
-
 	// ********************************************************
 	// ** Búsquedas
 	// ********************************************************

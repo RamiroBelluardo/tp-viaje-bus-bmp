@@ -3,6 +3,7 @@ package repo
 import ar.edu.unq.viajebus.Cliente.Cliente
 import org.uqbar.commons.model.CollectionBasedRepo
 import org.uqbar.commons.model.annotations.Observable
+import java.util.List
 
 @Observable
 class RepoClientes extends CollectionBasedRepo<Cliente> {
@@ -21,17 +22,21 @@ class RepoClientes extends CollectionBasedRepo<Cliente> {
 		this.create(cliente)
 		cliente
 	}
-	
+
 	override protected getCriterio(Cliente example) {
 		null
 	}
-	
+
 	override createExample() {
 		new Cliente
 	}
-	
+
 	override getEntityType() {
 		typeof(Cliente)
+	}
+
+	def List<Cliente> getClientes() {
+		allInstances
 	}
 
 }
