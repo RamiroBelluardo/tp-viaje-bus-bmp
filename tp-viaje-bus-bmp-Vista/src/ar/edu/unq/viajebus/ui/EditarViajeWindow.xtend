@@ -18,6 +18,7 @@ import transformer.LocalDateTimeTransformer
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 import org.uqbar.arena.widgets.List
 import org.uqbar.arena.bindings.NotNullObservable
+import org.uqbar.arena.widgets.CheckBox
 
 class EditarViajeWindow extends TransactionalDialog<Viaje> {
 
@@ -115,6 +116,7 @@ class EditarViajeWindow extends TransactionalDialog<Viaje> {
 			propiedadMicros.adaptWith(typeof(Micro), "patente")
 			// (items <=> "resultadosMicro").adapter = new PropertyAdapter(Micro, "patente")
 			width = 150
+		// bindEnabled(new NotNullObservable("tieneDesayuno"))
 		]
 
 		new Label(panelInfo) => [
@@ -122,44 +124,45 @@ class EditarViajeWindow extends TransactionalDialog<Viaje> {
 			fontSize = 15
 		]
 
-//		val panelServicios = new Panel(panelInfo) => [
-//			layout = new ColumnLayout(2)
-//		]
-//
-//		new CheckBox(panelServicios) => [
-//			value <=> "tieneDesayuno"
-//		]
-//
+		val panelServicios = new Panel(panelInfo) => [
+			layout = new ColumnLayout(2)
+		]
+
+		new CheckBox(panelServicios) => [
+			value <=> "tieneDesayuno"
+		]
+
+		new Label(panelServicios) => [
+			text = "Desayuno"
+		]
+
 //		new Label(panelServicios) => [
-//			text = "Desayuno"
+//			value <=> "tieneDesayunoAndMerienda"
 //		]
-//
-//		new Label(panelServicios) => [
-//			value <=> "tieneServicioDesayuno"
-//		]
-//		new CheckBox(panelServicios) => [
-//			value <=> "tieneAlmuerzo"
-//		]
-//
-//		new Label(panelServicios) => [
-//			text = "Almuerzo"
-//		]
-//
-//		new CheckBox(panelServicios) => [
-//			value <=> "tieneMerienda"
-//		]
-//
-//		new Label(panelServicios) => [
-//			text = "Merienda"
-//		]
-//
-//		new CheckBox(panelServicios) => [
-//			value <=> "tieneCena"
-//		]
-//
-//		new Label(panelServicios) => [
-//			text = "Cena"
-//		]
+		new CheckBox(panelServicios) => [
+			value <=> "tieneAlmuerzo"
+		]
+
+		new Label(panelServicios) => [
+			text = "Almuerzo"
+		]
+
+		new CheckBox(panelServicios) => [
+			value <=> "tieneMerienda"
+		]
+
+		new Label(panelServicios) => [
+			text = "Merienda"
+		]
+
+		new CheckBox(panelServicios) => [
+			value <=> "tieneCena"
+		]
+
+		new Label(panelServicios) => [
+			text = "Cena"
+		]
+
 		new Label(panelInfo) => [
 			text = "Precio Final:"
 			fontSize = 15

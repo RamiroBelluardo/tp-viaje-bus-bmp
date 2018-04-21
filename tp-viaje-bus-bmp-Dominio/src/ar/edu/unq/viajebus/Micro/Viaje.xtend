@@ -25,6 +25,10 @@ class Viaje extends Entity implements Cloneable{
 	String origen
 	String destino
 	String ciudadSeleccionada
+	Boolean tieneDesayuno = false
+	Boolean tieneAlmuerzo = false
+	Boolean tieneMerienda = false
+	Boolean tieneCena     = false
 
 	new(LocalDateTime fechaPartida, LocalDateTime fechaLlegada, Micro micro) {
 		this.fechaPartida = fechaPartida
@@ -41,13 +45,12 @@ class Viaje extends Entity implements Cloneable{
 	new() {
 		this.recorrido = newArrayList
 		this.servicios = newArrayList
-		
 	}
 
-	@Dependencies("precioBase", "precioServicios")
+	@Dependencies("precioBase", "precioServicios", "precioMicro")
 	def double getPrecio() {
 		
-		precioBase //+ precioServicios //+ precioMicro// + precioFinde
+		precioBase + precioServicios //+ precioMicro// + precioFinde
 	}
 
 	@Dependencies("minutos")
@@ -68,7 +71,8 @@ class Viaje extends Entity implements Cloneable{
 		 }
 	}
 
-	def getPrecioServicios() {
+//	@Dependencies("servicios")
+//	def getPrecioServicios() {
 //		var double res = 0
 //
 //		for (Servicio s : servicios) {
@@ -84,14 +88,21 @@ class Viaje extends Entity implements Cloneable{
 //		  		}
 //		 
 //		res
-	val String desayuno = "Desayuno"
-	if (!servicios.filter[servicio|servicio.nombre == desayuno].isEmpty) {
-		50
-	}
-	else {
-		0
-	}
-		
+//	val String desayuno = "Desayuno"
+//	if (!servicios.filter[servicio|servicio.nombre == desayuno].isEmpty) {
+//		50
+//	}
+//	else {
+//		0
+//	}
+//		
+//	}
+
+	@Dependencies("tieneDesayuno", "tieneMerienda", "tieneAlmuerzo", "tieneCena")
+	def  getPrecioServicios() {
+		if(tieneDesayuno) {
+			return 30
+		}
 	}
 
 	
@@ -185,6 +196,5 @@ class Viaje extends Entity implements Cloneable{
 		this.recorrido.last
 	}
 	
-	
-	
+			
 }
