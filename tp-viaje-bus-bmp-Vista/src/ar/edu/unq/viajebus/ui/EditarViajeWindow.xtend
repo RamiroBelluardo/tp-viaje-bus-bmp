@@ -86,6 +86,7 @@ class EditarViajeWindow extends TransactionalDialog<Viaje> {
 		]
 
 		new TextBox(panelInfo) => [
+			
 			(value <=> "fechaPartida").transformer = new LocalDateTimeTransformer
 			fontSize = 10
 			width = 200

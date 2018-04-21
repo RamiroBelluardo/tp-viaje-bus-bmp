@@ -80,7 +80,7 @@ class BuscarViajesWindow extends TransactionalDialog<ViajeAppModel> {
 				val dias = f.getDayOfMonth().toString
 				val meses = f.getMonthOfYear().toString
 				val anios = f.getYear().toString
-				val res = '''Â«diasÂ»/Â«mesesÂ»/Â«aniosÂ»'''
+				val res = '''«dias»/«meses»/«anios»'''
 				res
 			]
 			fixedSize = 200
@@ -92,7 +92,7 @@ class BuscarViajesWindow extends TransactionalDialog<ViajeAppModel> {
 				val dias = f.getDayOfMonth().toString
 				val meses = f.getMonthOfYear().toString
 				val anios = f.getYear().toString
-				val res = '''Â«diasÂ»/Â«mesesÂ»/Â«aniosÂ»'''
+				val res = '''«dias»/«meses»/«anios»'''
 				res
 			]
 			fixedSize = 200
@@ -107,7 +107,7 @@ class BuscarViajesWindow extends TransactionalDialog<ViajeAppModel> {
 		new Column<Viaje>(table) => [
 			title = "Precio"
 			bindContentsToProperty("precio").transformer = [ double p |
-				'''$Â«pÂ»'''
+				'''$«p»'''
 
 			]
 			fixedSize = 100

@@ -45,6 +45,9 @@ class PrincipalAppModel {
 	}
 	def eliminarViaje(){
 		repoViajes.delete(viajeSeleccionado)
+		search
 	}
+	
+
 }
 
