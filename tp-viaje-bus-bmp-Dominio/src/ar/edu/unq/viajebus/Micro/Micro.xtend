@@ -11,7 +11,7 @@ import org.uqbar.commons.model.annotations.Dependencies
 
 @Accessors
 @TransactionalAndObservable
-class Micro extends Entity implements Cloneable{
+class Micro extends Entity implements Cloneable {
 
 	String patente
 	List<Asiento> asientos
@@ -46,7 +46,7 @@ class Micro extends Entity implements Cloneable{
 		asientos.filter[asiento|asiento.numero == nro].get(0).estado instanceof Disponible
 	}
 
-	def asiento(Integer nro) {
+	def buscarAsiento(Integer nro) {
 		asientos.filter[asiento|asiento.numero == nro].get(0)
 	}
 

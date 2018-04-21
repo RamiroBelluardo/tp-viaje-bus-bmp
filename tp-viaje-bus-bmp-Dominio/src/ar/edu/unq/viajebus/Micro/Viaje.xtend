@@ -22,8 +22,8 @@ class Viaje extends Entity implements Cloneable{
 	List<String> recorrido
 	List<Pasaje> pasajes
 	EstadoDeViaje estado
-	//String origen
-	//String destino
+	String origen
+	String destino
 
 	new(LocalDateTime fechaPartida, LocalDateTime fechaLlegada, Micro micro) {
 		this.fechaPartida = fechaPartida
@@ -33,16 +33,20 @@ class Viaje extends Entity implements Cloneable{
 		this.recorrido = newArrayList
 		this.pasajes = newArrayList
 		this.estado = new Aprobado
+		this.origen = ""
+		this.destino = ""
 	}
 	
 	new() {
 		this.recorrido = newArrayList
+		this.servicios = newArrayList
+		
 	}
 
-	@Dependencies("precioBase")
+	@Dependencies("precioBase", "precioServicios")
 	def double getPrecio() {
 		
-		precioBase //+ precioServicios + precioMicro + precioFinde
+		precioBase //+ precioServicios //+ precioMicro// + precioFinde
 	}
 
 	@Dependencies("minutos")
@@ -63,29 +67,38 @@ class Viaje extends Entity implements Cloneable{
 		 }
 	}
 
-	def precioServicios() {
-		var double res = 0
-
-		for (Servicio s : servicios) {
-			res += s.precio
-		}
-		 
-		  		if (contieneDesayunoYMerienda) {
-		  			res -= 30
-		  		}
-
-		 		if (contieneAlmuerzoYCena) {
-		  			res -= 50
-		  		}
-		 
-		res
+	def getPrecioServicios() {
+//		var double res = 0
+//
+//		for (Servicio s : servicios) {
+//			res += s.precio
+//		}
+//		 
+//		  		if (contieneDesayunoYMerienda) {
+//		  			res -= 30
+//		  		}
+//
+//		 		if (contieneAlmuerzoYCena) {
+//		  			res -= 50
+//		  		}
+//		 
+//		res
+	val String desayuno = "Desayuno"
+	if (!servicios.filter[servicio|servicio.nombre == desayuno].isEmpty) {
+		50
+	}
+	else {
+		0
+	}
+		
 	}
 
-	def precioMicro() {
+	
+	def getPrecioMicro() {
 		/*
 		 * Retorna el precio adicional por el tipo de asiento.
 		 */
-		(precioBase + precioServicios) * micro.tipoDeAsiento.porcentaje / 100
+		(precioBase + precioServicios) * 2//micro.tipoDeAsiento.porcentaje / 100
 	}
 
 	def precioFinde() {
@@ -170,4 +183,5 @@ class Viaje extends Entity implements Cloneable{
 	def getDestino(){
 		this.recorrido.last
 	}
+	
 }

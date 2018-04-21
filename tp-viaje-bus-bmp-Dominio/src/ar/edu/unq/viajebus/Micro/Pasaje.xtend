@@ -9,7 +9,7 @@ import org.uqbar.commons.model.Entity
 
 @Accessors
 @Observable
-class Pasaje extends Entity implements Cloneable{
+class Pasaje extends Entity implements Cloneable {
 
 	Cliente cliente
 	Viaje viaje
@@ -22,12 +22,11 @@ class Pasaje extends Entity implements Cloneable{
 		cliente.pasajes.add(this)
 		this.viaje = viaje
 		this.nroAsiento = nroAsiento
-		this.asiento = viaje.micro.asiento(nroAsiento)
+		this.asiento = viaje.micro.buscarAsiento(nroAsiento)
 		this.estado = new ListoParaComprar
 	}
-	
-	new(){
-		
+
+	new() {
 	}
 
 	def cancelar() {

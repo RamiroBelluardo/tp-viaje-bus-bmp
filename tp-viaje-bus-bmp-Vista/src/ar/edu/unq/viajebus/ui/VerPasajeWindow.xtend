@@ -18,8 +18,8 @@ import applicationModel.ClienteAppModel
 
 class VerPasajeWindow extends TransactionalDialog<ClienteAppModel> {
 
-	new(WindowOwner parent) {
-		super(parent, new ClienteAppModel)
+	new(WindowOwner parent, ClienteAppModel model) {
+		super(parent, model)
 		title = "Viaje Bus"
 	}
 
@@ -40,13 +40,13 @@ class VerPasajeWindow extends TransactionalDialog<ClienteAppModel> {
 		new Button(panelCliente) => [
 			caption = "Nuevo"
 			width = 100
-			onClick[nuevoCliente]
+		// onClick[nuevoCliente]
 		]
 
 		new Selector<Cliente>(panelIzquierdo) => [
 			allowNull = false
 			(items <=> "clientes").adapter = new PropertyAdapter(Cliente, "nombre")
-			//value <=> "microSeleccionado"
+			// value <=> "microSeleccionado"
 			width = 150
 		]
 
@@ -125,13 +125,14 @@ class VerPasajeWindow extends TransactionalDialog<ClienteAppModel> {
 		}
 	}
 
-	def nuevoCliente() {
-		PantallaPrincipalWindow.openDialog(new NuevoClienteWindow(this))
-	}
-	
-	def buscarViaje(){
+//	def nuevoCliente() {
+//		PantallaPrincipalWindow.openDialog(new NuevoClienteWindow(this))
+//	}
+
+	def buscarViaje() {
 		openDialog(new BuscarViajesWindow(this))
 	}
+
 	def static openDialog(Dialog<?> dialog) {
 		dialog.open
 	}

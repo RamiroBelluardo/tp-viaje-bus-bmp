@@ -5,6 +5,7 @@ import ar.edu.unq.viajebus.Micro.Viaje
 import org.joda.time.LocalDateTime
 import org.uqbar.commons.model.CollectionBasedRepo
 import org.uqbar.commons.model.annotations.Observable
+import org.apache.commons.collections15.Predicate
 
 @Observable
 class RepoViajes extends CollectionBasedRepo<Viaje> {
@@ -12,24 +13,31 @@ class RepoViajes extends CollectionBasedRepo<Viaje> {
 	// ********************************************************
 	// ** Altas y bajas
 	// ********************************************************
-	def Viaje create(LocalDateTime vFechaPartida, LocalDateTime vFechaLlegada, Micro vMicro) {
-		val viaje = new Viaje => [
+	def void create(LocalDateTime vFechaPartida, LocalDateTime vFechaLlegada, Micro vMicro) {
+		this.create(new Viaje => [
 			fechaPartida = vFechaPartida
 			fechaLlegada = vFechaLlegada
 			micro = vMicro
-		]
-		this.create(viaje)
-		viaje
+		])
+	}
+
+	override void validateCreate(Viaje viaje) {
 	}
 
 	// ********************************************************
-	// ** B�squedas
+	// ** Búsquedas
 	// ********************************************************
-	def search(String origen, String destino, LocalDateTime fechaPartida, LocalDateTime fechaLlegada) {
-		allInstances.filter [ viaje |
-			this.match(origen, viaje.getOrigen) && this.match(destino, viaje.getDestino) &&
-				this.match(fechaPartida, viaje.fechaPartida) && this.match(fechaLlegada, viaje.fechaLlegada)
-		].toList
+//	def search(String origen, String destino, LocalDateTime fechaPartida, LocalDateTime fechaLlegada) {
+//		allInstances.filter [ viaje |
+//			this.match(origen, viaje.origen) && this.match(destino, viaje.destino) &&
+//				this.match(fechaPartida, viaje.fechaPartida) && this.match(fechaLlegada, viaje.fechaLlegada)
+//		].toList
+//	}
+//	def search(LocalDateTime fechaPartida, LocalDateTime fechaLlegada, Micro micro) {
+//		allInstances.filter[viaje|this.match(fechaPartida, viaje.fechaPartida) && this.match(fechaLlegada, viaje.fechaLlegada) && this.match(micro, viaje.micro)].toList
+//	}
+	def search(Micro micro) {
+		allInstances.filter[viaje|this.match(micro, viaje.micro)].toList
 	}
 
 	def match(Object expectedValue, Object realValue) {

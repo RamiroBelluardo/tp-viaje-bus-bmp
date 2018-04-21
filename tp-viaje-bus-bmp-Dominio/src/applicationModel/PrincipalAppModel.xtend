@@ -7,27 +7,40 @@ import org.uqbar.commons.model.annotations.Observable
 import repo.RepoViajes
 import java.util.List
 import ar.edu.unq.viajebus.Micro.Pasaje
+import repo.RepoPasajes
 
 @Accessors
 @Observable
 class PrincipalAppModel {
-	Viaje example = new Viaje
+	Viaje exampleViaje = new Viaje
 	List<Viaje> resultadosViaje
 	Viaje viajeSeleccionado
-	
+
+	Pasaje examplePasaje = new Pasaje
+	List<Pasaje> resultadosPasaje
 	Pasaje pasajeSeleccionado
-	
-	
-	def crearViaje (Viaje viaje) {
+
+	def void search() {
+		// resultadosViaje = repoViajes.search(exampleViaje.fechaPartida, exampleViaje.fechaLlegada, exampleViaje.micro)
+		// resultadosPasaje = repoPasajes.search
+		resultadosViaje = repoViajes.search(exampleViaje.micro)
+	}
+
+	def crearViaje(Viaje viaje) {
 		repoViajes.create(viaje)
 		search
 	}
-	
-	def void search() { 
-		resultadosViaje = repoViajes.search(example.origen, example.destino, example.fechaPartida, example.fechaLlegada)
+
+	def crearPasaje(Pasaje pasaje) {
+		repoPasajes.create(pasaje)
+		search
 	}
-	
+
 	def RepoViajes getRepoViajes() {
 		ApplicationContext.instance.getSingleton(typeof(Viaje))
+	}
+
+	def RepoPasajes getRepoPasajes() {
+		ApplicationContext.instance.getSingleton(typeof(Pasaje))
 	}
 }
