@@ -131,15 +131,15 @@ class VerPasajeWindow extends TransactionalDialog<Pasaje> {
 	}
 
 	def nuevoCliente() {
-		PantallaPrincipalWindow.openDialog(new NuevoClienteWindow(this))
+		openDialog(new NuevoClienteWindow(this))
 	}
-//	def buscarViaje() {
-//		openDialog(new BuscarViajesWindow(this))
-//	}
-//
-//	def static openDialog(Dialog<?> dialog) {
-//		dialog.open
-//	}
+	def buscarViaje() {
+		openDialog(new BuscarViajesWindow(this))
+	}
+
+	def static openDialog(Dialog<?> dialog) {
+		dialog.open
+	}
 
 	def getRepoClientes() {
 		ApplicationContext.instance.getSingleton(Cliente) as RepoClientes

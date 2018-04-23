@@ -10,8 +10,6 @@ import org.joda.time.Minutes
 import org.uqbar.commons.model.Entity
 import org.uqbar.commons.model.annotations.Dependencies
 import org.uqbar.commons.model.annotations.TransactionalAndObservable
-import ar.edu.unq.viajebus.Servicios.Desayuno
-import ar.edu.unq.viajebus.EstadoDeAsiento.Reservado
 
 @Accessors
 @TransactionalAndObservable
@@ -47,12 +45,13 @@ class Viaje extends Entity implements Cloneable {
 	new() {
 		this.recorrido = newArrayList
 		this.servicios = newArrayList
-		
 	}
 
-	//@Dependencies("precioBase", "precioServicios", "precioMicro", "precioFinde")
+	@Dependencies("precioBase", "precioServicios", "precioMicro", "precioFinde")
 	def double getPrecio() {
-
+		if (fechaPartida === null || fechaLlegada === null) {
+			return 0
+		}
 		precioBase + precioServicios + precioMicro + precioFinde
 	}
 
@@ -61,18 +60,14 @@ class Viaje extends Entity implements Cloneable {
 		minutos * 2
 	}
 
-	@Dependencies("fechaPartida", "fechaLlegada")
 	def getMinutos() {
 		/*
 		 * Retorna el tiempo que recorre el micro en minutos
 		 */
-		if (fechaPartida === null || fechaLlegada === null) {
-			return 0
-		} else {
-			Minutes.minutesBetween(fechaPartida, fechaLlegada).minutes
-		}
+		Minutes.minutesBetween(fechaPartida, fechaLlegada).minutes
 	}
 
+	@Dependencies("servicios")
 	def getPrecioServicios() {
 		var double res = 0
 
@@ -96,6 +91,7 @@ class Viaje extends Entity implements Cloneable {
 //			return 30
 //		}	
 //	}
+	@Dependencies("micro")
 	def getPrecioMicro() {
 		/*
 		 * Retorna el precio adicional por el tipo de asiento.
@@ -112,6 +108,7 @@ class Viaje extends Entity implements Cloneable {
 		}
 	}
 
+	@Dependencies("fechaPartida")
 	def esFinde() {
 		/*
 		 * Retorna si la fecha de partida del viaje es fin de semana.
@@ -202,7 +199,7 @@ class Viaje extends Entity implements Cloneable {
 	def getDestino() {
 		this.recorrido.last
 	}
-	
+
 	def porcentajeVendido() {
 		if (micro.asientos.size == 0) {
 			return 0
@@ -210,5 +207,5 @@ class Viaje extends Entity implements Cloneable {
 			micro.asientosReservados.size * 100 / micro.asientos.size
 		}
 	}
-	
+
 }

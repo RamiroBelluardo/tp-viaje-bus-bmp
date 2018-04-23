@@ -28,7 +28,7 @@ public final class LocalDateTimeTransformer implements ValueTransformer<LocalDat
 		if (valueFromModel == null) {
 			return null;
 		}
-		return new SimpleDateFormat(pattern).format(valueFromModel);
+		return valueFromModel.toString(pattern);
 	}
 
 	@Override

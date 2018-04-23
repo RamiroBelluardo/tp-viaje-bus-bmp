@@ -4,6 +4,7 @@ import applicationModel.PrincipalAppModel
 import ar.edu.unq.viajebus.Cliente.Cliente
 import ar.edu.unq.viajebus.Micro.Pasaje
 import ar.edu.unq.viajebus.Micro.Viaje
+import org.joda.time.LocalDateTime
 import org.uqbar.arena.bindings.NotNullObservable
 import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.layout.VerticalLayout
@@ -16,8 +17,6 @@ import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-import org.joda.time.LocalDateTime
-import org.uqbar.arena.windows.Dialog
 
 class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 

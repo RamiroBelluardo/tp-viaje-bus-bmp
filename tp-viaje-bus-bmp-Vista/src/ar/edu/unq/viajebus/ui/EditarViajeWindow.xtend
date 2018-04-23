@@ -20,6 +20,8 @@ import org.uqbar.arena.widgets.List
 import org.uqbar.arena.bindings.NotNullObservable
 import org.uqbar.arena.widgets.CheckBox
 import org.uqbar.commons.model.annotations.Dependencies
+import org.uqbar.arena.bindings.PropertyAdapter
+import org.joda.time.LocalDateTime
 
 class EditarViajeWindow extends TransactionalDialog<Viaje> {
 
@@ -65,7 +67,7 @@ class EditarViajeWindow extends TransactionalDialog<Viaje> {
 			caption = "Agregar"
 			onClick[modelObject.agregarCiudad(modelObject.ciudadSeleccionada)]
 			setAsDefault
-			disableOnError
+			//disableOnError
 		]
 
 		new Button(panelBotones) => [
@@ -180,7 +182,7 @@ class EditarViajeWindow extends TransactionalDialog<Viaje> {
 			caption = "Aceptar"
 			onClick [|this.accept]
 			setAsDefault
-			disableOnError
+			//disableOnError
 		]
 
 		new Button(actions) => [
