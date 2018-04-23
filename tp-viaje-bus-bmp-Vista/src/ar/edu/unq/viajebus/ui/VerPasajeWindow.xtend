@@ -18,11 +18,13 @@ import org.uqbar.commons.applicationContext.ApplicationContext
 import repo.RepoClientes
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
+import applicationModel.PasajeAppModel
+import applicationModel.BuscadorViajesAppModel
 
-class VerPasajeWindow extends TransactionalDialog<Pasaje> {
+class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 
 	new(WindowOwner parent, Pasaje model) {
-		super(parent, model)
+		super(parent,new PasajeAppModel)
 		title = "Viaje Bus"
 	}
 
@@ -48,10 +50,10 @@ class VerPasajeWindow extends TransactionalDialog<Pasaje> {
 
 		new Selector<Cliente>(panelIzquierdo) => [
 			allowNull = false
-			value <=> "cliente"
+			value <=> "clienteSeleccionado"
 			val propiedadClientes = bindItems(new ObservableProperty(repoClientes, "clientes"))
 			propiedadClientes.adaptWith(typeof(Cliente), "nombre")
-			// value <=> "microSeleccionado"
+			 value <=> "microSeleccionado"
 			width = 150
 		]
 
@@ -72,6 +74,7 @@ class VerPasajeWindow extends TransactionalDialog<Pasaje> {
 
 		new TextBox(panelViaje) => [
 			width = 100
+			value <=> "viajeSeleccionado"
 		]
 
 		val panelPrecios = new Panel(panelIzquierdo) => [
@@ -134,14 +137,13 @@ class VerPasajeWindow extends TransactionalDialog<Pasaje> {
 		openDialog(new NuevoClienteWindow(this))
 	}
 	def buscarViaje() {
-		openDialog(new BuscarViajesWindow(this)=> [
-			
-			open
-		]
-	)
+		val buscadorAppModel = new BuscadorViajesAppModel
+		new BuscarViajesWindow(this,buscadorAppModel).open
+		this.modelObject.viajeSeleccionado=buscadorAppModel.exampleViaje
 	}
 
 	def static openDialog(Dialog<?> dialog) {
+	
 		dialog.open
 	}
 

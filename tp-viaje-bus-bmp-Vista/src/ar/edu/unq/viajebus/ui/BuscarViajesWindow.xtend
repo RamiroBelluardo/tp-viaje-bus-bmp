@@ -17,12 +17,14 @@ import org.uqbar.arena.windows.WindowOwner
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 import org.joda.time.LocalDateTime
 import applicationModel.BuscadorViajesAppModel
+import applicationModel.PasajeAppModel
 
 class BuscarViajesWindow extends TransactionalDialog<BuscadorViajesAppModel> {
 
-	new(WindowOwner parent) {
-		super(parent, new BuscadorViajesAppModel)
-	}
+new(WindowOwner parent, BuscadorViajesAppModel model) {
+		super(parent,model)}
+	
+
 
 	override def createMainTemplate(Panel mainPanel) {
 		title = "Viaje Bus"
@@ -129,6 +131,7 @@ class BuscarViajesWindow extends TransactionalDialog<BuscadorViajesAppModel> {
 			caption = "Cancelar"
 			onClick[this.cancel]
 		]
+		
 	}
 
 }

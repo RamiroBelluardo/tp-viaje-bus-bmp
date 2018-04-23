@@ -17,6 +17,7 @@ class BuscadorViajesAppModel {
 	LocalDateTime fechaPartidaSeleccionada
 	LocalDateTime fechaLlegadaSeleccionada
 	Viaje exampleViaje
+	
 
 	def void search() {
 		if (fechaPartidaSeleccionada == null && fechaLlegadaSeleccionada == null) {
