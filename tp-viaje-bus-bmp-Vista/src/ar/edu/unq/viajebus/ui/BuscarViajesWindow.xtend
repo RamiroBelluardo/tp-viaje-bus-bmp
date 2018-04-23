@@ -67,8 +67,8 @@ class BuscarViajesWindow extends TransactionalDialog<BuscadorViajesAppModel> {
 
 	def createResultsGrid(Panel mainPanel) {
 		var table = new Table<Viaje>(mainPanel, Viaje) => [
-			items <=> "resultados"
-		// value <=> "viajeSeleccionado"
+			items <=> "resultadosViaje"
+		 value <=> "exampleViaje"
 		]
 		this.describeResultsGrid(table)
 	}
