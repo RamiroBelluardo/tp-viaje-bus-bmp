@@ -16,11 +16,12 @@ import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 import org.joda.time.LocalDateTime
+import applicationModel.BuscadorViajesAppModel
 
-class BuscarViajesWindow extends TransactionalDialog<ViajeAppModel> {
+class BuscarViajesWindow extends TransactionalDialog<BuscadorViajesAppModel> {
 
 	new(WindowOwner parent) {
-		super(parent, new ViajeAppModel)
+		super(parent, new BuscadorViajesAppModel)
 	}
 
 	override def createMainTemplate(Panel mainPanel) {
@@ -80,7 +81,7 @@ class BuscarViajesWindow extends TransactionalDialog<ViajeAppModel> {
 				val dias = f.getDayOfMonth().toString
 				val meses = f.getMonthOfYear().toString
 				val anios = f.getYear().toString
-				val res = '''Â«diasÂ»/Â«mesesÂ»/Â«aniosÂ»'''
+				val res = '''«dias»/«meses»/«anios»'''
 				res
 			]
 			fixedSize = 200
@@ -92,7 +93,7 @@ class BuscarViajesWindow extends TransactionalDialog<ViajeAppModel> {
 				val dias = f.getDayOfMonth().toString
 				val meses = f.getMonthOfYear().toString
 				val anios = f.getYear().toString
-				val res = '''Â«diasÂ»/Â«mesesÂ»/Â«aniosÂ»'''
+				val res = '''«dias»/«meses»/«anios»'''
 				res
 			]
 			fixedSize = 200
@@ -107,7 +108,7 @@ class BuscarViajesWindow extends TransactionalDialog<ViajeAppModel> {
 		new Column<Viaje>(table) => [
 			title = "Precio"
 			bindContentsToProperty("precio").transformer = [ double p |
-				'''$Â«pÂ»'''
+				'''$«p»'''
 
 			]
 			fixedSize = 100
