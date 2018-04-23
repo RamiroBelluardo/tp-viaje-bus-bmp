@@ -34,8 +34,18 @@ class RepoMicros extends CollectionBasedRepo<Micro> {
 		typeof(Micro)
 	}
 
-	def List<Micro> getMicros() {
+	def getMicros() {
 		allInstances
+	}
+
+	def match(Object expectedValue, Object realValue) {
+		if (expectedValue === null) {
+			return true
+		}
+		if (realValue === null) {
+			return false
+		}
+		realValue.toString().toLowerCase().contains(expectedValue.toString().toLowerCase())
 	}
 
 }

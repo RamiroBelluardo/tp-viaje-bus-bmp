@@ -26,6 +26,7 @@ class Micro extends Entity implements Cloneable {
 
 	new() {
 		this.asientos = newArrayList
+		this.tipoDeAsiento = tipoDeAsiento
 	}
 
 	def agregarAsiento(Asiento asiento) {
@@ -57,12 +58,5 @@ class Micro extends Entity implements Cloneable {
 		asientos.filter[asiento|asiento.numero == nroAsiento].get(0).liberar
 	}
 
-	def porcentajeVendido() {
-		if (asientos.size == 0) {
-			return 0
-		} else {
-			asientosReservados.size * 100 / asientos.size
-		}
-	}
 
 }

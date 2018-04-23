@@ -10,10 +10,12 @@ import org.joda.time.Minutes
 import org.uqbar.commons.model.Entity
 import org.uqbar.commons.model.annotations.Dependencies
 import org.uqbar.commons.model.annotations.TransactionalAndObservable
+import ar.edu.unq.viajebus.Servicios.Desayuno
+import ar.edu.unq.viajebus.EstadoDeAsiento.Reservado
 
 @Accessors
 @TransactionalAndObservable
-class Viaje extends Entity implements Cloneable{
+class Viaje extends Entity implements Cloneable {
 
 	LocalDateTime fechaPartida
 	LocalDateTime fechaLlegada
@@ -28,7 +30,7 @@ class Viaje extends Entity implements Cloneable{
 	Boolean tieneDesayuno = false
 	Boolean tieneAlmuerzo = false
 	Boolean tieneMerienda = false
-	Boolean tieneCena     = false
+	Boolean tieneCena = false
 
 	new(LocalDateTime fechaPartida, LocalDateTime fechaLlegada, Micro micro) {
 		this.fechaPartida = fechaPartida
@@ -41,16 +43,17 @@ class Viaje extends Entity implements Cloneable{
 		this.origen = ""
 		this.destino = ""
 	}
-	
+
 	new() {
 		this.recorrido = newArrayList
 		this.servicios = newArrayList
+		
 	}
 
-	@Dependencies("precioBase", "precioServicios", "precioMicro")
+	//@Dependencies("precioBase", "precioServicios", "precioMicro", "precioFinde")
 	def double getPrecio() {
-		
-		precioBase + precioServicios //+ precioMicro// + precioFinde
+
+		precioBase + precioServicios + precioMicro + precioFinde
 	}
 
 	@Dependencies("minutos")
@@ -63,64 +66,51 @@ class Viaje extends Entity implements Cloneable{
 		/*
 		 * Retorna el tiempo que recorre el micro en minutos
 		 */
-		 if(fechaPartida === null || fechaLlegada === null){
-		 	return 0
-		 }
-		 else{
-			Minutes.minutesBetween(fechaPartida, fechaLlegada).minutes	 	
-		 }
-	}
-
-//	@Dependencies("servicios")
-//	def getPrecioServicios() {
-//		var double res = 0
-//
-//		for (Servicio s : servicios) {
-//			res += s.precio
-//		}
-//		 
-//		  		if (contieneDesayunoYMerienda) {
-//		  			res -= 30
-//		  		}
-//
-//		 		if (contieneAlmuerzoYCena) {
-//		  			res -= 50
-//		  		}
-//		 
-//		res
-//	val String desayuno = "Desayuno"
-//	if (!servicios.filter[servicio|servicio.nombre == desayuno].isEmpty) {
-//		50
-//	}
-//	else {
-//		0
-//	}
-//		
-//	}
-
-	@Dependencies("tieneDesayuno", "tieneMerienda", "tieneAlmuerzo", "tieneCena")
-	def  getPrecioServicios() {
-		if(tieneDesayuno) {
-			return 30
+		if (fechaPartida === null || fechaLlegada === null) {
+			return 0
+		} else {
+			Minutes.minutesBetween(fechaPartida, fechaLlegada).minutes
 		}
 	}
 
-	
-//	def getPrecioMicro() {
-//		/*
-//		 * Retorna el precio adicional por el tipo de asiento.
-//		 */
-//		(precioBase + precioServicios) * 2//micro.tipoDeAsiento.porcentaje / 100
+	def getPrecioServicios() {
+		var double res = 0
+
+		for (Servicio s : servicios) {
+			res += s.precio
+		}
+
+		if (contieneDesayunoYMerienda) {
+			res -= 30
+		}
+
+		if (contieneAlmuerzoYCena) {
+			res -= 50
+		}
+
+		return res
+	}
+
+//	def getPrecioServicios() {
+//		if (tieneDesayuno) {
+//			return 30
+//		}	
 //	}
-//
-//	def precioFinde() {
-//		/*
-//		 * Retorna el precio adicional si es fin de semana.
-//		 */
-//		if (esFinde) {
-//			(precioBase + precioServicios + precioMicro) * 10 / 100
-//		}
-//	}
+	def getPrecioMicro() {
+		/*
+		 * Retorna el precio adicional por el tipo de asiento.
+		 */
+		(precioBase + precioServicios) * micro.tipoDeAsiento.porcentaje / 100
+	}
+
+	def precioFinde() {
+		/*
+		 * Retorna el precio adicional si es fin de semana.
+		 */
+		if (esFinde) {
+			(precioBase + precioServicios + precioMicro) * 10 / 100
+		}
+	}
 
 	def esFinde() {
 		/*
@@ -144,23 +134,41 @@ class Viaje extends Entity implements Cloneable{
 	def agregarServicio(Servicio servicio) {
 		if (servicios.filter[servicio2|servicio2.nombre == servicio.nombre].isEmpty) {
 			servicios.add(servicio)
+			if (servicio.nombre == "Desayuno") {
+				tieneDesayuno = true
+			}
+			if (servicio.nombre == "Almuerzo") {
+				tieneAlmuerzo = true
+			}
+			if (servicio.nombre == "Merienda") {
+				tieneMerienda = true
+			}
+			if (servicio.nombre == "Cena") {
+				tieneCena = true
+			}
 		}
 	}
 
-	def contieneDesayunoYMerienda() {
+	def quitarServicio(Servicio servicio) {
+		servicios.remove(servicio)
+	}
+
+	def getContieneDesayunoYMerienda() {
 		val String desayuno = "Desayuno"
 		val String merienda = "Merienda"
 
-		!servicios.filter[servicio|servicio.nombre == desayuno].isEmpty  &&
-		!servicios.filter[servicio|servicio.nombre == merienda].isEmpty
+		!servicios.filter[servicio|servicio.nombre == desayuno].isEmpty && !servicios.filter [ servicio |
+			servicio.nombre == merienda
+		].isEmpty
 	}
 
-	def contieneAlmuerzoYCena() {
+	def getContieneAlmuerzoYCena() {
 		val String almuerzo = "Almuerzo"
 		val String cena = "Cena"
 
-		!servicios.filter[servicio|servicio.nombre == almuerzo].isEmpty  &&
-		!servicios.filter[servicio|servicio.nombre == cena].isEmpty  
+		!servicios.filter[servicio|servicio.nombre == almuerzo].isEmpty && !servicios.filter [ servicio |
+			servicio.nombre == cena
+		].isEmpty
 	}
 
 	def agregarCiudad(String ciudad) {
@@ -168,12 +176,11 @@ class Viaje extends Entity implements Cloneable{
 			recorrido.add(ciudad)
 		}
 	}
-	
+
 	def quitarCiudad(String ciudad) {
-		if(!recorrido.filter[ciu | ciu == ciudad].isEmpty) {
+		if (!recorrido.filter[ciu|ciu == ciudad].isEmpty) {
 			recorrido.remove(ciudad)
 		}
-		
 	}
 
 	def cancelar() {
@@ -187,14 +194,21 @@ class Viaje extends Entity implements Cloneable{
 	def hayPasajesVendidos() {
 		!pasajes.isEmpty
 	}
-	
-	def getOrigen(){
+
+	def getOrigen() {
 		this.recorrido.head
 	}
-	
-	def getDestino(){
+
+	def getDestino() {
 		this.recorrido.last
 	}
 	
-			
+	def porcentajeVendido() {
+		if (micro.asientos.size == 0) {
+			return 0
+		} else {
+			micro.asientosReservados.size * 100 / micro.asientos.size
+		}
+	}
+	
 }

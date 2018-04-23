@@ -19,6 +19,7 @@ import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 import org.uqbar.arena.widgets.List
 import org.uqbar.arena.bindings.NotNullObservable
 import org.uqbar.arena.widgets.CheckBox
+import org.uqbar.commons.model.annotations.Dependencies
 
 class EditarViajeWindow extends TransactionalDialog<Viaje> {
 
@@ -86,7 +87,7 @@ class EditarViajeWindow extends TransactionalDialog<Viaje> {
 		]
 
 		new TextBox(panelInfo) => [
-			
+
 			(value <=> "fechaPartida").transformer = new LocalDateTimeTransformer
 			fontSize = 10
 			width = 200
@@ -134,17 +135,15 @@ class EditarViajeWindow extends TransactionalDialog<Viaje> {
 		]
 
 		new Label(panelServicios) => [
-			text = "Desayuno"
+			text = "Desayuno ($30)"
 		]
-//		new Label(panelServicios) => [
-//			value <=> "tieneDesayunoAndMerienda"
-//		]
+
 		new CheckBox(panelServicios) => [
 			value <=> "tieneAlmuerzo"
 		]
 
 		new Label(panelServicios) => [
-			text = "Almuerzo"
+			text = "Almuerzo ($50)"
 		]
 
 		new CheckBox(panelServicios) => [
@@ -152,7 +151,7 @@ class EditarViajeWindow extends TransactionalDialog<Viaje> {
 		]
 
 		new Label(panelServicios) => [
-			text = "Merienda"
+			text = "Merienda ($30)"
 		]
 
 		new CheckBox(panelServicios) => [
@@ -160,7 +159,7 @@ class EditarViajeWindow extends TransactionalDialog<Viaje> {
 		]
 
 		new Label(panelServicios) => [
-			text = "Cena"
+			text = "Cena ($50)"
 		]
 
 		new Label(panelInfo) => [
@@ -174,23 +173,8 @@ class EditarViajeWindow extends TransactionalDialog<Viaje> {
 			fontSize = 10
 			width = 50
 		]
-	// createGridActions(panelDerecho)
 	}
 
-//	def void createGridActions(Panel panel) {
-//		val actionsPanel = new Panel(panel).layout = new ColumnLayout(4)
-//		new Button(actionsPanel) => [
-//			caption = "Aceptar"
-//			onClick[|this.accept]
-//			setAsDefault
-//			disableOnError
-//		]
-//		new Button(actionsPanel) => [
-//			caption = "Cancelar"
-//			onClick[this.cancel]
-//			disableOnError
-//		]
-//	}
 	override protected void addActions(Panel actions) {
 		new Button(actions) => [
 			caption = "Aceptar"

@@ -19,14 +19,14 @@ class ViajeAppModel extends Entity implements Cloneable {
 	Viaje example = new Viaje
 	String ciudadSeleccionada
 	Micro microSeleccionado
+
 //	Boolean tieneDesayuno = false
 //	Boolean tieneAlmuerzo = false
 //	Boolean tieneMerienda = false
 //	Boolean tieneCena = false
-
-	def void search() {
-		resultadosMicro = repoMicros.micros
-	}
+//	def void search() {
+//		resultadosMicro = repoMicros.getMicros
+//	}
 
 	def RepoMicros getRepoMicros() {
 		ApplicationContext.instance.getSingleton(typeof(Micro))
@@ -40,7 +40,6 @@ class ViajeAppModel extends Entity implements Cloneable {
 //	def getTieneServicioDesayuno() {
 //		tieneDesayuno
 //	}
-
 	def agregarCiudad() {
 		example.agregarCiudad(ciudadSeleccionada)
 	}
@@ -53,5 +52,4 @@ class ViajeAppModel extends Entity implements Cloneable {
 //	def setTieneDesayuno() {
 //		example.agregarServicio(new Desayuno)
 //	}
-
 }

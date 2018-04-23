@@ -32,6 +32,7 @@ class RepoViajes extends CollectionBasedRepo<Viaje> {
 //	def search(LocalDateTime fechaPartida, LocalDateTime fechaLlegada, Micro micro) {
 //		allInstances.filter[viaje|this.match(fechaPartida, viaje.fechaPartida) && this.match(fechaLlegada, viaje.fechaLlegada) && this.match(micro, viaje.micro)].toList
 //	}
+
 	def search(Micro micro) {
 		allInstances.filter[viaje|this.match(micro, viaje.micro)].toList
 	}
