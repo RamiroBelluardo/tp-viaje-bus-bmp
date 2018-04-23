@@ -48,6 +48,10 @@ class RepoViajes extends CollectionBasedRepo<Viaje> {
 	def search(Micro micro) {
 		allInstances.filter[viaje|this.match(micro, viaje.micro)].toList
 	}
+	
+	def search(double precio, Micro micro) {
+		allInstances.filter[viaje|this.match(precio, viaje.precio) && this.match(micro, viaje.micro)].toList
+	}
 
 	def match(Object expectedValue, Object realValue) {
 		if (expectedValue === null) {

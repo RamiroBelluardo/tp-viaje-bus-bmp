@@ -45,10 +45,10 @@ class Viaje extends Entity implements Cloneable {
 	new() {
 		this.recorrido = newArrayList
 		this.servicios = newArrayList
-	
+
 	}
 
-	//@Dependencies("precioBase", "precioServicios")
+	@Dependencies("precioBase", "precioServicios", "precioMicro", "precioFinde")
 	def double getPrecio() {
 		if (fechaPartida === null || fechaLlegada === null) {
 			return 0
@@ -73,9 +73,10 @@ class Viaje extends Entity implements Cloneable {
 		}
 
 	}
-	
-	@Dependencies("servicios")
+
+	@Dependencies("contieneDesayunoYMerienda", "contieneAlmuerzoYCena")
 	def getPrecioServicios() {
+
 		var double res = 0
 
 		for (Servicio s : servicios) {
@@ -103,6 +104,9 @@ class Viaje extends Entity implements Cloneable {
 		/*
 		 * Retorna el precio adicional por el tipo de asiento.
 		 */
+		if (micro === null) {
+			return 0
+		}
 		(precioBase + precioServicios) * micro.tipoDeAsiento.porcentaje / 100
 	}
 
@@ -137,18 +141,7 @@ class Viaje extends Entity implements Cloneable {
 	def agregarServicio(Servicio servicio) {
 		if (servicios.filter[servicio2|servicio2.nombre == servicio.nombre].isEmpty) {
 			servicios.add(servicio)
-			if (servicio.nombre == "Desayuno") {
-				tieneDesayuno = true
-			}
-			if (servicio.nombre == "Almuerzo") {
-				tieneAlmuerzo = true
-			}
-			if (servicio.nombre == "Merienda") {
-				tieneMerienda = true
-			}
-			if (servicio.nombre == "Cena") {
-				tieneCena = true
-			}
+
 		}
 	}
 
@@ -156,6 +149,7 @@ class Viaje extends Entity implements Cloneable {
 		servicios.remove(servicio)
 	}
 
+	@Dependencies("servicios")
 	def getContieneDesayunoYMerienda() {
 		val String desayuno = "Desayuno"
 		val String merienda = "Merienda"
@@ -165,6 +159,7 @@ class Viaje extends Entity implements Cloneable {
 		].isEmpty
 	}
 
+	@Dependencies("servicios")
 	def getContieneAlmuerzoYCena() {
 		val String almuerzo = "Almuerzo"
 		val String cena = "Cena"
@@ -214,7 +209,7 @@ class Viaje extends Entity implements Cloneable {
 		}
 	}
 
-	val hoy = new LocalDateTime()
+	val hoy = new LocalDateTime
 
 	@Dependencies("fechaPartida", "fechaLlegada", "micro")
 	def getPuedeCrearViaje() {

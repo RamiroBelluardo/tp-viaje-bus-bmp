@@ -9,10 +9,10 @@ import ar.edu.unq.viajebus.Servicios.Merienda
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.applicationContext.ApplicationContext
+import org.uqbar.commons.model.annotations.Dependencies
 import org.uqbar.commons.model.annotations.Observable
 import repo.RepoPasajes
 import repo.RepoViajes
-import ar.edu.unq.viajebus.TipoAsiento.Cama
 
 @Accessors
 @Observable
@@ -26,13 +26,14 @@ class PrincipalAppModel {
 	Pasaje pasajeSeleccionado
 
 	def void search() {
-		// resultadosViaje = repoViajes.search(exampleViaje.fechaPartida, exampleViaje.fechaLlegada, exampleViaje.micro)
-		resultadosViaje = repoViajes.search(exampleViaje.micro)
+		resultadosViaje = repoViajes.search(exampleViaje.fechaPartida, exampleViaje.fechaLlegada, exampleViaje.micro)
+		// resultadosViaje = repoViajes.search(exampleViaje.precio, exampleViaje.micro)
 		resultadosPasaje = repoPasajes.search(examplePasaje.cliente)
 	}
 
 	def crearViaje(Viaje viaje) {
 		repoViajes.create(viaje)
+		this.actualizarServicios(viaje)
 		search
 	}
 
@@ -57,70 +58,67 @@ class PrincipalAppModel {
 
 	def actualizarViajeSeleccionado() {
 		repoViajes.update(viajeSeleccionado)
-		this.actualizarServicios
+		this.actualizarServicios(viajeSeleccionado)
 		search
 	}
 
-	def actualizarServicios() {
+	def actualizarServicios(Viaje viaje) {
 		// viajeSeleccionado.servicios.forEach[Servicio s | s.actualizar]
-		actualizarDesayuno
-		actualizarAlmuerzo
-		actualizarMerienda
-		actualizarCena
+		actualizarDesayuno(viaje)
+		actualizarAlmuerzo(viaje)
+		actualizarMerienda(viaje)
+		actualizarCena(viaje)
 	}
 
-	def actualizarDesayuno() {
-		if (viajeSeleccionado.tieneDesayuno) {
-			viajeSeleccionado.agregarServicio(new Desayuno)
+	@Dependencies("viajeSeleccionado.tieneDesayuno")
+	def actualizarDesayuno(Viaje viaje) {
+		if (viaje.tieneDesayuno) {
+			viaje.agregarServicio(new Desayuno)
 		} else {
-			var servicio = viajeSeleccionado.servicios.filter[servicio|servicio.nombre == "Desayuno"]
+			var servicio = viaje.servicios.filter[servicio|servicio.nombre == "Desayuno"]
 			if (!servicio.empty) {
-				viajeSeleccionado.quitarServicio(servicio.toList.get(0))
+				viaje.quitarServicio(servicio.toList.get(0))
 			}
 
 		}
 	}
 
-	def actualizarAlmuerzo() {
-		if (viajeSeleccionado.tieneAlmuerzo) {
-			viajeSeleccionado.agregarServicio(new Almuerzo)
+	@Dependencies("viajeSeleccionado.tieneAlmuerzo")
+	def actualizarAlmuerzo(Viaje viaje) {
+		if (viaje.tieneAlmuerzo) {
+			viaje.agregarServicio(new Almuerzo)
 		} else {
-			var servicio = viajeSeleccionado.servicios.filter[servicio|servicio.nombre == "Almuerzo"]
+			var servicio = viaje.servicios.filter[servicio|servicio.nombre == "Almuerzo"]
 			if (!servicio.empty) {
-				viajeSeleccionado.quitarServicio(servicio.toList.get(0))
+				viaje.quitarServicio(servicio.toList.get(0))
 			}
 
 		}
 	}
 
-	def actualizarMerienda() {
-		if (viajeSeleccionado.tieneMerienda) {
-			viajeSeleccionado.agregarServicio(new Merienda)
+	@Dependencies("viajeSeleccionado.tieneMerienda")
+	def actualizarMerienda(Viaje viaje) {
+		if (viaje.tieneMerienda) {
+			viaje.agregarServicio(new Merienda)
 		} else {
-			var servicio = viajeSeleccionado.servicios.filter[servicio|servicio.nombre == "Merienda"]
+			var servicio = viaje.servicios.filter[servicio|servicio.nombre == "Merienda"]
 			if (!servicio.empty) {
-				viajeSeleccionado.quitarServicio(servicio.toList.get(0))
+				viaje.quitarServicio(servicio.toList.get(0))
 			}
 
 		}
 	}
 
-	def actualizarCena() {
-		if (viajeSeleccionado.tieneCena) {
-			viajeSeleccionado.agregarServicio(new Cena)
+	@Dependencies("viajeSeleccionado.tieneCena")
+	def actualizarCena(Viaje viaje) {
+		if (viaje.tieneCena) {
+			viaje.agregarServicio(new Cena)
 		} else {
-			var servicio = viajeSeleccionado.servicios.filter[servicio|servicio.nombre == "Cena"]
+			var servicio = viaje.servicios.filter[servicio|servicio.nombre == "Cena"]
 			if (!servicio.empty) {
-				viajeSeleccionado.quitarServicio(servicio.toList.get(0))
+				viaje.quitarServicio(servicio.toList.get(0))
 			}
 
 		}
 	}
-
-//	def actualizarMicro() {
-//		if (viajeSeleccionado.micro.tipoDeAsiento instanceof Cama) {
-//			
-//		}
-//	}
-
 }

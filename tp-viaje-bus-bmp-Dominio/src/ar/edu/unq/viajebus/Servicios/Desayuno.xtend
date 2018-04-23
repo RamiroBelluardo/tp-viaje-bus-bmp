@@ -1,7 +1,10 @@
 package ar.edu.unq.viajebus.Servicios
 
-import ar.edu.unq.viajebus.Micro.Viaje
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.uqbar.commons.model.annotations.TransactionalAndObservable
 
+@TransactionalAndObservable
+@Accessors
 class Desayuno extends Servicio {
 	new() {
 		this.precio = 30
