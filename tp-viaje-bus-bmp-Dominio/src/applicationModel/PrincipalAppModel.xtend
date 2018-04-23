@@ -12,6 +12,7 @@ import org.uqbar.commons.applicationContext.ApplicationContext
 import org.uqbar.commons.model.annotations.Observable
 import repo.RepoPasajes
 import repo.RepoViajes
+import ar.edu.unq.viajebus.TipoAsiento.Cama
 
 @Accessors
 @Observable
@@ -25,7 +26,7 @@ class PrincipalAppModel {
 	Pasaje pasajeSeleccionado
 
 	def void search() {
-		//resultadosViaje = repoViajes.search(exampleViaje.fechaPartida, exampleViaje.fechaLlegada, exampleViaje.micro)
+		// resultadosViaje = repoViajes.search(exampleViaje.fechaPartida, exampleViaje.fechaLlegada, exampleViaje.micro)
 		resultadosViaje = repoViajes.search(exampleViaje.micro)
 		resultadosPasaje = repoPasajes.search(examplePasaje.cliente)
 	}
@@ -55,8 +56,8 @@ class PrincipalAppModel {
 	}
 
 	def actualizarViajeSeleccionado() {
-		this.actualizarServicios
 		repoViajes.update(viajeSeleccionado)
+		this.actualizarServicios
 		search
 	}
 
@@ -115,5 +116,11 @@ class PrincipalAppModel {
 
 		}
 	}
+
+//	def actualizarMicro() {
+//		if (viajeSeleccionado.micro.tipoDeAsiento instanceof Cama) {
+//			
+//		}
+//	}
 
 }

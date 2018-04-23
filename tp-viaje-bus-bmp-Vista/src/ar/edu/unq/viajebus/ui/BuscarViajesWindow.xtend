@@ -83,7 +83,7 @@ new(WindowOwner parent, BuscadorViajesAppModel model) {
 				val dias = f.getDayOfMonth().toString
 				val meses = f.getMonthOfYear().toString
 				val anios = f.getYear().toString
-				val res = '''«dias»/«meses»/«anios»'''
+				val res = '''Â«diasÂ»/Â«mesesÂ»/Â«aniosÂ»'''
 				res
 			]
 			fixedSize = 200
@@ -95,7 +95,7 @@ new(WindowOwner parent, BuscadorViajesAppModel model) {
 				val dias = f.getDayOfMonth().toString
 				val meses = f.getMonthOfYear().toString
 				val anios = f.getYear().toString
-				val res = '''«dias»/«meses»/«anios»'''
+				val res = '''Â«diasÂ»/Â«mesesÂ»/Â«aniosÂ»'''
 				res
 			]
 			fixedSize = 200
@@ -110,7 +110,7 @@ new(WindowOwner parent, BuscadorViajesAppModel model) {
 		new Column<Viaje>(table) => [
 			title = "Precio"
 			bindContentsToProperty("precio").transformer = [ double p |
-				'''$«p»'''
+				'''$Â«pÂ»'''
 
 			]
 			fixedSize = 100

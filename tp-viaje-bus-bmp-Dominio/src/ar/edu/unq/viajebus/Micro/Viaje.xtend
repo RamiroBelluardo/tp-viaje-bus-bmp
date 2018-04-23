@@ -45,9 +45,10 @@ class Viaje extends Entity implements Cloneable {
 	new() {
 		this.recorrido = newArrayList
 		this.servicios = newArrayList
+	
 	}
 
-	@Dependencies("precioBase", "precioServicios", "precioMicro", "precioFinde")
+	//@Dependencies("precioBase", "precioServicios")
 	def double getPrecio() {
 		if (fechaPartida === null || fechaLlegada === null) {
 			return 0
@@ -60,6 +61,7 @@ class Viaje extends Entity implements Cloneable {
 		minutos * 2
 	}
 
+	@Dependencies("fechaPartida", "fechaLlegada")
 	def getMinutos() {
 		/*
 		 * Retorna el tiempo que recorre el micro en minutos
@@ -71,7 +73,7 @@ class Viaje extends Entity implements Cloneable {
 		}
 
 	}
-
+	
 	@Dependencies("servicios")
 	def getPrecioServicios() {
 		var double res = 0
@@ -104,7 +106,7 @@ class Viaje extends Entity implements Cloneable {
 		(precioBase + precioServicios) * micro.tipoDeAsiento.porcentaje / 100
 	}
 
-	def precioFinde() {
+	def getPrecioFinde() {
 		/*
 		 * Retorna el precio adicional si es fin de semana.
 		 */
@@ -113,7 +115,6 @@ class Viaje extends Entity implements Cloneable {
 		}
 	}
 
-	@Dependencies("fechaPartida")
 	def esFinde() {
 		/*
 		 * Retorna si la fecha de partida del viaje es fin de semana.
@@ -217,9 +218,9 @@ class Viaje extends Entity implements Cloneable {
 
 	@Dependencies("fechaPartida", "fechaLlegada", "micro")
 	def getPuedeCrearViaje() {
-		
+
 		fechaPartida !== null && fechaPartida.isAfter(hoy) && fechaLlegada !== null &&
 			fechaLlegada.isAfter(fechaPartida) && micro !== null
 	}
-	
+
 }

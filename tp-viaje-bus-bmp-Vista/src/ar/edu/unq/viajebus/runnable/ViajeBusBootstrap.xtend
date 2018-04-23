@@ -36,12 +36,12 @@ class ViajeBusBootstrap extends CollectionBasedBootstrap {
 		val RepoClientes repoClientes = ApplicationContext.instance.getSingleton(typeof(Cliente))
 		val RepoPasajes repoPasajes = ApplicationContext.instance.getSingleton(typeof(Pasaje))
 
-		val partidaMicro1 = new LocalDateTime(2018, 3, 31, 12, 00)
-		val llegadaMicro1 = new LocalDateTime(2018, 3, 31, 14, 00)
-		val partidaMicro2 = new LocalDateTime(2018, 1, 1, 00, 00)
-		val llegadaMicro2 = new LocalDateTime(2018, 1, 2, 00, 00)
-		val partidaMicro3 = new LocalDateTime(2018, 2, 22, 17, 20)
-		val llegadaMicro3 = new LocalDateTime(2018, 2, 23, 15, 45)
+		val partidaMicro1 = new LocalDateTime(2019, 4, 1, 12, 00)
+		val llegadaMicro1 = new LocalDateTime(2019, 4, 1, 14, 00)
+		val partidaMicro2 = new LocalDateTime(2020, 1, 1, 00, 00)
+		val llegadaMicro2 = new LocalDateTime(2020, 1, 2, 00, 00)
+		val partidaMicro3 = new LocalDateTime(2021, 2, 22, 17, 20)
+		val llegadaMicro3 = new LocalDateTime(2021, 2, 23, 15, 45)
 
 
 		val micro1 = repoMicros.create("ABC123", new Cama, true)

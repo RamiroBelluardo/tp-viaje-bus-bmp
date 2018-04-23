@@ -7,6 +7,7 @@ import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.Entity
 import org.uqbar.commons.model.annotations.TransactionalAndObservable
+import org.uqbar.commons.model.annotations.Dependencies
 
 @Accessors
 @TransactionalAndObservable
@@ -58,5 +59,7 @@ class Micro extends Entity implements Cloneable {
 		asientos.filter[asiento|asiento.numero == nroAsiento].get(0).liberar
 	}
 
-
 }
+
+
+

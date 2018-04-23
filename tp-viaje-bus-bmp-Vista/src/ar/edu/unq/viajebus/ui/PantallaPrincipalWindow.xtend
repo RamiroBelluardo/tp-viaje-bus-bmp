@@ -72,7 +72,7 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 				val dias = f.getDayOfMonth().toString
 				val meses = f.getMonthOfYear().toString
 				val anios = f.getYear().toString
-				val res = '''«dias»/«meses»/«anios»'''
+				val res = '''Â«diasÂ»/Â«mesesÂ»/Â«aniosÂ»'''
 				res
 			]
 			fixedSize = 200
@@ -84,7 +84,7 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 				val dias = f.getDayOfMonth().toString
 				val meses = f.getMonthOfYear().toString
 				val anios = f.getYear().toString
-				val res = '''«dias»/«meses»/«anios»'''
+				val res = '''Â«diasÂ»/Â«mesesÂ»/Â«aniosÂ»'''
 				res
 			]
 			fixedSize = 200
@@ -99,7 +99,7 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 		new Column<Viaje>(table) => [
 			title = "Precio"
 			bindContentsToProperty("precio").transformer = [ double p |
-				'''$«p»'''
+				'''$Â«pÂ»'''
 			]
 			fixedSize = 115
 		]
@@ -107,7 +107,7 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 		new Column<Viaje>(table) => [
 			title = "Vendido"
 			bindContentsToProperty("porcentajeVendido").transformer = [ int p |
-				'''«p»'''
+				'''Â«pÂ»%'''
 			]
 			fixedSize = 115
 		]
@@ -128,7 +128,7 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 		new Column<Pasaje>(table) => [
 			title = "Cliente"
 			bindContentsToProperty("cliente").transformer = [ Cliente c |
-				'''«c.nombre» «c.apellido»'''
+				'''Â«c.nombreÂ» Â«c.apellidoÂ»'''
 			]
 			fixedSize = 150
 		]
@@ -139,7 +139,7 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 				val dias = f.getDayOfMonth().toString
 				val meses = f.getMonthOfYear().toString
 				val anios = f.getYear().toString
-				val res = '''«dias»/«meses»/«anios»'''
+				val res = '''Â«diasÂ»/Â«mesesÂ»/Â«aniosÂ»'''
 				res
 			]
 			fixedSize = 200
@@ -151,7 +151,7 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 				val dias = f.getDayOfMonth().toString
 				val meses = f.getMonthOfYear().toString
 				val anios = f.getYear().toString
-				val res = '''«dias»/«meses»/«anios»'''
+				val res = '''Â«diasÂ»/Â«mesesÂ»/Â«aniosÂ»'''
 				res
 			]
 			fixedSize = 200
@@ -162,7 +162,7 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 			bindContentsToProperty("viaje.fechaPartida").transformer = [ LocalDateTime f |
 				val horas = f.getHourOfDay.toString
 				val minutos = f.getMinuteOfHour.toString
-				val res = '''«horas»:«minutos»'''
+				val res = '''Â«horasÂ»:Â«minutosÂ»'''
 				res
 			]
 			fixedSize = 75

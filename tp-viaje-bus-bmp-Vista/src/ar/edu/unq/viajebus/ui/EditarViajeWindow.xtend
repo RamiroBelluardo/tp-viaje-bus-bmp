@@ -2,6 +2,7 @@ package ar.edu.unq.viajebus.ui
 
 import ar.edu.unq.viajebus.Micro.Micro
 import ar.edu.unq.viajebus.Micro.Viaje
+import java.awt.Color
 import org.uqbar.arena.aop.windows.TransactionalDialog
 import org.uqbar.arena.bindings.NotNullObservable
 import org.uqbar.arena.bindings.ObservableProperty
@@ -19,8 +20,6 @@ import repo.RepoMicros
 import transformer.LocalDateTimeTransformer
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-import org.uqbar.arena.bindings.PropertyAdapter
-import java.awt.Color
 
 class EditarViajeWindow extends TransactionalDialog<Viaje> {
 
