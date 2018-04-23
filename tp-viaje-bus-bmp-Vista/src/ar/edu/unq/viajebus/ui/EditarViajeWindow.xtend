@@ -3,10 +3,13 @@ package ar.edu.unq.viajebus.ui
 import ar.edu.unq.viajebus.Micro.Micro
 import ar.edu.unq.viajebus.Micro.Viaje
 import org.uqbar.arena.aop.windows.TransactionalDialog
+import org.uqbar.arena.bindings.NotNullObservable
 import org.uqbar.arena.bindings.ObservableProperty
 import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.widgets.Button
+import org.uqbar.arena.widgets.CheckBox
 import org.uqbar.arena.widgets.Label
+import org.uqbar.arena.widgets.List
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.Selector
 import org.uqbar.arena.widgets.TextBox
@@ -16,12 +19,8 @@ import repo.RepoMicros
 import transformer.LocalDateTimeTransformer
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-import org.uqbar.arena.widgets.List
-import org.uqbar.arena.bindings.NotNullObservable
-import org.uqbar.arena.widgets.CheckBox
-import org.uqbar.commons.model.annotations.Dependencies
 import org.uqbar.arena.bindings.PropertyAdapter
-import org.joda.time.LocalDateTime
+import java.awt.Color
 
 class EditarViajeWindow extends TransactionalDialog<Viaje> {
 
@@ -67,7 +66,7 @@ class EditarViajeWindow extends TransactionalDialog<Viaje> {
 			caption = "Agregar"
 			onClick[modelObject.agregarCiudad(modelObject.ciudadSeleccionada)]
 			setAsDefault
-			//disableOnError
+			disableOnError
 		]
 
 		new Button(panelBotones) => [
@@ -102,9 +101,11 @@ class EditarViajeWindow extends TransactionalDialog<Viaje> {
 		]
 
 		new TextBox(panelInfo) => [
+			val fechaPartidaRequerida = new NotNullObservable("fechaPartida")
 			(value <=> "fechaLlegada").transformer = new LocalDateTimeTransformer
 			fontSize = 10
 			width = 200
+			bindEnabled(fechaPartidaRequerida)
 
 		]
 
@@ -113,14 +114,15 @@ class EditarViajeWindow extends TransactionalDialog<Viaje> {
 			fontSize = 15
 		]
 
+		val fechaLlegadaRequerida = new NotNullObservable("fechaLlegada")
+
 		new Selector<Micro>(panelInfo) => [
 			allowNull(false)
 			value <=> "micro"
 			val propiedadMicros = bindItems(new ObservableProperty(repoMicros, "micros"))
 			propiedadMicros.adaptWith(typeof(Micro), "patente")
-			// (items <=> "resultadosMicro").adapter = new PropertyAdapter(Micro, "patente")
 			width = 150
-		// bindEnabled(new NotNullObservable("tieneDesayuno"))
+			bindEnabled(fechaLlegadaRequerida)
 		]
 
 		new Label(panelInfo) => [
@@ -134,6 +136,8 @@ class EditarViajeWindow extends TransactionalDialog<Viaje> {
 
 		new CheckBox(panelServicios) => [
 			value <=> "tieneDesayuno"
+			bindEnabled(fechaLlegadaRequerida)
+
 		]
 
 		new Label(panelServicios) => [
@@ -142,6 +146,8 @@ class EditarViajeWindow extends TransactionalDialog<Viaje> {
 
 		new CheckBox(panelServicios) => [
 			value <=> "tieneAlmuerzo"
+			bindEnabled(fechaLlegadaRequerida)
+
 		]
 
 		new Label(panelServicios) => [
@@ -150,6 +156,8 @@ class EditarViajeWindow extends TransactionalDialog<Viaje> {
 
 		new CheckBox(panelServicios) => [
 			value <=> "tieneMerienda"
+			bindEnabled(fechaLlegadaRequerida)
+
 		]
 
 		new Label(panelServicios) => [
@@ -158,11 +166,15 @@ class EditarViajeWindow extends TransactionalDialog<Viaje> {
 
 		new CheckBox(panelServicios) => [
 			value <=> "tieneCena"
+			bindEnabled(fechaLlegadaRequerida)
+
 		]
 
 		new Label(panelServicios) => [
 			text = "Cena ($50)"
 		]
+
+		new Label(panelServicios)
 
 		new Label(panelInfo) => [
 			text = "Precio Final:"
@@ -170,7 +182,7 @@ class EditarViajeWindow extends TransactionalDialog<Viaje> {
 		]
 
 		new Label(panelInfo) => [
-			// Hacer que salga el precio con la palabra pesos o la letra p.
+			foreground = Color.RED
 			value <=> "precio"
 			fontSize = 10
 			width = 50
@@ -179,17 +191,16 @@ class EditarViajeWindow extends TransactionalDialog<Viaje> {
 
 	override protected void addActions(Panel actions) {
 		new Button(actions) => [
+			val microRequerido = new NotNullObservable("micro")
 			caption = "Aceptar"
-			onClick [|this.accept]
-			setAsDefault
-			//disableOnError
+			onClick [this.accept]
+			disableOnError
+			bindEnabled(microRequerido)
 		]
 
 		new Button(actions) => [
 			caption = "Cancelar"
-			onClick [|
-				this.cancel
-			]
+			onClick [this.cancel]
 		]
 	}
 

@@ -64,7 +64,12 @@ class Viaje extends Entity implements Cloneable {
 		/*
 		 * Retorna el tiempo que recorre el micro en minutos
 		 */
-		Minutes.minutesBetween(fechaPartida, fechaLlegada).minutes
+		if (fechaPartida === null || fechaLlegada === null) {
+			return 0
+		} else {
+			Minutes.minutesBetween(fechaPartida, fechaLlegada).minutes
+		}
+
 	}
 
 	@Dependencies("servicios")
@@ -208,4 +213,12 @@ class Viaje extends Entity implements Cloneable {
 		}
 	}
 
+	val hoy = new LocalDateTime()
+
+	@Dependencies("fechaPartida", "fechaLlegada", "micro")
+	def getPuedeCrearViaje() {
+		fechaPartida !== null && fechaPartida.isAfter(hoy) && fechaLlegada !== null &&
+			fechaLlegada.isAfter(fechaPartida) && micro !== null
+	}
+	
 }
