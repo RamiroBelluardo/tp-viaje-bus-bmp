@@ -217,6 +217,7 @@ class Viaje extends Entity implements Cloneable {
 
 	@Dependencies("fechaPartida", "fechaLlegada", "micro")
 	def getPuedeCrearViaje() {
+		
 		fechaPartida !== null && fechaPartida.isAfter(hoy) && fechaLlegada !== null &&
 			fechaLlegada.isAfter(fechaPartida) && micro !== null
 	}

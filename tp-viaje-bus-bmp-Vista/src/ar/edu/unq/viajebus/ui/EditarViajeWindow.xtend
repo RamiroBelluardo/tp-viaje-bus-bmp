@@ -195,7 +195,8 @@ class EditarViajeWindow extends TransactionalDialog<Viaje> {
 			caption = "Aceptar"
 			onClick [this.accept]
 			disableOnError
-			bindEnabled(microRequerido)
+			//bindEnabled(microRequerido)
+			bindEnabledToProperty("puedeCrearViaje")
 		]
 
 		new Button(actions) => [
