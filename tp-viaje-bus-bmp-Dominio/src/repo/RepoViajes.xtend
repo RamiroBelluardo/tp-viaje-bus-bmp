@@ -2,9 +2,11 @@ package repo
 
 import ar.edu.unq.viajebus.Micro.Micro
 import ar.edu.unq.viajebus.Micro.Viaje
+import org.joda.time.LocalDate
 import org.joda.time.LocalDateTime
 import org.uqbar.commons.model.CollectionBasedRepo
 import org.uqbar.commons.model.annotations.Observable
+import java.util.Date
 
 @Observable
 class RepoViajes extends CollectionBasedRepo<Viaje> {
@@ -30,10 +32,10 @@ class RepoViajes extends CollectionBasedRepo<Viaje> {
 		].toList
 	}
 
-	def search(String ciudad, LocalDateTime fechaPartida, LocalDateTime fechaLlegada) {
+	def search(String ciudad, LocalDate fechaPartida, LocalDate fechaLlegada) {
 		allInstances.filter [ viajes |
-			this.match(ciudad, viajes.recorrido) && this.match(fechaPartida, viajes.fechaPartida) &&
-				this.match(fechaLlegada, viajes.fechaLlegada)
+			this.match(ciudad, viajes.recorrido) && this.match(fechaPartida, viajes.fechaPartida.toLocalDate) &&
+				this.match(fechaLlegada, viajes.fechaLlegada.toLocalDate)
 		].toList
 	}
 

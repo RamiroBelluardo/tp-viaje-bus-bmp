@@ -1,12 +1,12 @@
 package applicationModel
 
-import org.eclipse.xtend.lib.annotations.Accessors
-import org.uqbar.commons.model.annotations.Observable
 import ar.edu.unq.viajebus.Micro.Viaje
 import java.util.List
-import repo.RepoViajes
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.joda.time.LocalDate
 import org.uqbar.commons.applicationContext.ApplicationContext
-import org.joda.time.LocalDateTime
+import org.uqbar.commons.model.annotations.Observable
+import repo.RepoViajes
 
 @Accessors
 @Observable
@@ -14,8 +14,8 @@ class BuscadorViajesAppModel {
 
 	List<Viaje> resultadosViaje
 	String ciudadSeleccionada
-	LocalDateTime fechaPartidaSeleccionada
-	LocalDateTime fechaLlegadaSeleccionada
+	LocalDate fechaPartidaSeleccionada
+	LocalDate fechaLlegadaSeleccionada
 	Viaje exampleViaje = new Viaje
 	Viaje viajeSeleccionado
 

@@ -16,6 +16,9 @@ import org.uqbar.arena.widgets.tables.Table
 import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
+import org.uqbar.arena.bindings.DateTransformer
+import transformer.LocalDateTimeTransformer
+import transformer.LocalDateTransformer
 
 class BuscarViajesWindow extends TransactionalDialog<BuscadorViajesAppModel> {
 
@@ -48,6 +51,19 @@ static def createViewModel(Viaje viaje){
 
 		]
 	}
+	
+	def static crearLabelYTextBoxParaFecha(Panel panel, String texto, String valor) {
+		new Label(panel) => [
+			text = texto
+			foreground = Color.BLUE
+		]
+
+		new TextBox(panel) => [
+			(value <=> valor).transformer = new LocalDateTransformer
+			width = 200
+
+		]
+	}
 
 	override protected createFormPanel(Panel mainPanel) {
 
@@ -56,8 +72,8 @@ static def createViewModel(Viaje viaje){
 		]
 
 		crearLabelYTextBox(searchFormPanel, "Ciudad:", "ciudadSeleccionada")
-		crearLabelYTextBox(searchFormPanel, "Fecha de partida:", "fechaPartidaSeleccionada")
-		crearLabelYTextBox(searchFormPanel, "Fecha de llegada:", "fechaLlegadaSeleccionada")
+		crearLabelYTextBoxParaFecha(searchFormPanel, "Fecha de partida:", "fechaPartidaSeleccionada")
+		crearLabelYTextBoxParaFecha(searchFormPanel, "Fecha de llegada:", "fechaLlegadaSeleccionada")
 	}
 
 	override protected addActions(Panel actionsPanel) {

@@ -1,28 +1,28 @@
 package transformer;
 
 import org.apache.commons.lang.StringUtils;
-import org.joda.time.LocalDateTime;
+import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.uqbar.arena.bindings.ValueTransformer;
 import org.uqbar.commons.model.exceptions.UserException;
 
-public final class LocalDateTimeTransformer implements ValueTransformer<LocalDateTime, String> {
-	public String pattern = "dd/MM/yyyy HH:mm";
+public final class LocalDateTransformer implements ValueTransformer<LocalDate, String> {
+	public String pattern = "dd/MM/yyyy";
 	DateTimeFormatter dtf = DateTimeFormat.forPattern(pattern);
 
 	@Override
-	public LocalDateTime viewToModel(String valueFromView) {
+	public LocalDate viewToModel(String valueFromView) {
 
 		try {
-			return StringUtils.isBlank(valueFromView) ? null : dtf.parseLocalDateTime(valueFromView);
+			return StringUtils.isBlank(valueFromView) ? null : dtf.parseLocalDate(valueFromView);
 		} catch (IllegalArgumentException e) {
 			throw new UserException("Debe ingresar una fecha en formato: " + this.pattern);
 		}
 	}
 
 	@Override
-	public String modelToView(LocalDateTime valueFromModel) {
+	public String modelToView(LocalDate valueFromModel) {
 		if (valueFromModel == null) {
 			return null;
 		}
@@ -30,8 +30,8 @@ public final class LocalDateTimeTransformer implements ValueTransformer<LocalDat
 	}
 
 	@Override
-	public Class<LocalDateTime> getModelType() {
-		return LocalDateTime.class;
+	public Class<LocalDate> getModelType() {
+		return LocalDate.class;
 	}
 
 	@Override
