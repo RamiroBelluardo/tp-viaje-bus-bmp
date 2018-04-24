@@ -46,7 +46,7 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 		new Button(panelCliente) => [
 			caption = "Nuevo"
 			width = 100
-	//	 onClick[nuevoCliente]
+		 onClick[nuevoCliente]
 		]
 
 		new Selector<Cliente>(panelIzquierdo) => [
@@ -134,8 +134,13 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 		}
 	}
 
-	//def nuevoCliente() {
-		//openDialog(new NuevoClienteWindow(this))
+	def nuevoCliente() {
+		val cliente = new Cliente
+		new NuevoClienteWindow(this, cliente) => [
+			onAccept[this.modelObject.crearCliente(cliente)]
+			open
+		]
+	}
 	
 	def buscarViaje() {
 			

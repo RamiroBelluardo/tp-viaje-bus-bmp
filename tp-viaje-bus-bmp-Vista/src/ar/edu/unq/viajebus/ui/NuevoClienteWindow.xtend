@@ -12,14 +12,18 @@ import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 import applicationModel.ClienteAppModel
+import ar.edu.unq.viajebus.Cliente.Cliente
 
 class NuevoClienteWindow extends TransactionalDialog<ClienteAppModel> {
 
-	new(WindowOwner parent) {
-		super(parent, new ClienteAppModel)
-		title = "Viaje Bus"
+new(WindowOwner parent, Cliente cliente) {
+		super(parent,createViewModel(cliente))}
+	
+static def createViewModel(Cliente cliente){
+		val model = new ClienteAppModel()
+		model.clienteSeleccionado= cliente
+		return model
 	}
-
 	override protected createFormPanel(Panel mainPanel) {
 		val editorPanel = new Panel(mainPanel)
 		editorPanel.layout = new ColumnLayout(2)
@@ -47,7 +51,7 @@ class NuevoClienteWindow extends TransactionalDialog<ClienteAppModel> {
 			width = 200
 		]
 
-		BuscarViajesWindow.crearLabelYTextBox(editorPanel, "Teléfono", "clienteSeleccionado.telefono")
+		BuscarViajesWindow.crearLabelYTextBox(editorPanel, "Telï¿½fono", "clienteSeleccionado.telefono")
 		createGridActions(editorPanel)
 	}
 
