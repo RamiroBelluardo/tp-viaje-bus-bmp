@@ -1,8 +1,9 @@
 package ar.edu.unq.viajebus.ui
 
-import applicationModel.ViajeAppModel
+import applicationModel.BuscadorViajesAppModel
 import ar.edu.unq.viajebus.Micro.Viaje
 import java.awt.Color
+import org.joda.time.LocalDateTime
 import org.uqbar.arena.aop.windows.TransactionalDialog
 import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.layout.HorizontalLayout
@@ -15,9 +16,6 @@ import org.uqbar.arena.widgets.tables.Table
 import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-import org.joda.time.LocalDateTime
-import applicationModel.BuscadorViajesAppModel
-import applicationModel.PasajeAppModel
 
 class BuscarViajesWindow extends TransactionalDialog<BuscadorViajesAppModel> {
 
@@ -58,8 +56,8 @@ static def createViewModel(Viaje viaje){
 		]
 
 		crearLabelYTextBox(searchFormPanel, "Ciudad:", "ciudadSeleccionada")
-		crearLabelYTextBox(searchFormPanel, "Partida:", "fechaPartidaSeleccionada")
-		crearLabelYTextBox(searchFormPanel, "Llegada:", "fechaLlegadaSeleccionada")
+		crearLabelYTextBox(searchFormPanel, "Fecha de partida:", "fechaPartidaSeleccionada")
+		crearLabelYTextBox(searchFormPanel, "Fecha de llegada:", "fechaLlegadaSeleccionada")
 	}
 
 	override protected addActions(Panel actionsPanel) {
@@ -74,7 +72,7 @@ static def createViewModel(Viaje viaje){
 	def createResultsGrid(Panel mainPanel) {
 		var table = new Table<Viaje>(mainPanel, Viaje) => [
 			items <=> "resultadosViaje"
-		 value <=> "exampleViaje"
+		 value <=> "viajeSeleccionado"
 		]
 		this.describeResultsGrid(table)
 	}

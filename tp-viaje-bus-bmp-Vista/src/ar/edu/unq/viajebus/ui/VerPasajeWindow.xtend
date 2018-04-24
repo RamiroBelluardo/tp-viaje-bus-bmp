@@ -1,7 +1,9 @@
 package ar.edu.unq.viajebus.ui
 
+import applicationModel.PasajeAppModel
 import ar.edu.unq.viajebus.Cliente.Cliente
 import ar.edu.unq.viajebus.Micro.Pasaje
+import ar.edu.unq.viajebus.Micro.Viaje
 import org.uqbar.arena.aop.windows.TransactionalDialog
 import org.uqbar.arena.bindings.ObservableProperty
 import org.uqbar.arena.layout.ColumnLayout
@@ -12,21 +14,23 @@ import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.Selector
 import org.uqbar.arena.widgets.TextBox
-import org.uqbar.arena.windows.Dialog
 import org.uqbar.arena.windows.WindowOwner
 import org.uqbar.commons.applicationContext.ApplicationContext
 import repo.RepoClientes
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-import applicationModel.PasajeAppModel
-import applicationModel.BuscadorViajesAppModel
-import ar.edu.unq.viajebus.Micro.Viaje
 
 class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 
 	new(WindowOwner parent, Pasaje model) {
-		super(parent, new PasajeAppModel)
+		super(parent, createViewModel(model))
 		title = "Viaje Bus"
+	}
+
+	static def createViewModel(Pasaje pasaje) {
+		val model = new PasajeAppModel()
+		model.pasajeSeleccionado = pasaje
+		return model
 	}
 
 	override protected createFormPanel(Panel mainPanel) {
@@ -51,10 +55,9 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 
 		new Selector<Cliente>(panelIzquierdo) => [
 			allowNull = false
-			value <=> "clienteSeleccionado"
+			value <=> "pasajeSeleccionado.cliente"
 			val propiedadClientes = bindItems(new ObservableProperty(repoClientes, "clientes"))
 			propiedadClientes.adaptWith(typeof(Cliente), "nombre")
-			// value <=> "microSeleccionado"
 			width = 150
 		]
 

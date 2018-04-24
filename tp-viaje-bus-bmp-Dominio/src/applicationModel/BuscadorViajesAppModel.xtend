@@ -16,19 +16,11 @@ class BuscadorViajesAppModel {
 	String ciudadSeleccionada
 	LocalDateTime fechaPartidaSeleccionada
 	LocalDateTime fechaLlegadaSeleccionada
-	Viaje exampleViaje
-	
+	Viaje exampleViaje = new Viaje
+	Viaje viajeSeleccionado
 
-	def void search() {
-		if (fechaPartidaSeleccionada == null && fechaLlegadaSeleccionada == null) {
-			resultadosViaje = repoViajes.search(ciudadSeleccionada)
-		} else {
-			if (fechaLlegadaSeleccionada == null) {
-				resultadosViaje = repoViajes.search(ciudadSeleccionada, fechaPartidaSeleccionada)
-			} else {
-				repoViajes.search(ciudadSeleccionada, fechaPartidaSeleccionada, fechaLlegadaSeleccionada)
-			}
-		}
+	def search() {
+		resultadosViaje = repoViajes.search(ciudadSeleccionada, fechaPartidaSeleccionada, fechaLlegadaSeleccionada)
 	}
 
 	def RepoViajes getRepoViajes() {

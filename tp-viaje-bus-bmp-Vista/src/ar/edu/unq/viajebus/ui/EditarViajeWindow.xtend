@@ -1,5 +1,6 @@
 package ar.edu.unq.viajebus.ui
 
+import applicationModel.ViajeAppModel
 import ar.edu.unq.viajebus.Micro.Micro
 import ar.edu.unq.viajebus.Micro.Viaje
 import java.awt.Color
@@ -20,7 +21,6 @@ import repo.RepoMicros
 import transformer.LocalDateTimeTransformer
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-import applicationModel.ViajeAppModel
 
 class EditarViajeWindow extends TransactionalDialog<ViajeAppModel> {
 

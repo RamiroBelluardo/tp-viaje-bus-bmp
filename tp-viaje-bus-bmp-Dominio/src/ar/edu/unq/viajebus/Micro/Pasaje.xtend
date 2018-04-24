@@ -4,11 +4,11 @@ import ar.edu.unq.viajebus.Cliente.Cliente
 import ar.edu.unq.viajebus.EstadoDePasaje.EstadoDePasaje
 import ar.edu.unq.viajebus.EstadoDePasaje.ListoParaComprar
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.uqbar.commons.model.annotations.Observable
 import org.uqbar.commons.model.Entity
+import org.uqbar.commons.model.annotations.TransactionalAndObservable
 
 @Accessors
-@Observable
+@TransactionalAndObservable
 class Pasaje extends Entity implements Cloneable {
 
 	Cliente cliente

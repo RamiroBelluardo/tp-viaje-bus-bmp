@@ -43,7 +43,6 @@ class ViajeBusBootstrap extends CollectionBasedBootstrap {
 		val partidaMicro3 = new LocalDateTime(2021, 2, 22, 17, 20)
 		val llegadaMicro3 = new LocalDateTime(2021, 2, 23, 15, 45)
 
-
 		val micro1 = repoMicros.create("ABC123", new Cama, true)
 		val micro2 = repoMicros.create("AB123AB", new Semicama, false)
 		val micro3 = repoMicros.create("DCR283", new Ejecutivo, true)
@@ -52,30 +51,32 @@ class ViajeBusBootstrap extends CollectionBasedBootstrap {
 		val asiento2 = new Asiento
 		val asiento3 = new Asiento
 
-		repoViajes.create(partidaMicro1,llegadaMicro1,micro1)
-		repoViajes.create(partidaMicro2,llegadaMicro2,micro2)
+		repoViajes.create(partidaMicro1, llegadaMicro1, micro1)
+		repoViajes.create(partidaMicro2, llegadaMicro2, micro2)
 		repoViajes.create(partidaMicro3, llegadaMicro3, micro3)
-		
+
 		val viaje1 = repoViajes.searchById(1)
 		val viaje2 = repoViajes.searchById(2)
 		val viaje3 = repoViajes.searchById(3)
-		
+
 		viaje1.agregarCiudad("San Salvador de Jujuy")
 		viaje2.agregarCiudad("Purmamarca")
 		viaje3.agregarCiudad("Tilcara")
-		
+
 		val cliente1 = repoClientes.create("Lucas", "Pier", "111111", "lg.piergiacomi@gmail.com", "44444444")
+		val cliente2 = repoClientes.create("Esteban", "Matas", "222222", "esteban@eso.com", "")
+		val cliente3 = repoClientes.create("Ramiro", "Belluardo", "333333", "ramiro@ramiro.ramiro", "22222222")
 
 		val pasaje1 = repoPasajes.create(cliente1, viaje1, 1)
-		val pasaje2 = repoPasajes.create(cliente1, viaje1, 18)
-
+		// val pasaje2 = repoPasajes.create(cliente1, viaje1, 18)
+		
 		micro1.agregarAsiento(asiento1)
 		micro1.reservarAsiento(1)
 		micro2.agregarAsiento(asiento2)
 		micro2.agregarAsiento(asiento3)
 		micro2.reservarAsiento(1)
-		
-		viaje1.agregarServicio(new Desayuno)	
+
+		viaje1.agregarServicio(new Desayuno)
 	}
 
 }

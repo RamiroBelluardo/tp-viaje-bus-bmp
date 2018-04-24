@@ -1,23 +1,26 @@
 package applicationModel
 
-import org.eclipse.xtend.lib.annotations.Accessors
-import org.uqbar.commons.model.annotations.Observable
 import ar.edu.unq.viajebus.Cliente.Cliente
-import ar.edu.unq.viajebus.Micro.Viaje
 import ar.edu.unq.viajebus.Micro.Micro
-import repo.RepoViajes
-import org.uqbar.commons.applicationContext.ApplicationContext
-import repo.RepoClientes
+import ar.edu.unq.viajebus.Micro.Pasaje
+import ar.edu.unq.viajebus.Micro.Viaje
 import java.util.List
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.uqbar.commons.applicationContext.ApplicationContext
+import org.uqbar.commons.model.annotations.Observable
+import repo.RepoClientes
+import repo.RepoViajes
 
 @Accessors
 @Observable
 class PasajeAppModel {
 	Cliente clienteSeleccionado
-	Viaje viajeSeleccionado
-	Micro microSeleccionado
 	Cliente exampleCliente = new Cliente
 	List<Cliente> resultadosClientes
+
+	Viaje viajeSeleccionado
+	Micro microSeleccionado
+	Pasaje pasajeSeleccionado
 
 	def search() {
 		resultadosClientes = repoClientes.allInstances

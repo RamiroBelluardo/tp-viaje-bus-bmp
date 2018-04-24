@@ -9,7 +9,6 @@ import ar.edu.unq.viajebus.Servicios.Merienda
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.applicationContext.ApplicationContext
-import org.uqbar.commons.model.annotations.Dependencies
 import org.uqbar.commons.model.annotations.Observable
 import repo.RepoPasajes
 import repo.RepoViajes
@@ -33,7 +32,7 @@ class PrincipalAppModel {
 
 	def crearViaje(Viaje viaje) {
 		repoViajes.create(viaje)
-		// this.actualizarServicios(viaje)
+		this.actualizarServicios(viaje)
 		search
 	}
 

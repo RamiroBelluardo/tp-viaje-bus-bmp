@@ -16,7 +16,6 @@ class RepoPasajes extends CollectionBasedRepo<Pasaje> {
 		val pasaje = new Pasaje => [
 			cliente = pCliente
 			viaje = pViaje
-			// asiento = pViaje.micro.buscarAsiento(pNroAsiento)
 			nroAsiento = pNroAsiento
 		]
 		this.create(pasaje)

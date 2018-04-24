@@ -111,18 +111,6 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 			]
 			fixedSize = 115
 		]
-		
-		new Column<Viaje>(table) => [
-			title = "tieneDesayuno"
-			bindContentsToProperty("tieneDesayuno")
-			fixedSize = 115
-		]
-		
-		new Column<Viaje>(table) => [
-			title = "Servicios"
-			bindContentsToProperty("servicios")
-			fixedSize = 300
-		]
 
 	}
 
@@ -140,12 +128,10 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 
 		new Column<Pasaje>(table) => [
 			title = "Cliente"
-			bindContentsToProperty("cliente")
-//			.transformer = [ Cliente c |
-//				'''«c.nombre» «c.apellido»'''
-			//]
+			bindContentsToProperty("cliente").transformer = [ Cliente c | '''«c.nombre» «c.apellido»''']
 			fixedSize = 150
 		]
+	
 
 		new Column<Pasaje>(table) => [
 			title = "Partida"
@@ -273,7 +259,4 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 	override protected addActions(Panel actionsPanel) {
 	}
 
-//	def static openDialog(Dialog<?> dialog) {
-//		dialog.open
-//	}
 }
