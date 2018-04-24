@@ -55,6 +55,7 @@ class EditarViajeWindow extends TransactionalDialog<Viaje> {
 		new TextBox(panelRecorrido) => [
 			value <=> "ciudadSeleccionada"
 			width = 100
+			
 		]
 
 		val panelBotones = new Panel(panelIzquierdo) => [
@@ -66,6 +67,7 @@ class EditarViajeWindow extends TransactionalDialog<Viaje> {
 			onClick[modelObject.agregarCiudad(modelObject.ciudadSeleccionada)]
 			setAsDefault
 			disableOnError
+			bindEnabledToProperty("puedeAgregarCiudad")
 		]
 
 		new Button(panelBotones) => [

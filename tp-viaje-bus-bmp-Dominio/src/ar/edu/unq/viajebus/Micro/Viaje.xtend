@@ -218,4 +218,9 @@ class Viaje extends Entity implements Cloneable {
 			fechaLlegada.isAfter(fechaPartida) && micro !== null
 	}
 
+	@Dependencies("ciudadSeleccionada")
+	def getPuedeAgregarCiudad() {
+		ciudadSeleccionada !== "" && ciudadSeleccionada !== null
+	}
+
 }
