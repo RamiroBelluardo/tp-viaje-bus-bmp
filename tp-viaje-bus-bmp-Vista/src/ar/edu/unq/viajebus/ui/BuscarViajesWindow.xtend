@@ -21,10 +21,14 @@ import applicationModel.PasajeAppModel
 
 class BuscarViajesWindow extends TransactionalDialog<BuscadorViajesAppModel> {
 
-new(WindowOwner parent, BuscadorViajesAppModel model) {
-		super(parent,model)}
+new(WindowOwner parent, Viaje viaje) {
+		super(parent,createViewModel(viaje))}
 	
-
+static def createViewModel(Viaje viaje){
+		val model = new BuscadorViajesAppModel()
+		model.exampleViaje= viaje
+		return model
+	}
 
 	override def createMainTemplate(Panel mainPanel) {
 		title = "Viaje Bus"

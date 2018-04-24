@@ -5,6 +5,8 @@ import org.uqbar.commons.model.annotations.Observable
 import ar.edu.unq.viajebus.Cliente.Cliente
 import ar.edu.unq.viajebus.Micro.Viaje
 import ar.edu.unq.viajebus.Micro.Micro
+import repo.RepoViajes
+import org.uqbar.commons.applicationContext.ApplicationContext
 
 @Accessors
 @Observable
@@ -15,6 +17,14 @@ class PasajeAppModel {
 	
 	def static search() {
 		
+	}
+	def RepoViajes getRepoViajes() {
+		ApplicationContext.instance.getSingleton(typeof(Viaje))
+	}
+	def actualizarViajeSeleccionado(Viaje viaje) {
+			repoViajes.update(viaje)
+
+		search
 	}
 	
 }

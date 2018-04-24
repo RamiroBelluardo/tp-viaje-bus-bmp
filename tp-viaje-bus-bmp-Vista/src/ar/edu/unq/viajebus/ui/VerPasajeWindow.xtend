@@ -20,6 +20,7 @@ import repo.RepoClientes
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 import applicationModel.PasajeAppModel
 import applicationModel.BuscadorViajesAppModel
+import ar.edu.unq.viajebus.Micro.Viaje
 
 class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 
@@ -45,7 +46,7 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 		new Button(panelCliente) => [
 			caption = "Nuevo"
 			width = 100
-		 onClick[nuevoCliente]
+	//	 onClick[nuevoCliente]
 		]
 
 		new Selector<Cliente>(panelIzquierdo) => [
@@ -133,19 +134,21 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 		}
 	}
 
-	def nuevoCliente() {
-		openDialog(new NuevoClienteWindow(this))
-	}
-	def buscarViaje() {
-		val buscadorAppModel = new BuscadorViajesAppModel
-		new BuscarViajesWindow(this,buscadorAppModel).open
-		this.modelObject.viajeSeleccionado=buscadorAppModel.exampleViaje
-	}
-
-	def static openDialog(Dialog<?> dialog) {
+	//def nuevoCliente() {
+		//openDialog(new NuevoClienteWindow(this))
 	
-		dialog.open
+	def buscarViaje() {
+			
+		val viaje = new Viaje
+		new BuscarViajesWindow(this, viaje) => [
+			onAccept[this.modelObject.actualizarViajeSeleccionado(viaje)]
+			open
+		]
 	}
+		
+	
+
+	
 
 	def getRepoClientes() {
 		ApplicationContext.instance.getSingleton(Cliente) as RepoClientes
