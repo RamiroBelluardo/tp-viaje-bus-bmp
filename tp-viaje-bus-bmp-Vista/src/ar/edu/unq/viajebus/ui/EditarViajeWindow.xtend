@@ -20,12 +20,19 @@ import repo.RepoMicros
 import transformer.LocalDateTimeTransformer
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
+import applicationModel.ViajeAppModel
 
-class EditarViajeWindow extends TransactionalDialog<Viaje> {
+class EditarViajeWindow extends TransactionalDialog<ViajeAppModel> {
 
 	new(WindowOwner parent, Viaje model) {
-		super(parent, model)
+		super(parent, createViewModel(model))
 		title = defaultTitle
+	}
+	
+	static def createViewModel(Viaje viaje) {
+		val model = new ViajeAppModel()
+		model.viajeSeleccionado = viaje
+		return model
 	}
 
 	def defaultTitle() {
@@ -46,7 +53,7 @@ class EditarViajeWindow extends TransactionalDialog<Viaje> {
 		]
 
 		new List(panelRecorrido) => [
-			items <=> "recorrido"
+			items <=> "viajeSeleccionado.recorrido"
 			value <=> "ciudadSeleccionada"
 			width = 300
 
@@ -64,7 +71,7 @@ class EditarViajeWindow extends TransactionalDialog<Viaje> {
 
 		new Button(panelBotones) => [
 			caption = "Agregar"
-			onClick[modelObject.agregarCiudad(modelObject.ciudadSeleccionada)]
+			onClick[modelObject.viajeSeleccionado.agregarCiudad(modelObject.ciudadSeleccionada)]
 			setAsDefault
 			disableOnError
 			bindEnabledToProperty("puedeAgregarCiudad")
@@ -73,7 +80,7 @@ class EditarViajeWindow extends TransactionalDialog<Viaje> {
 		new Button(panelBotones) => [
 			val elementSelected = new NotNullObservable("ciudadSeleccionada")
 			caption = "Quitar"
-			onClick[modelObject.quitarCiudad(modelObject.ciudadSeleccionada)]
+			onClick[modelObject.viajeSeleccionado.quitarCiudad(modelObject.ciudadSeleccionada)]
 			setAsDefault
 			disableOnError
 			bindEnabled(elementSelected)
@@ -90,7 +97,7 @@ class EditarViajeWindow extends TransactionalDialog<Viaje> {
 
 		new TextBox(panelInfo) => [
 
-			(value <=> "fechaPartida").transformer = new LocalDateTimeTransformer
+			(value <=> "viajeSeleccionado.fechaPartida").transformer = new LocalDateTimeTransformer
 			fontSize = 10
 			width = 200
 		]
@@ -102,8 +109,8 @@ class EditarViajeWindow extends TransactionalDialog<Viaje> {
 		]
 
 		new TextBox(panelInfo) => [
-			val fechaPartidaRequerida = new NotNullObservable("fechaPartida")
-			(value <=> "fechaLlegada").transformer = new LocalDateTimeTransformer
+			val fechaPartidaRequerida = new NotNullObservable("viajeSeleccionado.fechaPartida")
+			(value <=> "viajeSeleccionado.fechaLlegada").transformer = new LocalDateTimeTransformer
 			fontSize = 10
 			width = 200
 			bindEnabled(fechaPartidaRequerida)
@@ -115,11 +122,11 @@ class EditarViajeWindow extends TransactionalDialog<Viaje> {
 			fontSize = 15
 		]
 
-		val fechaLlegadaRequerida = new NotNullObservable("fechaLlegada")
+		val fechaLlegadaRequerida = new NotNullObservable("viajeSeleccionado.fechaLlegada")
 
 		new Selector<Micro>(panelInfo) => [
 			allowNull(false)
-			value <=> "micro"
+			value <=> "viajeSeleccionado.micro"
 			val propiedadMicros = bindItems(new ObservableProperty(repoMicros, "micros"))
 			propiedadMicros.adaptWith(typeof(Micro), "patente")
 			width = 150
@@ -136,7 +143,7 @@ class EditarViajeWindow extends TransactionalDialog<Viaje> {
 		]
 
 		new CheckBox(panelServicios) => [
-			value <=> "tieneDesayuno"
+			value <=> "viajeSeleccionado.tieneDesayuno"
 			bindEnabled(fechaLlegadaRequerida)
 
 		]
@@ -146,7 +153,7 @@ class EditarViajeWindow extends TransactionalDialog<Viaje> {
 		]
 
 		new CheckBox(panelServicios) => [
-			value <=> "tieneAlmuerzo"
+			value <=> "viajeSeleccionado.tieneAlmuerzo"
 			bindEnabled(fechaLlegadaRequerida)
 
 		]
@@ -156,7 +163,7 @@ class EditarViajeWindow extends TransactionalDialog<Viaje> {
 		]
 
 		new CheckBox(panelServicios) => [
-			value <=> "tieneMerienda"
+			value <=> "viajeSeleccionado.tieneMerienda"
 			bindEnabled(fechaLlegadaRequerida)
 
 		]
@@ -166,7 +173,7 @@ class EditarViajeWindow extends TransactionalDialog<Viaje> {
 		]
 
 		new CheckBox(panelServicios) => [
-			value <=> "tieneCena"
+			value <=> "viajeSeleccionado.tieneCena"
 			bindEnabled(fechaLlegadaRequerida)
 
 		]
@@ -184,7 +191,7 @@ class EditarViajeWindow extends TransactionalDialog<Viaje> {
 
 		new Label(panelInfo) => [
 			foreground = Color.RED
-			value <=> "precio"
+			value <=> "viajeSeleccionado.precio"
 			fontSize = 10
 			width = 50
 		]

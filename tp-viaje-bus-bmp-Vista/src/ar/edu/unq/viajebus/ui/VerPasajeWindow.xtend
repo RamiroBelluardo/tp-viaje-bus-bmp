@@ -25,7 +25,7 @@ import ar.edu.unq.viajebus.Micro.Viaje
 class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 
 	new(WindowOwner parent, Pasaje model) {
-		super(parent,new PasajeAppModel)
+		super(parent, new PasajeAppModel)
 		title = "Viaje Bus"
 	}
 
@@ -46,7 +46,7 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 		new Button(panelCliente) => [
 			caption = "Nuevo"
 			width = 100
-		 onClick[nuevoCliente]
+			onClick[nuevoCliente]
 		]
 
 		new Selector<Cliente>(panelIzquierdo) => [
@@ -54,7 +54,7 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 			value <=> "clienteSeleccionado"
 			val propiedadClientes = bindItems(new ObservableProperty(repoClientes, "clientes"))
 			propiedadClientes.adaptWith(typeof(Cliente), "nombre")
-			 value <=> "microSeleccionado"
+			// value <=> "microSeleccionado"
 			width = 150
 		]
 
@@ -139,21 +139,20 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 		new NuevoClienteWindow(this, cliente) => [
 			onAccept[this.modelObject.crearCliente(cliente)]
 			open
+
 		]
+		modelObject.search
+
 	}
-	
+
 	def buscarViaje() {
-			
+
 		val viaje = new Viaje
 		new BuscarViajesWindow(this, viaje) => [
 			onAccept[this.modelObject.actualizarViajeSeleccionado(viaje)]
 			open
 		]
 	}
-		
-	
-
-	
 
 	def getRepoClientes() {
 		ApplicationContext.instance.getSingleton(Cliente) as RepoClientes

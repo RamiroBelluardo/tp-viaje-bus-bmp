@@ -6,6 +6,7 @@ import java.util.List
 import org.uqbar.commons.model.annotations.Observable
 import org.uqbar.commons.model.exceptions.UserException
 import org.uqbar.commons.model.Entity
+import org.uqbar.commons.model.annotations.Dependencies
 
 @Accessors
 @Observable
@@ -46,17 +47,16 @@ class Cliente extends Entity implements Cloneable {
 //		}
 //		this.dni = unDNI
 //	}
+	
+	@Dependencies("dni")
 	def getValido() {
-		this.dni == ""
+		this.dni !== "" || this.dni.length > MAX_DIGITOS
 	}
 
-//	def void setMail(String unMail) {
-//		if (!unMail.contains("@")) {
-//			throw new UserException("El Mail debe contener @")
-//		}
-//		if (!unMail.contains(".com")) {
-//			throw new UserException("Mail inválido")
-//		}
-//		this.mail = unMail
-//	}
+	def void setMail(String unMail) {
+		if (!unMail.contains("@")) {
+			throw new UserException("El Mail debe contener @")
+		}
+		this.mail = unMail
+	}
 }

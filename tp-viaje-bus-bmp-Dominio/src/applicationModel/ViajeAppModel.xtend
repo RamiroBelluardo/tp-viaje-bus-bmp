@@ -9,6 +9,8 @@ import org.uqbar.commons.model.Entity
 import org.uqbar.commons.model.annotations.TransactionalAndObservable
 import repo.RepoMicros
 import repo.RepoViajes
+import org.joda.time.LocalDateTime
+import org.uqbar.commons.model.annotations.Dependencies
 
 @Accessors
 @TransactionalAndObservable
@@ -20,10 +22,8 @@ class ViajeAppModel extends Entity implements Cloneable {
 	String ciudadSeleccionada
 	Micro microSeleccionado
 
-//	Boolean tieneDesayuno = false
-//	Boolean tieneAlmuerzo = false
-//	Boolean tieneMerienda = false
-//	Boolean tieneCena = false
+
+
 //	def void search() {
 //		resultadosMicro = repoMicros.getMicros
 //	}
@@ -52,4 +52,19 @@ class ViajeAppModel extends Entity implements Cloneable {
 //	def setTieneDesayuno() {
 //		example.agregarServicio(new Desayuno)
 //	}
+
+
+	val hoy = new LocalDateTime
+
+	@Dependencies("fechaPartida", "fechaLlegada", "micro")
+	def getPuedeCrearViaje() {
+
+		viajeSeleccionado.fechaPartida !== null && viajeSeleccionado.fechaPartida.isAfter(hoy) && viajeSeleccionado.fechaLlegada !== null &&
+			viajeSeleccionado.fechaLlegada.isAfter(viajeSeleccionado.fechaPartida) && viajeSeleccionado.micro !== null
+	}
+
+	@Dependencies("ciudadSeleccionada")
+	def getPuedeAgregarCiudad() {
+		ciudadSeleccionada !== "" && ciudadSeleccionada !== null
+	}
 }

@@ -3,7 +3,6 @@ package repo
 import ar.edu.unq.viajebus.Cliente.Cliente
 import org.uqbar.commons.model.CollectionBasedRepo
 import org.uqbar.commons.model.annotations.Observable
-import java.util.List
 
 @Observable
 class RepoClientes extends CollectionBasedRepo<Cliente> {
@@ -23,6 +22,16 @@ class RepoClientes extends CollectionBasedRepo<Cliente> {
 		cliente
 	}
 
+	def match(Object expectedValue, Object realValue) {
+		if (expectedValue === null) {
+			return true
+		}
+		if (realValue === null) {
+			return false
+		}
+		realValue.toString().toLowerCase().contains(expectedValue.toString().toLowerCase())
+	}
+
 	override protected getCriterio(Cliente example) {
 		null
 	}
@@ -35,8 +44,7 @@ class RepoClientes extends CollectionBasedRepo<Cliente> {
 		typeof(Cliente)
 	}
 
-	def List<Cliente> getClientes() {
+	def getClientes() {
 		allInstances
 	}
-
 }

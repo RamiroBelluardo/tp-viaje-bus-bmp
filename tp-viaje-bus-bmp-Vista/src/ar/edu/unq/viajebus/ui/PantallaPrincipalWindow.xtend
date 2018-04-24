@@ -111,6 +111,19 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 			]
 			fixedSize = 115
 		]
+		
+		new Column<Viaje>(table) => [
+			title = "tieneDesayuno"
+			bindContentsToProperty("tieneDesayuno")
+			fixedSize = 115
+		]
+		
+		new Column<Viaje>(table) => [
+			title = "Servicios"
+			bindContentsToProperty("servicios")
+			fixedSize = 300
+		]
+
 	}
 
 	def crearTablaPasajes(Panel mainPanel) {
@@ -127,9 +140,10 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 
 		new Column<Pasaje>(table) => [
 			title = "Cliente"
-			bindContentsToProperty("cliente").transformer = [ Cliente c |
-				'''«c.nombre» «c.apellido»'''
-			]
+			bindContentsToProperty("cliente")
+//			.transformer = [ Cliente c |
+//				'''«c.nombre» «c.apellido»'''
+			//]
 			fixedSize = 150
 		]
 

@@ -24,7 +24,6 @@ class Viaje extends Entity implements Cloneable {
 	EstadoDeViaje estado
 	String origen
 	String destino
-	String ciudadSeleccionada
 	Boolean tieneDesayuno = false
 	Boolean tieneAlmuerzo = false
 	Boolean tieneMerienda = false
@@ -141,6 +140,18 @@ class Viaje extends Entity implements Cloneable {
 	def agregarServicio(Servicio servicio) {
 		if (servicios.filter[servicio2|servicio2.nombre == servicio.nombre].isEmpty) {
 			servicios.add(servicio)
+			if(servicio.nombre == "Desayuno"){
+				tieneDesayuno = true
+			}
+			if(servicio.nombre == "Almuerzo"){
+				tieneAlmuerzo = true
+			}
+			if(servicio.nombre == "Merienda"){
+				tieneMerienda = true
+			}
+			if(servicio.nombre == "Cena"){
+				tieneCena = true
+			}
 
 		}
 	}
@@ -207,20 +218,6 @@ class Viaje extends Entity implements Cloneable {
 		} else {
 			micro.asientosReservados.size * 100 / micro.asientos.size
 		}
-	}
-
-	val hoy = new LocalDateTime
-
-	@Dependencies("fechaPartida", "fechaLlegada", "micro")
-	def getPuedeCrearViaje() {
-
-		fechaPartida !== null && fechaPartida.isAfter(hoy) && fechaLlegada !== null &&
-			fechaLlegada.isAfter(fechaPartida) && micro !== null
-	}
-
-	@Dependencies("ciudadSeleccionada")
-	def getPuedeAgregarCiudad() {
-		ciudadSeleccionada !== "" && ciudadSeleccionada !== null
 	}
 
 }

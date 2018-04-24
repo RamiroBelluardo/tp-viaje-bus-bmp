@@ -16,14 +16,16 @@ import ar.edu.unq.viajebus.Cliente.Cliente
 
 class NuevoClienteWindow extends TransactionalDialog<ClienteAppModel> {
 
-new(WindowOwner parent, Cliente cliente) {
-		super(parent,createViewModel(cliente))}
-	
-static def createViewModel(Cliente cliente){
+	new(WindowOwner parent, Cliente cliente) {
+		super(parent, createViewModel(cliente))
+	}
+
+	static def createViewModel(Cliente cliente) {
 		val model = new ClienteAppModel()
-		model.clienteSeleccionado= cliente
+		model.clienteSeleccionado = cliente
 		return model
 	}
+
 	override protected createFormPanel(Panel mainPanel) {
 		val editorPanel = new Panel(mainPanel)
 		editorPanel.layout = new ColumnLayout(2)
@@ -51,7 +53,7 @@ static def createViewModel(Cliente cliente){
 			width = 200
 		]
 
-		BuscarViajesWindow.crearLabelYTextBox(editorPanel, "Tel�fono", "clienteSeleccionado.telefono")
+		BuscarViajesWindow.crearLabelYTextBox(editorPanel, "Teléfono", "clienteSeleccionado.telefono")
 		createGridActions(editorPanel)
 	}
 

@@ -10,7 +10,7 @@ import ar.edu.unq.viajebus.Cliente.Cliente
 class ClienteAppModel {
 
 	RepoClientes repoClientes
-	Cliente clienteSeleccionado = new Cliente
+	Cliente clienteSeleccionado
 
 //	new() {
 //		repoClientes = RepoClientes.instance

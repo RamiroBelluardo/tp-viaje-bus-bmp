@@ -33,7 +33,7 @@ class PrincipalAppModel {
 
 	def crearViaje(Viaje viaje) {
 		repoViajes.create(viaje)
-		this.actualizarServicios(viaje)
+		// this.actualizarServicios(viaje)
 		search
 	}
 
@@ -70,7 +70,6 @@ class PrincipalAppModel {
 		actualizarCena(viaje)
 	}
 
-	@Dependencies("viajeSeleccionado.tieneDesayuno")
 	def actualizarDesayuno(Viaje viaje) {
 		if (viaje.tieneDesayuno) {
 			viaje.agregarServicio(new Desayuno)
@@ -83,7 +82,6 @@ class PrincipalAppModel {
 		}
 	}
 
-	@Dependencies("viajeSeleccionado.tieneAlmuerzo")
 	def actualizarAlmuerzo(Viaje viaje) {
 		if (viaje.tieneAlmuerzo) {
 			viaje.agregarServicio(new Almuerzo)
@@ -96,7 +94,6 @@ class PrincipalAppModel {
 		}
 	}
 
-	@Dependencies("viajeSeleccionado.tieneMerienda")
 	def actualizarMerienda(Viaje viaje) {
 		if (viaje.tieneMerienda) {
 			viaje.agregarServicio(new Merienda)
@@ -109,7 +106,6 @@ class PrincipalAppModel {
 		}
 	}
 
-	@Dependencies("viajeSeleccionado.tieneCena")
 	def actualizarCena(Viaje viaje) {
 		if (viaje.tieneCena) {
 			viaje.agregarServicio(new Cena)
