@@ -1,18 +1,20 @@
 package ar.edu.unq.viajebus.Cliente
 
-import org.eclipse.xtend.lib.annotations.Accessors
 import ar.edu.unq.viajebus.Micro.Pasaje
 import java.util.List
-import org.uqbar.commons.model.annotations.Observable
-import org.uqbar.commons.model.exceptions.UserException
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.Entity
 import org.uqbar.commons.model.annotations.Dependencies
+import org.uqbar.commons.model.annotations.TransactionalAndObservable
+import org.uqbar.commons.model.exceptions.UserException
 
 @Accessors
-@Observable
+@TransactionalAndObservable
 class Cliente extends Entity implements Cloneable {
 
-	static final int MAX_DIGITOS = 7
+	static final int MIN_DIGITOS_DNI = 8
+	static final int MAX_DIGITOS_DNI = 9
+	static final int MIN_DIGITOS_MAIL = 5
 
 	String nombre
 	String apellido
@@ -38,24 +40,38 @@ class Cliente extends Entity implements Cloneable {
 		this.pasajes.add(pasaje)
 	}
 
-//	def void setDni(String unDNI) {
-//		if (unDNI === "" || unDNI.length <= MAX_DIGITOS) {
-//			throw new UserException("El DNI debe tener minimamente 8 d�gitos")
-//		}
-//		if (unDNI.charAt(2) !== ".".charAt(0)){// || unDNI.charAt(6).equals(".")) {
-//			throw new UserException("El DNI debe tener el formato nn.nnn.nnn")
-//		}
-//		this.dni = unDNI
-//	}
+	def void setDni(String unDNI) {
+		if (unDNI.length < MIN_DIGITOS_DNI) {
+			throw new UserException('''El DNI debe tener por lo menos «MIN_DIGITOS_DNI» dígitos''')
+		}
+		if (unDNI.length > MAX_DIGITOS_DNI) {
+			throw new UserException('''El DNI no debe tener más de «MAX_DIGITOS_DNI» dígitos''')
+		}
+		this.dni = unDNI
+	}
 	
-	@Dependencies("dni")
+//	//@Dependencies("nombre", "apellido", "dni", "mail")
+//	def void getValido() {
+//		if (this.nombre == null || this.apellido == null || this.dni == null || this.mail == null){
+//			throw new UserException('''Debe rellenar los campos obligatorios''')
+//		}
+//	}
+
+	@Dependencies("mail")
 	def getValido() {
-		this.dni !== "" || this.dni.length > MAX_DIGITOS
+		//this.mail !== null || this.mail !== ""
 	}
 
 	def void setMail(String unMail) {
-		if (!unMail.contains("@")) {
-			throw new UserException("El Mail debe contener @")
+		var lastChar = ""
+		if (unMail.length > 0){
+			lastChar = unMail.substring(unMail.length() - 1);
+		}
+		if (unMail === null || unMail.length < MIN_DIGITOS_MAIL){
+			throw new UserException('''El mail debe tener al menos «MIN_DIGITOS_MAIL» caracteres''')
+		}
+		if (!unMail.contains("@") || (lastChar == "@")) {
+			throw new UserException('''El Mail debe contener un @ intermedio''')
 		}
 		this.mail = unMail
 	}

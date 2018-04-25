@@ -41,7 +41,7 @@ class BuscarViajesWindow extends TransactionalDialog<BuscadorViajesAppModel> {
 		this.createGridActions(mainPanel)
 	}
 
-	def static crearLabelYTextBox(Panel panel, String texto, String valor) {
+	def crearLabelYTextBox(Panel panel, String texto, String valor) {
 		new Label(panel) => [
 			text = texto
 			foreground = Color.BLUE
@@ -54,7 +54,7 @@ class BuscarViajesWindow extends TransactionalDialog<BuscadorViajesAppModel> {
 		]
 	}
 
-	def static crearLabelYTextBoxParaFecha(Panel panel, String texto, String valor) {
+	def crearLabelYTextBoxParaFecha(Panel panel, String texto, String valor) {
 		new Label(panel) => [
 			text = texto
 			foreground = Color.BLUE

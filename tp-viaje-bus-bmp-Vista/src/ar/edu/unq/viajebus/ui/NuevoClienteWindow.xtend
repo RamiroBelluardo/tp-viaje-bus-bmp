@@ -11,27 +11,42 @@ import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-import applicationModel.ClienteAppModel
 import ar.edu.unq.viajebus.Cliente.Cliente
+import org.uqbar.arena.bindings.NotNullObservable
 
-class NuevoClienteWindow extends TransactionalDialog<ClienteAppModel> {
+class NuevoClienteWindow extends TransactionalDialog<Cliente> {
 
 	new(WindowOwner parent, Cliente cliente) {
-		super(parent, createViewModel(cliente))
+		super(parent, cliente)
 	}
 
-	static def createViewModel(Cliente cliente) {
-		val model = new ClienteAppModel()
-		model.clienteSeleccionado = cliente
-		return model
-	}
 
 	override protected createFormPanel(Panel mainPanel) {
 		val editorPanel = new Panel(mainPanel)
 		editorPanel.layout = new ColumnLayout(2)
 
-		BuscarViajesWindow.crearLabelYTextBox(editorPanel, "Nombre", "clienteSeleccionado.nombre")
-		BuscarViajesWindow.crearLabelYTextBox(editorPanel, "Apellido", "clienteSeleccionado.apellido")
+		new Label(editorPanel) => [
+			text = "Nombre"
+			foreground = Color.BLUE
+		]
+
+		new TextBox(editorPanel) => [
+			value <=> "nombre"
+			width = 200
+		]
+		
+		new Label(editorPanel) => [
+			text = "Apellido"
+			foreground = Color.BLUE
+		]
+
+		new TextBox(editorPanel) => [
+			val elementSelected = new NotNullObservable("nombre")
+			value <=> "apellido"
+			width = 200
+			bindEnabled(elementSelected)	
+		]
+
 
 		new Label(editorPanel) => [
 			text = "DNI (sin puntos)"
@@ -39,8 +54,10 @@ class NuevoClienteWindow extends TransactionalDialog<ClienteAppModel> {
 		]
 
 		new NumericField(editorPanel) => [
-			value <=> "clienteSeleccionado.dni"
+			val elementSelected = new NotNullObservable("apellido")
+			value <=> "dni"
 			width = 200
+			bindEnabled(elementSelected)		
 		]
 
 		new Label(editorPanel) => [
@@ -49,11 +66,22 @@ class NuevoClienteWindow extends TransactionalDialog<ClienteAppModel> {
 		]
 
 		new TextBox(editorPanel) => [
-			value <=> "clienteSeleccionado.mail"
+			val elementSelected = new NotNullObservable("dni")
+			value <=> "mail"
+			width = 200
+			bindEnabled(elementSelected)		
+		]
+
+		new Label(editorPanel) => [
+			text = "Teléfono"
+			foreground = Color.BLUE
+		]
+
+		new TextBox(editorPanel) => [
+			value <=> "telefono"
 			width = 200
 		]
 
-		BuscarViajesWindow.crearLabelYTextBox(editorPanel, "Teléfono", "clienteSeleccionado.telefono")
 		createGridActions(editorPanel)
 	}
 
@@ -64,7 +92,7 @@ class NuevoClienteWindow extends TransactionalDialog<ClienteAppModel> {
 			onClick[this.accept]
 			setAsDefault
 			disableOnError
-			bindEnabledToProperty("clienteSeleccionado.valido")
+			bindEnabledToProperty("valido")
 			alignCenter
 		]
 
