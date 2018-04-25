@@ -179,6 +179,18 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 			bindContentsToProperty("asiento")
 			fixedSize = 75
 		]
+		
+		new Column<Pasaje>(table) => [
+			title = "Estado Pasaje"
+			bindContentsToProperty("estado")
+			fixedSize = 500
+		]
+		
+		new Column<Pasaje>(table) => [
+			title = "Estado Asiento"
+			bindContentsToProperty("asiento.estado")
+			fixedSize = 500
+		]
 	}
 
 	def crearBotonesViajes(Panel mainPanel) {
@@ -217,6 +229,7 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 		]
 		new Button(panelButtons) => [
 			caption = "Cancelar"
+			onClick[cancelarPasaje]
 			bindEnabled(elementSelected)
 		]
 	}
@@ -256,7 +269,12 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 			open
 		]
 	}
-
+	
+	def void cancelarPasaje(){
+		this.modelObject.pasajeSeleccionado.cancelar
+		modelObject.search
+	}
+	
 	override protected addActions(Panel actionsPanel) {
 	}
 

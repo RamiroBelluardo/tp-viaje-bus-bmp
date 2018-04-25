@@ -1,6 +1,7 @@
 package ar.edu.unq.viajebus.runnable
 
 import ar.edu.unq.viajebus.Cliente.Cliente
+import ar.edu.unq.viajebus.EstadoDePasaje.Confirmado
 import ar.edu.unq.viajebus.Micro.Asiento
 import ar.edu.unq.viajebus.Micro.Micro
 import ar.edu.unq.viajebus.Micro.Pasaje
@@ -36,10 +37,10 @@ class ViajeBusBootstrap extends CollectionBasedBootstrap {
 		val RepoClientes repoClientes = ApplicationContext.instance.getSingleton(typeof(Cliente))
 		val RepoPasajes repoPasajes = ApplicationContext.instance.getSingleton(typeof(Pasaje))
 
-		val partidaMicro1 = new LocalDateTime(2019, 4, 1, 12, 00)
-		val llegadaMicro1 = new LocalDateTime(2019, 4, 1, 14, 00)
-		val partidaMicro2 = new LocalDateTime(2020, 1, 1, 00, 00)
-		val llegadaMicro2 = new LocalDateTime(2020, 1, 2, 00, 00)
+		val partidaMicro1 = new LocalDateTime(2019, 4, 1, 12, 10)
+		val llegadaMicro1 = new LocalDateTime(2019, 4, 1, 14, 20)
+		val partidaMicro2 = new LocalDateTime(2020, 1, 1, 01, 13)
+		val llegadaMicro2 = new LocalDateTime(2020, 1, 2, 03, 12)
 		val partidaMicro3 = new LocalDateTime(2021, 2, 22, 17, 20)
 		val llegadaMicro3 = new LocalDateTime(2021, 2, 23, 15, 45)
 
@@ -67,22 +68,26 @@ class ViajeBusBootstrap extends CollectionBasedBootstrap {
 		
 		micro1.agregarAsiento(new Asiento)
 		micro1.agregarAsiento(new Asiento)
-		micro1.reservarAsiento(1)
+		//micro1.reservarAsiento(1)
 		
 		micro2.agregarAsiento(new Asiento)
 		micro2.agregarAsiento(new Asiento)
 		micro2.agregarAsiento(new Asiento)
+		//micro2.reservarAsiento(1)
 		//micro2.reservarAsiento(2)
-		//micro2.reservarAsiento(3)
 		
 		
 		micro3.agregarAsiento(new Asiento)
-		micro3.agregarAsiento(new Asiento)
+		//micro3.reservarAsiento(1)
 
 		viaje1.agregarServicio(new Desayuno)
 		
 		val pasaje1 = repoPasajes.create(cliente1, viaje1, 1)
-		// val pasaje2 = repoPasajes.create(cliente1, viaje1, 18)
+		val pasaje2 = repoPasajes.create(cliente2, viaje2, 1)
+		val pasaje3 = repoPasajes.create(cliente3, viaje3, 1)
+		//pasaje1.confirmar
+		pasaje2.confirmar
+		pasaje3.confirmar
 	}
 
 }

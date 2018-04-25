@@ -31,6 +31,7 @@ class Pasaje extends Entity implements Cloneable {
 		this.viaje = viaje
 		this.nroAsiento = nroAsiento
 		this.estado = new ListoParaComprar
+		
 	}
 
 	def cancelar() {

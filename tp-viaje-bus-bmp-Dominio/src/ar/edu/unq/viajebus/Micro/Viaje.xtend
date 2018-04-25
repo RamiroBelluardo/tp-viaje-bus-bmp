@@ -44,7 +44,7 @@ class Viaje extends Entity implements Cloneable {
 	new() {
 		this.recorrido = newArrayList
 		this.servicios = newArrayList
-
+		this.pasajes = newArrayList
 	}
 
 	@Dependencies("precioBase", "precioServicios", "precioMicro", "precioFinde")

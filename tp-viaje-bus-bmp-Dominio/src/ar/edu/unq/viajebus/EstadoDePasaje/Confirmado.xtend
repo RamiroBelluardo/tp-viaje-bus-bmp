@@ -8,7 +8,7 @@ class Confirmado extends EstadoDePasaje {
 
 	override anterior(Pasaje pasaje) {
 		super.anterior(pasaje)
-		GMailSender.instance.notificarCancelacionDePasaje(pasaje)
+	//	GMailSender.instance.notificarCancelacionDePasaje(pasaje)
 	}
 
 	override proximo() {

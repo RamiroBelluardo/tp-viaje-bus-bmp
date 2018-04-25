@@ -17,7 +17,9 @@ class RepoPasajes extends CollectionBasedRepo<Pasaje> {
 			cliente = pCliente
 			viaje = pViaje
 			nroAsiento = pNroAsiento
+			asiento = pViaje.micro.buscarAsiento(pNroAsiento)
 		]
+		
 		this.create(pasaje)
 		pasaje
 	}
