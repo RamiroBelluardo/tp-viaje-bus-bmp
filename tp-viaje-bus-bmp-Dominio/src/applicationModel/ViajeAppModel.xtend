@@ -20,7 +20,6 @@ class ViajeAppModel extends Entity implements Cloneable {
 	Viaje viajeSeleccionado
 	Viaje example = new Viaje
 	String ciudadSeleccionada
-	Micro microSeleccionado
 
 
 

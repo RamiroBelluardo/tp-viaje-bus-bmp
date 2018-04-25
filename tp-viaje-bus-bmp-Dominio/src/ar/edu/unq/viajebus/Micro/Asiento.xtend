@@ -4,10 +4,11 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import ar.edu.unq.viajebus.EstadoDeAsiento.EstadoDeAsiento
 import ar.edu.unq.viajebus.EstadoDeAsiento.Disponible
 import org.uqbar.commons.model.annotations.TransactionalAndObservable
+import org.uqbar.commons.model.Entity
 
 @TransactionalAndObservable
 @Accessors
-class Asiento {
+class Asiento extends Entity implements Cloneable {
 	Integer numero
 	EstadoDeAsiento estado
 	Micro micro

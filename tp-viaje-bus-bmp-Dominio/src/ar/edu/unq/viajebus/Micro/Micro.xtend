@@ -35,11 +35,11 @@ class Micro extends Entity implements Cloneable {
 	}
 
 	def asientosDisponibles() {
-		asientos.filter[asiento|asiento.estado instanceof Disponible]
+		asientos.filter[asiento|asiento.estado instanceof Disponible].toList
 	}
 
 	def asientosReservados() {
-		asientos.filter[asiento|asiento.estado instanceof Reservado]
+		asientos.filter[asiento|asiento.estado instanceof Reservado].toList
 	}
 
 	def estaDisponibleElNro(Integer nro) {
@@ -56,6 +56,16 @@ class Micro extends Entity implements Cloneable {
 
 	def liberarAsiento(Integer nroAsiento) {
 		asientos.filter[asiento|asiento.numero == nroAsiento].get(0).liberar
+	}
+	
+	def cantidadAsientos(){
+		asientos.size
+	}
+	
+	def getNrosAsientosDisponibles(){
+		val nros = newArrayList
+		asientosDisponibles.forEach[Asiento a | nros.add(a.numero)]
+		nros.toList
 	}
 
 }

@@ -47,10 +47,6 @@ class ViajeBusBootstrap extends CollectionBasedBootstrap {
 		val micro2 = repoMicros.create("AB123AB", new Semicama, false)
 		val micro3 = repoMicros.create("DCR283", new Ejecutivo, true)
 
-		val asiento1 = new Asiento
-		val asiento2 = new Asiento
-		val asiento3 = new Asiento
-
 		repoViajes.create(partidaMicro1, llegadaMicro1, micro1)
 		repoViajes.create(partidaMicro2, llegadaMicro2, micro2)
 		repoViajes.create(partidaMicro3, llegadaMicro3, micro3)
@@ -70,11 +66,17 @@ class ViajeBusBootstrap extends CollectionBasedBootstrap {
 		val pasaje1 = repoPasajes.create(cliente1, viaje1, 1)
 		// val pasaje2 = repoPasajes.create(cliente1, viaje1, 18)
 		
-		micro1.agregarAsiento(asiento1)
+		micro1.agregarAsiento(new Asiento)
 		micro1.reservarAsiento(1)
-		micro2.agregarAsiento(asiento2)
-		micro2.agregarAsiento(asiento3)
-		micro2.reservarAsiento(1)
+		
+		micro2.agregarAsiento(new Asiento)
+		micro2.agregarAsiento(new Asiento)
+		micro2.agregarAsiento(new Asiento)
+		micro2.reservarAsiento(2)
+		//micro2.reservarAsiento(3)
+		
+		
+		micro3.agregarAsiento(new Asiento)
 
 		viaje1.agregarServicio(new Desayuno)
 	}

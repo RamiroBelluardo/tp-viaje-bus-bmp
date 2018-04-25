@@ -68,4 +68,8 @@ class RepoViajes extends CollectionBasedRepo<Viaje> {
 	override protected getCriterio(Viaje example) {
 		null
 	}
+	
+	def getViajes() {
+		allInstances
+	}
 }

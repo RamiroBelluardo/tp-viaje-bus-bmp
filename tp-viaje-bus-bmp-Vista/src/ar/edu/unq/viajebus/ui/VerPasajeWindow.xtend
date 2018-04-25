@@ -2,6 +2,8 @@ package ar.edu.unq.viajebus.ui
 
 import applicationModel.PasajeAppModel
 import ar.edu.unq.viajebus.Cliente.Cliente
+import ar.edu.unq.viajebus.Micro.Asiento
+import ar.edu.unq.viajebus.Micro.Micro
 import ar.edu.unq.viajebus.Micro.Pasaje
 import ar.edu.unq.viajebus.Micro.Viaje
 import org.uqbar.arena.aop.windows.TransactionalDialog
@@ -9,14 +11,13 @@ import org.uqbar.arena.bindings.ObservableProperty
 import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.widgets.Button
-import org.uqbar.arena.widgets.CheckBox
 import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.Selector
-import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.windows.WindowOwner
 import org.uqbar.commons.applicationContext.ApplicationContext
 import repo.RepoClientes
+import repo.RepoMicros
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 
@@ -76,8 +77,7 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 			width = 100
 		]
 
-		new TextBox(panelViaje) => [
-			width = 100
+		new Label(panelViaje) => [
 			value <=> "viajeSeleccionado"
 		]
 
@@ -101,13 +101,13 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 		]
 
 		new Label(panelAsiento) => [
-			text = "12"
+			value <=> "pasajeSeleccionado.nroAsiento"
 			fontSize = 15
 		]
 
 		val panelAsientos = new Panel(panelDerecho)
 		panelAsientos.layout = new ColumnLayout(8)
-		crearAsientos(panelAsientos, 24)
+		crearAsientos(panelAsientos, repoMicros.micros.get(1).cantidadAsientos)
 
 		createGridActions(panelDerecho)
 
@@ -120,8 +120,10 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 		new Button(actionsPanel) => [
 			caption = "Aceptar"
 			onClick[this.accept]
+			modelObject.pasajeSeleccionado.viaje = modelObject.viajeSeleccionado
 			setAsDefault
 			disableOnError
+
 		]
 
 		new Button(actionsPanel) => [
@@ -131,11 +133,15 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 	}
 
 	def crearAsientos(Panel panel, int nroAsientos) {
-		for (var i = 1; i <= nroAsientos; i++) {
-			new Label(panel).text = i.toString
-			new CheckBox(panel) => []
-		}
+			new Selector<Asiento>(panel) => [
+				allowNull = false
+				value <=> "pasajeSeleccionado.nroAsiento"
+				val propiedadAsientos = bindItems(new ObservableProperty(repoMicros.micros.get(1), "nrosAsientosDisponibles"))
+				//propiedadAsientos.adaptWith(typeof(Integer), "numero")
+				width = 100
+			]
 	}
+
 
 	def nuevoCliente() {
 		val cliente = new Cliente
@@ -151,14 +157,20 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 	def buscarViaje() {
 
 		val viaje = new Viaje
-		new BuscarViajesWindow(this, viaje) => [
-			onAccept[this.modelObject.actualizarViajeSeleccionado(viaje)]
+		val pasaje = new Pasaje
+
+		new BuscarViajesWindow(this, viaje, pasaje) => [
+			onAccept[this.modelObject.actualizarViajeSeleccionado(pasaje.viaje)]
 			open
 		]
 	}
 
 	def getRepoClientes() {
 		ApplicationContext.instance.getSingleton(Cliente) as RepoClientes
+	}
+	
+	def getRepoMicros() {
+		ApplicationContext.instance.getSingleton(Micro) as RepoMicros
 	}
 
 }

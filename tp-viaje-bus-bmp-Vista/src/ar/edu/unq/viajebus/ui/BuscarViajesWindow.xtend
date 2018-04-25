@@ -1,6 +1,7 @@
 package ar.edu.unq.viajebus.ui
 
 import applicationModel.BuscadorViajesAppModel
+import ar.edu.unq.viajebus.Micro.Pasaje
 import ar.edu.unq.viajebus.Micro.Viaje
 import java.awt.Color
 import org.joda.time.LocalDateTime
@@ -14,21 +15,22 @@ import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.widgets.tables.Column
 import org.uqbar.arena.widgets.tables.Table
 import org.uqbar.arena.windows.WindowOwner
+import transformer.LocalDateTransformer
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-import org.uqbar.arena.bindings.DateTransformer
-import transformer.LocalDateTimeTransformer
-import transformer.LocalDateTransformer
 
 class BuscarViajesWindow extends TransactionalDialog<BuscadorViajesAppModel> {
 
-new(WindowOwner parent, Viaje viaje) {
-		super(parent,createViewModel(viaje))}
-	
-static def createViewModel(Viaje viaje){
+	new(WindowOwner parent, Viaje viaje, Pasaje pasaje) {
+		super(parent, createViewModel(viaje, pasaje))
+	}
+
+	static def createViewModel(Viaje viaje, Pasaje pasaje) {
 		val model = new BuscadorViajesAppModel()
-		model.exampleViaje= viaje
+		model.viajeSeleccionado = viaje
+		model.pasajeSeleccionado = pasaje
 		return model
+
 	}
 
 	override def createMainTemplate(Panel mainPanel) {
@@ -51,7 +53,7 @@ static def createViewModel(Viaje viaje){
 
 		]
 	}
-	
+
 	def static crearLabelYTextBoxParaFecha(Panel panel, String texto, String valor) {
 		new Label(panel) => [
 			text = texto
@@ -88,7 +90,7 @@ static def createViewModel(Viaje viaje){
 	def createResultsGrid(Panel mainPanel) {
 		var table = new Table<Viaje>(mainPanel, Viaje) => [
 			items <=> "resultadosViaje"
-		 value <=> "viajeSeleccionado"
+			value <=> "viajeSeleccionado"
 		]
 		this.describeResultsGrid(table)
 	}
@@ -142,6 +144,8 @@ static def createViewModel(Viaje viaje){
 		new Button(actionsPanel) => [
 			caption = "Aceptar"
 			onClick[this.accept]
+			onAccept[modelObject.setViaje]
+			//modelObject.pasajeSeleccionado.viaje = modelObject.viajeSeleccionado
 			disableOnError
 		]
 
@@ -149,7 +153,7 @@ static def createViewModel(Viaje viaje){
 			caption = "Cancelar"
 			onClick[this.cancel]
 		]
-		
+
 	}
 
 }
