@@ -22,8 +22,6 @@ class Viaje extends Entity implements Cloneable {
 	List<String> recorrido
 	List<Pasaje> pasajes
 	EstadoDeViaje estado
-	String origen
-	String destino
 	Boolean tieneDesayuno = false
 	Boolean tieneAlmuerzo = false
 	Boolean tieneMerienda = false
@@ -37,8 +35,6 @@ class Viaje extends Entity implements Cloneable {
 		this.recorrido = newArrayList
 		this.pasajes = newArrayList
 		this.estado = new Aprobado
-		this.origen = ""
-		this.destino = ""
 	}
 
 	new() {
@@ -184,12 +180,16 @@ class Viaje extends Entity implements Cloneable {
 	def agregarCiudad(String ciudad) {
 		if (recorrido.filter[ciu|ciu == ciudad].isEmpty) {
 			recorrido.add(ciudad)
+//			origen = recorrido.head
+//			destino = recorrido.last
 		}
 	}
 
 	def quitarCiudad(String ciudad) {
 		if (!recorrido.filter[ciu|ciu == ciudad].isEmpty) {
 			recorrido.remove(ciudad)
+//			origen = recorrido.head
+//			destino = recorrido.last
 		}
 	}
 
@@ -205,14 +205,6 @@ class Viaje extends Entity implements Cloneable {
 		!pasajes.isEmpty
 	}
 
-	def getOrigen() {
-		this.recorrido.head
-	}
-
-	def getDestino() {
-		this.recorrido.last
-	}
-
 	def porcentajeVendido() {
 		if (micro.asientos.size == 0) {
 			return 0
@@ -220,6 +212,32 @@ class Viaje extends Entity implements Cloneable {
 			//micro.asientosReservados.size * 100 / micro.asientos.size
 			pasajes.size * 100 / micro.asientos.size
 		}
+	}
+	
+	def getPartidaCompleta(){
+			val dias = fechaPartida.getDayOfMonth().toString
+			val meses = fechaPartida.getMonthOfYear().toString
+			val anios = fechaPartida.getYear().toString
+			val res = '''«getOrigen» - «dias»/«meses»/«anios»'''
+			res
+	}
+	
+	def getLlegadaCompleta(){
+			val dias = fechaPartida.getDayOfMonth().toString
+			val meses = fechaPartida.getMonthOfYear().toString
+			val anios = fechaPartida.getYear().toString
+			val res = '''«getDestino» - «dias»/«meses»/«anios»'''
+			res
+	}
+	
+	@Dependencies("recorrido")
+	def getOrigen(){
+		recorrido.head
+	}
+	
+	@Dependencies("recorrido")
+	def getDestino(){
+		recorrido.last
 	}
 
 }

@@ -81,7 +81,6 @@ class EditarViajeWindow extends TransactionalDialog<ViajeAppModel> {
 			val elementSelected = new NotNullObservable("ciudadSeleccionada")
 			caption = "Quitar"
 			onClick[modelObject.viajeSeleccionado.quitarCiudad(modelObject.ciudadSeleccionada)]
-			setAsDefault
 			disableOnError
 			bindEnabled(elementSelected)
 		]

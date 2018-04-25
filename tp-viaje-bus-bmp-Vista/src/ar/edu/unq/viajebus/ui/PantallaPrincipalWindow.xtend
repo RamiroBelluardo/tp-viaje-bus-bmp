@@ -111,6 +111,18 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 			]
 			fixedSize = 115
 		]
+		
+		new Column<Viaje>(table) => [
+			title = "Origen"
+			bindContentsToProperty("origen")
+			fixedSize = 300
+		]
+
+		new Column<Viaje>(table) => [
+			title = "Destino"
+			bindContentsToProperty("destino")
+			fixedSize = 300
+		]
 
 	}
 
@@ -135,25 +147,27 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 
 		new Column<Pasaje>(table) => [
 			title = "Partida"
-			bindContentsToProperty("viaje.fechaPartida").transformer = [ LocalDateTime f |
-				val dias = f.getDayOfMonth().toString
-				val meses = f.getMonthOfYear().toString
-				val anios = f.getYear().toString
-				val res = '''«dias»/«meses»/«anios»'''
-				res
-			]
+//			bindContentsToProperty("viaje.fechaPartida").transformer = [ LocalDateTime f |
+//				val dias = f.getDayOfMonth().toString
+//				val meses = f.getMonthOfYear().toString
+//				val anios = f.getYear().toString
+//				val res = '''«dias»/«meses»/«anios»'''
+//				res
+//			]
+			bindContentsToProperty("viaje.partidaCompleta")
 			fixedSize = 200
 		]
 
 		new Column<Pasaje>(table) => [
 			title = "Llegada"
-			bindContentsToProperty("viaje.fechaLlegada").transformer = [ LocalDateTime f |
-				val dias = f.getDayOfMonth().toString
-				val meses = f.getMonthOfYear().toString
-				val anios = f.getYear().toString
-				val res = '''«dias»/«meses»/«anios»'''
-				res
-			]
+//			bindContentsToProperty("viaje.fechaLlegada").transformer = [ LocalDateTime f |
+//				val dias = f.getDayOfMonth().toString
+//				val meses = f.getMonthOfYear().toString
+//				val anios = f.getYear().toString
+//				val res = '''«dias»/«meses»/«anios»'''
+//				res
+//			]
+			bindContentsToProperty("viaje.llegadaCompleta")
 			fixedSize = 200
 		]
 
@@ -167,6 +181,7 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 			]
 			fixedSize = 75
 		]
+		
 
 		new Column<Pasaje>(table) => [
 			title = "Asiento"
