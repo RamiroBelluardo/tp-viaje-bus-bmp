@@ -217,7 +217,8 @@ class Viaje extends Entity implements Cloneable {
 		if (micro.asientos.size == 0) {
 			return 0
 		} else {
-			micro.asientosReservados.size * 100 / micro.asientos.size
+			//micro.asientosReservados.size * 100 / micro.asientos.size
+			pasajes.size * 100 / micro.asientos.size
 		}
 	}
 
