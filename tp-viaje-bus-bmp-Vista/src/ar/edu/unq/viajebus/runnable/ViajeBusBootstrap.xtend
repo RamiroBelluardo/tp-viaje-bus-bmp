@@ -1,7 +1,7 @@
 package ar.edu.unq.viajebus.runnable
 
 import ar.edu.unq.viajebus.Cliente.Cliente
-import ar.edu.unq.viajebus.EstadoDePasaje.Confirmado
+import ar.edu.unq.viajebus.Mailing.GMailSender
 import ar.edu.unq.viajebus.Micro.Asiento
 import ar.edu.unq.viajebus.Micro.Micro
 import ar.edu.unq.viajebus.Micro.Pasaje
@@ -32,6 +32,9 @@ class ViajeBusBootstrap extends CollectionBasedBootstrap {
 	 * 
 	 */
 	override run() {
+		GMailSender.config(new GMailSender("pruebasfacultadtpi@gmail.com", "unqui2017"))
+		
+		
 		val RepoViajes repoViajes = ApplicationContext.instance.getSingleton(typeof(Viaje))
 		val RepoMicros repoMicros = ApplicationContext.instance.getSingleton(typeof(Micro))
 		val RepoClientes repoClientes = ApplicationContext.instance.getSingleton(typeof(Cliente))
@@ -61,7 +64,7 @@ class ViajeBusBootstrap extends CollectionBasedBootstrap {
 		viaje2.agregarCiudad("Buenos Aires")
 		viaje3.agregarCiudad("Tilcara")
 
-		val cliente1 = repoClientes.create("Lucas", "Pier", "111111", "lg.piergiacomi@gmail.com", "44444444")
+		val cliente1 = repoClientes.create("Lucas", "Pier", "111111", "lucaspiergiacomi@eso.com", "44444444")
 		val cliente2 = repoClientes.create("Esteban", "Matas", "222222", "esteban@eso.com", "")
 		val cliente3 = repoClientes.create("Ramiro", "Belluardo", "333333", "ramiro@ramiro.ramiro", "22222222")
 
@@ -82,7 +85,7 @@ class ViajeBusBootstrap extends CollectionBasedBootstrap {
 		val pasaje3 = repoPasajes.create(cliente3, viaje3, 1)
 		pasaje1.confirmar
 		pasaje2.confirmar
-		pasaje3.confirmar
+
 	}
 
 }

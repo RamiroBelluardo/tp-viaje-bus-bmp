@@ -260,7 +260,6 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 	
 	def void cancelarPasaje(){
 		this.modelObject.pasajeSeleccionado.cancelar
-		modelObject.search
 	}
 	
 	override protected addActions(Panel actionsPanel) {

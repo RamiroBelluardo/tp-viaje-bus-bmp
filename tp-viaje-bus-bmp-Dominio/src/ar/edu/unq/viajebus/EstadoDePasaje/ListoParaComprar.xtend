@@ -7,7 +7,7 @@ class ListoParaComprar extends EstadoDePasaje {
 
 	override siguiente(Pasaje pasaje) {
 		super.siguiente(pasaje)
-		//GMailSender.instance.notificarCompraDePasaje(pasaje)
+		GMailSender.instance.notificarCompraDePasaje(pasaje)
 	}
 
 	override proximo() {
@@ -17,6 +17,5 @@ class ListoParaComprar extends EstadoDePasaje {
 	override previo() {
 		new Cancelado
 	}
-	
 
 }

@@ -14,6 +14,8 @@ import ar.edu.unq.viajebus.Micro.Pasaje
 class GMailSender {
 
 	UserPasswordAuthentication authentication
+	
+	String pattern = "dd/MM/yyyy HH:mm";
 
 	new(String username, String password) {
 		authentication = new UserPasswordAuthentication(username, password)
@@ -54,18 +56,18 @@ class GMailSender {
 	}
 
 	def notificarCompraDePasaje(Pasaje pasaje) {
-		this.sendMail(pasaje.cliente.mail, "ViajeBus: Compra realizada con �xito",
+		this.sendMail(pasaje.cliente.mail, "ViajeBus: Compra realizada con éxito",
 			"Estimado/a " + pasaje.cliente.nombre +
-				", usted ha efectuado la compra del siguiente pasaje.\n\n N�mero de asiento:" + pasaje.asiento.numero +
-				"\n\n Fecha de partida:" + pasaje.viaje.fechaPartida + "\n\n Precio: " + pasaje.viaje.precio +
+				", usted ha efectuado la compra del siguiente pasaje.\n\n Número de asiento:" + pasaje.asiento.numero +
+				"\n\n Fecha de partida:" + pasaje.viaje.fechaPartida.toString(pattern) + "\n\n Precio: $" + pasaje.viaje.precio +
 				"\n\n Muchas gracias por elegirnos!\n\n ViajeBus")
 	}
 
 	def notificarCancelacionDePasaje(Pasaje pasaje) {
 		this.sendMail(pasaje.cliente.mail, "ViajeBus: Pasaje cancelado",
 			"Estimado/a " + pasaje.cliente.nombre +
-				", lamento informale que el siguiente pasaje ha sido cancelado. \n\n numero de Asiento:" +
-				pasaje.asiento.numero + "\n\n fecha de partida:" + pasaje.viaje.fechaPartida +
+				", lamentamos informarle que el siguiente pasaje ha sido cancelado: \n\n Número de asiento:" +
+				pasaje.asiento.numero + "\n\n Fecha de partida:" + pasaje.viaje.fechaPartida.toString(pattern) +
 				"\n\n Disculpe las molestias y muchas gracias por elegirnos!\n\n ViajeBus")
 	}
 

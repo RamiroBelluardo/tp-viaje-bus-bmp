@@ -50,6 +50,7 @@ class PrincipalAppModel {
 	}
 
 	def eliminarViaje() {
+		viajeSeleccionado.eliminar
 		repoViajes.delete(viajeSeleccionado)
 		search
 		viajeSeleccionado = null
