@@ -144,8 +144,8 @@ class BuscarViajesWindow extends TransactionalDialog<BuscadorViajesAppModel> {
 		new Button(actionsPanel) => [
 			caption = "Aceptar"
 			onClick[this.accept]
-			onAccept[modelObject.setViaje]
-			//modelObject.pasajeSeleccionado.viaje = modelObject.viajeSeleccionado
+			modelObject.pasajeSeleccionado.viaje = modelObject.viajeSeleccionado
+			modelObject.microSeleccionado = modelObject.viajeSeleccionado.micro
 			disableOnError
 		]
 

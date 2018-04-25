@@ -140,16 +140,16 @@ class Viaje extends Entity implements Cloneable {
 	def agregarServicio(Servicio servicio) {
 		if (servicios.filter[servicio2|servicio2.nombre == servicio.nombre].isEmpty) {
 			servicios.add(servicio)
-			if(servicio.nombre == "Desayuno"){
+			if (servicio.nombre == "Desayuno") {
 				tieneDesayuno = true
 			}
-			if(servicio.nombre == "Almuerzo"){
+			if (servicio.nombre == "Almuerzo") {
 				tieneAlmuerzo = true
 			}
-			if(servicio.nombre == "Merienda"){
+			if (servicio.nombre == "Merienda") {
 				tieneMerienda = true
 			}
-			if(servicio.nombre == "Cena"){
+			if (servicio.nombre == "Cena") {
 				tieneCena = true
 			}
 
@@ -219,6 +219,5 @@ class Viaje extends Entity implements Cloneable {
 			micro.asientosReservados.size * 100 / micro.asientos.size
 		}
 	}
-	
 
 }

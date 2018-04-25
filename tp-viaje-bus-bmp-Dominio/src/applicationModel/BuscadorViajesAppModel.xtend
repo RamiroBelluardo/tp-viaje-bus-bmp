@@ -1,5 +1,7 @@
 package applicationModel
 
+import ar.edu.unq.viajebus.Micro.Micro
+import ar.edu.unq.viajebus.Micro.Pasaje
 import ar.edu.unq.viajebus.Micro.Viaje
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
@@ -7,7 +9,6 @@ import org.joda.time.LocalDate
 import org.uqbar.commons.applicationContext.ApplicationContext
 import org.uqbar.commons.model.annotations.Observable
 import repo.RepoViajes
-import ar.edu.unq.viajebus.Micro.Pasaje
 
 @Accessors
 @Observable
@@ -20,6 +21,7 @@ class BuscadorViajesAppModel {
 	Viaje exampleViaje = new Viaje
 	Viaje viajeSeleccionado
 	Pasaje pasajeSeleccionado
+	Micro microSeleccionado
 
 	def search() {
 		resultadosViaje = repoViajes.search(ciudadSeleccionada, fechaPartidaSeleccionada, fechaLlegadaSeleccionada)
