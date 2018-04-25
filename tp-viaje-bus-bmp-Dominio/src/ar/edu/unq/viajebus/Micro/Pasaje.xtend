@@ -44,5 +44,9 @@ class Pasaje extends Entity implements Cloneable {
 		this.estado.siguiente(this)
 		this.viaje.micro.reservarAsiento(this.asiento.numero)
 	}
+	
+	def getNoTieneCliente(){
+		this.cliente === null
+	}
 
 }

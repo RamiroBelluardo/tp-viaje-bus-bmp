@@ -19,4 +19,5 @@ class Confirmado extends EstadoDePasaje {
 		new Cancelado
 	}
 
+
 }

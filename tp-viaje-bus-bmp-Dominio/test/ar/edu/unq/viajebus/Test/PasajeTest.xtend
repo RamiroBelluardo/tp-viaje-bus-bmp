@@ -86,7 +86,7 @@ class PasajeTest {
 		assertEquals(pasaje.estado.class, Confirmado)
 		assertFalse(pasaje.viaje.micro.estaDisponibleElNro(1))
 		pasaje.cancelar
-		// Manda mail de cancelación:
+		// Manda mail de cancelaciï¿½n:
 		verify(notificador, times(1)).notificarCancelacionDePasaje(pasaje)
 		// El Pasaje pasa de Confirmado a Cancelado:
 		assertEquals(pasaje.estado.class, Cancelado)

@@ -11,5 +11,7 @@ class Cancelado extends EstadoDePasaje {
 	override previo() {
 		throw new UserException("El pasaje ya se encuentra cancelado")
 	}
+	
+
 
 }

@@ -60,6 +60,11 @@ class PrincipalAppModel {
 		this.actualizarServicios(viajeSeleccionado)
 		search
 	}
+	
+	def actualizarPasajeSeleccionado() {
+		repoPasajes.update(pasajeSeleccionado)
+		search
+	}
 
 	def actualizarServicios(Viaje viaje) {
 		// viajeSeleccionado.servicios.forEach[Servicio s | s.actualizar]

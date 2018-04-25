@@ -15,4 +15,5 @@ abstract class EstadoDePasaje {
 	def EstadoDePasaje proximo()
 
 	def EstadoDePasaje previo()
+
 }

@@ -212,7 +212,7 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 		]
 		new Button(panelButtons) => [
 			caption = "Ver"
-//			onClick[verPasaje]
+			onClick[verPasaje]
 			bindEnabled(elementSelected)
 		]
 		new Button(panelButtons) => [
@@ -221,13 +221,6 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 		]
 	}
 
-//	def crearPasaje() {
-//		openDialog(new CrearPasajeWindow(this))
-//	}
-//
-//	def verPasaje() {
-//		openDialog(new VerPasajeWindow(this))
-//	}
 	def void crearViaje() {
 		val viaje = new Viaje
 		new CrearViajeWindow(this, viaje) => [
@@ -252,6 +245,14 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 		val pasaje = new Pasaje
 		new CrearPasajeWindow(this, pasaje) => [
 			onAccept[this.modelObject.crearPasaje(pasaje)]
+			open
+		]
+	}
+	
+	def void verPasaje(){
+		val pasaje = modelObject.pasajeSeleccionado
+		new VerPasajeWindow(this, pasaje) => [
+			onAccept[this.modelObject.actualizarPasajeSeleccionado]
 			open
 		]
 	}

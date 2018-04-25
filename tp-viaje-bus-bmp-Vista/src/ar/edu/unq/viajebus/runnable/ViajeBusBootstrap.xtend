@@ -64,17 +64,15 @@ class ViajeBusBootstrap extends CollectionBasedBootstrap {
 		val cliente2 = repoClientes.create("Esteban", "Matas", "222222", "esteban@eso.com", "")
 		val cliente3 = repoClientes.create("Ramiro", "Belluardo", "333333", "ramiro@ramiro.ramiro", "22222222")
 
-		val pasaje1 = repoPasajes.create(cliente1, viaje1, 1)
-		// val pasaje2 = repoPasajes.create(cliente1, viaje1, 18)
 		
 		micro1.agregarAsiento(new Asiento)
 		micro1.agregarAsiento(new Asiento)
-		//micro1.reservarAsiento(1)
+		micro1.reservarAsiento(1)
 		
 		micro2.agregarAsiento(new Asiento)
 		micro2.agregarAsiento(new Asiento)
 		micro2.agregarAsiento(new Asiento)
-		micro2.reservarAsiento(2)
+		//micro2.reservarAsiento(2)
 		//micro2.reservarAsiento(3)
 		
 		
@@ -82,6 +80,9 @@ class ViajeBusBootstrap extends CollectionBasedBootstrap {
 		micro3.agregarAsiento(new Asiento)
 
 		viaje1.agregarServicio(new Desayuno)
+		
+		val pasaje1 = repoPasajes.create(cliente1, viaje1, 1)
+		// val pasaje2 = repoPasajes.create(cliente1, viaje1, 18)
 	}
 
 }

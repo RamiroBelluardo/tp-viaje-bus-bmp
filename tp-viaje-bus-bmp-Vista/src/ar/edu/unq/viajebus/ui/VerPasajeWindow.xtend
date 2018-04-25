@@ -49,11 +49,13 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 		new Button(panelCliente) => [
 			caption = "Nuevo"
 			width = 100
+			enabled <=> "pasajeSeleccionado.noTieneCliente"
 			onClick[nuevoCliente]
 		]
 
 		new Selector<Cliente>(panelCliente) => [
 			allowNull = false
+			enabled <=> "pasajeSeleccionado.noTieneCliente"
 			value <=> "pasajeSeleccionado.cliente"
 			val propiedadClientes = bindItems(new ObservableProperty(repoClientes, "clientes"))
 			propiedadClientes.adaptWith(typeof(Cliente), "nombre")
@@ -71,6 +73,7 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 
 		new Button(panelViaje) => [
 			caption = "Buscar"
+			enabled <=> "pasajeSeleccionado.noTieneCliente"
 			onClick[buscarViaje]
 			width = 100
 		]
@@ -134,12 +137,11 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 	}
 
 	def crearAsientos(Panel panel, int nroAsientos) {
-		val viajeRequerido = new NotNullObservable("viajeSeleccionado")
 		new Selector<Asiento>(panel) => [
 			allowNull = false
 			value <=> "pasajeSeleccionado.nroAsiento"
+			enabled <=> "pasajeSeleccionado.noTieneCliente"
 			bindItems(new ObservableProperty(modelObject.microSeleccionado, "nrosAsientosDisponibles"))
-			bindEnabled(viajeRequerido)
 			width = 50
 		]
 	}

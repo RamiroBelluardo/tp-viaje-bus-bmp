@@ -18,5 +18,6 @@ class ListoParaComprar extends EstadoDePasaje {
 	override previo() {
 		throw new UserException("El pasaje ya se encuentra listo para comprar")
 	}
+	
 
 }
