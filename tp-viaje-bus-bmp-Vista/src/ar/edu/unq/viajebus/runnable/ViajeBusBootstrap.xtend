@@ -68,24 +68,19 @@ class ViajeBusBootstrap extends CollectionBasedBootstrap {
 		
 		micro1.agregarAsiento(new Asiento)
 		micro1.agregarAsiento(new Asiento)
-		//micro1.reservarAsiento(1)
 		
 		micro2.agregarAsiento(new Asiento)
 		micro2.agregarAsiento(new Asiento)
-		micro2.agregarAsiento(new Asiento)
-		//micro2.reservarAsiento(1)
-		//micro2.reservarAsiento(2)
-		
+		micro2.agregarAsiento(new Asiento)	
 		
 		micro3.agregarAsiento(new Asiento)
-		//micro3.reservarAsiento(1)
 
 		viaje1.agregarServicio(new Desayuno)
 		
 		val pasaje1 = repoPasajes.create(cliente1, viaje1, 1)
 		val pasaje2 = repoPasajes.create(cliente2, viaje2, 1)
 		val pasaje3 = repoPasajes.create(cliente3, viaje3, 1)
-		//pasaje1.confirmar
+		pasaje1.confirmar
 		pasaje2.confirmar
 		pasaje3.confirmar
 	}
