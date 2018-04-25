@@ -54,6 +54,7 @@ class PasajeTest {
 		assertEquals(pasaje.viaje.micro, microCama)
 		assertEquals(pasaje.asiento.numero, 1)
 		assertEquals(pasaje.estado.class, ListoParaComprar)
+		assertEquals(pasaje.tipoPago, "Efectivo")
 	}
 
 	@Test

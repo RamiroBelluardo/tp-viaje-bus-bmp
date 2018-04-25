@@ -32,8 +32,7 @@ class ViajeBusBootstrap extends CollectionBasedBootstrap {
 	 * 
 	 */
 	override run() {
-		GMailSender.config(new GMailSender("pruebasfacultadtpi@gmail.com", "unqui2017"))
-		
+		//GMailSender.config(new GMailSender("pruebasfacultadtpi@gmail.com", "unqui2017"))	
 		
 		val RepoViajes repoViajes = ApplicationContext.instance.getSingleton(typeof(Viaje))
 		val RepoMicros repoMicros = ApplicationContext.instance.getSingleton(typeof(Micro))

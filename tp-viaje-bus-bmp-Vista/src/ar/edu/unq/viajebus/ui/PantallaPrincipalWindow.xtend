@@ -176,7 +176,7 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 
 		new Column<Pasaje>(table) => [
 			title = "Pago"
-			bindContentsToProperty("asiento")
+			bindContentsToProperty("tipoPago")
 			fixedSize = 75
 		]
 	}

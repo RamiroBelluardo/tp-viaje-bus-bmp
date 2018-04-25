@@ -16,6 +16,7 @@ class Pasaje extends Entity implements Cloneable {
 	Integer nroAsiento
 	Asiento asiento
 	EstadoDePasaje estado
+	String tipoPago
 
 	new(Cliente cliente, Viaje viaje, Integer nroAsiento) {
 		this.cliente = cliente
@@ -24,6 +25,7 @@ class Pasaje extends Entity implements Cloneable {
 		this.nroAsiento = nroAsiento
 		this.asiento = viaje.micro.buscarAsiento(nroAsiento)
 		this.estado = new ListoParaComprar
+		this.tipoPago = "Efectivo"
 	}
 
 	new() {
@@ -31,6 +33,7 @@ class Pasaje extends Entity implements Cloneable {
 		this.viaje = viaje
 		this.nroAsiento = nroAsiento
 		this.estado = new ListoParaComprar
+		this.tipoPago = "Efectivo"
 		
 	}
 
