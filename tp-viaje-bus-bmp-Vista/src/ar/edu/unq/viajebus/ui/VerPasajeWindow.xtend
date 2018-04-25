@@ -58,8 +58,8 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 			enabled <=> "pasajeSeleccionado.noTieneCliente"
 			value <=> "pasajeSeleccionado.cliente"
 			val propiedadClientes = bindItems(new ObservableProperty(repoClientes, "clientes"))
-			propiedadClientes.adaptWith(typeof(Cliente), "nombre")
-			width = 50
+			propiedadClientes.adaptWith(typeof(Cliente), "nombreCompleto")
+			width = 100
 		]
 
 		val panelViaje = new Panel(mainPanel) => [
