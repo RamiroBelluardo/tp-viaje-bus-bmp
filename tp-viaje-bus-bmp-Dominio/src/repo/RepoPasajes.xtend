@@ -19,13 +19,16 @@ class RepoPasajes extends CollectionBasedRepo<Pasaje> {
 			nroAsiento = pNroAsiento
 			asiento = pViaje.micro.buscarAsiento(pNroAsiento)
 		]
-		
+
 		this.create(pasaje)
 		pasaje
 	}
 
-	def search(Cliente cliente) {
-		allInstances.filter[pasaje|this.match(cliente, pasaje.cliente)].toList
+	def search(Cliente cliente, Viaje viaje, Integer nroAsiento) {
+		allInstances.filter [pasaje|
+			this.match(cliente, pasaje.cliente) && this.match(viaje, pasaje.viaje) &&
+				this.match(nroAsiento, pasaje.nroAsiento)
+		].toList
 	}
 
 	def match(Object expectedValue, Object realValue) {

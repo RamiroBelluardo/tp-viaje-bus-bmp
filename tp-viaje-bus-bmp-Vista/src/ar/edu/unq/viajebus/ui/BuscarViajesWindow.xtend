@@ -21,13 +21,12 @@ import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 
 class BuscarViajesWindow extends TransactionalDialog<BuscadorViajesAppModel> {
 
-	new(WindowOwner parent, Viaje viaje, Pasaje pasaje) {
-		super(parent, createViewModel(viaje, pasaje))
+	new(WindowOwner parent, Pasaje pasaje) {
+		super(parent, createViewModel(pasaje))
 	}
 
-	static def createViewModel(Viaje viaje, Pasaje pasaje) {
+	static def createViewModel(Pasaje pasaje) {
 		val model = new BuscadorViajesAppModel()
-		model.viajeSeleccionado = viaje
 		model.pasajeSeleccionado = pasaje
 		return model
 
@@ -144,8 +143,7 @@ class BuscarViajesWindow extends TransactionalDialog<BuscadorViajesAppModel> {
 		new Button(actionsPanel) => [
 			caption = "Aceptar"
 			onClick[this.accept]
-			modelObject.pasajeSeleccionado.viaje = modelObject.viajeSeleccionado
-			modelObject.microSeleccionado = modelObject.viajeSeleccionado.micro
+			onAccept[modelObject.actualizarDatos]
 			disableOnError
 		]
 

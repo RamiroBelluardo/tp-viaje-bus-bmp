@@ -21,6 +21,8 @@ import repo.RepoMicros
 import transformer.ViajeTransformer
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
+import org.uqbar.commons.model.utils.ObservableUtils
+import repo.RepoViajes
 
 class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 
@@ -77,11 +79,20 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 			onClick[buscarViaje]
 			width = 100
 		]
-		
+
 		new Label(panelViaje) => [
-			(value <=> "viajeSeleccionado")//.transformer = new ViajeTransformer
+			(value <=> "pasajeSeleccionado.viaje") // .transformer = new ViajeTransformer
 		]
-		
+//		new Selector<Viaje>(panelCliente) => [
+//			allowNull = false
+//			// enabled <=> "pasajeSeleccionado.noTieneCliente"
+//			value <=> "pasajeSeleccionado.viaje"
+//			enabled <=> "pasajeSeleccionado.noTieneCliente"
+//			val propiedadClientes = bindItems(new ObservableProperty(repoViajes, "viajes"))
+//			propiedadClientes.adaptWith(typeof(Viaje), "micro")
+//			width = 100
+//		]
+
 		val panelAsiento = new Panel(mainPanel) => [
 			layout = new ColumnLayout(2)
 		]
@@ -96,9 +107,7 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 			fontSize = 15
 		]
 
-
-		crearAsientos(panelAsiento, repoMicros.micros.get(1).cantidadAsientos)
-
+		crearAsientos(panelAsiento)
 
 		val panelPrecios = new Panel(mainPanel) => [
 			layout = new ColumnLayout(2)
@@ -107,12 +116,12 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 			text = "Precio:"
 			fontSize = 15
 		]
-		
+
 		new Label(panelPrecios) => [
-			value <=> "viajeSeleccionado.precio"
-			fontSize = 15	
+			value <=> "pasajeSeleccionado.viaje.precio"
+			fontSize = 15
 		]
-		
+
 		createGridActions(mainPanel)
 
 	}
@@ -124,7 +133,7 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 		new Button(actionsPanel) => [
 			caption = "Aceptar"
 			onClick[this.accept]
-			modelObject.pasajeSeleccionado.viaje = modelObject.viajeSeleccionado
+			//modelObject.pasajeSeleccionado.viaje = modelObject.viajeSeleccionado
 			setAsDefault
 			disableOnError
 
@@ -136,13 +145,14 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 		]
 	}
 
-	def crearAsientos(Panel panel, int nroAsientos) {
+	def crearAsientos(Panel panel) {
 		new Selector<Asiento>(panel) => [
 			allowNull = false
 			value <=> "pasajeSeleccionado.nroAsiento"
 			enabled <=> "pasajeSeleccionado.noTieneCliente"
 			bindItems(new ObservableProperty(modelObject.microSeleccionado, "nrosAsientosDisponibles"))
 			width = 50
+
 		]
 	}
 
@@ -158,15 +168,11 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 	}
 
 	def buscarViaje() {
-
-		val viaje = new Viaje
-		val pasaje = new Pasaje
-
-		new BuscarViajesWindow(this, viaje, pasaje) => [
-			onAccept[this.modelObject.actualizarPasajeYViajeSeleccionado(pasaje, viaje)]
+		val pasaje = modelObject.pasajeSeleccionado
+		new BuscarViajesWindow(this, pasaje) => [
+			onAccept[this.modelObject.actualizarPasajeSeleccionado(pasaje)]
 			open
 		]
-		modelObject.microSeleccionado = pasaje.viaje.micro
 	}
 
 	def getRepoClientes() {
@@ -175,6 +181,10 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 
 	def getRepoMicros() {
 		ApplicationContext.instance.getSingleton(Micro) as RepoMicros
+	}
+
+	def getRepoViajes() {
+		ApplicationContext.instance.getSingleton(Viaje) as RepoViajes
 	}
 
 }

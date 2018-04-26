@@ -27,7 +27,7 @@ class PrincipalAppModel {
 	def void search() {
 		resultadosViaje = repoViajes.search(exampleViaje.fechaPartida, exampleViaje.fechaLlegada, exampleViaje.micro)
 		// resultadosViaje = repoViajes.search(exampleViaje.precio, exampleViaje.micro)
-		resultadosPasaje = repoPasajes.search(examplePasaje.cliente)
+		resultadosPasaje = repoPasajes.search(examplePasaje.cliente, examplePasaje.viaje, examplePasaje.nroAsiento)
 	}
 
 	def crearViaje(Viaje viaje) {
@@ -61,7 +61,7 @@ class PrincipalAppModel {
 		this.actualizarServicios(viajeSeleccionado)
 		search
 	}
-	
+
 	def actualizarPasajeSeleccionado() {
 		repoPasajes.update(pasajeSeleccionado)
 		search

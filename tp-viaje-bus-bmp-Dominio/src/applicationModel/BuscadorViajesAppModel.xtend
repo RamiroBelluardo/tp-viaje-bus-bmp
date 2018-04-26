@@ -27,11 +27,13 @@ class BuscadorViajesAppModel {
 		resultadosViaje = repoViajes.search(ciudadSeleccionada, fechaPartidaSeleccionada, fechaLlegadaSeleccionada)
 	}
 
-	def setViaje() {
-		pasajeSeleccionado.viaje = viajeSeleccionado
-	}
-
 	def RepoViajes getRepoViajes() {
 		ApplicationContext.instance.getSingleton(typeof(Viaje))
 	}
+	
+	def actualizarDatos() {
+		pasajeSeleccionado.viaje = viajeSeleccionado
+		microSeleccionado= viajeSeleccionado.micro
+	}
+	
 }
