@@ -13,7 +13,6 @@ import repo.RepoClientes
 import repo.RepoMicros
 import repo.RepoPasajes
 import repo.RepoViajes
-import org.uqbar.commons.model.utils.ObservableUtils
 
 @Accessors
 @TransactionalAndObservable
@@ -25,16 +24,13 @@ class PasajeAppModel extends Entity implements Cloneable {
 	List<Viaje> resultadosViajes
 	List<Micro> resultadosMicros
 
-	Viaje viajeSeleccionado // = repoViajes.searchById(1)
+	Viaje viajeSeleccionado
 	Micro microSeleccionado = new Micro
-	Pasaje pasajeSeleccionado // = new Pasaje
+	Pasaje pasajeSeleccionado
 	Integer nroAsiento
 
 	def search() {
 		resultadosClientes = repoClientes.allInstances.toList
-		resultadosPasajes = repoPasajes.allInstances.toList
-		resultadosViajes = repoViajes.allInstances.toList
-		resultadosMicros = repoMicros.allInstances.toList
 	}
 
 	def RepoMicros getRepoMicros() {
@@ -51,20 +47,6 @@ class PasajeAppModel extends Entity implements Cloneable {
 
 	def RepoPasajes getRepoPasajes() {
 		ApplicationContext.instance.getSingleton(typeof(Pasaje))
-	}
-
-	def actualizarViajeSeleccionado(Viaje viaje) {
-		viajeSeleccionado = viaje
-		repoViajes.update(viaje)
-		search
-	}
-
-	def actualizarPasajeSeleccionado(Pasaje pasaje) {
-		pasajeSeleccionado = pasaje
-		viajeSeleccionado = pasaje.viaje
-		// microSeleccionado = pasaje.viaje.micro
-		//repoPasajes.update(pasaje)
-		search
 	}
 
 	def crearCliente(Cliente cliente) {

@@ -34,6 +34,11 @@ class Cliente extends Entity implements Cloneable {
 	}
 
 	new() {
+		this.nombre = nombre
+		this.apellido = apellido
+		this.dni = dni
+		this.mail = mail
+		this.telefono = telefono
 	}
 
 	def agregarPasaje(Pasaje pasaje) {
@@ -49,25 +54,24 @@ class Cliente extends Entity implements Cloneable {
 		}
 		this.dni = unDNI
 	}
-	
+
 //	//@Dependencies("nombre", "apellido", "dni", "mail")
 //	def void getValido() {
 //		if (this.nombre == null || this.apellido == null || this.dni == null || this.mail == null){
 //			throw new UserException('''Debe rellenar los campos obligatorios''')
 //		}
 //	}
-
 	@Dependencies("mail")
 	def getValido() {
-		//this.mail !== null || this.mail !== ""
+		// this.mail !== null || this.mail !== ""
 	}
 
 	def void setMail(String unMail) {
 		var lastChar = ""
-		if (unMail.length > 0){
+		if (unMail.length > 0) {
 			lastChar = unMail.substring(unMail.length() - 1);
 		}
-		if (unMail === null || unMail.length < MIN_DIGITOS_MAIL){
+		if (unMail === null || unMail.length < MIN_DIGITOS_MAIL) {
 			throw new UserException('''El mail debe tener al menos «MIN_DIGITOS_MAIL» caracteres''')
 		}
 		if (!unMail.contains("@") || (lastChar == "@")) {
@@ -75,8 +79,8 @@ class Cliente extends Entity implements Cloneable {
 		}
 		this.mail = unMail
 	}
-	
-	def getNombreCompleto(){
+
+	def getNombreCompleto() {
 		'''«nombre» «apellido»'''
 	}
 }

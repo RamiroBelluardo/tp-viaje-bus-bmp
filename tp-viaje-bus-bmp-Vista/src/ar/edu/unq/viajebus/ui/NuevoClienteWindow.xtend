@@ -1,7 +1,9 @@
 package ar.edu.unq.viajebus.ui
 
+import ar.edu.unq.viajebus.Cliente.Cliente
 import java.awt.Color
 import org.uqbar.arena.aop.windows.TransactionalDialog
+import org.uqbar.arena.bindings.NotNullObservable
 import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.Label
@@ -11,15 +13,19 @@ import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-import ar.edu.unq.viajebus.Cliente.Cliente
-import org.uqbar.arena.bindings.NotNullObservable
+import applicationModel.ClienteAppModel
 
-class NuevoClienteWindow extends TransactionalDialog<Cliente> {
+class NuevoClienteWindow extends TransactionalDialog<ClienteAppModel> {
 
 	new(WindowOwner parent, Cliente cliente) {
-		super(parent, cliente)
+		super(parent, createViewModel(cliente))
 	}
 
+	static def createViewModel(Cliente cliente) {
+		val model = new ClienteAppModel()
+		model.clienteSeleccionado = cliente
+		return model
+	}
 
 	override protected createFormPanel(Panel mainPanel) {
 		val editorPanel = new Panel(mainPanel)
@@ -31,22 +37,21 @@ class NuevoClienteWindow extends TransactionalDialog<Cliente> {
 		]
 
 		new TextBox(editorPanel) => [
-			value <=> "nombre"
+			value <=> "clienteSeleccionado.nombre"
 			width = 200
 		]
-		
+
 		new Label(editorPanel) => [
 			text = "Apellido"
 			foreground = Color.BLUE
 		]
 
 		new TextBox(editorPanel) => [
-			val elementSelected = new NotNullObservable("nombre")
-			value <=> "apellido"
+			val elementSelected = new NotNullObservable("clienteSeleccionado.nombre")
+			value <=> "clienteSeleccionado.apellido"
 			width = 200
-			bindEnabled(elementSelected)	
+			bindEnabled(elementSelected)
 		]
-
 
 		new Label(editorPanel) => [
 			text = "DNI (sin puntos)"
@@ -54,10 +59,10 @@ class NuevoClienteWindow extends TransactionalDialog<Cliente> {
 		]
 
 		new NumericField(editorPanel) => [
-			val elementSelected = new NotNullObservable("apellido")
-			value <=> "dni"
+			val elementSelected = new NotNullObservable("clienteSeleccionado.apellido")
+			value <=> "clienteSeleccionado.dni"
 			width = 200
-			bindEnabled(elementSelected)		
+			bindEnabled(elementSelected)
 		]
 
 		new Label(editorPanel) => [
@@ -66,10 +71,10 @@ class NuevoClienteWindow extends TransactionalDialog<Cliente> {
 		]
 
 		new TextBox(editorPanel) => [
-			val elementSelected = new NotNullObservable("dni")
-			value <=> "mail"
+			val elementSelected = new NotNullObservable("clienteSeleccionado.dni")
+			value <=> "clienteSeleccionado.mail"
 			width = 200
-			bindEnabled(elementSelected)		
+			bindEnabled(elementSelected)
 		]
 
 		new Label(editorPanel) => [
@@ -78,7 +83,7 @@ class NuevoClienteWindow extends TransactionalDialog<Cliente> {
 		]
 
 		new TextBox(editorPanel) => [
-			value <=> "telefono"
+			value <=> "clienteSeleccionado.telefono"
 			width = 200
 		]
 
@@ -92,7 +97,7 @@ class NuevoClienteWindow extends TransactionalDialog<Cliente> {
 			onClick[this.accept]
 			setAsDefault
 			disableOnError
-			bindEnabledToProperty("valido")
+			bindEnabledToProperty("clienteSeleccionado.valido")
 			alignCenter
 		]
 

@@ -7,7 +7,6 @@ import ar.edu.unq.viajebus.Micro.Micro
 import ar.edu.unq.viajebus.Micro.Pasaje
 import ar.edu.unq.viajebus.Micro.Viaje
 import org.uqbar.arena.aop.windows.TransactionalDialog
-import org.uqbar.arena.bindings.NotNullObservable
 import org.uqbar.arena.bindings.ObservableProperty
 import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.widgets.Button
@@ -18,11 +17,9 @@ import org.uqbar.arena.windows.WindowOwner
 import org.uqbar.commons.applicationContext.ApplicationContext
 import repo.RepoClientes
 import repo.RepoMicros
-import transformer.ViajeTransformer
+import repo.RepoViajes
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-import org.uqbar.commons.model.utils.ObservableUtils
-import repo.RepoViajes
 
 class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 
@@ -83,15 +80,7 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 		new Label(panelViaje) => [
 			(value <=> "pasajeSeleccionado.viaje") // .transformer = new ViajeTransformer
 		]
-//		new Selector<Viaje>(panelCliente) => [
-//			allowNull = false
-//			// enabled <=> "pasajeSeleccionado.noTieneCliente"
-//			value <=> "pasajeSeleccionado.viaje"
-//			enabled <=> "pasajeSeleccionado.noTieneCliente"
-//			val propiedadClientes = bindItems(new ObservableProperty(repoViajes, "viajes"))
-//			propiedadClientes.adaptWith(typeof(Viaje), "micro")
-//			width = 100
-//		]
+
 		val panelAsiento = new Panel(mainPanel) => [
 			layout = new ColumnLayout(2)
 		]
@@ -149,11 +138,8 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 			allowNull = false
 			value <=> "pasajeSeleccionado.asiento"
 			enabled <=> "pasajeSeleccionado.noTieneCliente"
-			// bindItems(new ObservableProperty(modelObject.microSeleccionado, "nrosAsientosDisponibles"))
-			// items <=> "pasajeSeleccionado.viaje.verAsientosDisponibles"
 			val propiedadAsientos = (items <=> "pasajeSeleccionado.viaje.micro.asientosDisponibles")
 			propiedadAsientos.adaptWith(typeof(Asiento), "numero")
-			// (items <=> "pasajeSeleccionado.viaje.micro.asientosDisponibles").adaptWith(typeof(Asiento), "numero")
 			width = 50
 
 		]
@@ -166,14 +152,11 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 			open
 
 		]
-		modelObject.search
-
 	}
 
 	def buscarViaje() {
 		val pasaje = modelObject.pasajeSeleccionado
 		new BuscarViajesWindow(this, pasaje) => [
-			onAccept[this.modelObject.actualizarPasajeSeleccionado(pasaje)]
 			open
 		]
 	}
