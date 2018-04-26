@@ -209,34 +209,34 @@ class Viaje extends Entity implements Cloneable {
 		if (micro.asientos.size == 0) {
 			return 0
 		} else {
-			//micro.asientosReservados.size * 100 / micro.asientos.size
+			// micro.asientosReservados.size * 100 / micro.asientos.size
 			pasajes.size * 100 / micro.asientos.size
 		}
 	}
-	
-	def getPartidaCompleta(){
-			val dias = fechaPartida.getDayOfMonth().toString
-			val meses = fechaPartida.getMonthOfYear().toString
-			val anios = fechaPartida.getYear().toString
-			val res = '''«getOrigen» - «dias»/«meses»/«anios»'''
-			res
+
+	def getPartidaCompleta() {
+		val dias = fechaPartida.getDayOfMonth().toString
+		val meses = fechaPartida.getMonthOfYear().toString
+		val anios = fechaPartida.getYear().toString
+		val res = '''«getOrigen» - «dias»/«meses»/«anios»'''
+		res
 	}
-	
-	def getLlegadaCompleta(){
-			val dias = fechaPartida.getDayOfMonth().toString
-			val meses = fechaPartida.getMonthOfYear().toString
-			val anios = fechaPartida.getYear().toString
-			val res = '''«getDestino» - «dias»/«meses»/«anios»'''
-			res
+
+	def getLlegadaCompleta() {
+		val dias = fechaPartida.getDayOfMonth().toString
+		val meses = fechaPartida.getMonthOfYear().toString
+		val anios = fechaPartida.getYear().toString
+		val res = '''«getDestino» - «dias»/«meses»/«anios»'''
+		res
 	}
-	
+
 	@Dependencies("recorrido")
-	def getOrigen(){
+	def getOrigen() {
 		recorrido.head
 	}
-	
+
 	@Dependencies("recorrido")
-	def getDestino(){
+	def getDestino() {
 		recorrido.last
 	}
 

@@ -68,25 +68,27 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 
 		new Column<Viaje>(table) => [
 			title = "Partida"
-			bindContentsToProperty("fechaPartida").transformer = [ LocalDateTime f |
-				val dias = f.getDayOfMonth().toString
-				val meses = f.getMonthOfYear().toString
-				val anios = f.getYear().toString
-				val res = '''«dias»/«meses»/«anios»'''
-				res
-			]
+//			bindContentsToProperty("fechaPartida").transformer = [ LocalDateTime f |
+//				val dias = f.getDayOfMonth().toString
+//				val meses = f.getMonthOfYear().toString
+//				val anios = f.getYear().toString
+//				val res = '''«dias»/«meses»/«anios»'''
+//				res
+//			]
+			bindContentsToProperty("partidaCompleta")
 			fixedSize = 200
 		]
 
 		new Column<Viaje>(table) => [
 			title = "Destino"
-			bindContentsToProperty("fechaLlegada").transformer = [ LocalDateTime f |
-				val dias = f.getDayOfMonth().toString
-				val meses = f.getMonthOfYear().toString
-				val anios = f.getYear().toString
-				val res = '''«dias»/«meses»/«anios»'''
-				res
-			]
+//			bindContentsToProperty("fechaLlegada").transformer = [ LocalDateTime f |
+//				val dias = f.getDayOfMonth().toString
+//				val meses = f.getMonthOfYear().toString
+//				val anios = f.getYear().toString
+//				val res = '''«dias»/«meses»/«anios»'''
+//				res
+//			]
+			bindContentsToProperty("llegadaCompleta")
 			fixedSize = 200
 		]
 
@@ -111,18 +113,6 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 			]
 			fixedSize = 115
 		]
-		
-		new Column<Viaje>(table) => [
-			title = "Origen"
-			bindContentsToProperty("origen")
-			fixedSize = 300
-		]
-
-		new Column<Viaje>(table) => [
-			title = "Destino"
-			bindContentsToProperty("destino")
-			fixedSize = 300
-		]
 
 	}
 
@@ -140,10 +130,9 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 
 		new Column<Pasaje>(table) => [
 			title = "Cliente"
-			bindContentsToProperty("cliente").transformer = [ Cliente c | '''«c.nombre» «c.apellido»''']
+			bindContentsToProperty("cliente").transformer = [Cliente c|'''«c.nombre» «c.apellido»''']
 			fixedSize = 150
 		]
-	
 
 		new Column<Pasaje>(table) => [
 			title = "Partida"
@@ -181,11 +170,10 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 			]
 			fixedSize = 75
 		]
-		
 
 		new Column<Pasaje>(table) => [
 			title = "Asiento"
-			bindContentsToProperty("nroAsiento")
+			bindContentsToProperty("asiento.numero")
 			fixedSize = 50
 		]
 
@@ -264,19 +252,19 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 			open
 		]
 	}
-	
-	def void verPasaje(){
+
+	def void verPasaje() {
 		val pasaje = modelObject.pasajeSeleccionado
 		new VerPasajeWindow(this, pasaje) => [
 			onAccept[this.modelObject.actualizarPasajeSeleccionado]
 			open
 		]
 	}
-	
-	def void cancelarPasaje(){
+
+	def void cancelarPasaje() {
 		this.modelObject.pasajeSeleccionado.cancelar
 	}
-	
+
 	override protected addActions(Panel actionsPanel) {
 	}
 

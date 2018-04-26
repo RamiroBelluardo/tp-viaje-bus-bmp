@@ -25,7 +25,7 @@ class RepoPasajes extends CollectionBasedRepo<Pasaje> {
 	}
 
 	def search(Cliente cliente, Viaje viaje, Integer nroAsiento) {
-		allInstances.filter [pasaje|
+		allInstances.filter [ pasaje |
 			this.match(cliente, pasaje.cliente) && this.match(viaje, pasaje.viaje) &&
 				this.match(nroAsiento, pasaje.nroAsiento)
 		].toList

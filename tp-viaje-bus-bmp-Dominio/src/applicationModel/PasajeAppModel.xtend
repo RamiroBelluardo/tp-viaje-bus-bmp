@@ -13,6 +13,7 @@ import repo.RepoClientes
 import repo.RepoMicros
 import repo.RepoPasajes
 import repo.RepoViajes
+import org.uqbar.commons.model.utils.ObservableUtils
 
 @Accessors
 @TransactionalAndObservable
@@ -27,7 +28,7 @@ class PasajeAppModel extends Entity implements Cloneable {
 	Viaje viajeSeleccionado // = repoViajes.searchById(1)
 	Micro microSeleccionado = new Micro
 	Pasaje pasajeSeleccionado // = new Pasaje
-	Integer nroAsientoSeleccionado
+	Integer nroAsiento
 
 	def search() {
 		resultadosClientes = repoClientes.allInstances.toList
@@ -62,7 +63,7 @@ class PasajeAppModel extends Entity implements Cloneable {
 		pasajeSeleccionado = pasaje
 		viajeSeleccionado = pasaje.viaje
 		// microSeleccionado = pasaje.viaje.micro
-		repoPasajes.update(pasaje)
+		//repoPasajes.update(pasaje)
 		search
 	}
 

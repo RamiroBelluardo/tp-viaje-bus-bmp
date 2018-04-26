@@ -34,7 +34,7 @@ class Pasaje extends Entity implements Cloneable {
 		this.nroAsiento = nroAsiento
 		this.estado = new ListoParaComprar
 		this.tipoPago = "Efectivo"
-		
+
 	}
 
 	def cancelar() {
@@ -48,9 +48,17 @@ class Pasaje extends Entity implements Cloneable {
 		this.estado.siguiente(this)
 		this.viaje.micro.reservarAsiento(this.asiento.numero)
 	}
-	
-	def getNoTieneCliente(){
+
+	def getNoTieneCliente() {
 		this.cliente === null
 	}
+
+//	def Integer getNroAsiento() {
+//		nroAsiento
+//	}
+//
+//	def void setNroAsiento(Integer nro) {
+//		this.nroAsiento = nro
+//	}
 
 }

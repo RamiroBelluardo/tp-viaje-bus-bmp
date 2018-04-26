@@ -92,7 +92,6 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 //			propiedadClientes.adaptWith(typeof(Viaje), "micro")
 //			width = 100
 //		]
-
 		val panelAsiento = new Panel(mainPanel) => [
 			layout = new ColumnLayout(2)
 		]
@@ -133,7 +132,7 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 		new Button(actionsPanel) => [
 			caption = "Aceptar"
 			onClick[this.accept]
-			//modelObject.pasajeSeleccionado.viaje = modelObject.viajeSeleccionado
+			onAccept[modelObject.pasajeSeleccionado.confirmar]
 			setAsDefault
 			disableOnError
 
@@ -148,9 +147,13 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 	def crearAsientos(Panel panel) {
 		new Selector<Asiento>(panel) => [
 			allowNull = false
-			value <=> "pasajeSeleccionado.nroAsiento"
+			value <=> "pasajeSeleccionado.asiento"
 			enabled <=> "pasajeSeleccionado.noTieneCliente"
-			bindItems(new ObservableProperty(modelObject.microSeleccionado, "nrosAsientosDisponibles"))
+			// bindItems(new ObservableProperty(modelObject.microSeleccionado, "nrosAsientosDisponibles"))
+			// items <=> "pasajeSeleccionado.viaje.verAsientosDisponibles"
+			val propiedadAsientos = (items <=> "pasajeSeleccionado.viaje.micro.asientosDisponibles")
+			propiedadAsientos.adaptWith(typeof(Asiento), "numero")
+			// (items <=> "pasajeSeleccionado.viaje.micro.asientosDisponibles").adaptWith(typeof(Asiento), "numero")
 			width = 50
 
 		]
