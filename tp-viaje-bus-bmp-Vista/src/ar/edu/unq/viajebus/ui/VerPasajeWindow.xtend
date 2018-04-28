@@ -18,6 +18,7 @@ import org.uqbar.commons.applicationContext.ApplicationContext
 import repo.RepoClientes
 import repo.RepoMicros
 import repo.RepoViajes
+import transformer.ViajeTransformer
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 
@@ -56,7 +57,7 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 			allowNull = false
 			enabled <=> "pasajeSeleccionado.noTieneCliente"
 			value <=> "pasajeSeleccionado.cliente"
-			val propiedadClientes = bindItems(new ObservableProperty(repoClientes, "clientes"))
+			val propiedadClientes = (items <=> "resultadosClientes") //bindItems(new ObservableProperty(repoClientes, "clientes"))
 			propiedadClientes.adaptWith(typeof(Cliente), "nombreCompleto")
 			width = 100
 		]
@@ -78,7 +79,7 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 		]
 
 		new Label(panelViaje) => [
-			(value <=> "pasajeSeleccionado.viaje") // .transformer = new ViajeTransformer
+			(value <=> "pasajeSeleccionado.viaje").transformer = new ViajeTransformer
 		]
 
 		val panelAsiento = new Panel(mainPanel) => [

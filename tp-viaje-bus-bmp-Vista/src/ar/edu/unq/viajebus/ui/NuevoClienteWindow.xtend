@@ -96,7 +96,7 @@ class NuevoClienteWindow extends TransactionalDialog<ClienteAppModel> {
 			caption = "Aceptar"
 			onClick[this.accept]
 			setAsDefault
-			disableOnError
+//			disableOnError
 			bindEnabledToProperty("clienteSeleccionado.valido")
 			alignCenter
 		]

@@ -62,8 +62,8 @@ class Cliente extends Entity implements Cloneable {
 //		}
 //	}
 	@Dependencies("mail")
-	def getValido() {
-		// this.mail !== null || this.mail !== ""
+	def Boolean getValido() {
+		 this.mail !== null && this.mail !== ""
 	}
 
 	def void setMail(String unMail) {

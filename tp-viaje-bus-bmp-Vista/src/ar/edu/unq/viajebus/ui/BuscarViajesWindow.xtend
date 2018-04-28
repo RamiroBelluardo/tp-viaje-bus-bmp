@@ -96,27 +96,23 @@ class BuscarViajesWindow extends TransactionalDialog<BuscadorViajesAppModel> {
 
 	def void describeResultsGrid(Table<Viaje> table) {
 
+		val transformerDeFecha = [ LocalDateTime f |
+			val dias = f.getDayOfMonth().toString
+			val meses = f.getMonthOfYear().toString
+			val anios = f.getYear().toString
+			val res = '''«dias»/«meses»/«anios»'''
+			res
+		]
+
 		new Column<Viaje>(table) => [
 			title = "Partida"
-			bindContentsToProperty("fechaPartida").transformer = [ LocalDateTime f |
-				val dias = f.getDayOfMonth().toString
-				val meses = f.getMonthOfYear().toString
-				val anios = f.getYear().toString
-				val res = '''«dias»/«meses»/«anios»'''
-				res
-			]
+			bindContentsToProperty("fechaPartida").transformer = transformerDeFecha 
 			fixedSize = 200
 		]
 
 		new Column<Viaje>(table) => [
 			title = "Destino"
-			bindContentsToProperty("fechaLlegada").transformer = [ LocalDateTime f |
-				val dias = f.getDayOfMonth().toString
-				val meses = f.getMonthOfYear().toString
-				val anios = f.getYear().toString
-				val res = '''«dias»/«meses»/«anios»'''
-				res
-			]
+			bindContentsToProperty("fechaLlegada").transformer = transformerDeFecha 
 			fixedSize = 200
 		]
 

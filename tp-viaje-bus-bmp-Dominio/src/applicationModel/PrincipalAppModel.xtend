@@ -12,6 +12,7 @@ import org.uqbar.commons.applicationContext.ApplicationContext
 import org.uqbar.commons.model.annotations.Observable
 import repo.RepoPasajes
 import repo.RepoViajes
+import org.uqbar.commons.model.utils.ObservableUtils
 
 @Accessors
 @Observable
@@ -27,6 +28,7 @@ class PrincipalAppModel {
 	def void search() {
 		resultadosViaje = repoViajes.search(exampleViaje.fechaPartida, exampleViaje.fechaLlegada, exampleViaje.micro)
 		// resultadosViaje = repoViajes.search(exampleViaje.precio, exampleViaje.micro)
+		ObservableUtils.firePropertyChanged(this, "resultadosViaje")
 		resultadosPasaje = repoPasajes.search(examplePasaje.cliente, examplePasaje.viaje, examplePasaje.nroAsiento)
 	}
 

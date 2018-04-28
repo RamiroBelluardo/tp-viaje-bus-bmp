@@ -44,7 +44,7 @@ class Viaje extends Entity implements Cloneable {
 		this.estado = new Aprobado
 	}
 
-	@Dependencies("precioBase", "precioServicios", "precioMicro", "precioFinde")
+	@Dependencies("precioBase", "precioServicios", "precioMicro", "precioFinde", "tieneDesayuno", "tieneAlmuerzo", "tieneMerienda", "tieneCena")
 	def double getPrecio() {
 		if (fechaPartida === null || fechaLlegada === null) {
 			return 0
@@ -202,16 +202,15 @@ class Viaje extends Entity implements Cloneable {
 	}
 
 	def hayPasajesVendidos() {
-		!pasajes.isEmpty
+		!pasajes.isEmpty //TODO: Calcular con los pasajes NO cancelados
 	}
 
-	def porcentajeVendido() {
-		if (micro.asientos.size == 0) {
-			return 0
-		} else {
-			// micro.asientosReservados.size * 100 / micro.asientos.size
-			pasajes.size * 100 / micro.asientos.size
-		}
+	def int porcentajeVendido() {
+		return if (micro.asientos.size == 0)
+			0
+		else
+//			 micro.asientosReservados.size * 100 / micro.asientos.size
+			pasajes.size * 100 / micro.asientos.size //TODO: Calcular con los pasajes NO cancelados
 	}
 
 	def getPartidaCompleta() {

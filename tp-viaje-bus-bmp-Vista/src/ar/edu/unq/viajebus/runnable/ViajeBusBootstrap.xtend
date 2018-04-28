@@ -32,7 +32,7 @@ class ViajeBusBootstrap extends CollectionBasedBootstrap {
 	 * 
 	 */
 	override run() {
-		//GMailSender.config(new GMailSender("pruebasfacultadtpi@gmail.com", "unqui2017"))	
+		GMailSender.config(new GMailSender("pruebasfacultadtpi@gmail.com", "unqui2017"))	
 		
 		val RepoViajes repoViajes = ApplicationContext.instance.getSingleton(typeof(Viaje))
 		val RepoMicros repoMicros = ApplicationContext.instance.getSingleton(typeof(Micro))
@@ -63,9 +63,9 @@ class ViajeBusBootstrap extends CollectionBasedBootstrap {
 		viaje2.agregarCiudad("Buenos Aires")
 		viaje3.agregarCiudad("Tilcara")
 
-		val cliente1 = repoClientes.create("Lucas", "Pier", "11111111", "lucaspiergiacomi@eso.com", "44444444")
+		val cliente1 = repoClientes.create("Lucas", "Pier", "11111111", "lg.piergiacomi@asd.com", "44444444")
 		val cliente2 = repoClientes.create("Esteban", "Matas", "22222222", "esteban@eso.com", "")
-		val cliente3 = repoClientes.create("Ramiro", "Belluardo", "33333333", "ramiro@ramiro.ramiro", "22222222")
+		val cliente3 = repoClientes.create("Ramiro", "Belluardo", "33333333", "ramirobelluardo1993@gmail.com", "22222222")
 
 		
 		micro1.agregarAsiento(new Asiento)

@@ -13,6 +13,7 @@ import repo.RepoClientes
 import repo.RepoMicros
 import repo.RepoPasajes
 import repo.RepoViajes
+import org.uqbar.commons.model.utils.ObservableUtils
 
 @Accessors
 @TransactionalAndObservable
@@ -29,8 +30,15 @@ class PasajeAppModel extends Entity implements Cloneable {
 	Pasaje pasajeSeleccionado
 	Integer nroAsiento
 
+	new() {
+		search
+	}
+
 	def search() {
+		println(repoClientes.allInstances.last.id)
+		println(repoClientes.allInstances.last.nombreCompleto)
 		resultadosClientes = repoClientes.allInstances.toList
+		ObservableUtils.firePropertyChanged(this, "resultadosClientes")
 	}
 
 	def RepoMicros getRepoMicros() {
@@ -50,6 +58,7 @@ class PasajeAppModel extends Entity implements Cloneable {
 	}
 
 	def crearCliente(Cliente cliente) {
+		println(cliente.nombreCompleto)
 		repoClientes.create(cliente)
 		search
 	}
