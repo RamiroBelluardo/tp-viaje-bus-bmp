@@ -65,7 +65,7 @@ class ViajeBusBootstrap extends CollectionBasedBootstrap {
 
 		val cliente1 = repoClientes.create("Lucas", "Pier", "11111111", "lg.piergiacomi@asd.com", "44444444")
 		val cliente2 = repoClientes.create("Esteban", "Matas", "22222222", "esteban@eso.com", "")
-		val cliente3 = repoClientes.create("Ramiro", "Belluardo", "33333333", "ramirobelluardo1993@gmail.com", "22222222")
+		val cliente3 = repoClientes.create("Ramiro", "Belluardo", "33333333", "ramirobelluardo1993@eso.com", "22222222")
 
 		
 		micro1.agregarAsiento(new Asiento)

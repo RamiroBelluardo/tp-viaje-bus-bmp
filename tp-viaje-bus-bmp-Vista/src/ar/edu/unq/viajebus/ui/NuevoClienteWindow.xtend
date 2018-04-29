@@ -47,10 +47,10 @@ class NuevoClienteWindow extends TransactionalDialog<ClienteAppModel> {
 		]
 
 		new TextBox(editorPanel) => [
-			val elementSelected = new NotNullObservable("clienteSeleccionado.nombre")
+			//val elementSelected = new NotNullObservable("clienteSeleccionado.nombre")
 			value <=> "clienteSeleccionado.apellido"
 			width = 200
-			bindEnabled(elementSelected)
+			//bindEnabled(elementSelected)
 		]
 
 		new Label(editorPanel) => [
@@ -59,10 +59,10 @@ class NuevoClienteWindow extends TransactionalDialog<ClienteAppModel> {
 		]
 
 		new NumericField(editorPanel) => [
-			val elementSelected = new NotNullObservable("clienteSeleccionado.apellido")
+			//val elementSelected = new NotNullObservable("clienteSeleccionado.apellido")
 			value <=> "clienteSeleccionado.dni"
 			width = 200
-			bindEnabled(elementSelected)
+			//bindEnabled(elementSelected)
 		]
 
 		new Label(editorPanel) => [
@@ -71,10 +71,10 @@ class NuevoClienteWindow extends TransactionalDialog<ClienteAppModel> {
 		]
 
 		new TextBox(editorPanel) => [
-			val elementSelected = new NotNullObservable("clienteSeleccionado.dni")
+			//val elementSelected = new NotNullObservable("clienteSeleccionado.dni")
 			value <=> "clienteSeleccionado.mail"
 			width = 200
-			bindEnabled(elementSelected)
+			//bindEnabled(elementSelected)
 		]
 
 		new Label(editorPanel) => [

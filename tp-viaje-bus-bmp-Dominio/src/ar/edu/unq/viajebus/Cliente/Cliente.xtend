@@ -61,9 +61,12 @@ class Cliente extends Entity implements Cloneable {
 //			throw new UserException('''Debe rellenar los campos obligatorios''')
 //		}
 //	}
-	@Dependencies("mail")
+	@Dependencies("nombre", "apellido", "dni", "mail")
 	def Boolean getValido() {
-		 this.mail !== null && this.mail !== ""
+		 this.nombre !== null && this.nombre !== "" 
+		 && this.apellido !== null && this.apellido !== ""
+		 && this.dni !== null && this.dni !== ""
+		 && this.mail !== null && this.mail !== ""
 	}
 
 	def void setMail(String unMail) {
