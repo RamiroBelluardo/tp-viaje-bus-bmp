@@ -39,11 +39,12 @@ class PasajeTest {
 		GMailSender.config(notificador)
 		fechaPartida = new LocalDateTime(2018, 03, 30, 12, 00)
 		fechaLlegada = new LocalDateTime(2018, 03, 30, 14, 00)
-		asiento1 = new Asiento
+		asiento1 = new Asiento(1)
 		microCama = new Micro("AAA111", new Cama, false)
-		microCama.agregarAsiento(asiento1)
+		// microCama.agregarAsiento(asiento1)
 		lucas = new Cliente("Lucas", "Piergiacomi", "11.111.111", "lg.piergiacomi@gmail.com", "44445555")
 		viaje = new Viaje(fechaPartida, fechaLlegada, microCama)
+		viaje.agregarAsiento(asiento1)
 		pasaje = new Pasaje(lucas, viaje, 1)
 	}
 
@@ -66,7 +67,7 @@ class PasajeTest {
 	@Test
 	def confirmarPasaje() {
 		assertEquals(pasaje.estado.class, ListoParaComprar)
-		assertTrue(pasaje.viaje.micro.estaDisponibleElNro(1))
+		assertTrue(pasaje.viaje.estaDisponibleElNro(1))
 		pasaje.confirmar
 		// Manda mail de confirmacion:
 		verify(notificador, times(1)).notificarCompraDePasaje(pasaje)
@@ -74,18 +75,18 @@ class PasajeTest {
 		assertEquals(pasaje.estado.class, Confirmado)
 		// El Asiento pasa de Disponible a Reservado:
 		assertEquals(pasaje.asiento.estado.class, Reservado)
-		assertFalse(pasaje.viaje.micro.estaDisponibleElNro(1))
+		assertFalse(pasaje.viaje.estaDisponibleElNro(1))
 
 	}
 
 	@Test
 	def cancelarPasaje() {
 		assertEquals(pasaje.estado.class, ListoParaComprar)
-		assertTrue(pasaje.viaje.micro.estaDisponibleElNro(1))
+		assertTrue(pasaje.viaje.estaDisponibleElNro(1))
 		pasaje.confirmar
 		// El Pasaje pasa de ListoParaComprar a Confirmado:
 		assertEquals(pasaje.estado.class, Confirmado)
-		assertFalse(pasaje.viaje.micro.estaDisponibleElNro(1))
+		assertFalse(pasaje.viaje.estaDisponibleElNro(1))
 		pasaje.cancelar
 		// Manda mail de cancelaci�n:
 		verify(notificador, times(1)).notificarCancelacionDePasaje(pasaje)
@@ -93,7 +94,7 @@ class PasajeTest {
 		assertEquals(pasaje.estado.class, Cancelado)
 		// El Asiento pasa de Reservado a Disponible:
 		assertEquals(pasaje.asiento.estado.class, Disponible)
-		assertTrue(pasaje.viaje.micro.estaDisponibleElNro(1))
+		assertTrue(pasaje.viaje.estaDisponibleElNro(1))
 	}
 
 	@Test(expected=UserException)

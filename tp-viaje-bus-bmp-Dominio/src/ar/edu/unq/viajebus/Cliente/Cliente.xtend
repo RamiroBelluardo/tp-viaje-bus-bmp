@@ -46,12 +46,12 @@ class Cliente extends Entity implements Cloneable {
 	}
 
 	def void setDni(String unDNI) {
-		if (unDNI.length < MIN_DIGITOS_DNI) {
-			throw new UserException('''El DNI debe tener por lo menos «MIN_DIGITOS_DNI» dígitos''')
-		}
-		if (unDNI.length > MAX_DIGITOS_DNI) {
-			throw new UserException('''El DNI no debe tener más de «MAX_DIGITOS_DNI» dígitos''')
-		}
+//		if (unDNI.length < MIN_DIGITOS_DNI) {
+//			throw new UserException('''El DNI debe tener por lo menos «MIN_DIGITOS_DNI» dígitos''')
+//		}
+//		if (unDNI.length > MAX_DIGITOS_DNI) {
+//			throw new UserException('''El DNI no debe tener más de «MAX_DIGITOS_DNI» dígitos''')
+//		}
 		this.dni = unDNI
 	}
 

@@ -10,6 +10,9 @@ import org.joda.time.Minutes
 import org.uqbar.commons.model.Entity
 import org.uqbar.commons.model.annotations.Dependencies
 import org.uqbar.commons.model.annotations.TransactionalAndObservable
+import ar.edu.unq.viajebus.EstadoDeAsiento.Disponible
+import ar.edu.unq.viajebus.EstadoDeAsiento.Reservado
+import ar.edu.unq.viajebus.EstadoDePasaje.Confirmado
 
 @Accessors
 @TransactionalAndObservable
@@ -26,6 +29,7 @@ class Viaje extends Entity implements Cloneable {
 	Boolean tieneAlmuerzo = false
 	Boolean tieneMerienda = false
 	Boolean tieneCena = false
+	List<Asiento> asientos
 
 	new(LocalDateTime fechaPartida, LocalDateTime fechaLlegada, Micro micro) {
 		this.fechaPartida = fechaPartida
@@ -35,13 +39,23 @@ class Viaje extends Entity implements Cloneable {
 		this.recorrido = newArrayList
 		this.pasajes = newArrayList
 		this.estado = new Aprobado
+		this.asientos = newArrayList
+		asientos.add(new Asiento(1))
+		asientos.add(new Asiento(2))
+		asientos.add(new Asiento(3))
+		asientos.add(new Asiento(4))
 	}
 
 	new() {
 		this.recorrido = newArrayList
 		this.servicios = newArrayList
 		this.pasajes = newArrayList
+		this.asientos = newArrayList
 		this.estado = new Aprobado
+		asientos.add(new Asiento(1))
+		asientos.add(new Asiento(2))
+		asientos.add(new Asiento(3))
+		asientos.add(new Asiento(4))
 	}
 
 	@Dependencies("precioBase", "precioServicios", "precioMicro", "precioFinde", "tieneDesayuno", "tieneAlmuerzo", "tieneMerienda", "tieneCena")
@@ -126,14 +140,54 @@ class Viaje extends Entity implements Cloneable {
 
 	}
 
-	def verAsientosDisponibles() {
-		micro.asientosDisponibles()
+//	def verAsientosDisponibles() {
+//		micro.asientosDisponibles()
+//	}
+	def agregarAsiento(Asiento asiento) {
+		asiento.numero = asientos.size + 1
+		asientos.add(asiento)
+	}
+
+	def asientosDisponibles() {
+		asientos.filter[asiento|asiento.estado instanceof Disponible].toList
 	}
 
 	def verAsientosReservados() {
-		micro.asientosReservados
+		asientos.filter[asiento|asiento.estado instanceof Reservado].toList
 	}
 
+	def estaDisponibleElNro(Integer nro) {
+		asientos.filter[asiento|asiento.numero == nro].get(0).estado instanceof Disponible
+	}
+
+	def buscarAsiento(Integer nro) {
+		asientos.filter[asiento|asiento.numero == nro].get(0)
+	}
+
+	def reservarAsiento(Integer nroAsiento) {
+		asientos.filter[asiento|asiento.numero == nroAsiento].get(0).reservar
+	}
+
+	def liberarAsiento(Integer nroAsiento) {
+		asientos.filter[asiento|asiento.numero == nroAsiento].get(0).liberar
+	}
+
+	def cantidadAsientos() {
+		asientos.size
+	}
+
+//	def pasajesConfirmados() {
+//		pasajes.filter[pasaje|pasaje.estado instanceof Confirmado].toList
+//	}
+	def getNrosAsientosDisponibles() {
+		val nros = newArrayList
+		asientosDisponibles.forEach[Asiento a|nros.add(a.numero)]
+		nros.toList
+	}
+
+//	def verAsientosReservados() {
+//		micro.asientosReservados
+//	}
 	def agregarServicio(Servicio servicio) {
 		if (servicios.filter[servicio2|servicio2.nombre == servicio.nombre].isEmpty) {
 			servicios.add(servicio)
@@ -202,15 +256,25 @@ class Viaje extends Entity implements Cloneable {
 	}
 
 	def hayPasajesVendidos() {
-		!pasajes.isEmpty //TODO: Calcular con los pasajes NO cancelados
+		!pasajes.isEmpty // TODO: Calcular con los pasajes NO cancelados
+	}
+
+	def cancelarPasajes() {
+		if (pasajes.size == 1) {
+			pasajes.get(0).cancelar
+		} else {
+			for (Pasaje p : pasajes) {
+				p.cancelar
+			}
+		}
 	}
 
 	def int porcentajeVendido() {
-		return if (micro.asientos.size == 0)
+		return if (asientos.size == 0)
 			0
 		else
-//			 micro.asientosReservados.size * 100 / micro.asientos.size
-			pasajes.size * 100 / micro.asientos.size //TODO: Calcular con los pasajes NO cancelados
+			// verAsientosReservados.size * 100 / asientos.size
+			pasajes.size * 100 / asientos.size // TODO: Calcular con los pasajes NO cancelados
 	}
 
 	def getPartidaCompleta() {

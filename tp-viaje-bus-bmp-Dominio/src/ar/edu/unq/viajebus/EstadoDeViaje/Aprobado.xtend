@@ -6,7 +6,7 @@ import org.uqbar.commons.model.exceptions.UserException
 class Aprobado extends EstadoDeViaje {
 
 	override cancelar(Viaje viaje) {
-		viaje.pasajes.forEach(pasaje|pasaje.cancelar)
+		viaje.cancelarPasajes
 		viaje.estado = new ViajeCancelado
 	}
 

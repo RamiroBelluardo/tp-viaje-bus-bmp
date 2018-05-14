@@ -27,9 +27,11 @@ class PrincipalAppModel {
 
 	def void search() {
 		resultadosViaje = repoViajes.search(exampleViaje.fechaPartida, exampleViaje.fechaLlegada, exampleViaje.micro)
-		// resultadosViaje = repoViajes.search(exampleViaje.precio, exampleViaje.micro)
+		// resultadosViaje = repoViajes.allInstances.toList
 		ObservableUtils.firePropertyChanged(this, "resultadosViaje")
 		resultadosPasaje = repoPasajes.search(examplePasaje.cliente, examplePasaje.viaje, examplePasaje.nroAsiento)
+		// resultadosPasaje = repoPasajes.allInstances.toList
+		ObservableUtils.firePropertyChanged(this, "resultadosPasaje")
 	}
 
 	def crearViaje(Viaje viaje) {
@@ -66,6 +68,11 @@ class PrincipalAppModel {
 
 	def actualizarPasajeSeleccionado() {
 		repoPasajes.update(pasajeSeleccionado)
+		search
+	}
+
+	def cancelarPasaje() {
+		repoPasajes.delete(pasajeSeleccionado)
 		search
 	}
 

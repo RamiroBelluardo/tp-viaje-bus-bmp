@@ -112,7 +112,7 @@ class BuscarViajesWindow extends TransactionalDialog<BuscadorViajesAppModel> {
 
 		new Column<Viaje>(table) => [
 			title = "Destino"
-			bindContentsToProperty("fechaLlegada").transformer = transformerDeFecha 
+			bindContentsToProperty("fechaLlegada") .transformer = transformerDeFecha 
 			fixedSize = 200
 		]
 

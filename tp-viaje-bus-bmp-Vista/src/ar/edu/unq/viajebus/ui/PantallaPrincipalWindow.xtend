@@ -263,6 +263,7 @@ class PantallaPrincipalWindow extends SimpleWindow<PrincipalAppModel> {
 
 	def void cancelarPasaje() {
 		this.modelObject.pasajeSeleccionado.cancelar
+	// this.modelObject.cancelarPasaje
 	}
 
 	override protected addActions(Panel actionsPanel) {

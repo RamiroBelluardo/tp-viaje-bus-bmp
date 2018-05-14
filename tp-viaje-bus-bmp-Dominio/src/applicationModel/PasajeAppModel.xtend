@@ -35,8 +35,8 @@ class PasajeAppModel extends Entity implements Cloneable {
 	}
 
 	def search() {
-		println(repoClientes.allInstances.last.id)
-		println(repoClientes.allInstances.last.nombreCompleto)
+		//println(repoClientes.allInstances.last.id)
+		//println(repoClientes.allInstances.last.nombreCompleto)
 		resultadosClientes = repoClientes.allInstances.toList
 		ObservableUtils.firePropertyChanged(this, "resultadosClientes")
 	}

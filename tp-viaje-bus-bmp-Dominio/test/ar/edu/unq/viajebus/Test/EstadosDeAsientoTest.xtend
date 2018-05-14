@@ -7,13 +7,17 @@ import static org.junit.Assert.*
 import ar.edu.unq.viajebus.EstadoDeAsiento.Reservado
 import org.uqbar.commons.model.exceptions.UserException
 import ar.edu.unq.viajebus.EstadoDeAsiento.Disponible
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.uqbar.commons.model.annotations.TransactionalAndObservable
 
+@Accessors
+@TransactionalAndObservable
 class EstadosDeAsientoTest {
 	Asiento asiento
 
 	@Before
 	def void init() {
-		asiento = new Asiento()
+		asiento = new Asiento(1)
 	}
 
 	@Test

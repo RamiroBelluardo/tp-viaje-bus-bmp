@@ -14,8 +14,7 @@ class MicroTest {
 	@Before
 	def void init() {
 		microEjecutivo = new Micro("ABC123", new Ejecutivo, true)
-		microEjecutivo.agregarAsiento(new Asiento)
-		
+	// microEjecutivo.agregarAsiento(new Asiento)
 	}
 
 	@Test
@@ -24,24 +23,23 @@ class MicroTest {
 		assertTrue(microEjecutivo.tipoDeAsiento instanceof Ejecutivo)
 		assertTrue(microEjecutivo.tieneTele)
 	}
-	
-	@Test
-	def agregarAsientoAMicro(){
-		assertEquals(microEjecutivo.asientos.size, 1)
-		microEjecutivo.agregarAsiento(new Asiento)
-		assertEquals(microEjecutivo.asientos.size, 2)
-		assertEquals(microEjecutivo.asientos.get(0).numero, 1)
-		assertEquals(microEjecutivo.asientos.get(1).numero, 2)
-	}
-	
-	@Test
-	def asientosDisponiblesDeUnMicro(){
-		assertEquals(microEjecutivo.asientosDisponibles.size(), 1)
-		assertEquals(microEjecutivo.asientosReservados.size(), 0)
-		microEjecutivo.reservarAsiento(1)
-		assertEquals(microEjecutivo.asientosDisponibles.size(), 0)
-		assertEquals(microEjecutivo.asientosReservados.size(), 1)
-		
-	}
-
+//	
+//	@Test
+//	def agregarAsientoAMicro(){
+//		assertEquals(microEjecutivo.asientos.size, 1)
+//		microEjecutivo.agregarAsiento(new Asiento)
+//		assertEquals(microEjecutivo.asientos.size, 2)
+//		assertEquals(microEjecutivo.asientos.get(0).numero, 1)
+//		assertEquals(microEjecutivo.asientos.get(1).numero, 2)
+//	}
+//	
+//	@Test
+//	def asientosDisponiblesDeUnMicro(){
+//		assertEquals(microEjecutivo.asientosDisponibles.size(), 1)
+//		assertEquals(microEjecutivo.asientosReservados.size(), 0)
+//		microEjecutivo.reservarAsiento(1)
+//		assertEquals(microEjecutivo.asientosDisponibles.size(), 0)
+//		assertEquals(microEjecutivo.asientosReservados.size(), 1)
+//		
+//	}
 }

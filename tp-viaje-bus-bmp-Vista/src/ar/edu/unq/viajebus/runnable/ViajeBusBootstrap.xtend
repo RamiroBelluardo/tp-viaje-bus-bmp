@@ -32,8 +32,8 @@ class ViajeBusBootstrap extends CollectionBasedBootstrap {
 	 * 
 	 */
 	override run() {
-		GMailSender.config(new GMailSender("pruebasfacultadtpi@gmail.com", "unqui2017"))	
-		
+		GMailSender.config(new GMailSender("pruebasfacultadtpi@gmail.com", "unqui2017"))
+
 		val RepoViajes repoViajes = ApplicationContext.instance.getSingleton(typeof(Viaje))
 		val RepoMicros repoMicros = ApplicationContext.instance.getSingleton(typeof(Micro))
 		val RepoClientes repoClientes = ApplicationContext.instance.getSingleton(typeof(Cliente))
@@ -67,24 +67,22 @@ class ViajeBusBootstrap extends CollectionBasedBootstrap {
 		val cliente2 = repoClientes.create("Esteban", "Matas", "22222222", "esteban@eso.com", "")
 		val cliente3 = repoClientes.create("Ramiro", "Belluardo", "33333333", "ramirobelluardo1993@eso.com", "22222222")
 
-		
-		micro1.agregarAsiento(new Asiento)
-		micro1.agregarAsiento(new Asiento)
-		
-		micro2.agregarAsiento(new Asiento)
-		micro2.agregarAsiento(new Asiento)
-		micro2.agregarAsiento(new Asiento)	
-		
-		micro3.agregarAsiento(new Asiento)
+//		viaje1.agregarAsiento(new Asiento)
+//		viaje1.agregarAsiento(new Asiento)
+//
+//		viaje2.agregarAsiento(new Asiento)
+//		viaje2.agregarAsiento(new Asiento)
+//		viaje2.agregarAsiento(new Asiento)
+//
+//		viaje3.agregarAsiento(new Asiento)
 
 		viaje1.agregarServicio(new Desayuno)
-		
+
 		val pasaje1 = repoPasajes.create(cliente1, viaje1, 1)
 		val pasaje2 = repoPasajes.create(cliente2, viaje2, 3)
-		val pasaje3 = repoPasajes.create(cliente3, viaje3, 1)
+		// val pasaje3 = repoPasajes.create(cliente3, viaje3, 1)
 		pasaje1.confirmar
 		pasaje2.confirmar
-		
 
 	}
 

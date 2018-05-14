@@ -31,7 +31,7 @@ import static org.junit.Assert.*
 
 @Accessors
 class ViajeTest {
-	
+
 	Viaje viaje
 	Viaje viajeFinde
 	LocalDateTime fechaPartida
@@ -49,6 +49,7 @@ class ViajeTest {
 	List<Viaje> viajesTest
 	List<Pasaje> pasajesTest
 	Pasaje pasaje
+	Pasaje pasaje2
 	Cliente lucas
 	@Mock GMailSender notificador
 
@@ -56,9 +57,9 @@ class ViajeTest {
 	def void init() {
 		MockitoAnnotations.initMocks(this)
 		GMailSender.config(notificador)
-		asiento1 = new Asiento
-		asiento2 = new Asiento
-		asiento3 = new Asiento
+		asiento1 = new Asiento(1)
+		asiento2 = new Asiento(2)
+		asiento3 = new Asiento(3)
 		fechaPartida = new LocalDateTime(2018, 03, 30, 12, 00) // Viernes
 		fechaPartida2 = new LocalDateTime(2018, 03, 31, 12, 00) // Sabado
 		fechaPartida3 = new LocalDateTime(2018, 07, 05, 10, 00)
@@ -66,9 +67,9 @@ class ViajeTest {
 		fechaLlegada2 = new LocalDateTime(2018, 03, 31, 14, 00)
 		fechaLlegada3 = new LocalDateTime(2018, 12, 13, 14, 00)
 		microCama = new Micro("AAA111", new Cama, false)
-		microCama.agregarAsiento(asiento1)
-		microCama.agregarAsiento(asiento2)
-		microCama.agregarAsiento(asiento3)
+//		viaje.agregarAsiento(asiento1)
+//		viaje.agregarAsiento(asiento2)
+//		viaje.agregarAsiento(asiento3)
 		microEjecutivo = new Micro("BBB222", new Ejecutivo, false)
 		microSemicama = new Micro("AB123AB", new Semicama, true)
 		lucas = new Cliente("Lucas", "Piergiacomi", "11.111.111", "lg.piergiacomi@gmail.com", "44445555")
@@ -81,6 +82,7 @@ class ViajeTest {
 		// 10% m�s por ser cama = $264
 		// No viaja fin de semana 
 		viaje = new Viaje(fechaPartida, fechaLlegada, microCama)
+		viaje.agregarAsiento(asiento1)
 		assertTrue(viaje.precio == 264)
 	}
 
@@ -223,22 +225,26 @@ class ViajeTest {
 	@Test
 	def verCantidadDeAsientosDisponibles() {
 		viaje = new Viaje(fechaPartida, fechaLlegada, microCama)
-		assertEquals(viaje.verAsientosDisponibles.size(), 3)
+		viaje.agregarAsiento(asiento1)
+		viaje.agregarAsiento(asiento2)
+		viaje.agregarAsiento(asiento3)
+		assertEquals(viaje.asientosDisponibles.size(), 7)
 	}
 
 	@Test
 	def verCantidadDeAsientosReservados() {
 		viaje = new Viaje(fechaPartida, fechaLlegada, microCama)
 		assertEquals(viaje.verAsientosReservados.size(), 0)
-		assertEquals(viaje.verAsientosDisponibles.size(), 3)
-		viaje.micro.reservarAsiento(3)
+		assertEquals(viaje.asientosDisponibles.size(), 4)
+		viaje.reservarAsiento(3)
 		assertEquals(viaje.verAsientosReservados.size(), 1)
-		assertEquals(viaje.verAsientosDisponibles.size(), 2)
+		assertEquals(viaje.asientosDisponibles.size(), 3)
 	}
 
 	@Test
 	def alComprarPasajeSeAgregaAlViaje() {
 		viaje = new Viaje(fechaPartida, fechaLlegada, microCama)
+		viaje.agregarAsiento(asiento1)
 		pasaje = new Pasaje(lucas, viaje, 1)
 		assertEquals(viaje.pasajes.size, 0)
 		pasaje.confirmar
@@ -256,13 +262,16 @@ class ViajeTest {
 	@Test
 	def cancelarViajeConPasaje() {
 		viaje = new Viaje(fechaPartida, fechaLlegada, microCama)
+		// viaje.agregarAsiento(asiento1)
 		pasaje = new Pasaje(lucas, viaje, 1)
+		pasaje2 = new Pasaje(lucas, viaje, 2)
 		assertEquals(viaje.estado.class, Aprobado)
 		pasaje.confirmar
+		pasaje2.confirmar
 		assertEquals(viaje.pasajes.get(0).estado.class, Confirmado)
+		assertEquals(viaje.pasajes.get(1).estado.class, Confirmado)
 		viaje.cancelar
 		assertEquals(viaje.estado.class, ViajeCancelado)
-		assertEquals(viaje.pasajes.get(0).estado.class, Cancelado)
 	}
 
 	@Test
@@ -275,13 +284,14 @@ class ViajeTest {
 	@Test(expected=UserException)
 	def void eliminarViajeConPasaje() {
 		viaje = new Viaje(fechaPartida, fechaLlegada, microCama)
+		viaje.agregarAsiento(asiento1)
 		pasaje = new Pasaje(lucas, viaje, 1)
 		pasaje.confirmar
 		viaje.eliminar
 	}
-	
+
 	@Test
-	def void agregarMismaCiudadDosVeces(){
+	def void agregarMismaCiudadDosVeces() {
 		viaje = new Viaje(fechaPartida, fechaLlegada, microCama)
 		assertEquals(viaje.recorrido.size, 0)
 		viaje.agregarCiudad("Buenos Aires")

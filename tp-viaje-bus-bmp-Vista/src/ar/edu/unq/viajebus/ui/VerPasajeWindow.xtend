@@ -7,7 +7,6 @@ import ar.edu.unq.viajebus.Micro.Micro
 import ar.edu.unq.viajebus.Micro.Pasaje
 import ar.edu.unq.viajebus.Micro.Viaje
 import org.uqbar.arena.aop.windows.TransactionalDialog
-import org.uqbar.arena.bindings.ObservableProperty
 import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.Label
@@ -139,7 +138,7 @@ class VerPasajeWindow extends TransactionalDialog<PasajeAppModel> {
 			allowNull = false
 			value <=> "pasajeSeleccionado.asiento"
 			enabled <=> "pasajeSeleccionado.noTieneCliente"
-			val propiedadAsientos = (items <=> "pasajeSeleccionado.viaje.micro.asientosDisponibles")
+			val propiedadAsientos = (items <=> "pasajeSeleccionado.viaje.asientosDisponibles")
 			propiedadAsientos.adaptWith(typeof(Asiento), "numero")
 			width = 50
 
