@@ -31,5 +31,11 @@
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
+		<dependency>
+			<groupId>tp-viaje-bus-bmp-Vista</groupId>
+			<artifactId>tp-viaje-bus-bmp-Vista</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
 	</dependencies>
 </project>

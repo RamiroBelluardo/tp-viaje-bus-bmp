@@ -86,4 +86,19 @@ class Cliente extends Entity implements Cloneable {
 	def getNombreCompleto() {
 		'''«nombre» «apellido»'''
 	}
+	
+	def validar() {
+		if (nombre === null || nombre.trim.equals("")) {
+			throw new UserException("Debe ingresar nombre")
+		}
+		if (apellido === null || apellido.trim.equals("")) {
+			throw new UserException("Debe ingresar apellido")
+		}
+		if (dni === null || dni.trim.equals("")) {
+			throw new UserException("Debe ingresar dni")
+		}
+		if (mail === null || mail.trim.equals("")) {
+			throw new UserException("Debe ingresar mail")
+		}
+	}
 }
