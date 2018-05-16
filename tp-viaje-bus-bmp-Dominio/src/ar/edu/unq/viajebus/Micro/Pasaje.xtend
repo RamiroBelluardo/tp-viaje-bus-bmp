@@ -54,11 +54,4 @@ class Pasaje extends Entity implements Cloneable {
 		this.cliente === null
 	}
 
-//	def Integer getNroAsiento() {
-//		nroAsiento
-//	}
-//
-//	def void setNroAsiento(Integer nro) {
-//		this.nroAsiento = nro
-//	}
 }

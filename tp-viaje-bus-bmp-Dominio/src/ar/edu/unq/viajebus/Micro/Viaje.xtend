@@ -1,5 +1,7 @@
 package ar.edu.unq.viajebus.Micro
 
+import ar.edu.unq.viajebus.EstadoDeAsiento.Disponible
+import ar.edu.unq.viajebus.EstadoDeAsiento.Reservado
 import ar.edu.unq.viajebus.EstadoDeViaje.Aprobado
 import ar.edu.unq.viajebus.EstadoDeViaje.EstadoDeViaje
 import ar.edu.unq.viajebus.Servicios.Servicio
@@ -10,9 +12,6 @@ import org.joda.time.Minutes
 import org.uqbar.commons.model.Entity
 import org.uqbar.commons.model.annotations.Dependencies
 import org.uqbar.commons.model.annotations.TransactionalAndObservable
-import ar.edu.unq.viajebus.EstadoDeAsiento.Disponible
-import ar.edu.unq.viajebus.EstadoDeAsiento.Reservado
-import ar.edu.unq.viajebus.EstadoDePasaje.Confirmado
 
 @Accessors
 @TransactionalAndObservable

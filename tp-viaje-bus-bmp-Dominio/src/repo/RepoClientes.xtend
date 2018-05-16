@@ -21,6 +21,12 @@ class RepoClientes extends CollectionBasedRepo<Cliente> {
 		this.create(cliente)
 		cliente
 	}
+	
+		
+	def search(String nombre, String apellido) {
+		allInstances.filter [ clientes |
+			this.match(nombre, clientes.nombre) && this.match(apellido, clientes.apellido)].toList
+	}
 
 	def match(Object expectedValue, Object realValue) {
 		if (expectedValue === null) {

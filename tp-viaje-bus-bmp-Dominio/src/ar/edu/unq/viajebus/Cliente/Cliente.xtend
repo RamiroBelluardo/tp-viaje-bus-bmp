@@ -83,8 +83,9 @@ class Cliente extends Entity implements Cloneable {
 		this.mail = unMail
 	}
 
-	def getNombreCompleto() {
-		'''«nombre» «apellido»'''
+	def String getNombreCompleto() {
+		//'''«nombre» «apellido»'''
+		nombre + " " + apellido
 	}
 	
 	def validar() {

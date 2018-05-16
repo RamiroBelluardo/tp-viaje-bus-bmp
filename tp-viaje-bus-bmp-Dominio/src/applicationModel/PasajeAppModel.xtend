@@ -58,7 +58,6 @@ class PasajeAppModel extends Entity implements Cloneable {
 	}
 
 	def crearCliente(Cliente cliente) {
-		println(cliente.nombreCompleto)
 		repoClientes.create(cliente)
 		search
 	}
