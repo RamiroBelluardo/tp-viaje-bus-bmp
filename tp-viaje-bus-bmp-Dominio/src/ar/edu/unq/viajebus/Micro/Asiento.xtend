@@ -13,8 +13,8 @@ class Asiento extends Entity implements Cloneable {
 	EstadoDeAsiento estado
 	Micro micro
 
-	new(Integer numero) {
-		this.numero = numero
+	new() {
+		//this.numero = numero
 		this.estado = new Disponible
 	}
 

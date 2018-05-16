@@ -39,10 +39,7 @@ class Viaje extends Entity implements Cloneable {
 		this.pasajes = newArrayList
 		this.estado = new Aprobado
 		this.asientos = newArrayList
-		asientos.add(new Asiento(1))
-		asientos.add(new Asiento(2))
-		asientos.add(new Asiento(3))
-		asientos.add(new Asiento(4))
+
 	}
 
 	new() {
@@ -51,10 +48,7 @@ class Viaje extends Entity implements Cloneable {
 		this.pasajes = newArrayList
 		this.asientos = newArrayList
 		this.estado = new Aprobado
-		asientos.add(new Asiento(1))
-		asientos.add(new Asiento(2))
-		asientos.add(new Asiento(3))
-		asientos.add(new Asiento(4))
+
 	}
 
 	@Dependencies("precioBase", "precioServicios", "precioMicro", "precioFinde", "tieneDesayuno", "tieneAlmuerzo", "tieneMerienda", "tieneCena")
