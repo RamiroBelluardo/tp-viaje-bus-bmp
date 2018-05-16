@@ -81,6 +81,34 @@ class ViajeBusController {
 		}
 	}
 
+	@Post('/login')
+	def Result loginUsuario(@Body String body) {
+		try {
+			if (body === null || body.trim.equals("")) {
+				return badRequest(' "error" : "Faltan datos del usuario a agregar" ')
+			}
+
+			val nuevo = body.fromJson(Usuario)
+
+			if (nuevo.username === null || nuevo.username.equals("")) {
+				return badRequest(' "error" : "El username no puede ser vacio" ')
+			}
+			if (nuevo.password === null || nuevo.password.equals("")) {
+				return badRequest(' "error" : "El password no puede ser vacio" ')
+			}
+
+			val usuario = repoUsuarios.search(nuevo.username, nuevo.password)
+			if (usuario.isEmpty) {
+				return badRequest(' "error" : "El username y/o el password es incorrecto" ')
+			}
+			ok('''{ "id" : "«usuario.get(0).id»" }''')
+
+		} catch (UserException e) {
+			badRequest(getErrorJson(e.message))
+		}
+
+	}
+
 	@Get('/viajes')
 	// def Result buscar(String ciudadPartida, String ciudadLlegada, String fechaPartida, String fechaLlegada) {
 	def Result buscar(String ciudadPartida, String ciudadLlegada) {

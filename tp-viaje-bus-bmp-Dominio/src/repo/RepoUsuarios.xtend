@@ -22,8 +22,12 @@ class RepoUsuarios extends CollectionBasedRepo<Usuario> {
 	}
 
 	def search(String username) {
-		allInstances.filter [ usuarios |
-			this.match(username, usuarios.username) ].toList
+		allInstances.filter [ usuario |
+			this.match(username, usuario.username) ].toList
+	}
+	def search(String username,String password) {
+		allInstances.filter [ usuario |
+			this.match2(username, usuario.username) && this.match2(password, usuario.password) ].toList
 	}
 
 	def match(Object expectedValue, Object realValue) {
@@ -34,6 +38,15 @@ class RepoUsuarios extends CollectionBasedRepo<Usuario> {
 			return false
 		}
 		realValue.toString().toLowerCase().contains(expectedValue.toString().toLowerCase())
+	}
+	def match2(Object expectedValue, Object realValue) {
+		if (expectedValue === null) {
+			return true
+		}
+		if (realValue === null) {
+			return false
+		}
+		realValue.toString().equals(expectedValue.toString())
 	}
 	override protected getCriterio(Usuario example) {
 		null
