@@ -16,6 +16,8 @@ import org.uqbar.xtrest.json.JSONUtils
 import repo.RepoClientes
 import repo.RepoMicros
 import repo.RepoViajes
+import repo.RepoUsuarios
+import ar.edu.unq.viajebus.Cliente.Usuario
 
 @Controller
 class ViajeBusController {
@@ -25,41 +27,48 @@ class ViajeBusController {
 	RepoClientes repoClientes = ApplicationContext.instance.getSingleton(typeof(Cliente)) as RepoClientes
 	RepoViajes repoViajes = ApplicationContext.instance.getSingleton(typeof(Viaje)) as RepoViajes
 	RepoMicros repoMicros = ApplicationContext.instance.getSingleton(typeof(Micro)) as RepoMicros
-	
+	RepoUsuarios repoUsuarios = ApplicationContext.instance.getSingleton(typeof(Usuario)) as RepoUsuarios
 
-	new() {	this.bootstrap.run }
-
+	new() {
+		this.bootstrap.run
+	}
 
 	@Post('/usuarios')
 	def Result crearUsuario(@Body String body) {
 		try {
 			if (body === null || body.trim.equals("")) {
-				return badRequest("Faltan datos del usuario a agregar")
+				return badRequest('{ "error" : "Faltan datos del usuario a agregar" }')
 			}
-			val nuevo = body.fromJson(Cliente)
-			nuevo.validar
-			val nuevoCliente = repoClientes.create(nuevo.nombre, nuevo.apellido, nuevo.dni, nuevo.mail, nuevo.telefono)
 
-			ok('''{ "id" : "«nuevoCliente.id»" }''')
+			val nuevo = body.fromJson(Usuario)
+			nuevo.validar
+			val checkUser = repoUsuarios.search(nuevo.username)
+		if (!checkUser.isEmpty){
+				
+			return badRequest('{ "error" : "El username ya existe" }')
+		}
+		
+			val nuevoUsuario = repoUsuarios.create(nuevo.username, nuevo.password, nuevo.cliente)
+
+			ok('''{ "id" : "«nuevoUsuario.id»" }''')
+
 		} catch (UserException e) {
 			badRequest(getErrorJson(e.message))
 		}
+
 	}
-	
+
 	@Get('/viajes')
-	//def Result buscar(String ciudadPartida, String ciudadLlegada, String fechaPartida, String fechaLlegada) {
+	// def Result buscar(String ciudadPartida, String ciudadLlegada, String fechaPartida, String fechaLlegada) {
 	def Result buscar(String ciudadPartida, String ciudadLlegada) {
-		//ok(repoViajes.search(ciudadPartida, ciudadLlegada).toJson)
+		// ok(repoViajes.search(ciudadPartida, ciudadLlegada).toJson)
 		ok(repoViajes.viajes.toJson)
-		//ok(repoViajes.search(ciudadPartida, ciudadLlegada, fechaPartida, fechaLlegada).toJson)
+	// ok(repoViajes.search(ciudadPartida, ciudadLlegada, fechaPartida, fechaLlegada).toJson)
 	}
-	
 
 	// ********************************************************
 	// ** OPCIONALES
 	// ********************************************************
-
-	
 	@Get('/micros')
 	def Result buscarMicros() {
 		ok(repoMicros.micros.toJson)
@@ -69,9 +78,6 @@ class ViajeBusController {
 	def Result buscarClientes(String nombre, String apellido) {
 		ok(repoClientes.search(nombre, apellido).toJson)
 	}
-
-
-
 
 	private def String getErrorJson(String message) {
 		'''{ "error" : "«message»" }'''

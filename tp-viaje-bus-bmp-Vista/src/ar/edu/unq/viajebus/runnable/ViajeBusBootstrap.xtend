@@ -17,6 +17,8 @@ import repo.RepoClientes
 import repo.RepoMicros
 import repo.RepoPasajes
 import repo.RepoViajes
+import ar.edu.unq.viajebus.Cliente.Usuario
+import repo.RepoUsuarios
 
 class ViajeBusBootstrap extends CollectionBasedBootstrap {
 
@@ -25,6 +27,7 @@ class ViajeBusBootstrap extends CollectionBasedBootstrap {
 		ApplicationContext.instance.configureSingleton(typeof(Micro), new RepoMicros)
 		ApplicationContext.instance.configureSingleton(typeof(Cliente), new RepoClientes)
 		ApplicationContext.instance.configureSingleton(typeof(Pasaje), new RepoPasajes)
+		ApplicationContext.instance.configureSingleton(typeof(Usuario), new RepoUsuarios)
 	}
 
 	/**
@@ -38,6 +41,7 @@ class ViajeBusBootstrap extends CollectionBasedBootstrap {
 		val RepoMicros repoMicros = ApplicationContext.instance.getSingleton(typeof(Micro))
 		val RepoClientes repoClientes = ApplicationContext.instance.getSingleton(typeof(Cliente))
 		val RepoPasajes repoPasajes = ApplicationContext.instance.getSingleton(typeof(Pasaje))
+		
 
 		val partidaMicro1 = new LocalDateTime(2019, 4, 1, 12, 10)
 		val llegadaMicro1 = new LocalDateTime(2019, 4, 1, 14, 20)
