@@ -18,6 +18,7 @@ import repo.RepoMicros
 import repo.RepoViajes
 import repo.RepoUsuarios
 import ar.edu.unq.viajebus.Cliente.Usuario
+import org.uqbar.xtrest.api.annotation.Put
 
 @Controller
 class ViajeBusController {
@@ -37,17 +38,17 @@ class ViajeBusController {
 	def Result crearUsuario(@Body String body) {
 		try {
 			if (body === null || body.trim.equals("")) {
-				return badRequest('{ "error" : "Faltan datos del usuario a agregar" }')
+				return badRequest(' "error" : "Faltan datos del usuario a agregar" ')
 			}
 
 			val nuevo = body.fromJson(Usuario)
 			nuevo.validar
 			val checkUser = repoUsuarios.search(nuevo.username)
-		if (!checkUser.isEmpty){
-				
-			return badRequest('{ "error" : "El username ya existe" }')
-		}
-		
+			if (!checkUser.isEmpty) {
+
+				return badRequest(' "error" : "El username ya existe" ')
+			}
+
 			val nuevoUsuario = repoUsuarios.create(nuevo.username, nuevo.password, nuevo.cliente)
 
 			ok('''{ "id" : "«nuevoUsuario.id»" }''')
@@ -58,6 +59,28 @@ class ViajeBusController {
 
 	}
 
+	@Put('/usuarios/:username')
+	def Result actualizar(@Body String body) {
+		try {
+			val actualizado = body.fromJson(Usuario)
+			val usuario = repoUsuarios.search(username)
+			if (usuario.isEmpty) {
+				return badRequest(' "error" : "El usuario no existe" ')
+			}
+			if (usuario.get(0).username != actualizado.username) {
+				return badRequest(' "error" : "No se puede modificar el username" ')
+			}
+			if (usuario.get(0).password != actualizado.password) {
+				return badRequest(' "error" : "No se puede modificar el password" ')
+			}
+			actualizado.validar
+			repoUsuarios.update(actualizado)
+			ok('{ "status" : "OK" }');
+		} catch (UserException e) {
+			badRequest(getErrorJson(e.message))
+		}
+	}
+
 	@Get('/viajes')
 	// def Result buscar(String ciudadPartida, String ciudadLlegada, String fechaPartida, String fechaLlegada) {
 	def Result buscar(String ciudadPartida, String ciudadLlegada) {
@@ -66,9 +89,9 @@ class ViajeBusController {
 	// ok(repoViajes.search(ciudadPartida, ciudadLlegada, fechaPartida, fechaLlegada).toJson)
 	}
 
-	// ********************************************************
-	// ** OPCIONALES
-	// ********************************************************
+// ********************************************************
+// ** OPCIONALES
+// ********************************************************
 	@Get('/micros')
 	def Result buscarMicros() {
 		ok(repoMicros.micros.toJson)
