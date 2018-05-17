@@ -88,7 +88,7 @@ class ViajeBusBootstrap extends CollectionBasedBootstrap {
 		val pasaje2 = repoPasajes.create(cliente2, viaje2, 3)
 		// val pasaje3 = repoPasajes.create(cliente3, viaje3, 1)
 	//	pasaje1.confirmar
-		//pasaje2.confirmar
+		pasaje2.confirmar
 
 	}
 

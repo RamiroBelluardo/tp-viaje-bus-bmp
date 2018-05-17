@@ -26,6 +26,7 @@ import repo.RepoPasajes
 import repo.RepoUsuarios
 import repo.RepoViajes
 import transformer.LocalDateTransformer
+import ar.edu.unq.viajebus.adapters.PasajeConUsuario
 
 @Controller
 class ViajeBusController {
@@ -137,18 +138,22 @@ class ViajeBusController {
 			if (body === null || body.trim.equals("")) {
 				return badRequest(' "error" : "Faltan datos del pasaje a comprar" ')
 			}
-			val pasaje = body.fromJson(Pasaje)
+			val pasajeConCliente = body.fromJson(PasajeConUsuario)
 			
-//			if (pasaje.asiento.estado instanceof Reservado) {
-//
-//				return badRequest(' "error" : "El asiento ya está reservado" ')
-//			}
-//			pasaje.cliente.validar
-
+			if (repoUsuarios.search(pasajeConCliente.username, pasajeConCliente.password).isEmpty) {
+				return badRequest(' "error" : "El usuario no existe" ')
+			}
 			
+			val usuario = repoUsuarios.buscarUsuario(pasajeConCliente.username, pasajeConCliente.password)
+			val viaje = repoViajes.searchById(pasajeConCliente.viajeId)
+			val nroAsiento = pasajeConCliente.asiento
 			
-			val nuevoPasaje = repoPasajes.create(pasaje.cliente, pasaje.viaje, pasaje.nroAsiento)
-
+			if (!viaje.nrosAsientosDisponibles.contains(nroAsiento)) {
+				return badRequest(' "error" : "El asiento ya se encuentra reservado" ')
+			}	
+			
+			val nuevoPasaje = repoPasajes.create(usuario.cliente, viaje, nroAsiento)
+			nuevoPasaje.confirmar
 			ok('''{ "id" : "«nuevoPasaje.id»" }''')
 
 		} catch (UserException e) {

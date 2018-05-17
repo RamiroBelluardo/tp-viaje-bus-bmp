@@ -29,6 +29,11 @@ class RepoUsuarios extends CollectionBasedRepo<Usuario> {
 		allInstances.filter [ usuario |
 			this.match2(username, usuario.username) && this.match2(password, usuario.password) ].toList
 	}
+	
+	def buscarUsuario(String username,String password) {
+		allInstances.filter [ usuario |
+			this.match2(username, usuario.username) && this.match2(password, usuario.password) ].get(0)
+	}
 
 	def match(Object expectedValue, Object realValue) {
 		if (expectedValue === null) {
