@@ -41,6 +41,10 @@ class RepoPasajes extends CollectionBasedRepo<Pasaje> {
 		realValue.toString().toLowerCase().contains(expectedValue.toString().toLowerCase())
 	}
 
+	def pasajes() {
+		allInstances
+	}
+
 	override getEntityType() {
 		typeof(Pasaje)
 	}

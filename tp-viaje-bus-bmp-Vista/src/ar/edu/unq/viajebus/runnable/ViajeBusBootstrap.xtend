@@ -73,11 +73,11 @@ class ViajeBusBootstrap extends CollectionBasedBootstrap {
 
 		viaje1.agregarAsiento(new Asiento)
 		viaje1.agregarAsiento(new Asiento)
-//
-//		viaje2.agregarAsiento(new Asiento)
-//		viaje2.agregarAsiento(new Asiento)
-//		viaje2.agregarAsiento(new Asiento)
-//		viaje2.agregarAsiento(new Asiento)
+
+		viaje2.agregarAsiento(new Asiento)
+		viaje2.agregarAsiento(new Asiento)
+		viaje2.agregarAsiento(new Asiento)
+		viaje2.agregarAsiento(new Asiento)
 
 //
 //		viaje3.agregarAsiento(new Asiento)

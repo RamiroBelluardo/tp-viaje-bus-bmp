@@ -1,8 +1,14 @@
 package ar.edu.unq.viajebus.xtrest
 
 import ar.edu.unq.viajebus.Cliente.Cliente
+import ar.edu.unq.viajebus.Cliente.Usuario
+import ar.edu.unq.viajebus.EstadoDeAsiento.Reservado
 import ar.edu.unq.viajebus.Micro.Micro
+import ar.edu.unq.viajebus.Micro.Pasaje
 import ar.edu.unq.viajebus.Micro.Viaje
+import ar.edu.unq.viajebus.adapters.ClienteResumido
+import ar.edu.unq.viajebus.adapters.PasajeResumido
+import ar.edu.unq.viajebus.adapters.ViajeResumido
 import ar.edu.unq.viajebus.runnable.ViajeBusBootstrap
 import org.uqbar.commons.applicationContext.ApplicationContext
 import org.uqbar.commons.model.exceptions.UserException
@@ -12,16 +18,13 @@ import org.uqbar.xtrest.api.annotation.Body
 import org.uqbar.xtrest.api.annotation.Controller
 import org.uqbar.xtrest.api.annotation.Get
 import org.uqbar.xtrest.api.annotation.Post
+import org.uqbar.xtrest.api.annotation.Put
 import org.uqbar.xtrest.json.JSONUtils
 import repo.RepoClientes
 import repo.RepoMicros
-import repo.RepoViajes
+import repo.RepoPasajes
 import repo.RepoUsuarios
-import ar.edu.unq.viajebus.Cliente.Usuario
-import org.uqbar.xtrest.api.annotation.Put
-import ar.edu.unq.viajebus.adapters.ClienteResumido
-import ar.edu.unq.viajebus.adapters.ViajeResumido
-import org.joda.time.LocalDate
+import repo.RepoViajes
 import transformer.LocalDateTransformer
 
 @Controller
@@ -32,6 +35,7 @@ class ViajeBusController {
 	RepoClientes repoClientes = ApplicationContext.instance.getSingleton(typeof(Cliente)) as RepoClientes
 	RepoViajes repoViajes = ApplicationContext.instance.getSingleton(typeof(Viaje)) as RepoViajes
 	RepoMicros repoMicros = ApplicationContext.instance.getSingleton(typeof(Micro)) as RepoMicros
+	RepoPasajes repoPasajes = ApplicationContext.instance.getSingleton(typeof(Pasaje)) as RepoPasajes
 	RepoUsuarios repoUsuarios = ApplicationContext.instance.getSingleton(typeof(Usuario)) as RepoUsuarios
 
 	new() {
@@ -118,13 +122,39 @@ class ViajeBusController {
 		var formateador = new LocalDateTransformer
 		var fechaPartidaFormateada = formateador.viewToModel(fechaPartida)
 		var fechaLlegadaFormateada = formateador.viewToModel(fechaLlegada)
-	
+
 		var resultados = repoViajes.search(ciudadPartida, ciudadLlegada, fechaPartidaFormateada, fechaLlegadaFormateada)
 		if (resultados.isEmpty) {
 			return badRequest(' "error" : "No existen viajes con tu parametro de busqueda" ')
 		}
-		
+
 		ok(resultados.map([each|new ViajeResumido(each)]).toJson)
+	}
+
+	@Post('/pasajes')
+	def Result comprarPasaje(@Body String body) {
+		try {
+			if (body === null || body.trim.equals("")) {
+				return badRequest(' "error" : "Faltan datos del pasaje a comprar" ')
+			}
+			val pasaje = body.fromJson(Pasaje)
+			
+//			if (pasaje.asiento.estado instanceof Reservado) {
+//
+//				return badRequest(' "error" : "El asiento ya está reservado" ')
+//			}
+//			pasaje.cliente.validar
+
+			
+			
+			val nuevoPasaje = repoPasajes.create(pasaje.cliente, pasaje.viaje, pasaje.nroAsiento)
+
+			ok('''{ "id" : "«nuevoPasaje.id»" }''')
+
+		} catch (UserException e) {
+			badRequest(getErrorJson(e.message))
+		}
+
 	}
 
 // ********************************************************
@@ -138,6 +168,11 @@ class ViajeBusController {
 	@Get('/clientes')
 	def Result buscarClientes(String nombre, String apellido) {
 		ok(repoClientes.search(nombre, apellido).toJson)
+	}
+
+	@Get('/pasajes')
+	def Result buscarPasajes() {
+		ok(repoPasajes.pasajes.map([each|new PasajeResumido(each)]).toJson)
 	}
 
 	private def String getErrorJson(String message) {
