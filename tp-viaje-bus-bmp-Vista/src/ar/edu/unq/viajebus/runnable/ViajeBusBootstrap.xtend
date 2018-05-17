@@ -41,6 +41,7 @@ class ViajeBusBootstrap extends CollectionBasedBootstrap {
 		val RepoMicros repoMicros = ApplicationContext.instance.getSingleton(typeof(Micro))
 		val RepoClientes repoClientes = ApplicationContext.instance.getSingleton(typeof(Cliente))
 		val RepoPasajes repoPasajes = ApplicationContext.instance.getSingleton(typeof(Pasaje))
+		val RepoUsuarios repoUsuarios = ApplicationContext.instance.getSingleton(typeof(Usuario))
 		
 
 		val partidaMicro1 = new LocalDateTime(2019, 4, 1, 12, 10)
@@ -70,6 +71,10 @@ class ViajeBusBootstrap extends CollectionBasedBootstrap {
 		val cliente1 = repoClientes.create("Lucas", "Pier", "11111111", "lg.piergiacomi@asd.com", "44444444")
 		val cliente2 = repoClientes.create("Esteban", "Matas", "22222222", "esteban@eso.com", "")
 		val cliente3 = repoClientes.create("Ramiro", "Belluardo", "33333333", "ramirobelluardo1993@eso.com", "22222222")
+		
+		val usuario1 = repoUsuarios.create("lucas", "12345", cliente1)
+		val usuario2 = repoUsuarios.create("esteban", "12345", cliente2)
+		val usuario3 = repoUsuarios.create("ramiro", "12345", cliente3)
 
 		viaje1.agregarAsiento(new Asiento)
 		viaje1.agregarAsiento(new Asiento)

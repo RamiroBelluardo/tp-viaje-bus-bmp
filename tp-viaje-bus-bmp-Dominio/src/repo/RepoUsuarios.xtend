@@ -4,6 +4,7 @@ import ar.edu.unq.viajebus.Cliente.Cliente
 import org.uqbar.commons.model.CollectionBasedRepo
 import org.uqbar.commons.model.annotations.Observable
 import ar.edu.unq.viajebus.Cliente.Usuario
+import org.uqbar.commons.model.exceptions.UserException
 
 @Observable
 class RepoUsuarios extends CollectionBasedRepo<Usuario> {
@@ -22,8 +23,7 @@ class RepoUsuarios extends CollectionBasedRepo<Usuario> {
 	}
 
 	def search(String username) {
-		allInstances.filter [ usuario |
-			this.match(username, usuario.username) ].toList
+		allInstances.findFirst [ usuario | this.match(username, usuario.username) ]
 	}
 	def search(String username,String password) {
 		allInstances.filter [ usuario |
@@ -31,8 +31,12 @@ class RepoUsuarios extends CollectionBasedRepo<Usuario> {
 	}
 	
 	def buscarUsuario(String username,String password) {
-		allInstances.filter [ usuario |
-			this.match2(username, usuario.username) && this.match2(password, usuario.password) ].get(0)
+		val usuario = allInstances.findFirst[ usuario |
+			this.match2(username, usuario.username) && this.match2(password, usuario.password) ]
+		if (usuario === null){
+			throw new UserException("El usuario no existe")
+		}
+		usuario
 	}
 
 	def match(Object expectedValue, Object realValue) {

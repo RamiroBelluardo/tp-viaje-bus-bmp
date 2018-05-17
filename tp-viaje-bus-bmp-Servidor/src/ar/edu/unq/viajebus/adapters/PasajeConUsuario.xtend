@@ -1,6 +1,5 @@
 package ar.edu.unq.viajebus.adapters
 
-import ar.edu.unq.viajebus.Cliente.Cliente
 import org.eclipse.xtend.lib.annotations.Accessors
 
 @Accessors

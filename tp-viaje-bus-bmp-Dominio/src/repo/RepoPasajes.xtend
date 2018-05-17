@@ -30,6 +30,11 @@ class RepoPasajes extends CollectionBasedRepo<Pasaje> {
 				this.match(nroAsiento, pasaje.nroAsiento)
 		].toList
 	}
+	
+		def search(Integer id) {
+		allInstances.filter [ pasaje |
+			this.match(id, pasaje.id)].toList
+	}
 
 	def match(Object expectedValue, Object realValue) {
 		if (expectedValue === null) {

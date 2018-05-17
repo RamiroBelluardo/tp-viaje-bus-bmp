@@ -39,6 +39,7 @@ class Cliente extends Entity implements Cloneable {
 		this.dni = dni
 		this.mail = mail
 		this.telefono = telefono
+		this.pasajes = newArrayList
 	}
 
 	def agregarPasaje(Pasaje pasaje) {
@@ -102,4 +103,9 @@ class Cliente extends Entity implements Cloneable {
 			throw new UserException("Debe ingresar mail")
 		}
 	}
+	
+	def removerPasaje(Pasaje pasaje) {
+		this.pasajes.remove(pasaje)
+	}
+	
 }
