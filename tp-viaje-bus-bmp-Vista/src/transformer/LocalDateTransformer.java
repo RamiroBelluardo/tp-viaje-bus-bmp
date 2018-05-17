@@ -8,7 +8,7 @@ import org.uqbar.arena.bindings.ValueTransformer;
 import org.uqbar.commons.model.exceptions.UserException;
 
 public final class LocalDateTransformer implements ValueTransformer<LocalDate, String> {
-	public String pattern = "dd/MM/yyyy";
+	public String pattern = "dd-MM-yyyy";
 	DateTimeFormatter dtf = DateTimeFormat.forPattern(pattern);
 
 	@Override

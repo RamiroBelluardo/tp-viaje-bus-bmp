@@ -7,6 +7,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 @TransactionalAndObservable
 class Cama extends TipoAsiento {
 	new() {
+		this.nombre = "Cama"
 		this.porcentaje = 10
 	}
 }

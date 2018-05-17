@@ -12,10 +12,10 @@ class Usuario extends Entity implements Cloneable {
 	String password
 	Cliente cliente
 
-	new(String username2, String password2, Cliente cliente2) {
-		username = username2
-		password = password2
-		cliente = cliente2
+	new(String username, String password, Cliente cliente) {
+		this.username = username
+		this.password = password
+		this.cliente = cliente
 	}
 
 	new() {
@@ -25,15 +25,15 @@ class Usuario extends Entity implements Cloneable {
 		if (username === null || username.trim.equals("")) {
 			throw new UserException("Debe ingresar un username")
 		}
-		if (username.length()<5){
+		if (username.length() < 5) {
 			throw new UserException("El username debe tener 5 caracteres al menos")
 		}
-	
+
 		if (password === null || password.trim.equals("")) {
 			throw new UserException("Debe ingresar un password")
 		}
-		
-		if (password.length()<4){
+
+		if (password.length() < 4) {
 			throw new UserException("El password debe tener 4 caracteres al menos")
 		}
 		cliente.validar()

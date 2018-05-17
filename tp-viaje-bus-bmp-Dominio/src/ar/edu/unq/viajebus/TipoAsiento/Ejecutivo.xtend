@@ -8,6 +8,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 @TransactionalAndObservable
 class Ejecutivo extends TipoAsiento {
 	new() {
+		this.nombre = "Ejecutivo"
 		this.porcentaje = 20
 	}
 }

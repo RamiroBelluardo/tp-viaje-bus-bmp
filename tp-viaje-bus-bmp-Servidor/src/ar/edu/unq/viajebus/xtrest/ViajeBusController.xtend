@@ -19,6 +19,10 @@ import repo.RepoViajes
 import repo.RepoUsuarios
 import ar.edu.unq.viajebus.Cliente.Usuario
 import org.uqbar.xtrest.api.annotation.Put
+import ar.edu.unq.viajebus.adapters.ClienteResumido
+import ar.edu.unq.viajebus.adapters.ViajeResumido
+import org.joda.time.LocalDate
+import transformer.LocalDateTransformer
 
 @Controller
 class ViajeBusController {
@@ -101,7 +105,7 @@ class ViajeBusController {
 			if (usuario.isEmpty) {
 				return badRequest(' "error" : "El username y/o el password es incorrecto" ')
 			}
-			ok('''{ "id" : "«usuario.get(0).id»" }''')
+			ok(new ClienteResumido(usuario.get(0)).toJson)
 
 		} catch (UserException e) {
 			badRequest(getErrorJson(e.message))
@@ -110,11 +114,17 @@ class ViajeBusController {
 	}
 
 	@Get('/viajes')
-	// def Result buscar(String ciudadPartida, String ciudadLlegada, String fechaPartida, String fechaLlegada) {
-	def Result buscar(String ciudadPartida, String ciudadLlegada) {
-		// ok(repoViajes.search(ciudadPartida, ciudadLlegada).toJson)
-		ok(repoViajes.viajes.toJson)
-	// ok(repoViajes.search(ciudadPartida, ciudadLlegada, fechaPartida, fechaLlegada).toJson)
+	def Result buscar(String ciudadPartida, String ciudadLlegada, String fechaPartida, String fechaLlegada) {
+		var formateador = new LocalDateTransformer
+		var fechaPartidaFormateada = formateador.viewToModel(fechaPartida)
+		var fechaLlegadaFormateada = formateador.viewToModel(fechaLlegada)
+	
+		var resultados = repoViajes.search(ciudadPartida, ciudadLlegada, fechaPartidaFormateada, fechaLlegadaFormateada)
+		if (resultados.isEmpty) {
+			return badRequest(' "error" : "No existen viajes con tu parametro de busqueda" ')
+		}
+		
+		ok(resultados.map([each|new ViajeResumido(each)]).toJson)
 	}
 
 // ********************************************************

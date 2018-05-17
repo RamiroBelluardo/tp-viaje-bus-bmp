@@ -45,13 +45,13 @@ class RepoViajes extends CollectionBasedRepo<Viaje> {
 	}
 	
 
-//	def search(String ciudadPartida, String ciudadLlegada, LocalDate fechaPartida, LocalDate fechaLlegada) {
-//		allInstances.filter [ viajes |
-//			this.match(ciudadPartida, viajes.recorrido.head) && this.match(ciudadLlegada, viajes.recorrido.last) &&
-//				this.match(fechaPartida, viajes.fechaPartida.toLocalDate) &&
-//				this.match(fechaLlegada, viajes.fechaLlegada.toLocalDate)
-//		].toList
-//	}
+	def search(String ciudadPartida, String ciudadLlegada, LocalDate fechaPartida, LocalDate fechaLlegada) {
+		allInstances.filter [ viajes |
+			this.match(ciudadPartida, viajes.recorrido.head) && this.match(ciudadLlegada, viajes.recorrido.last) &&
+				this.match(fechaPartida, viajes.fechaPartida.toLocalDate) &&
+				this.match(fechaLlegada, viajes.fechaLlegada.toLocalDate)
+		].toList
+	}
 
 	def search(Micro micro) {
 		allInstances.filter[viaje|this.match(micro, viaje.micro)].toList

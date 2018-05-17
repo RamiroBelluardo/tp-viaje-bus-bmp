@@ -6,5 +6,6 @@ import org.uqbar.commons.model.annotations.TransactionalAndObservable
 @TransactionalAndObservable
 @Accessors
 abstract class TipoAsiento {
-	int porcentaje
+	String nombre
+	Integer porcentaje
 }
