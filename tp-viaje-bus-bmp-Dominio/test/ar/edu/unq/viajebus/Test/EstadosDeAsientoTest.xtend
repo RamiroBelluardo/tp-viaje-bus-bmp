@@ -17,7 +17,7 @@ class EstadosDeAsientoTest {
 
 	@Before
 	def void init() {
-		asiento = new Asiento(1)
+		asiento = new Asiento()
 	}
 
 	@Test

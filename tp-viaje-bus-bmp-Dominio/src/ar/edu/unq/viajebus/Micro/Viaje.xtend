@@ -12,6 +12,7 @@ import org.joda.time.Minutes
 import org.uqbar.commons.model.Entity
 import org.uqbar.commons.model.annotations.Dependencies
 import org.uqbar.commons.model.annotations.TransactionalAndObservable
+import org.uqbar.commons.model.exceptions.UserException
 
 @Accessors
 @TransactionalAndObservable
@@ -97,11 +98,6 @@ class Viaje extends Entity implements Cloneable {
 		return res
 	}
 
-//	def getPrecioServicios() {
-//		if (tieneDesayuno) {
-//			return 30
-//		}	
-//	}
 	@Dependencies("micro")
 	def getPrecioMicro() {
 		/*
@@ -133,12 +129,14 @@ class Viaje extends Entity implements Cloneable {
 
 	}
 
-//	def verAsientosDisponibles() {
-//		micro.asientosDisponibles()
-//	}
 	def agregarAsiento(Asiento asiento) {
-		asiento.numero = asientos.size + 1
-		asientos.add(asiento)
+		if (asientos.size < micro.cantidadAsientos){
+			asiento.numero = asientos.size + 1
+			asientos.add(asiento)
+		}
+		else {
+			throw new UserException('''El micro con patente «micro.patente» no tiene más asientos disponibles''')
+		}
 	}
 
 	def asientosDisponibles() {
@@ -169,18 +167,12 @@ class Viaje extends Entity implements Cloneable {
 		asientos.size
 	}
 
-//	def pasajesConfirmados() {
-//		pasajes.filter[pasaje|pasaje.estado instanceof Confirmado].toList
-//	}
 	def getNrosAsientosDisponibles() {
 		val nros = newArrayList
 		asientosDisponibles.forEach[Asiento a|nros.add(a.numero)]
 		nros.toList
 	}
 
-//	def verAsientosReservados() {
-//		micro.asientosReservados
-//	}
 	def agregarServicio(Servicio servicio) {
 		if (servicios.filter[servicio2|servicio2.nombre == servicio.nombre].isEmpty) {
 			servicios.add(servicio)
@@ -227,16 +219,12 @@ class Viaje extends Entity implements Cloneable {
 	def agregarCiudad(String ciudad) {
 		if (recorrido.filter[ciu|ciu == ciudad].isEmpty) {
 			recorrido.add(ciudad)
-//			origen = recorrido.head
-//			destino = recorrido.last
 		}
 	}
 
 	def quitarCiudad(String ciudad) {
 		if (!recorrido.filter[ciu|ciu == ciudad].isEmpty) {
 			recorrido.remove(ciudad)
-//			origen = recorrido.head
-//			destino = recorrido.last
 		}
 	}
 
@@ -266,7 +254,6 @@ class Viaje extends Entity implements Cloneable {
 		return if (asientos.size == 0)
 			0
 		else
-			// verAsientosReservados.size * 100 / asientos.size
 			pasajes.size * 100 / asientos.size // TODO: Calcular con los pasajes NO cancelados
 	}
 

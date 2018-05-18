@@ -1,11 +1,11 @@
 package ar.edu.unq.viajebus.Test
 
-import org.junit.Test
-import org.junit.Before
-import static org.junit.Assert.*
-import ar.edu.unq.viajebus.TipoAsiento.Ejecutivo
 import ar.edu.unq.viajebus.Micro.Micro
-import ar.edu.unq.viajebus.Micro.Asiento
+import ar.edu.unq.viajebus.TipoAsiento.Ejecutivo
+import org.junit.Before
+import org.junit.Test
+
+import static org.junit.Assert.*
 
 class MicroTest {
 
@@ -13,7 +13,7 @@ class MicroTest {
 
 	@Before
 	def void init() {
-		microEjecutivo = new Micro("ABC123", new Ejecutivo, true)
+		microEjecutivo = new Micro("ABC123", new Ejecutivo, true, 1)
 	// microEjecutivo.agregarAsiento(new Asiento)
 	}
 
@@ -23,6 +23,7 @@ class MicroTest {
 		assertTrue(microEjecutivo.tipoDeAsiento instanceof Ejecutivo)
 		assertTrue(microEjecutivo.tieneTele)
 	}
+	
 //	
 //	@Test
 //	def agregarAsientoAMicro(){

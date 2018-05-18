@@ -5,6 +5,7 @@ import ar.edu.unq.viajebus.Micro.Pasaje
 import ar.edu.unq.viajebus.Micro.Viaje
 import org.uqbar.commons.model.CollectionBasedRepo
 import org.uqbar.commons.model.annotations.Observable
+import org.uqbar.commons.model.exceptions.UserException
 
 @Observable
 class RepoPasajes extends CollectionBasedRepo<Pasaje> {
@@ -32,8 +33,11 @@ class RepoPasajes extends CollectionBasedRepo<Pasaje> {
 	}
 	
 		def search(Integer id) {
-		allInstances.filter [ pasaje |
-			this.match(id, pasaje.id)].toList
+		val pasaje = allInstances.findFirst [ pasaje | this.match(id, pasaje.id)]
+		if (pasaje === null){
+			throw new UserException("No se encontró un pasaje con ese id")
+		}
+		pasaje
 	}
 
 	def match(Object expectedValue, Object realValue) {

@@ -8,13 +8,14 @@ import ar.edu.unq.viajebus.Micro.Micro
 class MicroResumido {
 
 	String patente
-	// Integer cantidadAsientos
 	TipoAsiento tipoAsiento
 	Boolean tieneTele
+	Integer cantidadAsientos
 
 	new(Micro micro) {
 		this.patente = micro.patente
 		this.tipoAsiento = micro.tipoDeAsiento
 		this.tieneTele = micro.tieneTele
+		this.cantidadAsientos = micro.cantidadAsientos
 	}
 }

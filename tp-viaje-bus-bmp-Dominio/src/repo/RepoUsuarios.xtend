@@ -22,19 +22,41 @@ class RepoUsuarios extends CollectionBasedRepo<Usuario> {
 		usuario
 	}
 
-	def search(String username) {
-		allInstances.findFirst [ usuario | this.match(username, usuario.username) ]
+	def buscarParaCrear(String username) {
+		val user = allInstances.findFirst[usuario|this.match(username, usuario.username)]
+		if (user !== null) {
+			throw new UserException("El username ya existe")
+		}
+		user
 	}
-	def search(String username,String password) {
-		allInstances.filter [ usuario |
-			this.match2(username, usuario.username) && this.match2(password, usuario.password) ].toList
-	}
-	
-	def buscarUsuario(String username,String password) {
-		val usuario = allInstances.findFirst[ usuario |
-			this.match2(username, usuario.username) && this.match2(password, usuario.password) ]
-		if (usuario === null){
+
+	def buscarParaEditar(String username) {
+		val usuario = allInstances.findFirst[usuario|this.match(username, usuario.username)]
+		if (usuario === null) {
 			throw new UserException("El usuario no existe")
+		}
+		usuario
+	}
+
+//	def search(String username,String password) {
+//		allInstances.filter [ usuario |
+//			this.match2(username, usuario.username) && this.match2(password, usuario.password) ].toList
+//	}
+	def buscarParaLogin(String username, String password) {
+		
+		this.buscarParaEditar(username)
+		
+		val usuario = allInstances.findFirst [ usuario |
+			this.match2(username, usuario.username) && this.match2(password, usuario.password)
+		]
+		if (usuario === null) {
+			throw new UserException("El username y/o el password es incorrecto")
+		}
+		if (username === null || username.equals("")) {
+			throw new UserException("El username no puede ser vacío")
+		}
+		if (password === null || password.equals("")) {
+			throw new UserException("El password no puede ser vacío")
 		}
 		usuario
 	}
@@ -48,6 +70,7 @@ class RepoUsuarios extends CollectionBasedRepo<Usuario> {
 		}
 		realValue.toString().toLowerCase().contains(expectedValue.toString().toLowerCase())
 	}
+
 	def match2(Object expectedValue, Object realValue) {
 		if (expectedValue === null) {
 			return true
@@ -57,6 +80,7 @@ class RepoUsuarios extends CollectionBasedRepo<Usuario> {
 		}
 		realValue.toString().equals(expectedValue.toString())
 	}
+
 	override protected getCriterio(Usuario example) {
 		null
 	}
@@ -73,5 +97,3 @@ class RepoUsuarios extends CollectionBasedRepo<Usuario> {
 		allInstances
 	}
 }
-	
-

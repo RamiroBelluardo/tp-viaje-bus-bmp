@@ -5,8 +5,8 @@ import ar.edu.unq.viajebus.Cliente.Usuario
 import ar.edu.unq.viajebus.Micro.Micro
 import ar.edu.unq.viajebus.Micro.Pasaje
 import ar.edu.unq.viajebus.Micro.Viaje
-import ar.edu.unq.viajebus.adapters.ClienteResumido
 import ar.edu.unq.viajebus.adapters.PasajeConUsuario
+import ar.edu.unq.viajebus.adapters.UsuarioLogueado
 import ar.edu.unq.viajebus.adapters.ViajeResumido
 import ar.edu.unq.viajebus.runnable.ViajeBusBootstrap
 import org.uqbar.commons.applicationContext.ApplicationContext
@@ -42,44 +42,42 @@ class ViajeBusController {
 	}
 
 	@Post('/usuarios')
+	/*
+	 * Crea un nuevo usuario en el servidor
+	 */
 	def Result crearUsuario(@Body String body) {
 		try {
 			if (body === null || body.trim.equals("")) {
-				return badRequest(' "error" : "Faltan datos del usuario a agregar" ')
+				return badRequest(getErrorJson("Faltan datos del usuario a agregar"))
 			}
-
 			val nuevo = body.fromJson(Usuario)
 			nuevo.validar
-			val checkUser = repoUsuarios.search(nuevo.username)
-			if (checkUser !== null) {
-
-				return badRequest('{"error" : "El username ya existe"}')
-			}
-
+			repoUsuarios.buscarParaCrear(nuevo.username)
 			repoClientes.create(nuevo.cliente)
 			val nuevoUsuario = repoUsuarios.create(nuevo.username, nuevo.password, nuevo.cliente)
-
 			ok('''{ "id" : "«nuevoUsuario.id»" }''')
 
 		} catch (UserException e) {
 			badRequest(getErrorJson(e.message))
 		}
-
 	}
 
 	@Put('/usuarios/:username')
+	/*
+	 * Actualiza datos del cliente asociado al usuario.
+	 * Username y password no se pueden cambiar.
+	 * Todos los datos son obligatorios menos el teléfono
+	 */
 	def Result actualizar(@Body String body) {
 		try {
 			val actualizado = body.fromJson(Usuario)
-			val usuario = repoUsuarios.search(username)
-			if (usuario === null) {
-				return badRequest(' "error" : "El usuario no existe" ')
-			}
+			val usuario = repoUsuarios.buscarParaEditar(username)
+
 			if (usuario.username != actualizado.username) {
-				return badRequest(' "error" : "No se puede modificar el username" ')
+				return badRequest(getErrorJson("No se puede modificar el username"))
 			}
 			if (usuario.password != actualizado.password) {
-				return badRequest(' "error" : "No se puede modificar el password" ')
+				return badRequest(getErrorJson("No se puede modificar el password"))
 			}
 			actualizado.validar
 			repoUsuarios.update(actualizado)
@@ -90,29 +88,20 @@ class ViajeBusController {
 	}
 
 	@Post('/login')
+	/*
+	 * Login de un usuario. Chequea que los datos sean correctos y que no haya datos vacíos
+	 */
 	def Result loginUsuario(@Body String body) {
 		try {
-			
-			
+
 			if (body === null || body.trim.equals("")) {
-				return badRequest(' "error" : "Faltan datos del usuario a agregar" ')
+				return badRequest(getErrorJson("Faltan datos del usuario a agregar"))
 			}
 
 			val nuevo = body.fromJson(Usuario)
-			repoUsuarios.buscarUsuario(nuevo.username, nuevo.password)
+			val usuario = repoUsuarios.buscarParaLogin(nuevo.username, nuevo.password)
 
-			if (nuevo.username === null || nuevo.username.equals("")) {
-				return badRequest(' "error" : "El username no puede ser vacio" ')
-			}
-			if (nuevo.password === null || nuevo.password.equals("")) {
-				return badRequest(' "error" : "El password no puede ser vacio" ')
-			}
-
-			val usuario = repoUsuarios.search(nuevo.username, nuevo.password)
-			if (usuario.isEmpty) {
-				return badRequest(' "error" : "El username y/o el password es incorrecto" ')
-			}
-			ok(new ClienteResumido(usuario.get(0)).toJson)
+			ok(new UsuarioLogueado(usuario).toJson)
 
 		} catch (UserException e) {
 			badRequest(getErrorJson(e.message))
@@ -121,37 +110,40 @@ class ViajeBusController {
 	}
 
 	@Get('/viajes')
+	/*
+	 * Devuelve la lista de viajes según los criterios en la URL.
+	 * Todos los criterios son opcionales.
+	 */
 	def Result buscar(String ciudadPartida, String ciudadLlegada, String fechaPartida, String fechaLlegada) {
 		var formateador = new LocalDateTransformer
 		var fechaPartidaFormateada = formateador.viewToModel(fechaPartida)
 		var fechaLlegadaFormateada = formateador.viewToModel(fechaLlegada)
-
 		var resultados = repoViajes.search(ciudadPartida, ciudadLlegada, fechaPartidaFormateada, fechaLlegadaFormateada)
 
 		ok(resultados.map([each|new ViajeResumido(each)]).toJson)
 	}
 
 	@Post('/pasajes')
+	/*
+	 * Carga un pasaje nuevo al cliente asociado al usuario.
+	 * Los datos de pago por el momento son ignorados.
+	 */
 	def Result comprarPasaje(@Body String body) {
 		try {
 			if (body === null || body.trim.equals("")) {
-				return badRequest(' "error" : "Faltan datos del pasaje a comprar" ')
+				return badRequest(getErrorJson("Faltan datos del pasaje a comprar"))
 			}
-			val pasajeConCliente = body.fromJson(PasajeConUsuario)
+			val pasajeConUsuario = body.fromJson(PasajeConUsuario)
+			val user = repoUsuarios.buscarParaLogin(pasajeConUsuario.username, pasajeConUsuario.password)
 
-			if (repoUsuarios.search(pasajeConCliente.username, pasajeConCliente.password).isEmpty) {
-				return badRequest(' "error" : "El usuario no existe" ')
-			}
-
-			val usuario = repoUsuarios.buscarUsuario(pasajeConCliente.username, pasajeConCliente.password)
-			val viaje = repoViajes.searchById(pasajeConCliente.viajeId)
-			val nroAsiento = pasajeConCliente.asiento
+			val viaje = repoViajes.searchById(pasajeConUsuario.viajeId)
+			val nroAsiento = pasajeConUsuario.asiento
 
 			if (!viaje.nrosAsientosDisponibles.contains(nroAsiento)) {
-				return badRequest(' "error" : "El asiento ya se encuentra reservado" ')
+				return badRequest(getErrorJson("El asiento ya se encuentra reservado"))
 			}
 
-			val nuevoPasaje = repoPasajes.create(usuario.cliente, viaje, nroAsiento)
+			val nuevoPasaje = repoPasajes.create(user.cliente, viaje, nroAsiento)
 			nuevoPasaje.confirmar
 			ok('''{ "id" : "«nuevoPasaje.id»" }''')
 
@@ -162,29 +154,25 @@ class ViajeBusController {
 	}
 
 	@Post('/pasajes/:idPasaje/cancelar')
+	/*
+	 * Cancela un pasaje previamente comprado.
+	 * Verifica que el pasaje haya sido comprado por el cliente asociado al usuario
+	 */
 	def Result cancelarPasaje(@Body String body) {
 		try {
 			if (body === null || body.trim.equals("")) {
-				return badRequest(' "error" : "Faltan datos del pasaje a cancelar" ')
+				return badRequest(getErrorJson("Faltan datos del pasaje a cancelar"))
 			}
 			val usuario = body.fromJson(Usuario)
-			val usuarioExtraido = repoUsuarios.buscarUsuario(usuario.username, usuario.password)
 
-//			if (repoUsuarios.search(usuario.username, usuario.password).isEmpty) {
-//				return badRequest(' "error" : "El usuario no existe" ')
-//			}
-
+			val usuarioExtraido = repoUsuarios.buscarParaLogin(usuario.username, usuario.password)
 			val pasaje = repoPasajes.search(Integer.valueOf(idPasaje))
 
-			if (pasaje.isEmpty) {
-				return badRequest(' "error" : "El pasaje no existe" ')
+			if (pasaje.cliente.id !== usuarioExtraido.cliente.id) {
+				return badRequest(getErrorJson("Este pasaje no le corresponde"))
 			}
 
-			if (pasaje.get(0).cliente.id !== usuarioExtraido.cliente.id) {
-				return badRequest(' "error" : "Este pasaje no le corresponde" ')
-			}
-
-			pasaje.get(0).cancelar
+			pasaje.cancelar
 			ok()
 
 		} catch (UserException e) {
@@ -204,11 +192,6 @@ class ViajeBusController {
 	@Get('/clientes')
 	def Result buscarClientes(String nombre, String apellido) {
 		ok(repoClientes.search(nombre, apellido).toJson)
-	}
-
-	@Get('/usuarios')
-	def Result buscarUsuarios(String nombre, String apellido) {
-		ok(repoUsuarios.search(nombre, apellido).toJson)
 	}
 
 	private def String getErrorJson(String message) {

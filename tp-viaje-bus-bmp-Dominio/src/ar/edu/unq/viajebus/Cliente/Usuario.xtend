@@ -37,18 +37,7 @@ class Usuario extends Entity implements Cloneable {
 			throw new UserException("El password debe tener 4 caracteres al menos")
 		}
 		cliente.validar()
-//		if (cliente.nombre === null || cliente.nombre.trim.equals("")) {
-//			throw new UserException("Debe ingresar nombre")
-//		}
-//		if (cliente.apellido === null || cliente.apellido.trim.equals("")) {
-//			throw new UserException("Debe ingresar apellido")
-//		}
-//		if (cliente.dni === null || cliente.dni.trim.equals("")) {
-//			throw new UserException("Debe ingresar dni")
-//		}
-//		if (cliente.mail === null || cliente.mail.trim.equals("")) {
-//			throw new UserException("Debe ingresar mail")
-//		}
+
 	}
 
 }

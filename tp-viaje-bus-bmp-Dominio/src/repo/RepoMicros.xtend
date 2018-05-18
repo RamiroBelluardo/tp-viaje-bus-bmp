@@ -12,11 +12,12 @@ class RepoMicros extends CollectionBasedRepo<Micro> {
 	// ********************************************************
 	// ** Altas y bajas
 	// ********************************************************
-	def Micro create(String mPatente, TipoAsiento mTipoDeAsiento, Boolean mTieneTele) {
+	def Micro create(String mPatente, TipoAsiento mTipoDeAsiento, Boolean mTieneTele, Integer mCantidadAsientos) {
 		val micro = new Micro => [
 			patente = mPatente
 			tipoDeAsiento = mTipoDeAsiento
 			tieneTele = mTieneTele
+			cantidadAsientos = mCantidadAsientos
 		]
 		this.create(micro)
 		micro

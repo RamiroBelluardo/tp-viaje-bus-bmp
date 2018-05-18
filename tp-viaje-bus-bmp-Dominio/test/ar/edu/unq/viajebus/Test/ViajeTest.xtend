@@ -57,21 +57,18 @@ class ViajeTest {
 	def void init() {
 		MockitoAnnotations.initMocks(this)
 		GMailSender.config(notificador)
-		asiento1 = new Asiento(1)
-		asiento2 = new Asiento(2)
-		asiento3 = new Asiento(3)
+		asiento1 = new Asiento()
+		asiento2 = new Asiento()
+		asiento3 = new Asiento()
 		fechaPartida = new LocalDateTime(2018, 03, 30, 12, 00) // Viernes
 		fechaPartida2 = new LocalDateTime(2018, 03, 31, 12, 00) // Sabado
 		fechaPartida3 = new LocalDateTime(2018, 07, 05, 10, 00)
 		fechaLlegada = new LocalDateTime(2018, 03, 30, 14, 00)
 		fechaLlegada2 = new LocalDateTime(2018, 03, 31, 14, 00)
 		fechaLlegada3 = new LocalDateTime(2018, 12, 13, 14, 00)
-		microCama = new Micro("AAA111", new Cama, false)
-//		viaje.agregarAsiento(asiento1)
-//		viaje.agregarAsiento(asiento2)
-//		viaje.agregarAsiento(asiento3)
-		microEjecutivo = new Micro("BBB222", new Ejecutivo, false)
-		microSemicama = new Micro("AB123AB", new Semicama, true)
+		microCama = new Micro("AAA111", new Cama, false, 20)
+		microEjecutivo = new Micro("BBB222", new Ejecutivo, false, 20)
+		microSemicama = new Micro("AB123AB", new Semicama, true, 20)
 		lucas = new Cliente("Lucas", "Piergiacomi", "11.111.111", "lg.piergiacomi@gmail.com", "44445555")
 	}
 
