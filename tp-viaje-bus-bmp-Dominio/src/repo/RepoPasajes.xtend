@@ -32,12 +32,17 @@ class RepoPasajes extends CollectionBasedRepo<Pasaje> {
 		].toList
 	}
 	
-		def search(Integer id) {
+	def search(Integer id) {
 		val pasaje = allInstances.findFirst [ pasaje | this.match(id, pasaje.id)]
 		if (pasaje === null){
 			throw new UserException("No se encontró un pasaje con ese id")
 		}
 		pasaje
+	}
+	
+	def search(Cliente cliente){
+		val pasajes = allInstances.filter [pasaje | this.match(cliente, pasaje.cliente)].toList
+		pasajes
 	}
 
 	def match(Object expectedValue, Object realValue) {

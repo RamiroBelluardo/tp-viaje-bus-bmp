@@ -6,6 +6,7 @@ import ar.edu.unq.viajebus.Micro.Micro
 import ar.edu.unq.viajebus.Micro.Pasaje
 import ar.edu.unq.viajebus.Micro.Viaje
 import ar.edu.unq.viajebus.adapters.PasajeConUsuario
+import ar.edu.unq.viajebus.adapters.PasajeConViaje
 import ar.edu.unq.viajebus.adapters.UsuarioLogueado
 import ar.edu.unq.viajebus.adapters.ViajeResumido
 import ar.edu.unq.viajebus.runnable.ViajeBusBootstrap
@@ -173,13 +174,31 @@ class ViajeBusController {
 			}
 
 			pasaje.cancelar
-			ok()
+			ok('''{ "id de Pasaje cancelado" : "«pasaje.id»" }''')
 
 		} catch (UserException e) {
 			badRequest(getErrorJson(e.message))
 		}
 
 	}
+	
+	@Get('/pasajes/:username')
+	/*
+	 * Devuelve la lista de pasajes comprados por el username pasado por parámetro.
+	 */
+	def Result pasajes() {
+		try {
+			var usuario = repoUsuarios.buscarParaEditar(username)
+			var cliente = repoClientes.searchById(usuario.id)
+			var resultados = repoPasajes.search(cliente)
+	
+			ok(resultados.map([each|new PasajeConViaje(each)]).toJson)
+			
+		} catch (UserException e) {
+			badRequest(getErrorJson(e.message))
+		}
+	}
+	
 
 // ********************************************************
 // ** OPCIONALES
