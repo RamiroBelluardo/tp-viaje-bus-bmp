@@ -40,7 +40,7 @@ class Pasaje extends Entity implements Cloneable {
 	def cancelar() {
 		this.viaje.pasajes.remove(this)
 		this.estado.anterior(this)
-		this.viaje.liberarAsiento(this.asiento.numero)
+		this.viaje.liberarAsiento(this.nroAsiento)
 		this.cliente.removerPasaje(this)
 
 	}
@@ -48,7 +48,7 @@ class Pasaje extends Entity implements Cloneable {
 	def confirmar() {
 		this.viaje.pasajes.add(this)
 		this.estado.siguiente(this)
-		this.viaje.reservarAsiento(this.asiento.numero)
+		this.viaje.reservarAsiento(this.nroAsiento)
 		this.cliente.agregarPasaje(this)
 	}
 

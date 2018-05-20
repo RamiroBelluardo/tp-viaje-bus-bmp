@@ -8,6 +8,6 @@ import org.eclipse.xtend.lib.annotations.Accessors
 class Semicama extends TipoAsiento {
 	new() {
 		this.nombre = "Semicama"
-		this.porcentaje = 1
+		this.porcentaje = 0
 	}
 }

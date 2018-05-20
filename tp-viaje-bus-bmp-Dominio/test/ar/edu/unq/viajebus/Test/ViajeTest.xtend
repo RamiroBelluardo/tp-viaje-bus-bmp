@@ -225,17 +225,20 @@ class ViajeTest {
 		viaje.agregarAsiento(asiento1)
 		viaje.agregarAsiento(asiento2)
 		viaje.agregarAsiento(asiento3)
-		assertEquals(viaje.asientosDisponibles.size(), 7)
+		assertEquals(viaje.asientosDisponibles.size(), 3)
 	}
 
 	@Test
 	def verCantidadDeAsientosReservados() {
 		viaje = new Viaje(fechaPartida, fechaLlegada, microCama)
+		viaje.agregarAsiento(asiento1)
+		viaje.agregarAsiento(asiento2)
+		viaje.agregarAsiento(asiento3)
 		assertEquals(viaje.verAsientosReservados.size(), 0)
-		assertEquals(viaje.asientosDisponibles.size(), 4)
+		assertEquals(viaje.asientosDisponibles.size(), 3)
 		viaje.reservarAsiento(3)
 		assertEquals(viaje.verAsientosReservados.size(), 1)
-		assertEquals(viaje.asientosDisponibles.size(), 3)
+		assertEquals(viaje.asientosDisponibles.size(), 2)
 	}
 
 	@Test
@@ -259,7 +262,8 @@ class ViajeTest {
 	@Test
 	def cancelarViajeConPasaje() {
 		viaje = new Viaje(fechaPartida, fechaLlegada, microCama)
-		// viaje.agregarAsiento(asiento1)
+		viaje.agregarAsiento(asiento1)
+		viaje.agregarAsiento(asiento2)
 		pasaje = new Pasaje(lucas, viaje, 1)
 		pasaje2 = new Pasaje(lucas, viaje, 2)
 		assertEquals(viaje.estado.class, Aprobado)
