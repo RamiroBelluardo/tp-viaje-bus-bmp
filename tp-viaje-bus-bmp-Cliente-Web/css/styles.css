@@ -1,0 +1,39 @@
+.fondoRojo
+{
+    background-color: red;
+}
+
+.fondoVerde
+{
+    background-color: green;
+}
+
+.fondoAmarillo
+{
+    background-color: yellow;
+}
+
+.colorRojo
+{
+    color: red
+}
+
+.precio
+{
+    color: red;
+    font-size: 25px;
+}
+
+
+.fa-bed
+{
+    color: rgb(249, 191, 141)
+}
+
+.fa-utensils{
+    color: rgb(138, 211, 217)
+}
+
+.fa-tv{
+    color: rgb(192, 223, 151)
+}
