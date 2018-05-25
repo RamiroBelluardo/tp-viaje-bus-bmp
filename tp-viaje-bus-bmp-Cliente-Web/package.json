@@ -4,12 +4,17 @@
   "description": "Cliente Web de ViajeBus",
   "main": "index.js",
   "scripts": {
+    "prestart": "npm install",
+    "start": "http-server  -p 8000 -c-1",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "angular": "^1.7.0",
+    "angular-ui-router": "^1.0.18",
     "bootstrap": "^3.3.7",
-    "font-awesome": "^4.7.0"
+    "font-awesome": "^4.7.0",
+    "http-server": "^0.11.1"
   }
 }
