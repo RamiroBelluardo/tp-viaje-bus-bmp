@@ -2,10 +2,9 @@
   "name": "tp-viaje-bus-bmp-cliente-web",
   "version": "1.0.0",
   "description": "Cliente Web de ViajeBus",
-  "main": "index.js",
   "scripts": {
     "prestart": "npm install",
-    "start": "http-server  -p 8000 -c-1",
+    "start": "http-server -p 8000 -c-1 -o",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -15,6 +14,7 @@
     "angular-ui-router": "^1.0.18",
     "bootstrap": "^3.3.7",
     "font-awesome": "^4.7.0",
-    "http-server": "^0.11.1"
+    "http-server": "^0.11.1",
+    "jquery": "^3.3.1"
   }
 }
