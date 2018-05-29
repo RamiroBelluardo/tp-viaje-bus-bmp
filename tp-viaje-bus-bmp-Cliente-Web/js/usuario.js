@@ -7,7 +7,7 @@ class Usuario {
         }
 
 
-        validar() {
+        validarRegistro() {
                 if (this.username === null || this.username === "") {
                         throw "Debe ingresar un username"
                 }
@@ -24,7 +24,6 @@ class Usuario {
                 }
                 this.cliente.validar()
         }
-
 }
 
 class Cliente {

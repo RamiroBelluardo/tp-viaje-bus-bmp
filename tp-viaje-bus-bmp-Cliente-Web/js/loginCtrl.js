@@ -13,11 +13,22 @@
     agregarUsuario(registerForm) {
       try {
         this.errorMessage = ''
-        this.usuario.validar()
+        this.usuario.validarRegistro()
         this.usuariosService.agregarUser(this.usuario)
         this.acceder()
       } catch (exception) {
         registerForm.$invalid = true
+        this.errorMessage = exception
+      }
+    }
+
+    loginUsuario(loginForm){
+      try {
+        this.errorMessage = ''
+        this.usuariosService.validarLogin(this.usuario)
+        this.acceder()
+      } catch (exception) {
+        loginForm.$invalid = true
         this.errorMessage = exception
       }
     }
