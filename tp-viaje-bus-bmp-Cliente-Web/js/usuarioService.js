@@ -5,21 +5,11 @@ class UsuarioService {
       this.usuarios = []  
     }
 
-    crearUsuario(username, password, name, lastName, dni, mail, phone) {
-        let usuario = new Usuario(username, password, name, lastName, dni, mail, phone)
-        usuario.id = this.usuariosIds++
-        return usuario
-    }
-
-    agregarUsuario(usuario) {
+    agregarUser(usuario) {
+        // VALIDA
         this.usuarios.push(usuario)
+        console.log(this.usuarios)    
     }
-
-    getUsuarioById(id) {
-        return this.usuarios.find((usuario) => {
-          return usuario.id == id
-        })
-      }
       
   
   }
