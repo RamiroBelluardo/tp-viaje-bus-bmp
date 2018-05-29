@@ -1,151 +1,125 @@
-<!DOCTYPE html>
-<html>
+<!-- BARRA SUPERIOR -->
+<div class="container">
+    <nav class="navbar navbar-dark bg-primary">
 
-<head>
-    <meta charset="utf-8">
-    <title>Búsqueda de viajes</title>
-    <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="../css/styles.css">
-    <!-- BOOTSTRAP -->
-    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
-    <!-- FONT AWESOME -->
-    <link rel="stylesheet" href="../node_modules/font-awesome/css/font-awesome.min.css">
-    <!-- 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
-        crossorigin="anonymous">
-    -->
-</head>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right ">
+                <li>
+                    <button type="button" class="btn btn-success">Tincho18</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
-<body>
 
-    <!-- BARRA SUPERIOR -->
-    <div class="container">
-        <nav class="navbar navbar-dark bg-primary">
+    <div class="row">
+        <!-- PANEL DE BUSQUEDA (IZQUIERDO) -->
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <form role="form">
+                <div class="form-group">
+                    <label for="ciudadPartida">Ciudad Partida</label>
+                    <input type="text" id="ciudadPartida" placeholder="Ingresá ciudad de partida" class="form-control" autofocus>
+                </div>
 
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right ">
-                    <li>
-                        <button type="button" class="btn btn-success">Tincho18</button>
-                    </li>
-                </ul>
+                <div class="form-group">
+                    <label for="fechaPartida">Fecha Partida</label>
+                    <input type="text" id="fechaPartida" placeholder="Ingresá fecha de partida" class="form-control" autofocus>
+                </div>
+
+                <div class="form-group">
+                    <label for="ciudadLlegada">Ciudad Llegada</label>
+                    <input type="text" id="ciudadLlegada" placeholder="Ingresá ciudad de llegada" class="form-control" autofocus>
+                </div>
+
+                <div class="form-group">
+                    <label for="fechaLlegada">Fecha Llegada</label>
+                    <input type="text" id="fechaLlegada" placeholder="Ingresá fecha de llegada" class="form-control" autofocus>
+                </div>
+            </form>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <button type="submit" class="btn btn-primary btn-block">Buscar</button>
             </div>
-        </nav>
-
-
-        <div class="row">
-            <!-- PANEL DE BUSQUEDA (IZQUIERDO) -->
-            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                <form role="form">
-                    <div class="form-group">
-                        <label for="ciudadPartida">Ciudad Partida</label>
-                        <input type="text" id="ciudadPartida" placeholder="Ingresá ciudad de partida" class="form-control" autofocus>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="fechaPartida">Fecha Partida</label>
-                        <input type="text" id="fechaPartida" placeholder="Ingresá fecha de partida" class="form-control" autofocus>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="ciudadLlegada">Ciudad Llegada</label>
-                        <input type="text" id="ciudadLlegada" placeholder="Ingresá ciudad de llegada" class="form-control" autofocus>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="fechaLlegada">Fecha Llegada</label>
-                        <input type="text" id="fechaLlegada" placeholder="Ingresá fecha de llegada" class="form-control" autofocus>
-                    </div>
-                </form>
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                    <button type="submit" class="btn btn-primary btn-block">Buscar</button>
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                    <button type="button" class="btn btn-link">Limpiar</button>
-                </div>
-
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <button type="button" class="btn btn-link">Limpiar</button>
             </div>
 
-            <!-- PANEL PRÓXIMOS VIAJES (DERECHO) -->
-
-            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                <h3>Próximos viajes</h3>
-                <hr>
-                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                    <b>Partida</b>
-                    <br> CABA - 8/6/18 12:00
-                    <br>
-                    <b>Llegada</b>
-                    <br> Córdoba - 9/6/18 10:00
-                </div>
-
-                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                    Asientos libres
-                    <br> 15/20
-
-                </div>
-
-                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                    <i class="fas fa-bed"></i>
-                    cama
-                    <br>
-                    <i class="fas fa-utensils"></i>
-                    desayuno y cena
-                    <br>
-                    <i class="fas fa-tv"></i>
-                    con tele
-                </div>
-
-                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                    <b class="precio">$1200</b>
-                    <br>
-                    <button type="button" class="btn btn-danger">Comprar</button>
-                </div>
-
-                <br>
-                <br>
-                <br>
-                <br>
-
-                <hr>
-                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                    <b>Partida</b>
-                    <br> CABA - 8/6/18 12:00
-                    <br>
-                    <b>Llegada</b>
-                    <br> Córdoba - 9/6/18 10:00
-                </div>
-
-                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                    Asientos libres
-                    <br> 3/20
-                    <br>
-                    <span class="colorRojo">Últimos disponibles</span>
-
-                </div>
-
-                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                    <i class="fas fa-bed"></i>
-                    cama
-                    <br>
-                    <i class="fas fa-utensils"></i>
-                    desayuno y cena
-                    <br>
-                    <i class="fas fa-tv"></i>
-                    con tele
-                </div>
-
-                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                    <b class="precio">$1200</b>
-                    <br>
-                    <button type="button" class="btn btn-danger">Comprar</button>
-                </div>
-            </div>
         </div>
 
+        <!-- PANEL PRÓXIMOS VIAJES (DERECHO) -->
+
+        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+            <h3>Próximos viajes</h3>
+            <hr>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <b>Partida</b>
+                <br> CABA - 8/6/18 12:00
+                <br>
+                <b>Llegada</b>
+                <br> Córdoba - 9/6/18 10:00
+            </div>
+
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                Asientos libres
+                <br> 15/20
+
+            </div>
+
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <i class="fas fa-bed"></i>
+                cama
+                <br>
+                <i class="fas fa-utensils"></i>
+                desayuno y cena
+                <br>
+                <i class="fas fa-tv"></i>
+                con tele
+            </div>
+
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <b class="precio">$1200</b>
+                <br>
+                <button type="button" class="btn btn-danger">Comprar</button>
+            </div>
+
+            <br>
+            <br>
+            <br>
+            <br>
+
+            <hr>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <b>Partida</b>
+                <br> CABA - 8/6/18 12:00
+                <br>
+                <b>Llegada</b>
+                <br> Córdoba - 9/6/18 10:00
+            </div>
+
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                Asientos libres
+                <br> 3/20
+                <br>
+                <span class="colorRojo">Últimos disponibles</span>
+
+            </div>
+
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <i class="fas fa-bed"></i>
+                cama
+                <br>
+                <i class="fas fa-utensils"></i>
+                desayuno y cena
+                <br>
+                <i class="fas fa-tv"></i>
+                con tele
+            </div>
+
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <b class="precio">$1200</b>
+                <br>
+                <button type="button" class="btn btn-danger">Comprar</button>
+            </div>
+        </div>
     </div>
 
-
-</body>
-
-</html>
+</div>

@@ -1,80 +1,68 @@
-<!DOCTYPE html>
-<html>
 
-<head>
-    <meta charset="utf-8">
     <title>Registrarse</title>
-    <!-- BOOTSTRAP -->
-    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
-</head>
-
-<body>
-    <div class="container" >
-        <form class="form-horizontal" role="form">
+    <div class="container" ng-controller="LoginController as login">
+        <form class="form-horizontal" role="form" name="registerForm">
             <h2>Registrarse</h2>
+
+            <div>
+				<div class="alert alert-danger" ng-show="login.errorMessage">
+					{{login.errorMessage}}</div>
+			</div>
 
             <div class="form-group">
                 <label for="username" class="col-sm-3 control-label">Usuario</label>
                 <div class="col-sm-9">
-                    <input type="text" id="username" placeholder="Ingresá tu usuario" class="form-control" autofocus>
+                    <input ng-model="login.usuario.username" type="text" id="username" placeholder="Ingresá tu usuario" class="form-control" autofocus required="true">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="password" class="col-sm-3 control-label">Contraseña</label>
                 <div class="col-sm-9">
-                    <input type="password" id="password" placeholder="Ingresá tu contraseña" class="form-control">
+                    <input ng-model="login.usuario.password" type="password" id="password" placeholder="Ingresá tu contraseña" class="form-control" required="true">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="name" class="col-sm-3 control-label">Nombre</label>
                 <div class="col-sm-9">
-                    <input type="text" id="name" placeholder="Ingresá tu nombre" class="form-control">
+                    <input ng-model="login.usuario.cliente.name" type="text" id="name" placeholder="Ingresá tu nombre" class="form-control" required="true">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="lastname" class="col-sm-3 control-label">Apellido</label>
                 <div class="col-sm-9">
-                    <input type="text" id="lastname" placeholder="Ingresá tu apellido" class="form-control">
+                    <input ng-model="login.usuario.cliente.lastName" type="text" id="lastname" placeholder="Ingresá tu apellido" class="form-control" required="true">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="dni" class="col-sm-3 control-label">DNI</label>
                 <div class="col-sm-9">
-                    <input type="text" id="dni" placeholder="Ingresá tu DNI" class="form-control">
+                    <input ng-model="login.usuario.cliente.dni" type="number" id="dni" placeholder="Ingresá tu DNI" class="form-control" required="true">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="mail" class="col-sm-3 control-label">Mail</label>
                 <div class="col-sm-9">
-                    <input type="text" id="mail" placeholder="Ingresá tu mail" class="form-control">
+                    <input ng-model="login.usuario.cliente.mail" type="text" id="mail" placeholder="Ingresá tu mail" class="form-control" required="true">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="phone" class="col-sm-3 control-label">Teléfono</label>
                 <div class="col-sm-9">
-                    <input type="text" id="phone" placeholder="Ingresá tu teléfono" class="form-control">
+                    <input ng-model="login.usuario.cliente.phone" type="number" id="phone" placeholder="Ingresá tu teléfono" class="form-control">
                 </div>
             </div>
 
 
             <div class="form-group">
                 <div class="col-sm-9 col-sm-offset-3">
-                    <button type="submit" class="btn btn-primary btn-block">Registrar</button>
+                    <button ng-click="login.agregarUsuario(registerForm)" type="submit" class="btn btn-primary btn-block">Registrar</button>
                 </div>
             </div>
         </form>
     </div>
-
-
-
-
-</body>
-
-</html>

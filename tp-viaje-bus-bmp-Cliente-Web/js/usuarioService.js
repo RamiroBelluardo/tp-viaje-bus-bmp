@@ -5,8 +5,8 @@ class UsuarioService {
       this.usuarios = []  
     }
 
-    crearUsuario(username, password) {
-        let usuario = new Usuario(username, password)
+    crearUsuario(username, password, name, lastName, dni, mail, phone) {
+        let usuario = new Usuario(username, password, name, lastName, dni, mail, phone)
         usuario.id = this.usuariosIds++
         return usuario
     }
