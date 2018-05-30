@@ -15,7 +15,7 @@
         this.errorMessage = ''
         this.usuario.validarRegistro()
         this.usuariosService.agregarUser(this.usuario)
-        this.acceder()
+        this.state.go("login")
       } catch (exception) {
         registerForm.$invalid = true
         this.errorMessage = exception
@@ -34,7 +34,7 @@
     }
     
      acceder(){
-       //this.state.go("buscarViajes")
+       this.state.go("buscarViajes")
        console.log("accediendo")
      }
 

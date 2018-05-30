@@ -11,7 +11,7 @@ class Usuario {
                 if (this.username === null || this.username === "") {
                         throw "Debe ingresar un username"
                 }
-                if (this.username.length < 5) {
+                if (this.username === undefined || this.username.length < 5) {
                         throw "El username debe tener 5 caracteres al menos"
                 }
 
@@ -19,7 +19,7 @@ class Usuario {
                         throw "Debe ingresar un password"
                 }
 
-                if (this.password.length < 4) {
+                if (this.password === undefined || this.password.length < 4) {
                         throw "El password debe tener 4 caracteres al menos"
                 }
                 this.cliente.validar()
