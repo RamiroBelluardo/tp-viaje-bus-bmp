@@ -1,3 +1,4 @@
+<!--
 <!-- BARRA SUPERIOR -->
 <div class="container" ng-controller="LoginController as login">
     <nav class="navbar navbar-dark bg-primary">
@@ -12,28 +13,50 @@
     </nav>
 
 
-    <div class="row">
+    <div class="row" ng-controller="BuscarViajesController as buscarCtrl">
         <!-- PANEL DE BUSQUEDA (IZQUIERDO) -->
-        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" ng-controller="BuscarViajesController as buscarCtrl">
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
             <form role="form">
                 <div class="form-group">
                     <label for="ciudadPartida">Ciudad Partida</label>
-                    <input type="text" id="ciudadPartida" placeholder="Ingresá ciudad de partida" class="form-control" autofocus>
+                    <input ng-model="buscarCtrl.ciudadPartida" type="text" id="ciudadPartida" placeholder="Ingresá ciudad de partida" class="form-control" autofocus>
                 </div>
 
                 <div class="form-group">
                     <label for="fechaPartida">Fecha Partida</label>
-                    <input type="text" id="fechaPartida" placeholder="Ingresá fecha de partida" class="form-control" autofocus>
+                    <div>
+                        <div class="row">
+                            <div>
+                                <p class="input-group">
+                                    <input type="text" class="form-control" clear-text="Limpiar"
+                                        current-text="Hoy" close-text="Cerrar"
+                                        datepicker-popup="dd/MM/yyyy"
+                                        ng-model="buscarCtrl.fechaPartida"
+                                        is-open="buscarCtrl.calendarioAbierto"
+                                        min-date="buscarCtrl.fechaMinimaViaje"
+                                        datepicker-options="buscarCtrl.dateOptions"
+                                        ng-required="true" /> <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default"
+                                            ng-click="buscarCtrl.verCalendario($event)">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </button>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--<input ng-model="buscarCtrl.fechaPartida" type="text" id="fechaPartida" placeholder="Ingresá fecha de partida" class="form-control" autofocus>-->
                 </div>
 
                 <div class="form-group">
                     <label for="ciudadLlegada">Ciudad Llegada</label>
-                    <input type="text" id="ciudadLlegada" placeholder="Ingresá ciudad de llegada" class="form-control" autofocus>
+                    <input ng-model="buscarCtrl.ciudadLlegada" type="text" id="ciudadLlegada" placeholder="Ingresá ciudad de llegada" class="form-control" autofocus>
                 </div>
 
                 <div class="form-group">
                     <label for="fechaLlegada">Fecha Llegada</label>
-                    <input type="text" id="fechaLlegada" placeholder="Ingresá fecha de llegada" class="form-control" autofocus>
+                    <input ng-model="buscarCtrl.fechaLlegada" type="text" id="fechaLlegada" placeholder="Ingresá fecha de llegada" class="form-control" autofocus>
                 </div>
             </form>
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -47,12 +70,14 @@
 
         <!-- PANEL PRÓXIMOS VIAJES (DERECHO) -->
 
+        <button ng-click="buscarCtrl.agregarViaje()" type="button" class="btn btn-success">Agregar viaje vacío</button>
+
         <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
             <h3>Próximos viajes</h3>
             <hr>
 
             <ul class="nav nav-pills nav-stacked">
-                <li ng-repeat="viaje in buscarCtrl.viajes">
+                <li data-ng-repeat="viaje in buscarCtrl.viajes">
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                         <b>Partida</b>
                         <br> {{viaje.fechaPartida}}

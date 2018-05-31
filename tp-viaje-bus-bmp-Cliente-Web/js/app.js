@@ -1,7 +1,6 @@
-angular.module('viajeBusApp', ['ui.router'])
+angular.module('viajeBusApp', ['ui.router','ui.bootstrap'])
     .service("UsuarioService", UsuarioService)
     .service("ViajeService", ViajeService)
     .controller('LoginController', LoginController)
     .controller('BuscarViajesController', BuscarViajesController)
     .config(routes)
-    
