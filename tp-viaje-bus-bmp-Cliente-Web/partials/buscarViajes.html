@@ -1,4 +1,3 @@
-<!--
 <!-- BARRA SUPERIOR -->
 <div class="container" ng-controller="LoginController as login">
     <nav class="navbar navbar-dark bg-primary">
@@ -6,7 +5,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right ">
                 <li>
-                    <button type="button" class="btn btn-success">{{login.usuario.username}}</button>
+                    <button type="button" class="btn btn-success">{{login.usuarioLogueado.username}}</button>
                 </li>
             </ul>
         </div>
@@ -19,7 +18,8 @@
             <form role="form">
                 <div class="form-group">
                     <label for="ciudadPartida">Ciudad Partida</label>
-                    <input ng-model="buscarCtrl.ciudadPartida" type="text" id="ciudadPartida" placeholder="Ingresá ciudad de partida" class="form-control" autofocus>
+                    <input ng-model="buscarCtrl.ciudadPartida" type="text" id="ciudadPartida" placeholder="Ingresá ciudad de partida" class="form-control"
+                        autofocus>
                 </div>
 
                 <div class="form-group">
@@ -28,16 +28,11 @@
                         <div class="row">
                             <div>
                                 <p class="input-group">
-                                    <input type="text" class="form-control" clear-text="Limpiar"
-                                        current-text="Hoy" close-text="Cerrar"
-                                        datepicker-popup="dd/MM/yyyy"
-                                        ng-model="buscarCtrl.fechaPartida"
-                                        is-open="buscarCtrl.calendarioAbierto"
-                                        min-date="buscarCtrl.fechaMinimaViaje"
-                                        datepicker-options="buscarCtrl.dateOptions"
-                                        ng-required="true" /> <span class="input-group-btn">
-                                        <button type="button" class="btn btn-default"
-                                            ng-click="buscarCtrl.verCalendario($event)">
+                                    <input type="text" class="form-control" clear-text="Limpiar" current-text="Hoy" close-text="Cerrar" datepicker-popup="dd/MM/yyyy"
+                                        ng-model="buscarCtrl.fechaPartida" is-open="buscarCtrl.fechaPartidaAbierto" min-date="buscarCtrl.fechaMinimaViaje"
+                                        datepicker-options="buscarCtrl.dateOptions" ng-required="true" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="buscarCtrl.verFechaPartida($event)">
                                             <i class="glyphicon glyphicon-calendar"></i>
                                         </button>
                                     </span>
@@ -46,17 +41,32 @@
                         </div>
                     </div>
 
-                    <!--<input ng-model="buscarCtrl.fechaPartida" type="text" id="fechaPartida" placeholder="Ingresá fecha de partida" class="form-control" autofocus>-->
                 </div>
 
                 <div class="form-group">
                     <label for="ciudadLlegada">Ciudad Llegada</label>
-                    <input ng-model="buscarCtrl.ciudadLlegada" type="text" id="ciudadLlegada" placeholder="Ingresá ciudad de llegada" class="form-control" autofocus>
+                    <input ng-model="buscarCtrl.ciudadLlegada" type="text" id="ciudadLlegada" placeholder="Ingresá ciudad de llegada" class="form-control"
+                        autofocus>
                 </div>
 
                 <div class="form-group">
                     <label for="fechaLlegada">Fecha Llegada</label>
-                    <input ng-model="buscarCtrl.fechaLlegada" type="text" id="fechaLlegada" placeholder="Ingresá fecha de llegada" class="form-control" autofocus>
+                    <div>
+                        <div class="row">
+                            <div>
+                                <p class="input-group">
+                                    <input type="text" class="form-control" clear-text="Limpiar" current-text="Hoy" close-text="Cerrar" datepicker-popup="dd/MM/yyyy"
+                                        ng-model="buscarCtrl.fechaLlegada" is-open="buscarCtrl.fechaLlegadaAbierto" min-date="buscarCtrl.fechaMinimaViaje"
+                                        datepicker-options="buscarCtrl.dateOptions" ng-required="true" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="buscarCtrl.verFechaLlegada($event)">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </button>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </form>
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">

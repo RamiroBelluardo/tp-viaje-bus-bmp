@@ -1,12 +1,13 @@
   class LoginController {
 
-    constructor($stateParams, $state){//, UsuarioService) {
-      //this.usuariosService = UsuarioService
-      this.usuariosService = new UsuarioService()
+    constructor($stateParams, $state, UsuarioService, LoginService) {
+      this.usuariosService = UsuarioService
+      this.loginService = LoginService
       this.usuario = new Usuario()
       this.errorMessage = ''
       this.usuarios = UsuarioService.usuarios
       this.state = $state
+      this.usuarioLogueado = this.loginService.usuarioLogueado
     }
 
     
@@ -34,6 +35,7 @@
     }
     
      acceder(){
+       this.loginService.usuarioLogueado = this.usuario
        this.state.go("buscarViajes")
        console.log("accediendo")
      }
