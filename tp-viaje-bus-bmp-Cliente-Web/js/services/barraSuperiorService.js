@@ -1,4 +1,4 @@
-class LoginService {
+class BarraSuperiorService {
 
     constructor() {
       this.usuarioLogueado = null

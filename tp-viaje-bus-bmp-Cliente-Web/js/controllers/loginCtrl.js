@@ -1,32 +1,21 @@
   class LoginController {
 
-    constructor($stateParams, $state, UsuarioService, LoginService) {
+    constructor($state, UsuarioService, BarraSuperiorService) {
       this.usuariosService = UsuarioService
-      this.loginService = LoginService
+      this.barraSuperiorService = BarraSuperiorService
       this.usuario = new Usuario()
       this.errorMessage = ''
       this.usuarios = UsuarioService.usuarios
       this.state = $state
-      this.usuarioLogueado = this.loginService.usuarioLogueado
+      this.usuarioLogueado = this.barraSuperiorService.usuarioLogueado
     }
 
-    
-    agregarUsuario(registerForm) {
-      try {
-        this.errorMessage = ''
-        this.usuario.validarRegistro()
-        this.usuariosService.agregarUser(this.usuario)
-        this.state.go("login")
-      } catch (exception) {
-        registerForm.$invalid = true
-        this.errorMessage = exception
-      }
-    }
 
     loginUsuario(loginForm){
       try {
         this.errorMessage = ''
         this.usuariosService.validarLogin(this.usuario)
+        this.barraSuperiorService.usuarioLogueado = this.usuario
         this.acceder()
       } catch (exception) {
         loginForm.$invalid = true
@@ -35,7 +24,6 @@
     }
     
      acceder(){
-       this.loginService.usuarioLogueado = this.usuario
        this.state.go("buscarViajes")
        console.log("accediendo")
      }

@@ -1,11 +1,11 @@
 <!-- BARRA SUPERIOR -->
-<div class="container" ng-controller="LoginController as login">
+<div class="container" ng-controller="BarraSuperiorController as superiorCtrl">
     <nav class="navbar navbar-dark bg-primary">
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right ">
                 <li>
-                    <button type="button" class="btn btn-success">{{login.usuarioLogueado.username}}</button>
+                    <button type="button" class="btn btn-success">{{superiorCtrl.usuarioLogueado.username}}</button>
                 </li>
             </ul>
         </div>

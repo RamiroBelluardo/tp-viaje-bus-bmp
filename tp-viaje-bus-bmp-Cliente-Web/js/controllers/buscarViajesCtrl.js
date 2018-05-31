@@ -8,7 +8,6 @@ class BuscarViajesController {
       this.viajeService = ViajeService
       this.viaje = new Viaje()
       this.fechaMinimaViaje = new Date()
-      // this.calendarioAbierto = false
       this.fechaPartidaAbierto = false
       this.fechaLlegadaAbierto = false
       this.errorMessage = ''
@@ -16,13 +15,6 @@ class BuscarViajesController {
       this.state = $state
 
     }
-
-
-	// verCalendario($event) {
-	// 	$event.preventDefault()
-  //   $event.stopPropagation()
-  //   this.calendarioAbierto = true
-  // }
   
   verFechaPartida($event) {
 		$event.preventDefault()
