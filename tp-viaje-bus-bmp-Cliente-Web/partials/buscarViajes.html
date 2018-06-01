@@ -1,3 +1,5 @@
+
+
 <!-- BARRA SUPERIOR -->
 <div class="container" ng-controller="BarraSuperiorController as superiorCtrl">
     <nav class="navbar navbar-dark bg-primary">
@@ -6,11 +8,11 @@
             <ul class="nav navbar-nav navbar-right ">
                 <li>
                     <button type="button" class="btn btn-success">{{superiorCtrl.usuarioLogueado.username}}</button>
+
                 </li>
             </ul>
         </div>
     </nav>
-
 
     <div class="row" ng-controller="BuscarViajesController as buscarCtrl">
         <!-- PANEL DE BUSQUEDA (IZQUIERDO) -->
@@ -98,24 +100,25 @@
                         <br>{{buscarCtrl.verAsientosLibres(viaje)}} / {{viaje.micro.cantidadAsientos}}
                         <br>
                         <span ng-show="buscarCtrl.ultimosDisponibles(viaje)" class="colorRojo">
-                            <i class="fas fa-fire"></i>
+                            <i class="fa fa-fire" aria-hidden="true"></i>
                             Últimos disponibles</span>
 
                     </div>
 
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 
-                            <i ng-show="buscarCtrl.esCama(viaje)" class="fas fa-bed"></i>
+                            <i ng-show="buscarCtrl.esCama(viaje)" class="fa fa-bed" aria-hidden="true"></i>
                             {{viaje.micro.tipoAsiento.nombre}}
 
                             <ul class="nav nav-pills nav-stacked" id="servicios">
-                                <i ng-show="buscarCtrl.tieneServicios(viaje)" class="fas fa-utensils"></i>
+                                <i ng-show="buscarCtrl.tieneServicios(viaje)" class="fa fa-cutlery" aria-hidden="true"></i>
+
                                 <li data-ng-repeat="servicio in viaje.servicios">
                                     {{servicio}},
                                 </li>
                             </ul>
-                            
-                            <i ng-show="viaje.micro.tieneTele" class="fas fa-tv"></i>
+
+                            <i ng-show="viaje.micro.tieneTele" class="fa fa-television" aria-hidden="true"></i>
                             {{buscarCtrl.mostrarTele(viaje)}}
                     </div>
 
