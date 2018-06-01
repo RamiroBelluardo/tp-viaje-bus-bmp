@@ -1,11 +1,13 @@
 package ar.edu.unq.viajebus.runnable
 
 import ar.edu.unq.viajebus.Cliente.Cliente
+import ar.edu.unq.viajebus.Cliente.Usuario
 import ar.edu.unq.viajebus.Mailing.GMailSender
 import ar.edu.unq.viajebus.Micro.Asiento
 import ar.edu.unq.viajebus.Micro.Micro
 import ar.edu.unq.viajebus.Micro.Pasaje
 import ar.edu.unq.viajebus.Micro.Viaje
+import ar.edu.unq.viajebus.Servicios.Cena
 import ar.edu.unq.viajebus.Servicios.Desayuno
 import ar.edu.unq.viajebus.TipoAsiento.Cama
 import ar.edu.unq.viajebus.TipoAsiento.Ejecutivo
@@ -16,9 +18,8 @@ import org.uqbar.commons.applicationContext.ApplicationContext
 import repo.RepoClientes
 import repo.RepoMicros
 import repo.RepoPasajes
-import repo.RepoViajes
-import ar.edu.unq.viajebus.Cliente.Usuario
 import repo.RepoUsuarios
+import repo.RepoViajes
 
 class ViajeBusBootstrap extends CollectionBasedBootstrap {
 
@@ -101,6 +102,8 @@ class ViajeBusBootstrap extends CollectionBasedBootstrap {
 		
 
 		viaje1.agregarServicio(new Desayuno)
+		viaje4.agregarServicio(new Desayuno)
+		viaje4.agregarServicio(new Cena)
 
 		val pasaje1 = repoPasajes.create(cliente1, viaje1, 1)
 		val pasaje2 = repoPasajes.create(cliente2, viaje2, 3)

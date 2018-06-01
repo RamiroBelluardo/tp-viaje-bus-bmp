@@ -13,18 +13,29 @@ class ViajeResumido {
 	List<Integer> asientosLibres
 	MicroResumido micro
 	List<String> recorrido
-	List<Servicio> servicios
+	List<String> servicios
 	double precio
 
 	new(Viaje viaje) {
-		var formateador = new LocalDateTimeTransformer
-		this.fechaPartida = formateador.modelToView(viaje.fechaPartida)
-		this.fechaLlegada = formateador.modelToView(viaje.fechaLlegada)
+		var formateadorFecha = new LocalDateTimeTransformer
+		this.fechaPartida = formateadorFecha.modelToView(viaje.fechaPartida)
+		this.fechaLlegada = formateadorFecha.modelToView(viaje.fechaLlegada)
 		this.asientosLibres = viaje.nrosAsientosDisponibles
 		this.micro = new MicroResumido(viaje.micro)
 		this.recorrido = viaje.recorrido
-		this.servicios = viaje.servicios
+		this.servicios = this.formatearServicios(viaje.servicios)
 		this.precio = viaje.precio
+	}
+
+	def formatearServicios(List<Servicio> servicios) {
+		var res = newArrayList
+		if (servicios === null) {
+			return null
+		}
+		for (Servicio s : servicios) {
+			res.add(s.nombre)
+		}
+		res
 	}
 
 }
