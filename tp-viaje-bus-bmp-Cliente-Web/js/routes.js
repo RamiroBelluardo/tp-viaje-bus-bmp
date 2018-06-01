@@ -14,6 +14,10 @@ const routes = ($stateProvider, $urlRouterProvider) => {
       url: "/buscarViajes",
       templateUrl: "partials/buscarViajes.html"
     })
+    .state('seleccionarAsiento', {
+      url: "/seleccionarAsiento",
+      templateUrl: "partials/seleccionarAsiento.html"
+    })
 
   $urlRouterProvider.otherwise("/login");
 

@@ -1,20 +1,55 @@
 class BuscarViajesController {
 
-    constructor($stateParams, $state, ViajeService){
-      this.fechaPartida = new Date()
-      this.fechaLlegada = new Date()
-      this.ciudadPartida = null
-      this.ciudadLlegada = null
-      this.viajeService = ViajeService
-      this.viaje = new Viaje()
+    constructor($stateParams, $state, viajeService, growl){
+      this.viajeService = viajeService
+      this.growl = growl
+      this.viajes = []
+      this.busqueda = ''
       this.fechaMinimaViaje = new Date()
       this.fechaPartidaAbierto = false
       this.fechaLlegadaAbierto = false
       this.errorMessage = ''
-      this.viajes = ViajeService.viajes
+      this.viajes = viajeService.viajes
       this.state = $state
+      this.errorHandler = (response) => {
+        if (response.data) {
+          // confiamos en que cuando hay un error, el servidor
+          // devuelve en el body un json de la forma { "error": <mensaje de error> }
+          this.notificarError(response.data.error)
+        } else {
+          // si no hay respuesta, debe ser porque hubo error de conexión
+          this.notificarError("Error de conexión, intente nuevamente luego.")
+        }
+    }
+    this.resetViajes()
 
     }
+
+        // NOTIFICACIONES & ERRORES
+        notificarMensaje(mensaje) {
+          this.growl.info(mensaje)
+      }
+  
+      notificarError(mensaje) {
+          this.growl.error(mensaje)
+      }
+  
+      // BUSCAR
+      buscarViajes() {
+          const promise = (this.busqueda == "") ?
+              this.viajeService.listarTodos() :
+              this.viajeService.buscar(this.busqueda)
+  
+          promise.then((response) => {
+              this.libros = response.data
+          }, this.errorHandler)
+      }
+  
+      // LISTAR
+      resetViajes() {
+          this.busqueda = ""
+          this.buscarViajes()
+      }
   
   verFechaPartida($event) {
 		$event.preventDefault()
