@@ -50,23 +50,29 @@ class ViajeBusBootstrap extends CollectionBasedBootstrap {
 		val llegadaMicro2 = new LocalDateTime(2020, 1, 2, 03, 12)
 		val partidaMicro3 = new LocalDateTime(2021, 2, 22, 17, 20)
 		val llegadaMicro3 = new LocalDateTime(2021, 2, 23, 15, 45)
+		val partidaMicro4 = new LocalDateTime(2025, 4, 12, 13, 00)
+		val llegadaMicro4 = new LocalDateTime(2025, 4, 13, 15, 00)
 
 		val micro1 = repoMicros.create("ABC123", new Cama, true, 2)
 		val micro2 = repoMicros.create("AB123AB", new Semicama, false, 4)
 		val micro3 = repoMicros.create("DCR283", new Ejecutivo, true, 0)
-
+		val micro4 = repoMicros.create("XYZ123", new Ejecutivo, true, 8)
+		
 		repoViajes.create(partidaMicro1, llegadaMicro1, micro1)
 		repoViajes.create(partidaMicro2, llegadaMicro2, micro2)
 		repoViajes.create(partidaMicro3, llegadaMicro3, micro3)
+		repoViajes.create(partidaMicro4, llegadaMicro4, micro4)
 
 		val viaje1 = repoViajes.searchById(1)
 		val viaje2 = repoViajes.searchById(2)
 		val viaje3 = repoViajes.searchById(3)
+		val viaje4 = repoViajes.searchById(4)
 
 		viaje1.agregarCiudad("San Salvador de Jujuy")
 		viaje2.agregarCiudad("Purmamarca")
 		viaje2.agregarCiudad("Buenos Aires")
 		viaje3.agregarCiudad("Tilcara")
+		viaje4.agregarCiudad("Moscú")
 
 		val cliente1 = repoClientes.create("Lucas", "Pier", "11111111", "lg.piergiacomi@asd.com", "44444444")
 		val cliente2 = repoClientes.create("Esteban", "Matas", "22222222", "esteban@eso.com", "")
@@ -84,8 +90,15 @@ class ViajeBusBootstrap extends CollectionBasedBootstrap {
 		viaje2.agregarAsiento(new Asiento)
 		viaje2.agregarAsiento(new Asiento)
 
-//
-//		viaje3.agregarAsiento(new Asiento)
+		viaje4.agregarAsiento(new Asiento)
+		viaje4.agregarAsiento(new Asiento)
+		viaje4.agregarAsiento(new Asiento)
+		viaje4.agregarAsiento(new Asiento)
+		viaje4.agregarAsiento(new Asiento)
+		viaje4.agregarAsiento(new Asiento)
+		viaje4.agregarAsiento(new Asiento)
+		viaje4.agregarAsiento(new Asiento)
+		
 
 		viaje1.agregarServicio(new Desayuno)
 
