@@ -3,7 +3,7 @@ angular.module('viajeBusApp', ['ui.router', 'ui.bootstrap', 'angular-growl'])
         growlProvider.globalTimeToLive(2000);
     }])
     .service("UsuarioService", UsuarioService)
-    .service("viajeService", viajeService)
+    .factory("viajeService", viajeService)
     .service("BarraSuperiorService", BarraSuperiorService)
     .controller('LoginController', LoginController)
     .controller('RegisterController', RegisterController)
