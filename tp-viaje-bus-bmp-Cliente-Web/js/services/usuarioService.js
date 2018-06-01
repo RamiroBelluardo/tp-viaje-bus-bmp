@@ -7,6 +7,13 @@
           url: baseurl + "login",
           data: usuario
         })
+      },
+      register: (usuario) => {
+        return $http({
+          method: "POST",
+          url: baseurl + "usuarios",
+          data: usuario
+        })
       }
     }
   }

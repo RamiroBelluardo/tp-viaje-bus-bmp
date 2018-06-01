@@ -1,24 +1,39 @@
 class RegisterController {
 
-  constructor($state, UsuarioService) {
-    this.usuariosService = UsuarioService
-    this.usuario = new Usuario()
-    this.errorMessage = ''
-    this.usuarios = UsuarioService.usuarios
+  constructor($state, usuarioService, growl) {
     this.state = $state
-  }
-
-
-  agregarUsuario(registerForm) {
-    try {
-      this.errorMessage = ''
-      this.usuario.validarRegistro()
-      this.usuariosService.agregarUser(this.usuario)
-      this.state.go("login")
-    } catch (exception) {
-      registerForm.$invalid = true
-      this.errorMessage = exception
+    this.usuarioService = usuarioService
+    this.growl = growl
+    this.usuarioARegistrar = null
+    this.errorHandler = (response) => {
+      if (response.data) {
+        this.notificarError(response.data.error)
+      } else {
+        this.notificarError("Error de conexión, intente nuevamente luego.")
+      }
     }
+    // this.usuario = new Usuario()
+    // this.errorMessage = ''
+    // this.usuarios = UsuarioService.usuarios
   }
 
+  // NOTIFICACIONES & ERRORES
+  notificarMensaje(mensaje) {
+    this.growl.info(mensaje)
+  }
+
+  notificarError(mensaje) {
+    this.growl.error(mensaje)
+  }
+
+
+  agregarUsuario() {
+    this.usuarioService.register(this.usuarioARegistrar)
+      .then((response) => {
+        this.notificarMensaje("Te registraste como: " + this.usuarioARegistrar.username)
+        this.state.go("login")
+      }, this.errorHandler)
+
+
+  }
 }

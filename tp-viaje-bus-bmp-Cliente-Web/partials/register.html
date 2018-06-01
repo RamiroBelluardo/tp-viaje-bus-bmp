@@ -1,67 +1,67 @@
 
     <title>Registrarse</title>
-    <div class="container" ng-controller="RegisterController as register">
+    <div class="container" ng-controller="RegisterController as registerCtrl">
         <form class="form-horizontal" role="form" name="registerForm">
             <h2>Registrarse</h2>
 
             <div>
-				<div class="alert alert-danger" ng-show="register.errorMessage">
-					{{register.errorMessage}}</div>
+				<div class="alert alert-danger" ng-show="registerCtrl.errorMessage">
+					{{registerCtrl.errorMessage}}</div>
 			</div>
 
             <div class="form-group">
                 <label for="username" class="col-sm-3 control-label">Usuario</label>
                 <div class="col-sm-9">
-                    <input ng-model="register.usuario.username" type="text" id="username" placeholder="Ingresá tu usuario" class="form-control" autofocus required="true">
+                    <input ng-model="registerCtrl.usuarioARegistrar.username" type="text" id="username" placeholder="Ingresá tu usuario" class="form-control" autofocus required="true">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="password" class="col-sm-3 control-label">Contraseña</label>
                 <div class="col-sm-9">
-                    <input ng-model="register.usuario.password" type="password" id="password" placeholder="Ingresá tu contraseña" class="form-control" required="true">
+                    <input ng-model="registerCtrl.usuarioARegistrar.password" type="password" id="password" placeholder="Ingresá tu contraseña" class="form-control" required="true">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="name" class="col-sm-3 control-label">Nombre</label>
                 <div class="col-sm-9">
-                    <input ng-model="register.usuario.cliente.name" type="text" id="name" placeholder="Ingresá tu nombre" class="form-control" required="true">
+                    <input ng-model="registerCtrl.usuarioARegistrar.cliente.name" type="text" id="name" placeholder="Ingresá tu nombre" class="form-control" required="true">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="lastname" class="col-sm-3 control-label">Apellido</label>
                 <div class="col-sm-9">
-                    <input ng-model="register.usuario.cliente.lastName" type="text" id="lastname" placeholder="Ingresá tu apellido" class="form-control" required="true">
+                    <input ng-model="registerCtrl.usuarioARegistrar.cliente.lastName" type="text" id="lastname" placeholder="Ingresá tu apellido" class="form-control" required="true">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="dni" class="col-sm-3 control-label">DNI</label>
                 <div class="col-sm-9">
-                    <input ng-model="register.usuario.cliente.dni" type="number" id="dni" placeholder="Ingresá tu DNI" class="form-control" required="true">
+                    <input ng-model="registerCtrl.usuarioARegistrar.cliente.dni" type="number" id="dni" placeholder="Ingresá tu DNI" class="form-control" required="true">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="mail" class="col-sm-3 control-label">Mail</label>
                 <div class="col-sm-9">
-                    <input ng-model="register.usuario.cliente.mail" type="text" id="mail" placeholder="Ingresá tu mail" class="form-control" required="true">
+                    <input ng-model="registerCtrl.usuarioARegistrar.cliente.mail" type="text" id="mail" placeholder="Ingresá tu mail" class="form-control" required="true">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="phone" class="col-sm-3 control-label">Teléfono</label>
                 <div class="col-sm-9">
-                    <input ng-model="register.usuario.cliente.phone" type="number" id="phone" placeholder="Ingresá tu teléfono" class="form-control">
+                    <input ng-model="registerCtrl.usuarioARegistrar.cliente.phone" type="number" id="phone" placeholder="Ingresá tu teléfono" class="form-control">
                 </div>
             </div>
 
 
             <div class="form-group">
                 <div class="col-sm-9 col-sm-offset-3">
-                    <button ng-click="register.agregarUsuario(registerForm)" type="submit" class="btn btn-primary btn-block">Registrar</button>
+                    <button ng-click="registerCtrl.agregarUsuario()" type="submit" class="btn btn-primary btn-block">Registrar</button>
                 </div>
             </div>
         </form>
