@@ -4,7 +4,12 @@ class BuscarViajesController {
         this.viajeService = viajeService
         this.growl = growl
         this.viajes = []
-        this.busqueda = ""
+        this.ciudadPartida = ""
+        this.ciudadLlegada = ""
+        this.fechaPartida = new Date()
+        this.fechaPartidaModificada = null
+        this.fechaLlegada = new Date()
+        this.fechaLlegadaModificada = null
         this.fechaMinimaViaje = new Date()
         this.fechaPartidaAbierto = false
         this.fechaLlegadaAbierto = false
@@ -15,7 +20,7 @@ class BuscarViajesController {
                 this.notificarError("Error de conexión, intente nuevamente luego.")
             }
         }
-        this.resetViajes()
+        //this.resetViajes()
 
     }
 
@@ -29,12 +34,27 @@ class BuscarViajesController {
     }
 
 
-
     // BUSCAR
     buscarViajes() {
-        const promise = (this.busqueda == "") ?
+        if (this.fechaPartida !== undefined) {
+            let diaPartida = this.fechaPartida.getDate()
+            let mesPartida = this.fechaPartida.getMonth()+1
+            let anioPartida = this.fechaPartida.getFullYear()
+            if (diaPartida < 10) { diaPartida = "0"+diaPartida }
+            if (mesPartida < 10) { mesPartida = "0"+mesPartida }
+            this.fechaPartidaModificada = diaPartida+"-"+mesPartida+"-"+anioPartida
+        }
+        if (this.fechaLlegada !== undefined) {
+            let diaLlegada = this.fechaLlegada.getDate()
+            let mesLlegada = this.fechaLlegada.getMonth()+1
+            let anioLlegada = this.fechaLlegada.getFullYear()
+            if (diaLlegada < 10) { diaLlegada = "0"+diaLlegada }
+            if (mesLlegada < 10) { mesLlegada = "0"+mesLlegada }
+            this.fechaLlegadaModificada = diaLlegada+"-"+mesLlegada+"-"+anioLlegada
+        }
+        const promise = (this.ciudadPartida == "" && this.ciudadLlegada == "" && this.fechaPartida == null && this.fechaLlegada == null) ?
             this.viajeService.listarTodos() :
-            this.viajeService.buscar(this.busqueda)
+            this.viajeService.buscar(this.ciudadPartida, this.ciudadLlegada, this.fechaPartidaModificada, this.fechaLlegadaModificada)
 
         promise
             .then((response) => response.data)
@@ -44,7 +64,7 @@ class BuscarViajesController {
 
     // LISTAR
     resetViajes() {
-        this.busqueda = ""
+        this.ciudadPartida = ""
         this.buscarViajes()
     }
 

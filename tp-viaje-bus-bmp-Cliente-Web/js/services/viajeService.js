@@ -7,12 +7,11 @@ const viajeService = ($http) => {
         url: baseurl + "viajes"
       })
     },
-    buscar: (busqueda) => {
+    buscar: (ciudadPartida, ciudadLlegada, fechaPartida, fechaLlegada) => {
       return $http({
         method: "GET",
-        url: baseurl + "viajes/search?ciudadPartida=" + busqueda
+        url: baseurl + "viajes?ciudadPartida=" + ciudadPartida + "&ciudadLlegada=" + ciudadLlegada + "&fechaPartida=" + fechaPartida + "&fechaLlegada=" + fechaLlegada
       })
     }
   }
 }
-

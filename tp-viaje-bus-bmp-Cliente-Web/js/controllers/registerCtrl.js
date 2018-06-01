@@ -12,9 +12,6 @@ class RegisterController {
         this.notificarError("Error de conexión, intente nuevamente luego.")
       }
     }
-    // this.usuario = new Usuario()
-    // this.errorMessage = ''
-    // this.usuarios = UsuarioService.usuarios
   }
 
   // NOTIFICACIONES & ERRORES
