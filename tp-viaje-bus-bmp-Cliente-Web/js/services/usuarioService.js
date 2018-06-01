@@ -1,27 +1,13 @@
-class UsuarioService {
-
-    constructor() {
-      this.usuariosIds = 0
-      this.usuarios = []  
+  const usuarioService = ($http) => {
+    const baseurl = "http://localhost:9200/"
+    return {
+      login: (usuario) => {
+        return $http({
+          method: "POST",
+          url: baseurl + "login",
+          data: usuario
+        })
+      }
     }
-
-    agregarUser(usuario) {
-        // VALIDA
-        this.usuarios.push(usuario)
-        console.log(this.usuarios)    
-    }
-
-    validarLogin(usuario){
-        // VALIDA
-        if (usuario.username === null || usuario.username === "") {
-            throw "Debe ingresar un username"
-        }
-        if (usuario.password === null || usuario.password === "") {
-            throw "Debe ingresar un password"
-        }
-
-        // Falta validar que el username exista, y que los datos sean correctos.
-    }      
-  
   }
   

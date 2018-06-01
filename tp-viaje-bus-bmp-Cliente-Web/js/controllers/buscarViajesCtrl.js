@@ -10,11 +10,8 @@ class BuscarViajesController {
         this.fechaLlegadaAbierto = false
         this.errorHandler = (response) => {
             if (response.data) {
-                // confiamos en que cuando hay un error, el servidor
-                // devuelve en el body un json de la forma { "error": <mensaje de error> }
                 this.notificarError(response.data.error)
             } else {
-                // si no hay respuesta, debe ser porque hubo error de conexión
                 this.notificarError("Error de conexión, intente nuevamente luego.")
             }
         }

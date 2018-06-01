@@ -1,31 +1,38 @@
   class LoginController {
 
-    constructor($state, UsuarioService, BarraSuperiorService) {
-      this.usuariosService = UsuarioService
-      this.barraSuperiorService = BarraSuperiorService
-      this.usuario = new Usuario()
-      this.errorMessage = ''
-      this.usuarios = UsuarioService.usuarios
+    constructor($state, usuarioService, BarraSuperiorService, growl) {
       this.state = $state
-      this.usuarioLogueado = this.barraSuperiorService.usuarioLogueado
-    }
-
-
-    loginUsuario(loginForm){
-      try {
-        this.errorMessage = ''
-        this.usuariosService.validarLogin(this.usuario)
-        this.barraSuperiorService.usuarioLogueado = this.usuario
-        this.acceder()
-      } catch (exception) {
-        loginForm.$invalid = true
-        this.errorMessage = exception
+      this.usuarioService = usuarioService
+      this.barraSuperiorService = BarraSuperiorService
+      this.growl = growl
+      this.usuarioALoguear = null
+      this.errorHandler = (response) => {
+        if (response.data) {
+          this.notificarError(response.data.error)
+        } else {
+          this.notificarError("Error de conexión, intente nuevamente luego.")
+        }
       }
     }
-    
-     acceder(){
-       this.state.go("buscarViajes")
-       console.log("accediendo")
-     }
+
+
+    // NOTIFICACIONES & ERRORES
+    notificarMensaje(mensaje) {
+      this.growl.info(mensaje)
+    }
+
+    notificarError(mensaje) {
+      this.growl.error(mensaje)
+    }
+
+
+    loginUsuario() {
+      this.usuarioService.login(this.usuarioALoguear)
+        .then((response) => {
+          this.notificarMensaje("Ingresanste como: " +this.usuarioALoguear.username)
+          this.barraSuperiorService.usuarioLogueado = this.usuarioALoguear
+          this.state.go("buscarViajes")
+        }, this.errorHandler)
+    }
 
   }
