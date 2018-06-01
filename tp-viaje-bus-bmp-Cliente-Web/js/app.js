@@ -10,3 +10,6 @@ angular.module('viajeBusApp', ['ui.router', 'ui.bootstrap', 'angular-growl'])
     .controller('BarraSuperiorController', BarraSuperiorController)
     .controller('BuscarViajesController', BuscarViajesController)
     .config(routes)
+
+
+    

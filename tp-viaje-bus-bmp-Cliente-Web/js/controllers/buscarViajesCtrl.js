@@ -25,7 +25,7 @@ class BuscarViajesController {
 
     }
 
-        // NOTIFICACIONES & ERRORES
+    // NOTIFICACIONES & ERRORES
         notificarMensaje(mensaje) {
           this.growl.info(mensaje)
       }
