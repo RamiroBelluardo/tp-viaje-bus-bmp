@@ -42,3 +42,12 @@
 .fa-tv{
     color: rgb(192, 223, 151)
 }
+
+.fa-fire{
+    color: red;
+}
+
+ul#servicios li {
+    display:inline;
+}
+

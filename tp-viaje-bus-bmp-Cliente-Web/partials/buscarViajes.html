@@ -95,25 +95,32 @@
 
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                         Asientos libres
-                        <br> 3/20
+                        <br>{{buscarCtrl.verAsientosLibres(viaje)}} / {{viaje.micro.cantidadAsientos}}
                         <br>
-                        <span class="colorRojo">Últimos disponibles</span>
+                        <span ng-show="buscarCtrl.ultimosDisponibles(viaje)" class="colorRojo">
+                            <i class="fas fa-fire"></i>
+                            Últimos disponibles</span>
 
                     </div>
 
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                        <i class="fas fa-bed"></i>
-                        cama
-                        <br>
-                        <i class="fas fa-utensils"></i>
-                        desayuno y cena
-                        <br>
-                        <i class="fas fa-tv"></i>
-                        con tele
+
+                            <i ng-show="buscarCtrl.esCama(viaje)" class="fas fa-bed"></i>
+                            {{viaje.micro.tipoAsiento.nombre}}
+
+                            <ul class="nav nav-pills nav-stacked" id="servicios">
+                                <i ng-show="buscarCtrl.tieneServicios(viaje)" class="fas fa-utensils"></i>
+                                <li data-ng-repeat="servicio in viaje.servicios">
+                                    {{servicio}},
+                                </li>
+                            </ul>
+                            
+                            <i ng-show="viaje.micro.tieneTele" class="fas fa-tv"></i>
+                            {{buscarCtrl.mostrarTele(viaje)}}
                     </div>
 
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                        <b class="precio">$1200</b>
+                        <b class="precio">${{viaje.precio}}</b>
                         <br>
                         <button type="button" class="btn btn-danger">Comprar</button>
                         <br>

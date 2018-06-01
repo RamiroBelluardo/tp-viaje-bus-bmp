@@ -67,4 +67,26 @@ class BuscarViajesController {
         this.viajeService.agregarViaje(this.viaje)
     }
 
+    verAsientosLibres(viaje){
+        return viaje.asientosLibres.length
+    }
+
+    ultimosDisponibles(viaje){
+        return this.verAsientosLibres(viaje) < 5
+    }
+
+    mostrarTele(viaje){
+        if (viaje.micro.tieneTele){
+            return "Con tele"
+        }
+    }
+
+    esCama(viaje){
+        return viaje.micro.tipoAsiento.nombre == "Cama"
+    }
+
+    tieneServicios(viaje){
+        return viaje.servicios.length > 0
+    }
+
 }
