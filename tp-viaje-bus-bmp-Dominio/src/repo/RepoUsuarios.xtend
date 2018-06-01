@@ -33,7 +33,7 @@ class RepoUsuarios extends CollectionBasedRepo<Usuario> {
 	def buscarParaEditar(String username) {
 		val usuario = allInstances.findFirst[usuario|this.match(username, usuario.username)]
 		if (usuario === null) {
-			throw new UserException("El usuario no existe")
+			throw new UserException("El username y/o el password es incorrecto")
 		}
 		usuario
 	}
@@ -43,6 +43,13 @@ class RepoUsuarios extends CollectionBasedRepo<Usuario> {
 //			this.match2(username, usuario.username) && this.match2(password, usuario.password) ].toList
 //	}
 	def buscarParaLogin(String username, String password) {
+	
+		if (username === null || username.equals("")) {
+			throw new UserException("El username no puede ser vacío")
+		}
+		if (password === null || password.equals("")) {
+			throw new UserException("El password no puede ser vacío")
+		}
 		
 		this.buscarParaEditar(username)
 		
@@ -52,12 +59,7 @@ class RepoUsuarios extends CollectionBasedRepo<Usuario> {
 		if (usuario === null) {
 			throw new UserException("El username y/o el password es incorrecto")
 		}
-		if (username === null || username.equals("")) {
-			throw new UserException("El username no puede ser vacío")
-		}
-		if (password === null || password.equals("")) {
-			throw new UserException("El password no puede ser vacío")
-		}
+
 		usuario
 	}
 
