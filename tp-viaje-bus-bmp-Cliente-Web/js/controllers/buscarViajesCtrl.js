@@ -7,9 +7,9 @@ class BuscarViajesController {
         this.ciudadPartida = ""
         this.ciudadLlegada = ""
         this.fechaPartida = new Date()
-        this.fechaPartidaModificada = null
+        this.fechaPartidaModificada = ""
         this.fechaLlegada = new Date()
-        this.fechaLlegadaModificada = null
+        this.fechaLlegadaModificada = ""
         this.fechaMinimaViaje = new Date()
         this.fechaPartidaAbierto = false
         this.fechaLlegadaAbierto = false
@@ -20,7 +20,7 @@ class BuscarViajesController {
                 this.notificarError("Error de conexión, intente nuevamente luego.")
             }
         }
-        //this.resetViajes()
+        this.resetViajes()
 
     }
 
@@ -36,7 +36,7 @@ class BuscarViajesController {
 
     // BUSCAR
     buscarViajes() {
-        if (this.fechaPartida !== undefined) {
+        if (this.fechaPartida !== null) {
             let diaPartida = this.fechaPartida.getDate()
             let mesPartida = this.fechaPartida.getMonth()+1
             let anioPartida = this.fechaPartida.getFullYear()
@@ -44,7 +44,7 @@ class BuscarViajesController {
             if (mesPartida < 10) { mesPartida = "0"+mesPartida }
             this.fechaPartidaModificada = diaPartida+"-"+mesPartida+"-"+anioPartida
         }
-        if (this.fechaLlegada !== undefined) {
+        if (this.fechaLlegada !== null) {
             let diaLlegada = this.fechaLlegada.getDate()
             let mesLlegada = this.fechaLlegada.getMonth()+1
             let anioLlegada = this.fechaLlegada.getFullYear()
@@ -65,6 +65,11 @@ class BuscarViajesController {
     // LISTAR
     resetViajes() {
         this.ciudadPartida = ""
+        this.ciudadLlegada = ""
+        this.fechaPartida = null
+        //this.fechaPartidaModificada = ""
+        this.fechaLlegada = null
+        //this.fechaLlegadaModificada = ""
         this.buscarViajes()
     }
 
