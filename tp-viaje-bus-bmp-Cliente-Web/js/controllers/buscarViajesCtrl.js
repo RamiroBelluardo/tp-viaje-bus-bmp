@@ -67,9 +67,7 @@ class BuscarViajesController {
         this.ciudadPartida = ""
         this.ciudadLlegada = ""
         this.fechaPartida = null
-        //this.fechaPartidaModificada = ""
         this.fechaLlegada = null
-        //this.fechaLlegadaModificada = ""
         this.buscarViajes()
     }
 

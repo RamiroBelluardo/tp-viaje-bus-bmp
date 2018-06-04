@@ -18,6 +18,10 @@ const routes = ($stateProvider, $urlRouterProvider) => {
       url: "/seleccionarAsiento",
       templateUrl: "partials/seleccionarAsiento.html"
     })
+    .state('datosPersonales', {
+      url: "/datosPersonales",
+      templateUrl: "partials/datosPersonales.html"
+    })
 
   $urlRouterProvider.otherwise("/login");
 

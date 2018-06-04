@@ -1,158 +1,121 @@
-<!DOCTYPE html>
-<html>
+<!-- BARRA SUPERIOR -->
+<div class="container" ng-controller="BarraSuperiorController as superiorCtrl">
+    <nav class="navbar navbar-dark bg-primary">
 
-<head>
-    <meta charset="utf-8">
-    <title>Datos personales</title>
-    <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="../css/styles.css">
-    <!-- BOOTSTRAP -->
-    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
-    <!-- FONT AWESOME -->
-    <link rel="stylesheet" href="../node_modules/font-awesome/css/font-awesome.min.css">
-    <!-- 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
-        crossorigin="anonymous">
-    -->
-</head>
-
-<body>
-
-    <!-- BARRA SUPERIOR -->
-    <div class="container">
-        <nav class="navbar navbar-dark bg-primary">
-
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right ">
-                    <li>
-                        <button type="button" class="btn btn-success">Tincho18</button>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-
-
-        <div class="row">
-            <!-- PANEL DE DATOS (IZQUIERDO) -->
-            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                <h3>Mis datos</h3>
-                <form class="form-horizontal" role="form">
-
-                    <div class="form-group">
-                        <label for="name" class="col-sm-3 control-label">Nombre</label>
-                        <div class="col-sm-9">
-                            <input type="text" id="name" class="form-control">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="lastname" class="col-sm-3 control-label">Apellido</label>
-                        <div class="col-sm-9">
-                            <input type="text" id="lastname" class="form-control">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="dni" class="col-sm-3 control-label">DNI</label>
-                        <div class="col-sm-9">
-                            <input type="text" id="dni" class="form-control">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="mail" class="col-sm-3 control-label">Mail</label>
-                        <div class="col-sm-9">
-                            <input type="text" id="mail" class="form-control">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="phone" class="col-sm-3 control-label">Teléfono</label>
-                        <div class="col-sm-9">
-                            <input type="text" id="phone" class="form-control">
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <div class="col-sm-9 col-sm-offset-3">
-                            <button type="submit" class="btn btn-primary btn-block">Guardar</button>
-                        </div>
-                    </div>
-                </form>
-
-            </div>
-
-            <!-- PANEL PASAJES (DERECHO) -->
-
-            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                <h3>Pasajes</h3>
-                <hr>
-                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-5">
-                    <b>Partida: </b>CABA - 8/6/18 12:00
-                    <br>
-                    <b>Llegada: </b>Córdoba - 9/6/18 10:00
-                </div>
-
-                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                    <i class="fas fa-bed"></i>
-                    cama
-                    <br>
-                    <i class="fas fa-utensils"></i>
-                    desayuno y cena
-                    <br>
-                    <i class="fas fa-tv"></i>
-                    con tele
-                </div>
-
-                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-2">
-                    <b class="precio">$1200</b>
-                </div>
-
-                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-2">
-                    <button type="button" class="btn btn-danger">Cancelar</button>
-                </div>
-
-                <br>
-                <br>
-                <br>
-
-                <hr>
-                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-5">
-                    <b>Partida: </b>CABA - 8/6/18 12:00
-                    <br>
-                    <b>Llegada: </b>Córdoba - 9/6/18 10:00
-                </div>
-
-                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                    <i class="fas fa-bed"></i>
-                    cama
-                    <br>
-                    <i class="fas fa-utensils"></i>
-                    desayuno y cena
-                    <br>
-                    <i class="fas fa-tv"></i>
-                    con tele
-                </div>
-
-                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-2">
-                    <b class="precio">$800</b>
-                </div>
-                <br>
-                <br>
-                <br>
-                <hr>
-                <div class="pull-right">
-                <button type="button" class="btn btn-primary">Volver</button>
-                </div>
-
-            </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right ">
+                <li>
+                    <button type="button" class="btn btn-success">{{superiorCtrl.usuarioLogueado.username}}</button>
+                </li>
+            </ul>
         </div>
+    </nav>
+
+    <div class="row">
+        <!-- PANEL DE DATOS (IZQUIERDO) -->
+        <div ng-controller="UsuarioController as usuarioCtrl" class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <h3>Mis datos</h3>
+            <form class="form-horizontal" role="form">
+
+                <div class="form-group">
+                    <label for="name" class="col-sm-3 control-label">Nombre</label>
+                    <div class="col-sm-9">
+                        <input ng-change="usuarioCtrl.cambio()" ng-model="superiorCtrl.usuarioLogueado.cliente.nombre" type="text" id="name" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="lastname" class="col-sm-3 control-label">Apellido</label>
+                    <div class="col-sm-9">
+                        <input ng-change="usuarioCtrl.cambio()" ng-model="superiorCtrl.usuarioLogueado.cliente.apellido" type="text" id="lastname" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="dni" class="col-sm-3 control-label">DNI</label>
+                    <div class="col-sm-9">
+                        <input ng-change="usuarioCtrl.cambio()" ng-model="superiorCtrl.usuarioLogueado.cliente.dni" type="text" string-to-number id="dni" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="mail" class="col-sm-3 control-label">Mail</label>
+                    <div class="col-sm-9">
+                        <input ng-change="usuarioCtrl.cambio()" ng-model="superiorCtrl.usuarioLogueado.cliente.mail" type="email" id="mail" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone" class="col-sm-3 control-label">Teléfono</label>
+                    <div class="col-sm-9">
+                        <input ng-change="usuarioCtrl.cambio()" ng-model="superiorCtrl.usuarioLogueado.cliente.telefono" type="text" id="phone" class="form-control">
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-sm-9 col-sm-offset-3">
+                        <button ng-show="usuarioCtrl.hayAlgoEditado" ng-click="usuarioCtrl.editarUsuario(superiorCtrl.usuarioLogueado)" type="submit" class="btn btn-primary btn-block">Guardar</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+        <!-- PANEL PASAJES (DERECHO) -->
+        <div ng-controller="PasajesController as pasajesCtrl" class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+            <h3>Pasajes</h3>
+            <hr>
+
+            <ul class="nav nav-pills nav-stacked">
+                <li data-ng-repeat="pasaje in pasajesCtrl.pasajes">
+                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                        <b>Partida: </b>
+                        {{pasaje.viaje.ciudadOrigen}} - {{pasaje.viaje.fechaPartida}}
+                        <br>
+                        <b>Llegada: </b>
+                        {{pasaje.viaje.ciudadDestino}} - {{pasaje.viaje.fechaLlegada}}
+                    </div>
+
+                    <div ng-controller="BuscarViajesController as buscarCtrl" class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+
+                        <i ng-show="buscarCtrl.esCama(pasaje.viaje)" class="fa fa-bed" aria-hidden="true"></i>
+                        {{pasaje.viaje.micro.tipoAsiento.nombre}}
+
+                        <ul class="nav nav-pills nav-stacked" id="servicios">
+                            <i ng-show="buscarCtrl.tieneServicios(pasaje.viaje)" class="fa fa-cutlery" aria-hidden="true"></i>
+
+                            <li data-ng-repeat="servicio in pasaje.viaje.servicios">
+                                {{servicio}},
+                            </li>
+                        </ul>
+
+                        <i ng-show="pasaje.viaje.micro.tieneTele" class="fa fa-television" aria-hidden="true"></i>
+                        {{buscarCtrl.mostrarTele(pasaje.viaje)}}
+                    </div>
+
+
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        <b class="precio">${{pasaje.viaje.precio}}</b>
+                    </div>
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        <button ng-click="pasajesCtrl.cancelar(pasaje)" type="button" class="btn btn-danger">Cancelar</button>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <hr>
+                </li>
+            </ul>
+
+            <div class="col-12">
+                <button type="submit" class="btn btn-sm btn-primary">Volver</button>
+            </div>
+
+        </div>
+
 
     </div>
 
-
-</body>
-
-</html>
+</div>

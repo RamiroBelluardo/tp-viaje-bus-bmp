@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <title>ViajeBus</title>
-  <link rel="stylesheet" href="css/styles.css"/>
+  <link rel="stylesheet" href="css/styles.css" />
 
   <!-- JQUERY -->
   <script src="node_modules/jquery/dist/jquery.min.js"></script>
@@ -13,64 +13,71 @@
   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
   <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-  
+
   <!-- ANGULAR  -->
   <script src="node_modules/angular/angular.min.js"></script>
   <script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
 
   <!-- BOOTBOX (dialogos de confirmacion) http://bootboxjs.com/ -->
-	<script src="node_modules/bootbox/bootbox.min.js"></script>
+  <script src="node_modules/bootbox/bootbox.min.js"></script>
 
-	<!-- GROWL (notificaciones) https://github.com/JanStevens/angular-growl-2 -->
-	<link href="node_modules/angular-growl-v2/build/angular-growl.css" rel="stylesheet">
+  <!-- GROWL (notificaciones) https://github.com/JanStevens/angular-growl-2 -->
+  <link href="node_modules/angular-growl-v2/build/angular-growl.css" rel="stylesheet">
   <script src="node_modules/angular-growl-v2/build/angular-growl.js"></script>
-  
+
   <!-- FONT AWESOME -->
   <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.css">
-  
+
+  <!-- NUMBER INPUT -->
+  <script type="text/javascript" src="node_modules/angular-number-input/angular-number-input.js"></script>
+
+
 
 </head>
 
 <body>
 
-<div growl></div>
+  <div growl></div>
 
-<div class="container">
-  <div class="page-header">
-    <h1>
-      ViajeBus
-    </h1>
+  <div class="container">
+    <div class="page-header">
+      <h1>
+        ViajeBus
+      </h1>
+    </div>
+
+    <div class="well-lg">
+      <div ui-view></div>
+    </div>
+
   </div>
 
-  <div class="well-lg">
-    <div ui-view></div>
-  </div>
+  <!-- models -->
+  <script src="js/model/viaje.js"></script>
+  <script src="js/model/micro.js"></script>
+  <script src="js/model/usuario.js"></script>
 
-</div>
+  <!-- services -->
+  <script src="js/services/usuarioService.js"></script>
+  <script src="js/services/viajeService.js"></script>
+  <script src="js/services/barraSuperiorService.js"></script>
+  <script src="js/services/pasajeService.js"></script>
 
-<!-- models -->
-<script src="js/model/viaje.js"></script>
-<script src="js/model/micro.js"></script>
-<script src="js/model/usuario.js"></script>
+  <!-- controllers -->
+  <script src="js/controllers/loginCtrl.js"></script>
+  <script src="js/controllers/registerCtrl.js"></script>
+  <script src="js/controllers/barraSuperiorCtrl.js"></script>
+  <script src="js/controllers/buscarViajesCtrl.js"></script>
+  <script src="js/controllers/pasajesCtrl.js"></script>
+  <script src="js/controllers/usuarioCtrl.js"></script>
 
-<!-- services -->
-<script src="js/services/usuarioService.js"></script>
-<script src="js/services/viajeService.js"></script>
-<script src="js/services/barraSuperiorService.js"></script>
-
-<!-- controllers -->
-<script src="js/controllers/loginCtrl.js"></script>
-<script src="js/controllers/registerCtrl.js"></script>
-<script src="js/controllers/barraSuperiorCtrl.js"></script>
-<script src="js/controllers/buscarViajesCtrl.js"></script>
-
-<!-- nuestra app -->
-<script src="js/routes.js"></script>
-<script src="js/app.js"></script>
+  <!-- nuestra app -->
+  <script src="js/routes.js"></script>
+  <script src="js/app.js"></script>
 
 
 
-<script src="node_modules/angular-ui-bootstrap/ui-bootstrap-tpls.js"
-type="text/javascript" charset="utf-8"></script>
+  <script src="node_modules/angular-ui-bootstrap/ui-bootstrap-tpls.js" type="text/javascript" charset="utf-8"></script>
 </body>
+
 </html>

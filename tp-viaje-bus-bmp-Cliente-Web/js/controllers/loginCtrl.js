@@ -29,8 +29,8 @@
     loginUsuario() {
       this.usuarioService.login(this.usuarioALoguear)
         .then((response) => {
-          this.notificarMensaje("Ingresanste como: " +this.usuarioALoguear.username)
-          this.barraSuperiorService.usuarioLogueado = this.usuarioALoguear
+          this.notificarMensaje("Ingresanste como: " +response.data.username) //this.usuarioALoguear.username)
+          this.barraSuperiorService.usuarioLogueado = response.data//this.usuarioALoguear
           this.state.go("buscarViajes")
         }, this.errorHandler)
     }

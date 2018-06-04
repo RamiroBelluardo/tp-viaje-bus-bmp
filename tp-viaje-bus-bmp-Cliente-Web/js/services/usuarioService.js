@@ -14,6 +14,13 @@
           url: baseurl + "usuarios",
           data: usuario
         })
+      },
+      edit: (usuario) => {
+        return $http({
+          method: "PUT",
+          url: baseurl + "usuarios/" +usuario.username,
+          data: usuario
+        })
       }
     }
   }

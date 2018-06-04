@@ -7,7 +7,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right ">
                 <li>
-                    <button type="button" class="btn btn-success">{{superiorCtrl.usuarioLogueado.username}}</button>
+                    <button ng-click="superiorCtrl.abrirPerfil()" type="button" class="btn btn-success">{{superiorCtrl.usuarioLogueado.username}}</button>
 
                 </li>
             </ul>
@@ -126,10 +126,12 @@
                         <b class="precio">${{viaje.precio}}</b>
                         <br>
                         <button type="button" class="btn btn-danger">Comprar</button>
-                        <br>
-                        <br>
-                        <hr>
                     </div>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <hr>
                 </li>
             </ul>
 
