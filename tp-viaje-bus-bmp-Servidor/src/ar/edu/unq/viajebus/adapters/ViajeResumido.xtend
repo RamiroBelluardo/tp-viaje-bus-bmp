@@ -13,6 +13,8 @@ class ViajeResumido {
 	List<Integer> asientosLibres
 	MicroResumido micro
 	List<String> recorrido
+	String ciudadOrigen
+	String ciudadDestino
 	List<String> servicios
 	double precio
 
@@ -23,6 +25,8 @@ class ViajeResumido {
 		this.asientosLibres = viaje.nrosAsientosDisponibles
 		this.micro = new MicroResumido(viaje.micro)
 		this.recorrido = viaje.recorrido
+		this.ciudadOrigen = viaje.origen
+		this.ciudadDestino = viaje.destino
 		this.servicios = this.formatearServicios(viaje.servicios)
 		this.precio = viaje.precio
 	}

@@ -21,6 +21,10 @@ class RepoUsuarios extends CollectionBasedRepo<Usuario> {
 		this.create(usuario)
 		usuario
 	}
+	
+	def search(){
+		allInstances
+	}
 
 	def buscarParaCrear(String username) {
 		val user = allInstances.findFirst[usuario|this.match(username, usuario.username)]

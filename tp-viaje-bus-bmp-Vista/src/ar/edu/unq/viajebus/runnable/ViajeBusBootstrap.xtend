@@ -76,7 +76,9 @@ class ViajeBusBootstrap extends CollectionBasedBootstrap {
 		viaje2.agregarCiudad("Purmamarca")
 		viaje2.agregarCiudad("Buenos Aires")
 		viaje3.agregarCiudad("Tilcara")
-		viaje4.agregarCiudad("Moscú")
+		viaje4.agregarCiudad("Córdoba")
+		viaje4.agregarCiudad("San Luis")
+		viaje4.agregarCiudad("Formosa")
 
 		val cliente1 = repoClientes.create("Lucas", "Pier", "11111111", "lg.piergiacomi@asd.com", "44444444")
 		val cliente2 = repoClientes.create("Esteban", "Matas", "22222222", "esteban@eso.com", "")
@@ -110,6 +112,7 @@ class ViajeBusBootstrap extends CollectionBasedBootstrap {
 
 		val pasaje1 = repoPasajes.create(cliente1, viaje1, 1)
 		val pasaje2 = repoPasajes.create(cliente2, viaje2, 3)
+		val pasaje3 = repoPasajes.create(cliente1, viaje4, 7)
 		// val pasaje3 = repoPasajes.create(cliente3, viaje3, 1)
 	//	pasaje1.confirmar
 		pasaje2.confirmar

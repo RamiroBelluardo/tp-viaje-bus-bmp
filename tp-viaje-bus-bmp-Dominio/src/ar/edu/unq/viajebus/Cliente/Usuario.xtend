@@ -36,8 +36,8 @@ class Usuario extends Entity implements Cloneable {
 		if (password.length() < 4) {
 			throw new UserException("El password debe tener 4 caracteres al menos")
 		}
-		cliente.validar()
-
+		
+		cliente.validar
 	}
 
 }

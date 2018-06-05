@@ -3,6 +3,7 @@ package repo
 import ar.edu.unq.viajebus.Cliente.Cliente
 import org.uqbar.commons.model.CollectionBasedRepo
 import org.uqbar.commons.model.annotations.Observable
+import org.uqbar.commons.model.exceptions.UserException
 
 @Observable
 class RepoClientes extends CollectionBasedRepo<Cliente> {
@@ -21,11 +22,14 @@ class RepoClientes extends CollectionBasedRepo<Cliente> {
 		this.create(cliente)
 		cliente
 	}
-	
-		
+
 	def search(String nombre, String apellido) {
-		allInstances.filter [ clientes |
-			this.match(nombre, clientes.nombre) && this.match(apellido, clientes.apellido)].toList
+		allInstances.filter[clientes|this.match(nombre, clientes.nombre) && this.match(apellido, clientes.apellido)].
+			toList
+	}
+
+	def searchByMail(String mail) {
+		allInstances.findFirst[clientes|this.match(mail, clientes.mail)]
 	}
 
 	def match(Object expectedValue, Object realValue) {

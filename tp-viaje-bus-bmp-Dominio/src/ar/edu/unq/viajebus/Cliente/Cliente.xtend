@@ -46,15 +46,16 @@ class Cliente extends Entity implements Cloneable {
 		this.pasajes.add(pasaje)
 	}
 
-	def void setDni(String unDNI) {
+
+//	def void setDni(String unDNI) {
 //		if (unDNI.length < MIN_DIGITOS_DNI) {
 //			throw new UserException('''El DNI debe tener por lo menos «MIN_DIGITOS_DNI» dígitos''')
 //		}
 //		if (unDNI.length > MAX_DIGITOS_DNI) {
 //			throw new UserException('''El DNI no debe tener más de «MAX_DIGITOS_DNI» dígitos''')
 //		}
-		this.dni = unDNI
-	}
+//		this.dni = unDNI
+//	}
 
 //	//@Dependencies("nombre", "apellido", "dni", "mail")
 //	def void getValido() {
@@ -70,19 +71,22 @@ class Cliente extends Entity implements Cloneable {
 		 && this.mail !== null && this.mail !== ""
 	}
 
-	def void setMail(String unMail) {
-		var lastChar = ""
-		if (unMail.length > 0) {
-			lastChar = unMail.substring(unMail.length() - 1);
-		}
-		if (unMail === null || unMail.length < MIN_DIGITOS_MAIL) {
-			throw new UserException('''El mail debe tener al menos «MIN_DIGITOS_MAIL» caracteres''')
-		}
-		if (!unMail.contains("@") || (lastChar == "@")) {
-			throw new UserException('''El Mail debe contener un @ intermedio''')
-		}
-		this.mail = unMail
-	}
+//	def void setMail(String unMail) {
+//		var lastChar = ""
+//		if (unMail.length > 0) {
+//			lastChar = unMail.substring(unMail.length() - 1);
+//		}
+//		if (unMail === null || unMail.length < MIN_DIGITOS_MAIL) {
+//			//throw new UserException('''El mail debe tener al menos «MIN_DIGITOS_MAIL» caracteres''')
+//			throw new UserException("El mail debe tener al menos " +MIN_DIGITOS_MAIL + " caracteres")
+//		}
+//		if (!unMail.contains("@") || (lastChar == "@")) {
+//			//throw new UserException('''El Mail debe contener un @ intermedio''')
+//			throw new UserException("El mail debe contener un @ intermedio")
+//			
+//		}
+//		this.mail = unMail
+//	}
 
 	def String getNombreCompleto() {
 		//'''«nombre» «apellido»'''
@@ -97,10 +101,18 @@ class Cliente extends Entity implements Cloneable {
 			throw new UserException("Debe ingresar apellido")
 		}
 		if (dni === null || dni.trim.equals("")) {
-			throw new UserException("Debe ingresar dni")
+			throw new UserException("Debe ingresar un dni válido")
 		}
 		if (mail === null || mail.trim.equals("")) {
 			throw new UserException("Debe ingresar mail")
+		}
+		if (mail === null || mail.length < MIN_DIGITOS_MAIL) {
+			throw new UserException("El mail debe tener al menos " +MIN_DIGITOS_MAIL + " caracteres")
+			
+		}
+		if (!mail.contains("@")) {
+			throw new UserException("El mail debe contener un @ intermedio")
+			
 		}
 	}
 	

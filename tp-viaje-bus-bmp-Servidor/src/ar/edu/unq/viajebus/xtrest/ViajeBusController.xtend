@@ -5,9 +5,11 @@ import ar.edu.unq.viajebus.Cliente.Usuario
 import ar.edu.unq.viajebus.Micro.Micro
 import ar.edu.unq.viajebus.Micro.Pasaje
 import ar.edu.unq.viajebus.Micro.Viaje
+import ar.edu.unq.viajebus.adapters.ClienteResumido
 import ar.edu.unq.viajebus.adapters.PasajeConUsuario
 import ar.edu.unq.viajebus.adapters.PasajeConViaje
 import ar.edu.unq.viajebus.adapters.UsuarioLogueado
+import ar.edu.unq.viajebus.adapters.UsuarioResumido
 import ar.edu.unq.viajebus.adapters.ViajeResumido
 import ar.edu.unq.viajebus.runnable.ViajeBusBootstrap
 import org.uqbar.commons.applicationContext.ApplicationContext
@@ -81,7 +83,9 @@ class ViajeBusController {
 				return badRequest(getErrorJson("No se puede modificar el password"))
 			}
 			actualizado.validar
-			repoUsuarios.update(actualizado)
+			repoUsuarios.delete(usuario)
+			repoUsuarios.create(actualizado)
+			//repoUsuarios.update(actualizado)
 			ok('{ "status" : "OK" }');
 		} catch (UserException e) {
 			badRequest(getErrorJson(e.message))
@@ -181,7 +185,7 @@ class ViajeBusController {
 		}
 
 	}
-	
+
 	@Get('/pasajes/:username')
 	/*
 	 * Devuelve la lista de pasajes comprados por el username pasado por parámetro.
@@ -189,16 +193,15 @@ class ViajeBusController {
 	def Result pasajes() {
 		try {
 			var usuario = repoUsuarios.buscarParaEditar(username)
-			var cliente = repoClientes.searchById(usuario.id)
+			var cliente = repoClientes.searchByMail(usuario.cliente.mail)
 			var resultados = repoPasajes.search(cliente)
-	
+
 			ok(resultados.map([each|new PasajeConViaje(each)]).toJson)
-			
+
 		} catch (UserException e) {
 			badRequest(getErrorJson(e.message))
 		}
 	}
-	
 
 // ********************************************************
 // ** OPCIONALES
@@ -210,7 +213,14 @@ class ViajeBusController {
 
 	@Get('/clientes')
 	def Result buscarClientes(String nombre, String apellido) {
-		ok(repoClientes.search(nombre, apellido).toJson)
+		var resultados = repoClientes.search(nombre, apellido)
+		ok(resultados.map([each|new ClienteResumido(each)]).toJson)
+	}
+
+	@Get('/usuarios')
+	def Result buscarUsuarios() {
+		var resultados = repoUsuarios.search
+		ok(resultados.map([each|new UsuarioResumido(each)]).toJson)
 	}
 
 	private def String getErrorJson(String message) {
