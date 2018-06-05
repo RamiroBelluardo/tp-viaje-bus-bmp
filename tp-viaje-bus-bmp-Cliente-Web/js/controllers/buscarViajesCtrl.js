@@ -13,6 +13,7 @@ class BuscarViajesController {
         this.fechaMinimaViaje = new Date()
         this.fechaPartidaAbierto = false
         this.fechaLlegadaAbierto = false
+        this.viajeAComprar = this.viajeService.viajeAComprar
         this.errorHandler = (response) => {
             if (response.data) {
                 this.notificarError(response.data.error)
@@ -61,6 +62,16 @@ class BuscarViajesController {
             .then((data) => this.viajes = data)
             .catch(this.errorHandler)
     }
+
+    // COMPRAR
+    comprar(viaje){
+        console.log(this.viajeAComprar) // undefined la 1ra vez
+        this.viajeService.viajeAComprar = viaje
+        this.viajeAComprar = this.viajeService.viajeAComprar
+        console.log(this.viajeAComprar) // viaje a comprar realmente
+        this.viajeService.comprar()
+    }
+    
 
     // LISTAR
     resetViajes() {

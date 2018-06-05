@@ -5,48 +5,55 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right ">
                 <li>
-                    <button type="button" class="btn btn-success">{{superiorCtrl.usuarioLogueado.username}}</button>
+                    <button ng-click="superiorCtrl.abrirPerfil()" type="button" class="btn btn-success">{{superiorCtrl.usuarioLogueado.username}}</button>
+
                 </li>
             </ul>
         </div>
     </nav>
 
-
-    <div class="row">
+    <div class="row" ng-controller="BuscarViajesController as buscarCtrl">
         <!-- PANEL DE INFORMACIÓN DE VIAJE (IZQUIERDO) -->
         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <span class="titulo">Partida</span>
-                <br> CABA
-                <br> 8/6/18
-                <br> 12:00hs
+                <br> {{buscarCtrl.viajeAComprar.ciudadOrigen}}
+                <br> {{buscarCtrl.viajeAComprar.fechaPartida}}
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <span class="titulo">Llegada</span>
-                <br> Córdoba
-                <br> 9/6/18
-                <br> 10:00hs
+                <br> {{buscarCtrl.viajeAComprar.ciudadDestino}}
+                <br> {{buscarCtrl.viajeAComprar.fechaLlegada}}
                 <br>
                 <br>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <i class="fas fa-bed"></i>
-                cama
+
+
+            <!-- <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
+
+                <i ng-show="buscarCtrl.esCama(viajeAComprar)" class="fa fa-bed" aria-hidden="true"></i>
+                {{buscarCtrl.viajeAComprar.micro.tipoAsiento.nombre}}
+
+                <ul class="nav nav-pills nav-stacked" id="servicios">
+                    <i ng-show="buscarCtrl.tieneServicios(viajeAComprar)" class="fa fa-cutlery" aria-hidden="true"></i>
+
+                    <li data-ng-repeat="servicio in buscarCtrl.viajeAComprar.servicios">
+                        {{servicio}},
+                    </li>
+                </ul>
+
+                <i ng-show="buscarCtrl.viajeAComprar.micro.tieneTele" class="fa fa-television" aria-hidden="true"></i>
+                {{buscarCtrl.mostrarTele(viajeAComprar)}}
                 <br>
-                <i class="fas fa-utensils"></i>
-                desayuno y cena
-                <br>
-                <i class="fas fa-tv"></i>
-                con tele
                 <br>
                 <br>
-            </div>
+            </div> -->
 
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <span class="titulo">Precio final:</span>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <span class="titulo precio">$1.200</span>
+                <span class="titulo precio">${{buscarCtrl.viajeAComprar.precio}}</span>
                 <br>
                 <br>
             </div>
@@ -61,115 +68,68 @@
 
         </div>
 
-        <!-- PANEL SELECCIÓN DE ASIENTO (DERECHO) -->
-
+        <!-- PANEL DERECHO -->
         <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-            <h3>Seleccione el asiento</h3>
-            <hr>
-            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                <button type="button" class="btn btn-secondary">1</button>
+
+            <!-- PANEL SELECCIÓN DE ASIENTOS -->
+            <div>
+                <h3>Seleccione el asiento</h3>
+                <hr>
+
+                <ul class="nav nav-pills nav-stacked" id="asientos">
+                    <li data-ng-repeat="asiento in buscarCtrl.viajeAComprar.asientosLibres">
+                        <!-- Botón con "estado": -->
+                        <!-- Cuando se hace click a un botón con el atributo data-toggle="button", se le agrega la clase .active -->
+                        <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">{{asiento}}</button>
+
+                        <!-- Botón deshabilitado: -->
+                        <!-- <button type="button" class="btn btn-primary" disabled>{{asiento}}</button> -->
+                    </li>
+                </ul>
+
                 <br>
                 <br>
-                <button type="button" class="btn btn-secondary">2</button>
                 <br>
                 <br>
-                <button type="button" class="btn btn-secondary">3</button>
                 <br>
                 <br>
-                <button type="button" class="btn btn-secondary">4</button>
                 <br>
                 <br>
-                <button type="button" class="btn btn-secondary">5</button>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <hr>
             </div>
 
-            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                <button type="button" class="btn btn-danger">6</button>
-                <br>
-                <br>
-                <button type="button" class="btn btn-secondary">7</button>
-                <br>
-                <br>
-                <button type="button" class="btn btn-secondary">8</button>
-                <br>
-                <br>
-                <button type="button" class="btn btn-primary">9</button>
-                <br>
-                <br>
-                <button type="button" class="btn btn-primary">10</button>
+            <!-- PANEL DE PAGO -->
+            <div>
+                <form class="form-horizontal" role="form">
+                    <h3>Pago</h3>
 
-            </div>
-
-            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                <button type="button" class="btn btn-primary">11</button>
-                <br>
-                <br>
-                <button type="button" class="btn btn-primary">12</button>
-                <br>
-                <br>
-                <button type="button" class="btn btn-secondary">13</button>
-                <br>
-                <br>
-                <button type="button" class="btn btn-secondary">14</button>
-                <br>
-                <br>
-                <button type="button" class="btn btn-secondary">15</button>
-            </div>
-
-            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                <button type="button" class="btn btn-secondary">16</button>
-                <br>
-                <br>
-                <button type="button" class="btn btn-secondary">17</button>
-                <br>
-                <br>
-                <button type="button" class="btn btn-secondary">18</button>
-                <br>
-                <br>
-                <button type="button" class="btn btn-secondary">19</button>
-                <br>
-                <br>
-                <button type="button" class="btn btn-secondary">20</button>
-            </div>
-
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <hr>
-
-            <form class="form-horizontal" role="form">
-                <h3>Pago</h3>
-
-                <div class="form-group">
-                    <label for="nroTarjeta" class="col-sm-3 control-label">Número</label>
-                    <div class="col-sm-5">
-                        <input type="text" id="nroTarjeta" placeholder="Ingresá número" class="form-control" autofocus>
+                    <div class="form-group">
+                        <label for="nroTarjeta" class="col-sm-3 control-label">Número</label>
+                        <div class="col-sm-5">
+                            <input type="text" id="nroTarjeta" placeholder="Ingresá número" class="form-control" autofocus>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="vencimiento" class="col-sm-3 control-label">Vencimiento</label>
-                    <div class="col-sm-2">
-                        <input type="text" id="mes" placeholder="MM" class="form-control">
-                        <input type="text" id="año" placeholder="AA" class="form-control">
+                    <div class="form-group">
+                        <label for="vencimiento" class="col-sm-3 control-label">Vencimiento</label>
+                        <div class="col-sm-2">
+                            <input type="text" id="mes" placeholder="MM" class="form-control">
+                            <input type="text" id="año" placeholder="AA" class="form-control">
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="nombre" class="col-sm-3 control-label">Nombre del titular</label>
-                    <div class="col-sm-5">
-                        <input type="text" id="nombre" placeholder="Ingresá nombre" class="form-control">
+                    <div class="form-group">
+                        <label for="nombre" class="col-sm-3 control-label">Nombre del titular</label>
+                        <div class="col-sm-5">
+                            <input type="text" id="nombre" placeholder="Ingresá nombre" class="form-control">
+                        </div>
                     </div>
-                </div>
+            </div>
 
 
         </div>
