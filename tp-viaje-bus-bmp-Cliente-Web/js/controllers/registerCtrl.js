@@ -4,7 +4,7 @@ class RegisterController {
     this.state = $state
     this.usuarioService = usuarioService
     this.growl = growl
-    this.usuarioARegistrar = null
+    this.usuarioARegistrar = new Usuario()
     this.errorHandler = (response) => {
       if (response.data) {
         this.notificarError(response.data.error)

@@ -7,23 +7,23 @@ class Usuario {
         }
 
 
-        validarRegistro() {
-                if (this.username === null || this.username === "") {
-                        throw "Debe ingresar un username"
-                }
-                if (this.username === undefined || this.username.length < 5) {
-                        throw "El username debe tener 5 caracteres al menos"
-                }
+        // validarRegistro() {
+        //         if (this.username === null || this.username === "") {
+        //                 throw "Debe ingresar un username"
+        //         }
+        //         if (this.username === undefined || this.username.length < 5) {
+        //                 throw "El username debe tener 5 caracteres al menos"
+        //         }
 
-                if (this.password === null || this.password === "") {
-                        throw "Debe ingresar un password"
-                }
+        //         if (this.password === null || this.password === "") {
+        //                 throw "Debe ingresar un password"
+        //         }
 
-                if (this.password === undefined || this.password.length < 4) {
-                        throw "El password debe tener 4 caracteres al menos"
-                }
-                this.cliente.validar()
-        }
+        //         if (this.password === undefined || this.password.length < 4) {
+        //                 throw "El password debe tener 4 caracteres al menos"
+        //         }
+        //         this.cliente.validar()
+        // }
 }
 
 class Cliente {
