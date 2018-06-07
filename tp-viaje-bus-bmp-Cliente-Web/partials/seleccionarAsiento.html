@@ -29,13 +29,13 @@
             </div>
 
 
-            <!-- <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
+            <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
 
-                <i ng-show="buscarCtrl.esCama(viajeAComprar)" class="fa fa-bed" aria-hidden="true"></i>
+                <i ng-show="buscarCtrl.esCama(buscarCtrl.viajeAComprar)" class="fa fa-bed" aria-hidden="true"></i>
                 {{buscarCtrl.viajeAComprar.micro.tipoAsiento.nombre}}
 
                 <ul class="nav nav-pills nav-stacked" id="servicios">
-                    <i ng-show="buscarCtrl.tieneServicios(viajeAComprar)" class="fa fa-cutlery" aria-hidden="true"></i>
+                    <i ng-show="buscarCtrl.tieneServicios(buscarCtrl.viajeAComprar)" class="fa fa-cutlery" aria-hidden="true"></i>
 
                     <li data-ng-repeat="servicio in buscarCtrl.viajeAComprar.servicios">
                         {{servicio}},
@@ -43,11 +43,11 @@
                 </ul>
 
                 <i ng-show="buscarCtrl.viajeAComprar.micro.tieneTele" class="fa fa-television" aria-hidden="true"></i>
-                {{buscarCtrl.mostrarTele(viajeAComprar)}}
+                {{buscarCtrl.mostrarTele(buscarCtrl.viajeAComprar)}}
                 <br>
                 <br>
                 <br>
-            </div> -->
+            </div>
 
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <span class="titulo">Precio final:</span>

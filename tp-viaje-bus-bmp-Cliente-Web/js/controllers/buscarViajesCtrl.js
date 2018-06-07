@@ -39,19 +39,27 @@ class BuscarViajesController {
     buscarViajes() {
         if (this.fechaPartida !== null) {
             let diaPartida = this.fechaPartida.getDate()
-            let mesPartida = this.fechaPartida.getMonth()+1
+            let mesPartida = this.fechaPartida.getMonth() + 1
             let anioPartida = this.fechaPartida.getFullYear()
-            if (diaPartida < 10) { diaPartida = "0"+diaPartida }
-            if (mesPartida < 10) { mesPartida = "0"+mesPartida }
-            this.fechaPartidaModificada = diaPartida+"-"+mesPartida+"-"+anioPartida
+            if (diaPartida < 10) {
+                diaPartida = "0" + diaPartida
+            }
+            if (mesPartida < 10) {
+                mesPartida = "0" + mesPartida
+            }
+            this.fechaPartidaModificada = diaPartida + "-" + mesPartida + "-" + anioPartida
         }
         if (this.fechaLlegada !== null) {
             let diaLlegada = this.fechaLlegada.getDate()
-            let mesLlegada = this.fechaLlegada.getMonth()+1
+            let mesLlegada = this.fechaLlegada.getMonth() + 1
             let anioLlegada = this.fechaLlegada.getFullYear()
-            if (diaLlegada < 10) { diaLlegada = "0"+diaLlegada }
-            if (mesLlegada < 10) { mesLlegada = "0"+mesLlegada }
-            this.fechaLlegadaModificada = diaLlegada+"-"+mesLlegada+"-"+anioLlegada
+            if (diaLlegada < 10) {
+                diaLlegada = "0" + diaLlegada
+            }
+            if (mesLlegada < 10) {
+                mesLlegada = "0" + mesLlegada
+            }
+            this.fechaLlegadaModificada = diaLlegada + "-" + mesLlegada + "-" + anioLlegada
         }
         const promise = (this.ciudadPartida == "" && this.ciudadLlegada == "" && this.fechaPartida == null && this.fechaLlegada == null) ?
             this.viajeService.listarTodos() :
@@ -64,14 +72,15 @@ class BuscarViajesController {
     }
 
     // COMPRAR
-    comprar(viaje){
+    comprar(viaje) {
         console.log(this.viajeAComprar) // undefined la 1ra vez
         this.viajeService.viajeAComprar = viaje
         this.viajeAComprar = this.viajeService.viajeAComprar
+//        this.viajeAComprar.micro = new Micro()
         console.log(this.viajeAComprar) // viaje a comprar realmente
         this.viajeService.comprar()
     }
-    
+
 
     // LISTAR
     resetViajes() {
@@ -98,26 +107,27 @@ class BuscarViajesController {
         this.viajeService.agregarViaje(this.viaje)
     }
 
-    verAsientosLibres(viaje){
+    verAsientosLibres(viaje) {
         return viaje.asientosLibres.length
     }
 
-    ultimosDisponibles(viaje){
+    ultimosDisponibles(viaje) {
         return this.verAsientosLibres(viaje) < 5
     }
 
-    mostrarTele(viaje){
-        if (viaje.micro.tieneTele){
+    mostrarTele(viaje) {
+        if (viaje.micro.tieneTele) {
             return "Con tele"
         }
     }
 
-    esCama(viaje){
+    esCama(viaje) {
         return viaje.micro.tipoAsiento.nombre == "Cama"
     }
 
-    tieneServicios(viaje){
+    tieneServicios(viaje) {
         return viaje.servicios.length > 0
     }
+
 
 }
