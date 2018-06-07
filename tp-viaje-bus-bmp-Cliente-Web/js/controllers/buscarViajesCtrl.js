@@ -1,6 +1,7 @@
 class BuscarViajesController {
 
-    constructor(viajeService, growl) {
+    constructor($state, viajeService, growl) {
+        this.state = $state
         this.viajeService = viajeService
         this.growl = growl
         this.viajes = []
@@ -75,7 +76,7 @@ class BuscarViajesController {
     comprar(viaje) {
         this.viajeService.viajeAComprar = viaje
         this.viajeAComprar = this.viajeService.viajeAComprar
-        this.viajeService.comprar()
+        this.state.go("seleccionarAsiento")
     }
 
 

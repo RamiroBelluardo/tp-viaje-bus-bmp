@@ -14,9 +14,6 @@ const viajeService = ($http, $state) => {
         method: "GET",
         url: baseurl + "viajes?ciudadPartida=" + ciudadPartida + "&ciudadLlegada=" + ciudadLlegada + "&fechaPartida=" + fechaPartida + "&fechaLlegada=" + fechaLlegada
       })
-    },
-    comprar: () => {
-      this.state.go("seleccionarAsiento")
     }
   }
 }

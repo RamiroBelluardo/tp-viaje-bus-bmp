@@ -1,16 +1,6 @@
-<!-- BARRA SUPERIOR -->
-<div class="container" ng-controller="BarraSuperiorController as superiorCtrl">
-    <nav class="navbar navbar-dark bg-primary">
+<title>Búsqueda de viajes</title>
 
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right ">
-                <li>
-                    <button ng-click="superiorCtrl.abrirPerfil()" type="button" class="btn btn-success">{{superiorCtrl.usuarioLogueado.username}}</button>
-
-                </li>
-            </ul>
-        </div>
-    </nav>
+<div class="container">
 
     <div class="row" ng-controller="BuscarViajesController as buscarCtrl">
         <!-- PANEL DE BUSQUEDA (IZQUIERDO) -->
@@ -73,7 +63,7 @@
                 <button data-ng-click="buscarCtrl.buscarViajes()" type="submit" class="btn btn-primary btn-block">Buscar</button>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <button data-ng-click="buscarCtrl.resetViajes()"type="button" class="btn btn-link">Limpiar</button>
+                <button data-ng-click="buscarCtrl.resetViajes()" type="button" class="btn btn-link">Limpiar</button>
             </div>
 
         </div>
@@ -105,18 +95,18 @@
 
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 
-                            <i ng-show="buscarCtrl.esCama(viaje)" class="fa fa-bed" aria-hidden="true"></i>
-                            {{viaje.micro.tipoAsiento.nombre}}
+                        <i ng-show="buscarCtrl.esCama(viaje)" class="fa fa-bed" aria-hidden="true"></i>
+                        {{viaje.micro.tipoAsiento.nombre}}
 
-                            <ul class="nav nav-pills nav-stacked" id="servicios">
-                                <i ng-show="buscarCtrl.tieneServicios(viaje)" class="fa fa-cutlery" aria-hidden="true"></i>
+                        <ul class="nav nav-pills nav-stacked" id="servicios">
+                            <i ng-show="buscarCtrl.tieneServicios(viaje)" class="fa fa-cutlery" aria-hidden="true"></i>
 
-                                {{buscarCtrl.mostrarServicios(viaje)}}
+                            {{buscarCtrl.mostrarServicios(viaje)}}
 
-                            </ul>
+                        </ul>
 
-                            <i ng-show="viaje.micro.tieneTele" class="fa fa-television" aria-hidden="true"></i>
-                            {{buscarCtrl.mostrarTele(viaje)}}
+                        <i ng-show="viaje.micro.tieneTele" class="fa fa-television" aria-hidden="true"></i>
+                        {{buscarCtrl.mostrarTele(viaje)}}
                     </div>
 
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -136,6 +126,3 @@
     </div>
 
 </div>
-
-<!-- Sólo de prueba: -->
-<button ui-sref="seleccionarAsiento" type="button" class="btn btn-success">Pasar a Seleccionar Asiento</button -->
