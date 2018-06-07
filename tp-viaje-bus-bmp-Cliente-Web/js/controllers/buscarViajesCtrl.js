@@ -73,11 +73,8 @@ class BuscarViajesController {
 
     // COMPRAR
     comprar(viaje) {
-        console.log(this.viajeAComprar) // undefined la 1ra vez
         this.viajeService.viajeAComprar = viaje
         this.viajeAComprar = this.viajeService.viajeAComprar
-//        this.viajeAComprar.micro = new Micro()
-        console.log(this.viajeAComprar) // viaje a comprar realmente
         this.viajeService.comprar()
     }
 
@@ -127,6 +124,10 @@ class BuscarViajesController {
 
     tieneServicios(viaje) {
         return viaje.servicios.length > 0
+    }
+
+    mostrarServicios(viaje){
+        return viaje.servicios.join(", ")
     }
 
 

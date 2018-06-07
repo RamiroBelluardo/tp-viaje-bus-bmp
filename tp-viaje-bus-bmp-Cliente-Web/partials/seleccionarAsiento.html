@@ -37,8 +37,8 @@
                 <ul class="nav nav-pills nav-stacked" id="servicios">
                     <i ng-show="buscarCtrl.tieneServicios(buscarCtrl.viajeAComprar)" class="fa fa-cutlery" aria-hidden="true"></i>
 
-                    <li data-ng-repeat="servicio in buscarCtrl.viajeAComprar.servicios">
-                        {{servicio}},
+                    {{buscarCtrl.mostrarServicios(buscarCtrl.viajeAComprar)}}
+
                     </li>
                 </ul>
 
@@ -77,7 +77,21 @@
                 <hr>
 
                 <ul class="nav nav-pills nav-stacked" id="asientos">
-                    <li data-ng-repeat="asiento in buscarCtrl.viajeAComprar.asientosLibres">
+                    <li data-ng-repeat="asiento in buscarCtrl.asientos">
+
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-primary active">
+                                <input type="radio" name="options" id="option1" autocomplete="off" checked> Radio 1 (preselected)
+                            </label>
+                            <label class="btn btn-primary">
+                                <input type="radio" name="options" id="option2" autocomplete="off"> Radio 2
+                            </label>
+                            <label class="btn btn-primary">
+                                <input type="radio" name="options" id="option3" autocomplete="off"> Radio 3
+                            </label>
+                        </div>
+
+
                         <!-- Botón con "estado": -->
                         <!-- Cuando se hace click a un botón con el atributo data-toggle="button", se le agrega la clase .active -->
                         <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">{{asiento}}</button>

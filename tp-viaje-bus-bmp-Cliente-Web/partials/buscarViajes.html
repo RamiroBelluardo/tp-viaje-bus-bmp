@@ -111,9 +111,8 @@
                             <ul class="nav nav-pills nav-stacked" id="servicios">
                                 <i ng-show="buscarCtrl.tieneServicios(viaje)" class="fa fa-cutlery" aria-hidden="true"></i>
 
-                                <li data-ng-repeat="servicio in viaje.servicios">
-                                    {{servicio}},
-                                </li>
+                                {{buscarCtrl.mostrarServicios(viaje)}}
+
                             </ul>
 
                             <i ng-show="viaje.micro.tieneTele" class="fa fa-television" aria-hidden="true"></i>
