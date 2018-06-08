@@ -36,8 +36,6 @@ class SeleccionarAsientoController {
     }
 
     mostrarTele(viaje) {
-        if (viaje.micro.tieneTele) {
-            return "Con tele"
-        }
+        return "Con tele"
     }
 }

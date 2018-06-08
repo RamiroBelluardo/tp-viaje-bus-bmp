@@ -110,9 +110,7 @@ class BuscarViajesController {
     }
 
     mostrarTele(viaje) {
-        if (viaje.micro.tieneTele) {
-            return "Con tele"
-        }
+        return "Con tele"
     }
 
     esCama(viaje) {
@@ -131,4 +129,4 @@ class BuscarViajesController {
         return viaje.recorrido.join(", ")
     }
 
- }
+}
