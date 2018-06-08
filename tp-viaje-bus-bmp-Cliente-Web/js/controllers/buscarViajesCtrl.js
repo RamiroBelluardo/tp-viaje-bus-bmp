@@ -101,10 +101,6 @@ class BuscarViajesController {
         this.fechaLlegadaAbierto = true
     }
 
-    agregarViaje() {
-        this.viajeService.agregarViaje(this.viaje)
-    }
-
     verAsientosLibres(viaje) {
         return viaje.asientosLibres.length
     }
@@ -135,4 +131,4 @@ class BuscarViajesController {
         return viaje.recorrido.join(", ")
     }
 
-}
+ }
