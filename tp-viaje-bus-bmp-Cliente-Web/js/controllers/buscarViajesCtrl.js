@@ -127,9 +127,12 @@ class BuscarViajesController {
         return viaje.servicios.length > 0
     }
 
-    mostrarServicios(viaje){
+    mostrarServicios(viaje) {
         return viaje.servicios.join(", ")
     }
 
+    mostrarRecorrido(viaje) {
+        return viaje.recorrido.join(", ")
+    }
 
 }
