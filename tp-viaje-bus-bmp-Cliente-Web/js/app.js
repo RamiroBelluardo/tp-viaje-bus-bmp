@@ -10,9 +10,9 @@ angular.module('viajeBusApp', ['ui.router', 'ui.bootstrap', 'angular-growl'])
     .controller('LoginController', LoginController)
     .controller('RegisterController', RegisterController)
     .controller('BuscarViajesController', BuscarViajesController)
-    .controller('PasajesController', PasajesController)
+    .controller('PasajeController', PasajeController)
     .controller('UsuarioController', UsuarioController)
-    .controller('ViajeController', ViajeController)
+    .controller('SeleccionarAsientoController', SeleccionarAsientoController)
     .config(routes)
 
 

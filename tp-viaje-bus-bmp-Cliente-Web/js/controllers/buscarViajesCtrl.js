@@ -14,7 +14,6 @@ class BuscarViajesController {
         this.fechaMinimaViaje = new Date()
         this.fechaPartidaAbierto = false
         this.fechaLlegadaAbierto = false
-        this.viajeAComprar = this.viajeService.viajeAComprar
         this.errorHandler = (response) => {
             if (response.data) {
                 this.notificarError(response.data.error)
@@ -74,8 +73,6 @@ class BuscarViajesController {
 
     // COMPRAR
     comprar(viaje) {
-        this.viajeService.viajeAComprar = viaje
-        this.viajeAComprar = this.viajeService.viajeAComprar
         this.state.go("seleccionarAsiento")
     }
 

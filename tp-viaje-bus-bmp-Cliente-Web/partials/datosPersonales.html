@@ -61,12 +61,11 @@
         </div>
 
         <!-- PANEL PASAJES (DERECHO) -->
-        <div ng-controller="PasajesController as pasajesCtrl" class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+        <div ng-controller="PasajeController as pasajeCtrl" class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
             <h3>Pasajes</h3>
             <hr>
-
             <ul class="nav nav-pills nav-stacked">
-                <li data-ng-repeat="pasaje in pasajesCtrl.pasajes">
+                <li data-ng-repeat="pasaje in pasajeCtrl.pasajes">
                     <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
                         <b>Partida: </b>
                         {{pasaje.viaje.ciudadOrigen}} - {{pasaje.viaje.fechaPartida}}
@@ -75,13 +74,13 @@
                         {{pasaje.viaje.ciudadDestino}} - {{pasaje.viaje.fechaLlegada}}
                     </div>
 
-                    <div ng-controller="BuscarViajesController as buscarCtrl" class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 
-                        <i ng-show="buscarCtrl.esCama(pasaje.viaje)" class="fa fa-bed" aria-hidden="true"></i>
+                        <i ng-show="pasajeCtrl.esCama(pasaje.viaje)" class="fa fa-bed" aria-hidden="true"></i>
                         {{pasaje.viaje.micro.tipoAsiento.nombre}}
 
                         <ul class="nav nav-pills nav-stacked" id="servicios">
-                            <i ng-show="buscarCtrl.tieneServicios(pasaje.viaje)" class="fa fa-cutlery" aria-hidden="true"></i>
+                            <i ng-show="pasajeCtrl.tieneServicios(pasaje.viaje)" class="fa fa-cutlery" aria-hidden="true"></i>
 
                             <li data-ng-repeat="servicio in pasaje.viaje.servicios">
                                 {{servicio}},
@@ -89,7 +88,7 @@
                         </ul>
 
                         <i ng-show="pasaje.viaje.micro.tieneTele" class="fa fa-television" aria-hidden="true"></i>
-                        {{buscarCtrl.mostrarTele(pasaje.viaje)}}
+                        {{pasajeCtrl.mostrarTele(pasaje.viaje)}}
                     </div>
 
 

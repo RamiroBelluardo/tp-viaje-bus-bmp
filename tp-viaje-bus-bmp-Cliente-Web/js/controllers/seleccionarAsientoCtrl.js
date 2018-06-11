@@ -1,5 +1,5 @@
-class ViajeController {
-    constructor($stateParams, $state, viajeService, pasajeService, BarraSuperiorService, growl) {
+class SeleccionarAsientoController {
+    constructor($stateParams, $state, viajeService, pasajeService, BarraSuperiorService, growl){
         this.$stateParams = $stateParams
         this.state = $state
         this.viajeService = viajeService
@@ -28,6 +28,10 @@ class ViajeController {
         this.growl.error(mensaje)
     }
 
+    asientoReservado(asiento) {
+        return asiento.estado.nombre == "Reservado"
+    }
+
     buscarViaje() {
         this.viajeService.getViajeById(this.$stateParams.id)
             .then((response) => {
@@ -54,24 +58,23 @@ class ViajeController {
         return viaje.servicios.join(", ")
     }
 
-    mostrarRecorrido(viaje) {
-        return viaje.recorrido.join(", ")
-    }
+//     mostrarRecorrido(viaje) {
+//         return viaje.recorrido.join(", ")
+//     }
 
-    asientoReservado(asiento) {
-        return asiento.estado.nombre == "Reservado"
-    }
+//     asientoReservado(asiento) {
+//         return asiento.estado.nombre == "Reservado"
+//     }
 
     confirmar() {
         this.pasaje.viajeId = this.viaje.id
-        this.pasaje.asiento = this.pasaje.asiento
         this.pasaje.username = this.barraSuperiorService.usuarioLogueado.username
         this.pasaje.password = this.barraSuperiorService.usuarioLogueado.password
         this.pasajeService.confirmar(this.pasaje)
             .then((response) => {
-                this.notificarMensaje("Pasaje comprado con éxito")
+                this.notificarMensaje("Pasaje a " +this.viaje.ciudadDestino + " comprado con éxito")
                 this.state.go("buscarViajes")
             }, this.errorHandler)
     }
 
-}
+ }

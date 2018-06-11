@@ -9,5 +9,4 @@ class Viaje {
             this.pasajes = []
             this.asientos = []
     }
-
 }
