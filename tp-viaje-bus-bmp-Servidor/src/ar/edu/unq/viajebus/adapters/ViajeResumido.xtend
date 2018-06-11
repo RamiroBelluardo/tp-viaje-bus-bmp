@@ -8,6 +8,7 @@ import transformer.LocalDateTimeTransformer
 
 @Accessors
 class ViajeResumido {
+	int id
 	String fechaPartida
 	String fechaLlegada
 	List<Integer> asientosLibres
@@ -20,6 +21,7 @@ class ViajeResumido {
 
 	new(Viaje viaje) {
 		var formateadorFecha = new LocalDateTimeTransformer
+		this.id = viaje.id
 		this.fechaPartida = formateadorFecha.modelToView(viaje.fechaPartida)
 		this.fechaLlegada = formateadorFecha.modelToView(viaje.fechaLlegada)
 		this.asientosLibres = viaje.nrosAsientosDisponibles

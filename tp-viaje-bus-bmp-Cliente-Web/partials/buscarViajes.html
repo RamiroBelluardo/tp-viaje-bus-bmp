@@ -4,26 +4,12 @@
 
     <div class="row" ng-controller="BuscarViajesController as buscarCtrl">
         <!-- PANEL DE BUSQUEDA (IZQUIERDO) -->
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
             <form role="form">
-
                 <div class="form-group">
                     <label for="ciudadPartida">Ciudad Partida</label>
-                    <div>
-                        <div class="row">
-                            <div>
-                                <p class="input-group">
-                                    <input ng-model="buscarCtrl.ciudadPartida" type="text" id="ciudadPartida" placeholder="Ingresá ciudad de partida" class="form-control"
-                                        autofocus>
-                                    <span class="input-group-btn">
-                                        <button type="button" class="btn btn-default">
-                                            <i class="glyphicon glyphicon-globe"></i>
-                                        </button>
-                                    </span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                    <input ng-model="buscarCtrl.ciudadPartida" type="text" id="ciudadPartida" placeholder="Ingresá ciudad de partida" class="form-control"
+                        autofocus>
                 </div>
 
                 <div class="form-group">
@@ -32,7 +18,7 @@
                         <div class="row">
                             <div>
                                 <p class="input-group">
-                                    <input disabled type="text" class="form-control" clear-text="Limpiar" current-text="Hoy" close-text="Cerrar" datepicker-popup="dd-MM-yyyy"
+                                    <input type="text" class="form-control" clear-text="Limpiar" current-text="Hoy" close-text="Cerrar" datepicker-popup="dd-MM-yyyy"
                                         ng-model="buscarCtrl.fechaPartida" is-open="buscarCtrl.fechaPartidaAbierto" min-date="buscarCtrl.fechaMinimaViaje"
                                         datepicker-options="buscarCtrl.dateOptions" ng-required="true" placeholder="Ingresá fecha de partida"
                                     />
@@ -45,25 +31,13 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
 
                 <div class="form-group">
                     <label for="ciudadLlegada">Ciudad Llegada</label>
-                    <div>
-                        <div class="row">
-                            <div>
-                                <p class="input-group">
-                                    <input ng-model="buscarCtrl.ciudadLlegada" type="text" id="ciudadLlegada" placeholder="Ingresá ciudad de llegada" class="form-control"
-                                        autofocus>
-                                    <span class="input-group-btn">
-                                        <button type="button" class="btn btn-default">
-                                            <i class="glyphicon glyphicon-globe"></i>
-                                        </button>
-                                    </span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                    <input ng-model="buscarCtrl.ciudadLlegada" type="text" id="ciudadLlegada" placeholder="Ingresá ciudad de llegada" class="form-control"
+                        autofocus>
                 </div>
 
                 <div class="form-group">
@@ -72,7 +46,7 @@
                         <div class="row">
                             <div>
                                 <p class="input-group">
-                                    <input disabled type="text" class="form-control" clear-text="Limpiar" current-text="Hoy" close-text="Cerrar" datepicker-popup="dd-MM-yyyy"
+                                    <input type="text" class="form-control" clear-text="Limpiar" current-text="Hoy" close-text="Cerrar" datepicker-popup="dd-MM-yyyy"
                                         ng-model="buscarCtrl.fechaLlegada" is-open="buscarCtrl.fechaLlegadaAbierto" min-date="buscarCtrl.fechaMinimaViaje"
                                         datepicker-options="buscarCtrl.dateOptions" ng-required="true" placeholder="Ingresá fecha de llegada"
                                     />
@@ -97,10 +71,9 @@
         </div>
 
         <!-- PANEL PRÓXIMOS VIAJES (DERECHO) -->
-        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
             <h3>Próximos viajes</h3>
             <hr>
-
 
             <ul class="nav nav-pills nav-stacked">
                 <li data-ng-repeat="viaje in buscarCtrl.viajes">
@@ -122,7 +95,7 @@
 
                     </div>
 
-                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 
                         <i ng-show="buscarCtrl.esCama(viaje)" class="fa fa-bed" aria-hidden="true"></i>
                         {{viaje.micro.tipoAsiento.nombre}}
@@ -151,7 +124,8 @@
                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                         <b class="precio">${{viaje.precio}}</b>
                         <br>
-                        <button data-ng-click="buscarCtrl.comprar(viaje)" type="button" class="btn btn-danger">Comprar</button>
+                        <!-- <button data-ng-click="buscarCtrl.comprar(viaje)" type="button" class="btn btn-danger">Comprar</button> -->
+                        <button ui-sref="seleccionarAsiento({id: viaje.id})" type="button" class="btn btn-danger">Comprar</button>
                     </div>
                     <br>
                     <br>
