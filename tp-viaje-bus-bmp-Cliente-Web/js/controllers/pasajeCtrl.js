@@ -35,7 +35,7 @@ class PasajeController {
 
     // CANCELAR
     cancelar(pasaje) {
-        const mensaje = "¿Está seguro que desea cancelar el pasaje con destino a '" + pasaje.viaje.ciudadDestino + "', con número de asiento '" + pasaje.asiento + "'?"
+        const mensaje = "¿Está seguro que desea cancelar el pasaje con destino a <b>'" + pasaje.viaje.ciudadDestino + "'</b>, con número de asiento <b>'" + pasaje.asiento + "'</b>?<br><br><b><u>Nota:</u> No se le reintegrará el monto abonado de $" + pasaje.viaje.precio + "</b>"
         bootbox.confirm({
             message: mensaje,
             buttons: {
@@ -53,7 +53,7 @@ class PasajeController {
                     let usuario = this.barraSuperiorService.usuarioLogueado
                     this.pasajeService.cancelar(usuario, pasaje)
                         .then((response) => {
-                            this.notificarMensaje("Pasaje con destino a '" + pasaje.viaje.ciudadDestino + "', y número de asiento '" + pasaje.asiento + "' cancelado con éxito")
+                            this.notificarMensaje("Pasaje con destino a <b>'" + pasaje.viaje.ciudadDestino + "'</b>, y número de asiento <b>'" + pasaje.asiento + "'</b> cancelado con éxito")
                         }, this.errorHandler)
                 }
             }
