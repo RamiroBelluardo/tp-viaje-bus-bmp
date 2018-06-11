@@ -85,7 +85,7 @@ class ViajeBusController {
 			actualizado.validar
 			repoUsuarios.delete(usuario)
 			repoUsuarios.create(actualizado)
-			//repoUsuarios.update(actualizado)
+			// repoUsuarios.update(actualizado)
 			ok('{ "status" : "OK" }');
 		} catch (UserException e) {
 			badRequest(getErrorJson(e.message))
@@ -221,6 +221,21 @@ class ViajeBusController {
 	def Result buscarUsuarios() {
 		var resultados = repoUsuarios.search
 		ok(resultados.map([each|new UsuarioResumido(each)]).toJson)
+	}
+
+	@Get('/viaje/:idViaje')
+	/*
+	 * Devuelve el viaje asociado al ID de la URL.
+	 */
+	def Result buscarPorId() {
+		try {
+			var viaje = repoViajes.searchById(Integer.valueOf(idViaje))
+			ok(new ViajeResumido(viaje).toJson)
+		} catch (NumberFormatException ex) {
+			badRequest(getErrorJson("El id debe ser un numero entero"))
+		} catch (UserException e) {
+			notFound(getErrorJson(e.message));
+		}
 	}
 
 	private def String getErrorJson(String message) {
