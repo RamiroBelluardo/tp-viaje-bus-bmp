@@ -30,7 +30,7 @@ class RegisterController {
         this.notificarMensaje("Te registraste como: " + this.usuarioARegistrar.username)
         this.state.go("login")
       }, this.errorHandler)
-
-
   }
+
+  
 }

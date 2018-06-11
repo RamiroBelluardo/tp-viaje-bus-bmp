@@ -17,7 +17,7 @@ const pasajeService = ($http) => {
       confirmar: (pasaje) => {
         return $http({
           method: "POST",
-          url: baseurl + "pasajes/",
+          url: baseurl + "pasajes",
           data: pasaje
         })
       }

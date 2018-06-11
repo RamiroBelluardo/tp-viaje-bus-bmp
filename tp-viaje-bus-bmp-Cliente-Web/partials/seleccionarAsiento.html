@@ -73,9 +73,16 @@
 
                         <div class="form-check">
                             <label ng-Class="(viajeCtrl.asientoReservado(asiento))?'btn btn-danger':'btn-primary'" class="btn btn-primary active">
-                                <input ng-disabled="viajeCtrl.asientoReservado(asiento)" type="radio" name="options" id="option1" autocomplete="off"> {{asiento.numero}}
+                                <input ng-model="viajeCtrl.pasaje.asiento" ng-value="asiento.numero" ng-disabled="viajeCtrl.asientoReservado(asiento)" type="radio" name="options"
+                                    id="option1" autocomplete="off"> {{asiento.numero}}
                             </label>
                         </div>
+                    </li>
+                </ul>
+
+                <!-- <div>
+                    <input ng-model="viajeCtrl.pasaje.asiento" type="text" id="nroAsiento" placeholder="Nro asiento" class="form-control" required="true">
+                </div> -->
 
             </div>
 
