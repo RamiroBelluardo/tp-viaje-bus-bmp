@@ -35,7 +35,7 @@ class PasajeController {
 
     // CANCELAR
     cancelar(pasaje) {
-        const mensaje = "¿Está seguro que desea cancelar el pasaje con destino '" + pasaje.ciudadDestino + "'?"
+        const mensaje = "¿Está seguro que desea cancelar el pasaje con destino a '" + pasaje.viaje.ciudadDestino + "', con número de asiento '" + pasaje.asiento + "'?"
         bootbox.confirm({
             message: mensaje,
             buttons: {
@@ -50,14 +50,16 @@ class PasajeController {
             },
             callback: (confirma) => {
                 if (confirma) {
-                    this.pasajeService.cancelar(pasaje).then(() => {
-                        this.notificarMensaje('Pasaje cancelado')
-                        this.resetPasajes()
-                    }, this.errorHandler)
+                    let usuario = this.barraSuperiorService.usuarioLogueado
+                    this.pasajeService.cancelar(usuario, pasaje)
+                        .then((response) => {
+                            this.notificarMensaje("Pasaje con destino a '" + pasaje.viaje.ciudadDestino + "', y número de asiento '" + pasaje.asiento + "' cancelado con éxito")
+                        }, this.errorHandler)
                 }
             }
         })
     }
+
 
     mostrarTele(viaje) {
         if (viaje.micro.tieneTele) {
@@ -72,5 +74,10 @@ class PasajeController {
     tieneServicios(viaje) {
         return viaje.servicios.length > 0
     }
+
+    mostrarServicios(viaje) {
+        return viaje.servicios.join(", ")
+    }
+
 
 }

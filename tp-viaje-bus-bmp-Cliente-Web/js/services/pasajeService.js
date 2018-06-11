@@ -7,11 +7,11 @@ const pasajeService = ($http) => {
           url: baseurl + "pasajes/" + username
         })
       },
-      cancelar: (pasaje) => {
+      cancelar: (usuario, pasaje) => {
         return $http({
           method: "POST",
           url: baseurl + "pasajes/" + pasaje.id + "/cancelar",
-          data: pasaje
+          data: usuario, pasaje
         })
       },
       confirmar: (pasaje) => {

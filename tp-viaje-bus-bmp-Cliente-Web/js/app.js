@@ -1,6 +1,6 @@
 angular.module('viajeBusApp', ['ui.router', 'ui.bootstrap', 'angular-growl'])
     .config(['growlProvider', function (growlProvider) {
-        growlProvider.globalTimeToLive(2000);
+        growlProvider.globalTimeToLive(4000);
     }])
     .factory("usuarioService", usuarioService)
     .factory("viajeService", viajeService)
