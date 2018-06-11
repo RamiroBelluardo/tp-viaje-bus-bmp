@@ -1,10 +1,15 @@
 class SeleccionarAsientoController {
 
-    constructor($state, viajeService, growl) {
+    constructor($state, viajeService, pasajeService, BarraSuperiorService, growl) {
         this.state = $state
         this.viajeService = viajeService
+        this.pasajeService = pasajeService
+        this.barraSuperiorService = BarraSuperiorService
         this.growl = growl
         this.viajeAComprar = this.viajeService.viajeAComprar
+        this.asientosLibres = this.viajeAComprar.asientosLibres
+        this.cantidadAsientos = this.viajeAComprar.micro.cantidadAsientos
+        this.pasajeAComprar = null
         this.errorHandler = (response) => {
             if (response.data) {
                 this.notificarError(response.data.error)
@@ -13,6 +18,7 @@ class SeleccionarAsientoController {
             }
         }
     }
+
 
     // NOTIFICACIONES & ERRORES
     notificarMensaje(mensaje) {
@@ -37,5 +43,20 @@ class SeleccionarAsientoController {
 
     mostrarTele(viaje) {
         return "Con tele"
+    }
+
+    asientos() {
+        let res = []
+        for (let i = 0; i < this.cantidadAsientos; i++) {
+            res.push(i + 1)
+        }
+        return res
+    }
+
+    confirmar(){
+        this.pasajeAComprar.username =this.barraSuperiorService.usuarioLogueado.username
+        this.pasajeAComprar.password =this.barraSuperiorService.usuarioLogueado.password
+        this.pasajeAComprar.viajeId = 1 // CAMBIARRRRRRRRRRRRRRRRRRRRRRR
+        this.pasajeService.confirmar(this.pasajeAComprar)
     }
 }

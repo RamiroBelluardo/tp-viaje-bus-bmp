@@ -13,6 +13,13 @@ const pasajeService = ($http) => {
           url: baseurl + "pasajes/" + pasaje.id + "/cancelar",
           data: pasaje
         })
+      },
+      confirmar: (pasaje) => {
+        return $http({
+          method: "POST",
+          url: baseurl + "pasajes/",
+          data: pasaje
+        })
       }
     }
   }
