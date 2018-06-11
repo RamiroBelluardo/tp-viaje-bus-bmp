@@ -15,7 +15,7 @@ const routes = ($stateProvider, $urlRouterProvider) => {
       templateUrl: "partials/buscarViajes.html"
     })
     .state('seleccionarAsiento', {
-      url: "/seleccionarAsiento",
+      url: "/viaje/:id",
       templateUrl: "partials/seleccionarAsiento.html"
     })
     .state('datosPersonales', {

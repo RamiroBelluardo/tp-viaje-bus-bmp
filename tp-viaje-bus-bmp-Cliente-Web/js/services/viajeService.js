@@ -1,5 +1,5 @@
 const viajeService = ($http, $state) => {
-  this.viajeAComprar = null
+  //this.viajeAComprar = null
   this.state = $state
   const baseurl = "http://localhost:9200/"
   return {
@@ -14,6 +14,13 @@ const viajeService = ($http, $state) => {
         method: "GET",
         url: baseurl + "viajes?ciudadPartida=" + ciudadPartida + "&ciudadLlegada=" + ciudadLlegada + "&fechaPartida=" + fechaPartida + "&fechaLlegada=" + fechaLlegada
       })
+    },
+    getViajeById: (id) => {
+      return $http({
+        method: "GET",
+        url: baseurl + "viaje/" + id
+      })
     }
   }
+
 }
