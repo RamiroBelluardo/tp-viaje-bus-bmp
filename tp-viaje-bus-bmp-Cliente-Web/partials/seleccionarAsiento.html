@@ -1,7 +1,7 @@
 <title>Seleccionar asiento</title>
-<div class="container" >
+<div class="container">
 
-    
+
 
     <div class="row" ng-controller="ViajeController as viajeCtrl">
 
@@ -52,7 +52,7 @@
 
 
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <button ng-click="selAsientoCtrl.confirmar()" type="submit" class="btn btn-primary btn-block">Confirmar</button>
+                <button ng-click="viajeCtrl.confirmar()" type="submit" class="btn btn-primary btn-block">Confirmar</button>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <button ui-sref="buscarViajes" type="button" class="btn btn-link">Volver</button>
@@ -71,43 +71,12 @@
                 <ul class="nav nav-pills nav-stacked" id="asientos">
                     <li data-ng-repeat="asiento in viajeCtrl.asientos">
 
-                        <div class="btn-group" data-toggle="buttons">
-                            <label class="btn btn-primary active">
-                                <input type="radio" name="options" id="option1" autocomplete="off" checked> Radio 1 (preselected)
-                            </label>
-                            <label class="btn btn-primary">
-                                <input type="radio" name="options" id="option2" autocomplete="off"> Radio 2
-                            </label>
-                            <label class="btn btn-primary">
-                                <input type="radio" name="options" id="option3" autocomplete="off"> Radio 3
+                        <div class="form-check">
+                            <label ng-Class="(viajeCtrl.asientoReservado(asiento))?'btn btn-danger':'btn-primary'" class="btn btn-primary active">
+                                <input ng-disabled="viajeCtrl.asientoReservado(asiento)" type="radio" name="options" id="option1" autocomplete="off"> {{asiento.numero}}
                             </label>
                         </div>
 
-
-                <ul class="nav nav-pills nav-stacked" id="asientos">
-                    <li data-ng-repeat="asiento in selAsientoCtrl.asientosLibres">
-                        <label class="btn btn-primary active">
-                            <input ng-model="selAsientoCtrl.pasajeAComprar.numero" type="radio" name="options" id="option1" autocomplete="off"> {{asiento}}
-                            <br>
-                        </label>
-                    </li>
-                </ul>
-
-
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <hr>
             </div>
 
             <!-- PANEL DE PAGO -->

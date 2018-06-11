@@ -43,7 +43,6 @@ class ViajeBusBootstrap extends CollectionBasedBootstrap {
 		val RepoClientes repoClientes = ApplicationContext.instance.getSingleton(typeof(Cliente))
 		val RepoPasajes repoPasajes = ApplicationContext.instance.getSingleton(typeof(Pasaje))
 		val RepoUsuarios repoUsuarios = ApplicationContext.instance.getSingleton(typeof(Usuario))
-		
 
 		val partidaMicro1 = new LocalDateTime(2019, 4, 1, 12, 10)
 		val llegadaMicro1 = new LocalDateTime(2019, 4, 1, 14, 20)
@@ -51,17 +50,16 @@ class ViajeBusBootstrap extends CollectionBasedBootstrap {
 		val llegadaMicro2 = new LocalDateTime(2020, 1, 2, 03, 12)
 		val partidaMicro3 = new LocalDateTime(2021, 2, 22, 17, 20)
 		val llegadaMicro3 = new LocalDateTime(2021, 2, 23, 15, 45)
-		//val partidaMicro4 = new LocalDateTime(2025, 4, 12, 13, 00)
-		//val llegadaMicro4 = new LocalDateTime(2025, 4, 13, 15, 00)
+		// val partidaMicro4 = new LocalDateTime(2025, 4, 12, 13, 00)
+		// val llegadaMicro4 = new LocalDateTime(2025, 4, 13, 15, 00)
 		val partidaMicro4 = new LocalDateTime()
-		val llegadaMicro4 = new LocalDateTime(
-			
-		)
+		val llegadaMicro4 = new LocalDateTime()
+
 		val micro1 = repoMicros.create("ABC123", new Cama, true, 2)
 		val micro2 = repoMicros.create("AB123AB", new Semicama, false, 4)
 		val micro3 = repoMicros.create("DCR283", new Ejecutivo, true, 0)
 		val micro4 = repoMicros.create("XYZ123", new Ejecutivo, true, 8)
-		
+
 		repoViajes.create(partidaMicro1, llegadaMicro1, micro1)
 		repoViajes.create(partidaMicro2, llegadaMicro2, micro2)
 		repoViajes.create(partidaMicro3, llegadaMicro3, micro3)
@@ -83,7 +81,7 @@ class ViajeBusBootstrap extends CollectionBasedBootstrap {
 		val cliente1 = repoClientes.create("Lucas", "Pier", "11111111", "lg.piergiacomi@asd.com", "44444444")
 		val cliente2 = repoClientes.create("Esteban", "Matas", "22222222", "esteban@eso.com", "")
 		val cliente3 = repoClientes.create("Ramiro", "Belluardo", "33333333", "ramirobelluardo1993@eso.com", "22222222")
-		
+
 		val usuario1 = repoUsuarios.create("lucas", "12345", cliente1)
 		val usuario2 = repoUsuarios.create("esteban", "12345", cliente2)
 		val usuario3 = repoUsuarios.create("ramiro", "12345", cliente3)
@@ -104,7 +102,6 @@ class ViajeBusBootstrap extends CollectionBasedBootstrap {
 		viaje4.agregarAsiento(new Asiento)
 		viaje4.agregarAsiento(new Asiento)
 		viaje4.agregarAsiento(new Asiento)
-		
 
 		viaje1.agregarServicio(new Desayuno)
 		viaje4.agregarServicio(new Desayuno)
@@ -114,7 +111,7 @@ class ViajeBusBootstrap extends CollectionBasedBootstrap {
 		val pasaje2 = repoPasajes.create(cliente2, viaje2, 3)
 		val pasaje3 = repoPasajes.create(cliente1, viaje4, 7)
 		// val pasaje3 = repoPasajes.create(cliente3, viaje3, 1)
-	//	pasaje1.confirmar
+		// pasaje1.confirmar
 		pasaje2.confirmar
 
 	}

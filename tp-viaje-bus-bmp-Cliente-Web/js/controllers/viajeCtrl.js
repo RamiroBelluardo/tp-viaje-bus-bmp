@@ -5,7 +5,7 @@ class ViajeController {
         this.viajeService = viajeService
         this.viaje = new Viaje()
         this.buscarViaje()
-        //this.viaje = viajeService.getViajeById($stateParams.id)
+        this.asientos = []
         this.growl = growl
         this.errorHandler = (response) => {
             if (response.data) {
@@ -29,6 +29,7 @@ class ViajeController {
         this.viajeService.getViajeById(this.$stateParams.id)
         .then((response) => {
             this.viaje = response.data
+            this.asientos = this.viaje.asientos
         }, this.errorHandler)
     }
 
@@ -52,6 +53,10 @@ class ViajeController {
 
     mostrarRecorrido(viaje) {
         return viaje.recorrido.join(", ")
+    }
+
+    asientoReservado(asiento) {
+        return asiento.estado.nombre == "Reservado"
     }
 
 }

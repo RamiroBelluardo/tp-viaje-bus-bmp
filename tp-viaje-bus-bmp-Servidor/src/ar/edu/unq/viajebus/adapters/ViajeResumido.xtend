@@ -1,5 +1,6 @@
 package ar.edu.unq.viajebus.adapters
 
+import ar.edu.unq.viajebus.Micro.Asiento
 import ar.edu.unq.viajebus.Micro.Viaje
 import ar.edu.unq.viajebus.Servicios.Servicio
 import java.util.List
@@ -11,6 +12,7 @@ class ViajeResumido {
 	int id
 	String fechaPartida
 	String fechaLlegada
+	List<AsientoResumido> asientos
 	List<Integer> asientosLibres
 	MicroResumido micro
 	List<String> recorrido
@@ -24,6 +26,7 @@ class ViajeResumido {
 		this.id = viaje.id
 		this.fechaPartida = formateadorFecha.modelToView(viaje.fechaPartida)
 		this.fechaLlegada = formateadorFecha.modelToView(viaje.fechaLlegada)
+		this.asientos = this.formatearAsientos(viaje.asientos)
 		this.asientosLibres = viaje.nrosAsientosDisponibles
 		this.micro = new MicroResumido(viaje.micro)
 		this.recorrido = viaje.recorrido
@@ -42,6 +45,15 @@ class ViajeResumido {
 			res.add(s.nombre)
 		}
 		res
+	}
+	
+	def formatearAsientos(List<Asiento> asientos) {
+		var asientosResumidos = newArrayList
+		for (Asiento a : asientos){
+			var asientoResumido = new AsientoResumido(a)
+			asientosResumidos.add(asientoResumido)
+		}
+		asientosResumidos
 	}
 
 }

@@ -4,6 +4,10 @@ import org.uqbar.commons.model.exceptions.UserException
 
 class Disponible extends EstadoDeAsiento {
 
+	new() {
+		this.nombre = "Disponible"
+	}
+
 	override proximo() {
 		new Reservado
 	}

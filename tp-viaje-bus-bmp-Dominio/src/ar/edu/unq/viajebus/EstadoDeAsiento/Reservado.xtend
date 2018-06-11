@@ -4,6 +4,10 @@ import org.uqbar.commons.model.exceptions.UserException
 
 class Reservado extends EstadoDeAsiento {
 
+	new() {
+		this.nombre = "Reservado"
+	}
+
 	override proximo() {
 		throw new UserException("El asiento ya se encuentra reservado")
 	}
