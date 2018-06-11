@@ -143,6 +143,10 @@ class ViajeBusController {
 
 			val viaje = repoViajes.searchById(pasajeConUsuario.viajeId)
 			val nroAsiento = pasajeConUsuario.asiento
+			
+			if (nroAsiento === null){
+				return badRequest(getErrorJson("Por favor seleccione un asiento a comprar"))
+			}
 
 			if (!viaje.nrosAsientosDisponibles.contains(nroAsiento)) {
 				return badRequest(getErrorJson("El asiento ya se encuentra reservado"))
