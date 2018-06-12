@@ -256,6 +256,23 @@ class ViajeBusController {
 		ok(resultados.map([each|new ViajeResumido(each)]).toJson)
 	}
 
+
+	@Get('/pasajesHistoricos/:username')
+	/*
+	 * Devuelve la lista de pasajes comprados por el username pasado por parámetro donde su fechaDeLlegada sea anterior a hoy.
+	 */
+	def Result pasajesHistoricos() {
+		try {
+			var usuario = repoUsuarios.buscarParaEditar(username)
+			var cliente = repoClientes.searchByMail(usuario.cliente.mail)
+			var resultados = repoPasajes.searchHistoricos(cliente)
+
+			ok(resultados.map([each|new PasajeConViaje(each)]).toJson)
+
+		} catch (UserException e) {
+			badRequest(getErrorJson(e.message))
+		}
+	}
 	private def String getOkJson(String message) {
 		'''{ "ok" : "«message»" }'''
 	}

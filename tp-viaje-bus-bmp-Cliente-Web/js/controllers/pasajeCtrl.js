@@ -2,7 +2,8 @@ class PasajeController {
     constructor(pasajeService, BarraSuperiorService, growl) {
         this.pasajeService = pasajeService
         this.barraSuperiorService = BarraSuperiorService
-        this.pasajes = []
+        this.pasajesActuales = []
+        this.pasajesHistoricos = []
         this.growl = growl
         this.errorHandler = (response) => {
             if (response.data) {
@@ -26,11 +27,16 @@ class PasajeController {
     // LISTAR
     resetPasajes() {
         let username = this.barraSuperiorService.usuarioLogueado.username
-        const promise = this.pasajeService.listarTodos(username)
+        const promise = this.pasajeService.listarActuales(username)
         promise
             .then((response) => response.data)
-            .then((data) => this.pasajes = data)
+            .then((data) => this.pasajesActuales = data)
             .catch(this.errorHandler)
+        const promise2 = this.pasajeService.listarHistoricos(username)
+        promise2
+        .then((response) => response.data)
+        .then((data) => this.pasajesHistoricos = data)
+        .catch(this.errorHandler)
     }
 
     // CANCELAR

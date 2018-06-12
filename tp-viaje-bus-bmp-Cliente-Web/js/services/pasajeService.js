@@ -1,10 +1,16 @@
 const pasajeService = ($http) => {
   const baseurl = "http://localhost:9200/"
   return {
-    listarTodos: (username) => {
+    listarActuales: (username) => {
       return $http({
         method: "GET",
         url: baseurl + "pasajes/" + username
+      })
+    },
+    listarHistoricos: (username) => {
+      return $http({
+        method: "GET",
+        url: baseurl + "pasajesHistoricos/" + username
       })
     },
     cancelar: (usuario, pasaje) => {
@@ -15,7 +21,6 @@ const pasajeService = ($http) => {
         pasaje
       })
     },
-
     crearPago(pasaje, token) {
       let uri = baseurl + "pasajes?token=" + token
       return $http({

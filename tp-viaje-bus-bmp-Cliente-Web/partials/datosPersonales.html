@@ -65,7 +65,7 @@
             <h3>Pasajes</h3>
             <hr>
             <ul class="nav nav-pills nav-stacked">
-                <li data-ng-repeat="pasaje in pasajeCtrl.pasajes">
+                <li data-ng-repeat="pasaje in pasajeCtrl.pasajesActuales">
                     <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
                         <b>Partida: </b>
                         {{pasaje.viaje.ciudadOrigen}} - {{pasaje.viaje.fechaPartida}}
@@ -96,6 +96,48 @@
                     </div>
                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                         <button ng-click="pasajeCtrl.cancelar(pasaje)" type="button" class="btn btn-danger">Cancelar</button>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <hr>
+                </li>
+            </ul>
+
+            <!-- PASAJES HISTÓRICOS -->
+
+            <h3>Pasajes históricos</h3>
+            <hr>
+            <ul class="nav nav-pills nav-stacked">
+                <li data-ng-repeat="pasaje in pasajeCtrl.pasajesHistoricos">
+                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                        <b>Partida: </b>
+                        {{pasaje.viaje.ciudadOrigen}} - {{pasaje.viaje.fechaPartida}}
+                        <br>
+                        <b>Llegada: </b>
+                        {{pasaje.viaje.ciudadDestino}} - {{pasaje.viaje.fechaLlegada}}
+                    </div>
+
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+
+                        <i ng-show="pasajeCtrl.esCama(pasaje.viaje)" class="fa fa-bed" aria-hidden="true"></i>
+                        {{pasaje.viaje.micro.tipoAsiento.nombre}}
+
+                        <ul class="nav nav-pills nav-stacked" id="servicios">
+                            <i ng-show="pasajeCtrl.tieneServicios(pasaje.viaje)" class="fa fa-cutlery" aria-hidden="true"></i>
+
+                            {{pasajeCtrl.mostrarServicios(pasaje.viaje)}}
+
+                        </ul>
+
+                        <i ng-show="pasaje.viaje.micro.tieneTele" class="fa fa-television" aria-hidden="true"></i>
+                        {{pasajeCtrl.mostrarTele(pasaje.viaje)}}
+                    </div>
+
+
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        <b class="precio">${{pasaje.viaje.precio}}</b>
                     </div>
                     <br>
                     <br>

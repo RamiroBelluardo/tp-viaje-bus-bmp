@@ -3,6 +3,7 @@ package repo
 import ar.edu.unq.viajebus.Cliente.Cliente
 import ar.edu.unq.viajebus.Micro.Pasaje
 import ar.edu.unq.viajebus.Micro.Viaje
+import org.joda.time.LocalDateTime
 import org.uqbar.commons.model.CollectionBasedRepo
 import org.uqbar.commons.model.annotations.Observable
 import org.uqbar.commons.model.exceptions.UserException
@@ -41,7 +42,14 @@ class RepoPasajes extends CollectionBasedRepo<Pasaje> {
 	}
 	
 	def search(Cliente cliente){
-		val pasajes = allInstances.filter [pasaje | this.match(cliente, pasaje.cliente)].toList
+		val fechaLlegada = LocalDateTime.now
+		val pasajes = allInstances.filter [pasaje | this.match(cliente, pasaje.cliente) && pasaje.viaje.fechaLlegada.isAfter(fechaLlegada)].toList
+		pasajes
+	}
+	
+	def searchHistoricos(Cliente cliente){
+		val fechaLlegada = LocalDateTime.now
+		val pasajes = allInstances.filter [pasaje | this.match(cliente, pasaje.cliente) && pasaje.viaje.fechaLlegada.isBefore(fechaLlegada)].toList
 		pasajes
 	}
 

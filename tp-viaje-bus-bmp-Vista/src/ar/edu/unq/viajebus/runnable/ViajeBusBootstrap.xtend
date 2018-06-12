@@ -107,11 +107,11 @@ class ViajeBusBootstrap extends CollectionBasedBootstrap {
 		viaje4.agregarServicio(new Desayuno)
 		viaje4.agregarServicio(new Cena)
 
-		//val pasaje1 = repoPasajes.create(cliente1, viaje1, 1)
+		val pasaje1 = repoPasajes.create(cliente1, viaje4, 1)
 		//val pasaje2 = repoPasajes.create(cliente2, viaje2, 3)
 		//val pasaje3 = repoPasajes.create(cliente1, viaje4, 7)
 		// val pasaje3 = repoPasajes.create(cliente3, viaje3, 1)
-		// pasaje1.confirmar
+		pasaje1.confirmar
 		//pasaje2.confirmar
 
 	}
