@@ -72,13 +72,6 @@ class PasajeController {
         })
     }
 
-
-    mostrarTele(viaje) {
-        if (viaje.micro.tieneTele) {
-            return "Con tele"
-        }
-    }
-
     esCama(viaje) {
         return viaje.micro.tipoAsiento.nombre == "Cama"
     }

@@ -106,10 +106,6 @@ class BuscarViajesController {
         return this.verAsientosLibres(viaje) < 5
     }
 
-    mostrarTele(viaje) {
-        return "Con tele"
-    }
-
     esCama(viaje) {
         return viaje.micro.tipoAsiento.nombre == "Cama"
     }

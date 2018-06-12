@@ -30,6 +30,15 @@
     font-weight: bold;
 }
 
+ .servicio
+{
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+    background-color: #fff;
+} 
+
 .fa-bed
 {
     color: rgb(249, 191, 141)
