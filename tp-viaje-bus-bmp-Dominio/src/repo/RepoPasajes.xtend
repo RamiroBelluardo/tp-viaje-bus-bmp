@@ -43,13 +43,18 @@ class RepoPasajes extends CollectionBasedRepo<Pasaje> {
 	
 	def search(Cliente cliente){
 		val fechaLlegada = LocalDateTime.now
-		val pasajes = allInstances.filter [pasaje | this.match(cliente, pasaje.cliente) && pasaje.viaje.fechaLlegada.isAfter(fechaLlegada)].toList
+		val pasajes = allInstances.filter [pasaje | this.match(cliente, pasaje.cliente) && pasaje.viaje.fechaLlegada.isAfter(fechaLlegada) && pasaje.estado.nombre !== "Cancelado"].toList
 		pasajes
 	}
 	
 	def searchHistoricos(Cliente cliente){
 		val fechaLlegada = LocalDateTime.now
 		val pasajes = allInstances.filter [pasaje | this.match(cliente, pasaje.cliente) && pasaje.viaje.fechaLlegada.isBefore(fechaLlegada)].toList
+		pasajes
+	}
+	
+	def searchCancelados(Cliente cliente){
+		val pasajes = allInstances.filter [pasaje | this.match(cliente, pasaje.cliente) && pasaje.estado.nombre == "Cancelado"].toList
 		pasajes
 	}
 

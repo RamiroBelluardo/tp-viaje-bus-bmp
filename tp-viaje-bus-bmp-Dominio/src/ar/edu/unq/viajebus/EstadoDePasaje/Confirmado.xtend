@@ -5,7 +5,11 @@ import ar.edu.unq.viajebus.Micro.Pasaje
 import ar.edu.unq.viajebus.Mailing.GMailSender
 
 class Confirmado extends EstadoDePasaje {
-
+	
+	new() {
+		this.nombre = "Confirmado"
+	}
+	
 	override anterior(Pasaje pasaje) {
 		super.anterior(pasaje)
 		GMailSender.instance.notificarCancelacionDePasaje(pasaje)

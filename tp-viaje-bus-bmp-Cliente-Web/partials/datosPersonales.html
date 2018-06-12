@@ -4,7 +4,7 @@
     <div class="row">
 
         <!-- PANEL DE DATOS (IZQUIERDO) -->
-        <div ng-controller="UsuarioController as usuarioCtrl" class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <div ng-controller="UsuarioController as usuarioCtrl" class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
             <h3>Mis datos</h3>
             <form class="form-horizontal" role="form">
 
@@ -61,12 +61,12 @@
         </div>
 
         <!-- PANEL PASAJES (DERECHO) -->
-        <div ng-controller="PasajeController as pasajeCtrl" class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+        <div ng-controller="PasajeController as pasajeCtrl" class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
             <h3>Pasajes</h3>
             <hr>
             <ul class="nav nav-pills nav-stacked">
                 <li data-ng-repeat="pasaje in pasajeCtrl.pasajesActuales">
-                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                         <b>Partida: </b>
                         {{pasaje.viaje.ciudadOrigen}} - {{pasaje.viaje.fechaPartida}}
                         <br>
@@ -90,11 +90,15 @@
                         {{pasajeCtrl.mostrarTele(pasaje.viaje)}}
                     </div>
 
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        <b>Asiento</b>
+                        <br> {{pasaje.asiento}}
+                    </div>
 
                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                         <b class="precio">${{pasaje.viaje.precio}}</b>
                     </div>
-                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
                         <button ng-click="pasajeCtrl.cancelar(pasaje)" type="button" class="btn btn-danger">Cancelar</button>
                     </div>
                     <br>
@@ -111,7 +115,7 @@
             <hr>
             <ul class="nav nav-pills nav-stacked">
                 <li data-ng-repeat="pasaje in pasajeCtrl.pasajesHistoricos">
-                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                         <b>Partida: </b>
                         {{pasaje.viaje.ciudadOrigen}} - {{pasaje.viaje.fechaPartida}}
                         <br>
@@ -137,7 +141,15 @@
 
 
                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        <b>Asiento</b>
+                        <br> {{pasaje.asiento}}
+                    </div>
+
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                         <b class="precio">${{pasaje.viaje.precio}}</b>
+                    </div>
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                        <i>Viaje expirado</i>
                     </div>
                     <br>
                     <br>
@@ -146,6 +158,59 @@
                     <hr>
                 </li>
             </ul>
+
+
+
+            <!-- PASAJES CANCELADOS -->
+
+            <h3>Pasajes cancelados</h3>
+            <hr>
+            <ul class="nav nav-pills nav-stacked">
+                <li data-ng-repeat="pasaje in pasajeCtrl.pasajesCancelados">
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <b>Partida: </b>
+                        {{pasaje.viaje.ciudadOrigen}} - {{pasaje.viaje.fechaPartida}}
+                        <br>
+                        <b>Llegada: </b>
+                        {{pasaje.viaje.ciudadDestino}} - {{pasaje.viaje.fechaLlegada}}
+                    </div>
+
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+
+                        <i ng-show="pasajeCtrl.esCama(pasaje.viaje)" class="fa fa-bed" aria-hidden="true"></i>
+                        {{pasaje.viaje.micro.tipoAsiento.nombre}}
+
+                        <ul class="nav nav-pills nav-stacked" id="servicios">
+                            <i ng-show="pasajeCtrl.tieneServicios(pasaje.viaje)" class="fa fa-cutlery" aria-hidden="true"></i>
+
+                            {{pasajeCtrl.mostrarServicios(pasaje.viaje)}}
+
+                        </ul>
+
+                        <i ng-show="pasaje.viaje.micro.tieneTele" class="fa fa-television" aria-hidden="true"></i>
+                        {{pasajeCtrl.mostrarTele(pasaje.viaje)}}
+                    </div>
+
+
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        <b>Asiento</b>
+                        <br> {{pasaje.asiento}}
+                    </div>
+
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        <b class="precio">${{pasaje.viaje.precio}}</b>
+                    </div>
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                        <i>Pasaje cancelado</i>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <hr>
+                </li>
+            </ul>
+
 
             <div class="col-12">
                 <button ui-sref="buscarViajes" type="submit" class="btn btn-sm btn-primary">Volver</button>

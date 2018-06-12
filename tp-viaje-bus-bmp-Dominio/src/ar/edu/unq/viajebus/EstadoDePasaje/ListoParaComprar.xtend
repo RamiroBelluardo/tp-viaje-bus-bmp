@@ -5,6 +5,10 @@ import ar.edu.unq.viajebus.Mailing.GMailSender
 
 class ListoParaComprar extends EstadoDePasaje {
 
+	new() {
+		this.nombre = "Listo para comprar"
+	}
+
 	override siguiente(Pasaje pasaje) {
 		super.siguiente(pasaje)
 		GMailSender.instance.notificarCompraDePasaje(pasaje)

@@ -13,6 +13,12 @@ const pasajeService = ($http) => {
         url: baseurl + "pasajesHistoricos/" + username
       })
     },
+    listarCancelados: (username) => {
+      return $http({
+        method: "GET",
+        url: baseurl + "pasajesCancelados/" + username
+      })
+    },
     cancelar: (usuario, pasaje) => {
       return $http({
         method: "POST",

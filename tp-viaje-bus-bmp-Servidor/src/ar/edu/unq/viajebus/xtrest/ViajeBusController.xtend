@@ -273,6 +273,24 @@ class ViajeBusController {
 			badRequest(getErrorJson(e.message))
 		}
 	}
+	
+	@Get('/pasajesCancelados/:username')
+	/*
+	 * Devuelve la lista de pasajes comprados por el username pasado por parámetro y que se hayan cancelado.
+	 */
+	def Result pasajesCancelados() {
+		try {
+			var usuario = repoUsuarios.buscarParaEditar(username)
+			var cliente = repoClientes.searchByMail(usuario.cliente.mail)
+			var resultados = repoPasajes.searchCancelados(cliente)
+
+			ok(resultados.map([each|new PasajeConViaje(each)]).toJson)
+
+		} catch (UserException e) {
+			badRequest(getErrorJson(e.message))
+		}
+	}
+	
 	private def String getOkJson(String message) {
 		'''{ "ok" : "«message»" }'''
 	}

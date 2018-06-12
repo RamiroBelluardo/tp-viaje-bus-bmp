@@ -34,9 +34,14 @@ class PasajeController {
             .catch(this.errorHandler)
         const promise2 = this.pasajeService.listarHistoricos(username)
         promise2
-        .then((response) => response.data)
-        .then((data) => this.pasajesHistoricos = data)
-        .catch(this.errorHandler)
+            .then((response) => response.data)
+            .then((data) => this.pasajesHistoricos = data)
+            .catch(this.errorHandler)
+        const promise3 = this.pasajeService.listarCancelados(username)
+        promise3
+            .then((response) => response.data)
+            .then((data) => this.pasajesCancelados = data)
+            .catch(this.errorHandler)
     }
 
     // CANCELAR
@@ -60,6 +65,7 @@ class PasajeController {
                     this.pasajeService.cancelar(usuario, pasaje)
                         .then((response) => {
                             this.notificarMensaje("Pasaje con destino a <b>'" + pasaje.viaje.ciudadDestino + "'</b>, y número de asiento <b>'" + pasaje.asiento + "'</b> cancelado con éxito")
+                            this.resetPasajes()
                         }, this.errorHandler)
                 }
             }
