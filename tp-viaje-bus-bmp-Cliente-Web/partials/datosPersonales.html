@@ -63,6 +63,7 @@
         <!-- PANEL PASAJES (DERECHO) -->
         <div ng-controller="PasajeController as pasajeCtrl" class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
             <h3>Pasajes</h3>
+            <i ng-show="pasajeCtrl.pasajesActuales.length==0">No tenés ningún pasaje comprado</i>
             <hr>
             <ul class="nav nav-pills nav-stacked">
                 <li data-ng-repeat="pasaje in pasajeCtrl.pasajesActuales">
@@ -112,6 +113,7 @@
             <!-- PASAJES HISTÓRICOS -->
 
             <h3>Pasajes históricos</h3>
+            <i ng-show="(pasajeCtrl.pasajesHistoricos.length==0)">No tenés ningún pasaje pasado</i>
             <hr>
             <ul class="nav nav-pills nav-stacked">
                 <li data-ng-repeat="pasaje in pasajeCtrl.pasajesHistoricos">
@@ -164,6 +166,7 @@
             <!-- PASAJES CANCELADOS -->
 
             <h3>Pasajes cancelados</h3>
+            <i ng-show="(pasajeCtrl.pasajesCancelados.length==0)">No tenés ningún pasaje cancelado</i>
             <hr>
             <ul class="nav nav-pills nav-stacked">
                 <li data-ng-repeat="pasaje in pasajeCtrl.pasajesCancelados">
