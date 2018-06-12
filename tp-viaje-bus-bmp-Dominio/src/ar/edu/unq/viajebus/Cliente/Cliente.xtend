@@ -12,8 +12,7 @@ import org.uqbar.commons.model.exceptions.UserException
 @TransactionalAndObservable
 class Cliente extends Entity implements Cloneable {
 
-	static final int MIN_DIGITOS_DNI = 8
-	static final int MAX_DIGITOS_DNI = 9
+	static final int MIN_DIGITOS_DNI = 7
 	static final int MIN_DIGITOS_MAIL = 5
 
 	String nombre
@@ -47,22 +46,6 @@ class Cliente extends Entity implements Cloneable {
 	}
 
 
-//	def void setDni(String unDNI) {
-//		if (unDNI.length < MIN_DIGITOS_DNI) {
-//			throw new UserException('''El DNI debe tener por lo menos «MIN_DIGITOS_DNI» dígitos''')
-//		}
-//		if (unDNI.length > MAX_DIGITOS_DNI) {
-//			throw new UserException('''El DNI no debe tener más de «MAX_DIGITOS_DNI» dígitos''')
-//		}
-//		this.dni = unDNI
-//	}
-
-//	//@Dependencies("nombre", "apellido", "dni", "mail")
-//	def void getValido() {
-//		if (this.nombre == null || this.apellido == null || this.dni == null || this.mail == null){
-//			throw new UserException('''Debe rellenar los campos obligatorios''')
-//		}
-//	}
 	@Dependencies("nombre", "apellido", "dni", "mail")
 	def Boolean getValido() {
 		 this.nombre !== null && this.nombre !== "" 
@@ -71,22 +54,6 @@ class Cliente extends Entity implements Cloneable {
 		 && this.mail !== null && this.mail !== ""
 	}
 
-//	def void setMail(String unMail) {
-//		var lastChar = ""
-//		if (unMail.length > 0) {
-//			lastChar = unMail.substring(unMail.length() - 1);
-//		}
-//		if (unMail === null || unMail.length < MIN_DIGITOS_MAIL) {
-//			//throw new UserException('''El mail debe tener al menos «MIN_DIGITOS_MAIL» caracteres''')
-//			throw new UserException("El mail debe tener al menos " +MIN_DIGITOS_MAIL + " caracteres")
-//		}
-//		if (!unMail.contains("@") || (lastChar == "@")) {
-//			//throw new UserException('''El Mail debe contener un @ intermedio''')
-//			throw new UserException("El mail debe contener un @ intermedio")
-//			
-//		}
-//		this.mail = unMail
-//	}
 
 	def String getNombreCompleto() {
 		//'''«nombre» «apellido»'''
@@ -101,7 +68,10 @@ class Cliente extends Entity implements Cloneable {
 			throw new UserException("Debe ingresar apellido")
 		}
 		if (dni === null || dni.trim.equals("")) {
-			throw new UserException("Debe ingresar un dni válido")
+			throw new UserException("Debe ingresar dni")
+		}
+		if (dni.length < MIN_DIGITOS_DNI) {
+			throw new UserException("El dni debe tener al menos " +MIN_DIGITOS_DNI + " dígitos")
 		}
 		if (mail === null || mail.trim.equals("")) {
 			throw new UserException("Debe ingresar mail")

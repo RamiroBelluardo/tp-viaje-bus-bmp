@@ -16,7 +16,7 @@
                                     <input ng-model="buscarCtrl.ciudadPartida" type="text" id="ciudadPartida" placeholder="Ingresá ciudad de partida" class="form-control"
                                         autofocus>
                                     <span class="input-group-btn">
-                                        <button type="button" class="btn btn-default">
+                                        <button type="button" class="btn btn-default" disabled>
                                             <i class="glyphicon glyphicon-globe"></i>
                                         </button>
                                     </span>
@@ -56,7 +56,7 @@
                                     <input ng-model="buscarCtrl.ciudadLlegada" type="text" id="ciudadLlegada" placeholder="Ingresá ciudad de llegada" class="form-control"
                                         autofocus>
                                     <span class="input-group-btn">
-                                        <button type="button" class="btn btn-default">
+                                        <button type="button" class="btn btn-default" disabled>
                                             <i class="glyphicon glyphicon-globe"></i>
                                         </button>
                                     </span>
@@ -114,12 +114,20 @@
                     </div>
 
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                        Asientos libres
-                        <br>{{buscarCtrl.verAsientosLibres(viaje)}} / {{viaje.micro.cantidadAsientos}}
-                        <br>
-                        <span ng-show="buscarCtrl.ultimosDisponibles(viaje)" class="colorRojo">
-                            <i class="fa fa-fire" aria-hidden="true"></i>
-                            Últimos disponibles</span>
+                        <div ng-show="viaje.asientosLibres.length>0">
+                            Asientos libres
+                            <br>{{buscarCtrl.verAsientosLibres(viaje)}} / {{viaje.micro.cantidadAsientos}}
+                            <br>
+                            <span ng-show="buscarCtrl.ultimosDisponibles(viaje)" class="colorRojo">
+                                <b>
+                                    <i class="fa fa-fire" aria-hidden="true"></i> Últimos disponibles</b>
+                            </span>
+                        </div>
+                        <span ng-show="viaje.asientosLibres.length==0" class="colorRojo">
+                            <b>
+                                <i class="fa fa-ban" aria-hidden="true"></i>
+                                Pasajes agotados</b>
+                        </span>
 
                     </div>
 
@@ -135,7 +143,9 @@
 
                         </ul>
 
-                        <i ng-show="viaje.micro.tieneTele" class="fa fa-television" aria-hidden="true"> <span class="servicio">Con tele</span></i>
+                        <i ng-show="viaje.micro.tieneTele" class="fa fa-television" aria-hidden="true">
+                            <span class="servicio">Con tele</span>
+                        </i>
                     </div>
 
                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
@@ -152,7 +162,6 @@
                         <b class="precio">${{viaje.precio}}</b>
                         <br>
                         <button ng-show="viaje.asientosLibres.length>0" ui-sref="seleccionarAsiento({id: viaje.id})" type="button" class="btn btn-danger">Comprar</button>
-                        <i ng-show="viaje.asientosLibres.length==0">Pasajes agotados</i>
                     </div>
                     <br>
                     <br>
