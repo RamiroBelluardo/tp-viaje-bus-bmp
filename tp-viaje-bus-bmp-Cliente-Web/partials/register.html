@@ -9,56 +9,56 @@
         </div>
 
         <div class="form-group">
-            <label for="username" class="col-sm-3 control-label">Usuario</label>
-            <div class="col-sm-9">
+            <label for="username" class="col-sm-4 control-label">Usuario</label>
+            <div class="col-sm-4">
                 <input ng-model="registerCtrl.usuarioARegistrar.username" type="text" id="username" placeholder="Ingresá tu usuario" class="form-control"
                     autofocus required="true">
             </div>
         </div>
 
         <div class="form-group">
-            <label for="password" class="col-sm-3 control-label">Contraseña</label>
-            <div class="col-sm-9">
+            <label for="password" class="col-sm-4 control-label">Contraseña</label>
+            <div class="col-sm-4">
                 <input ng-model="registerCtrl.usuarioARegistrar.password" type="password" id="password" placeholder="Ingresá tu contraseña"
                     class="form-control" required="true">
             </div>
         </div>
 
         <div class="form-group">
-            <label for="name" class="col-sm-3 control-label">Nombre</label>
-            <div class="col-sm-9">
+            <label for="name" class="col-sm-4 control-label">Nombre</label>
+            <div class="col-sm-4">
                 <input ng-model="registerCtrl.usuarioARegistrar.cliente.nombre" type="text" id="name" placeholder="Ingresá tu nombre" class="form-control"
                     required="true">
             </div>
         </div>
 
         <div class="form-group">
-            <label for="lastname" class="col-sm-3 control-label">Apellido</label>
-            <div class="col-sm-9">
+            <label for="lastname" class="col-sm-4 control-label">Apellido</label>
+            <div class="col-sm-4">
                 <input ng-model="registerCtrl.usuarioARegistrar.cliente.apellido" type="text" id="lastname" placeholder="Ingresá tu apellido"
                     class="form-control" required="true">
             </div>
         </div>
 
         <div class="form-group">
-            <label for="dni" class="col-sm-3 control-label">DNI</label>
-            <div class="col-sm-9">
+            <label for="dni" class="col-sm-4 control-label">DNI</label>
+            <div class="col-sm-4">
                 <input ng-model="registerCtrl.usuarioARegistrar.cliente.dni" type="number" id="dni" placeholder="Ingresá tu DNI" class="form-control"
                     required="true">
             </div>
         </div>
 
         <div class="form-group">
-            <label for="mail" class="col-sm-3 control-label">Mail</label>
-            <div class="col-sm-9">
+            <label for="mail" class="col-sm-4 control-label">Mail</label>
+            <div class="col-sm-4">
                 <input ng-model="registerCtrl.usuarioARegistrar.cliente.mail" type="text" id="mail" placeholder="Ingresá tu mail" class="form-control"
                     required="true">
             </div>
         </div>
 
         <div class="form-group">
-            <label for="phone" class="col-sm-3 control-label">Teléfono</label>
-            <div class="col-sm-9">
+            <label for="phone" class="col-sm-4 control-label">Teléfono</label>
+            <div class="col-sm-4">
                 <input ng-model="registerCtrl.usuarioARegistrar.cliente.telefono" type="number" id="phone" placeholder="Ingresá tu teléfono"
                     class="form-control">
             </div>
@@ -66,9 +66,15 @@
 
 
         <div class="form-group">
-            <div class="col-sm-9 col-sm-offset-3">
+            <div class="col-sm-4 col-sm-offset-4">
                 <button ng-click="registerCtrl.agregarUsuario()" type="submit" class="btn btn-primary btn-block">Registrar</button>
             </div>
         </div>
+
+        <div class="form-group">
+                <div class="col-sm-4 col-sm-offset-4">
+                    <button ui-sref="login" type="button" class="btn btn-link">Login</button>
+                </div>
+            </div>
     </form>
 </div>
