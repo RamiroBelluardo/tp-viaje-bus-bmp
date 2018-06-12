@@ -46,10 +46,11 @@ class RepoViajes extends CollectionBasedRepo<Viaje> {
 	
 
 	def search(String ciudadPartida, String ciudadLlegada, LocalDate fechaPartida, LocalDate fechaLlegada) {
+		val hoy = LocalDateTime.now
 		allInstances.filter [ viajes |
 			this.match(ciudadPartida, viajes.recorrido.head) && this.match(ciudadLlegada, viajes.recorrido.last) &&
 				this.match(fechaPartida, viajes.fechaPartida.toLocalDate) &&
-				this.match(fechaLlegada, viajes.fechaLlegada.toLocalDate)
+				this.match(fechaLlegada, viajes.fechaLlegada.toLocalDate) && viajes.fechaPartida.isAfter(hoy)
 		].toList
 	}
 	
