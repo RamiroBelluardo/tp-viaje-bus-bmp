@@ -56,7 +56,7 @@ class ViajeBusBootstrap extends CollectionBasedBootstrap {
 		val llegadaMicro4 = new LocalDateTime()
 
 		val micro1 = repoMicros.create("ABC123", new Cama, true, 2)
-		val micro2 = repoMicros.create("AB123AB", new Semicama, false, 4)
+		val micro2 = repoMicros.create("AB123AB", new Semicama, false, 6)
 		val micro3 = repoMicros.create("DCR283", new Ejecutivo, true, 0)
 		val micro4 = repoMicros.create("XYZ123", new Ejecutivo, true, 8)
 
@@ -89,6 +89,8 @@ class ViajeBusBootstrap extends CollectionBasedBootstrap {
 		viaje1.agregarAsiento(new Asiento)
 		viaje1.agregarAsiento(new Asiento)
 
+		viaje2.agregarAsiento(new Asiento)
+		viaje2.agregarAsiento(new Asiento)
 		viaje2.agregarAsiento(new Asiento)
 		viaje2.agregarAsiento(new Asiento)
 		viaje2.agregarAsiento(new Asiento)
