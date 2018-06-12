@@ -145,15 +145,15 @@ class ViajeBusController {
 
 			val viaje = repoViajes.searchById(pasajeConUsuario.viajeId)
 			val nroAsiento = pasajeConUsuario.asiento
-			
-			if (nroAsiento === null){
+
+			if (nroAsiento === null) {
 				return badRequest(getErrorJson("Por favor seleccione un asiento a comprar"))
 			}
 
 			if (!viaje.nrosAsientosDisponibles.contains(nroAsiento)) {
 				return badRequest(getErrorJson("El asiento ya se encuentra reservado"))
 			}
-						
+
 			pagosMercado.validarPago(pasajeConUsuario.pago, token)
 			ok(getOkJson("Pago Aprobado"))
 
@@ -211,11 +211,6 @@ class ViajeBusController {
 			badRequest(getErrorJson(e.message))
 		}
 	}
-	
-// ********************************************************
-// ** PAGOS MERCADO
-// ********************************************************
-
 
 // ********************************************************
 // ** OPCIONALES
@@ -251,7 +246,16 @@ class ViajeBusController {
 			notFound(getErrorJson(e.message));
 		}
 	}
-	
+
+	@Get('/viajesActuales')
+	/*
+	 * Devuelve la lista de viajes sin mostrar viajes pasados.
+	 */
+	def Result buscarActuales() {
+		var resultados = repoViajes.searchActuales()
+		ok(resultados.map([each|new ViajeResumido(each)]).toJson)
+	}
+
 	private def String getOkJson(String message) {
 		'''{ "ok" : "«message»" }'''
 	}

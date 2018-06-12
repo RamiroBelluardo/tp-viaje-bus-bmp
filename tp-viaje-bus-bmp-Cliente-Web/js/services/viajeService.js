@@ -8,6 +8,12 @@ const viajeService = ($http, $state) => {
         url: baseurl + "viajes"
       })
     },
+    listarActuales: () => {
+      return $http({
+        method: "GET",
+        url: baseurl + "viajesActuales"
+      })
+    },
     buscar: (ciudadPartida, ciudadLlegada, fechaPartida, fechaLlegada) => {
       return $http({
         method: "GET",

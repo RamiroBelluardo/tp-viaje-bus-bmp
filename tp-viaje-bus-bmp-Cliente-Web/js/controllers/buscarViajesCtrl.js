@@ -62,7 +62,7 @@ class BuscarViajesController {
             this.fechaLlegadaModificada = diaLlegada + "-" + mesLlegada + "-" + anioLlegada
         }
         const promise = (this.ciudadPartida == "" && this.ciudadLlegada == "" && this.fechaPartida == null && this.fechaLlegada == null) ?
-            this.viajeService.listarTodos() :
+            this.viajeService.listarActuales() :
             this.viajeService.buscar(this.ciudadPartida, this.ciudadLlegada, this.fechaPartidaModificada, this.fechaLlegadaModificada)
 
         promise

@@ -52,6 +52,11 @@ class RepoViajes extends CollectionBasedRepo<Viaje> {
 				this.match(fechaLlegada, viajes.fechaLlegada.toLocalDate)
 		].toList
 	}
+	
+	def searchActuales() {
+		val fechaPartida = LocalDateTime.now
+		allInstances.filter [ viaje | viaje.fechaPartida.isAfter(fechaPartida) || viaje.fechaPartida.isEqual(fechaPartida)].toList
+	}
 
 	def search(Micro micro) {
 		allInstances.filter[viaje|this.match(micro, viaje.micro)].toList
