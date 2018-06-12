@@ -1,7 +1,8 @@
 class SeleccionarAsientoController {
-    constructor($stateParams, $state, viajeService, pasajeService, BarraSuperiorService, growl){
+    constructor($stateParams, $state, PagosMercadoService, viajeService, pasajeService, BarraSuperiorService, growl) {
         this.$stateParams = $stateParams
         this.state = $state
+        this.pagosMercado = PagosMercadoService
         this.viajeService = viajeService
         this.pasajeService = pasajeService
         this.barraSuperiorService = BarraSuperiorService
@@ -11,10 +12,12 @@ class SeleccionarAsientoController {
         this.asientos = []
         this.growl = growl
         this.errorHandler = (response) => {
-            if (response.data) {
+            if (response.data.errors) {
+                let error = response.data.errors[0].detail.toString()
+                this.notificarError(error)
+            }
+            if (response.data.error) {
                 this.notificarError(response.data.error)
-            } else {
-                this.notificarError("Error de conexión, intente nuevamente luego.")
             }
         }
     }
@@ -58,23 +61,20 @@ class SeleccionarAsientoController {
         return viaje.servicios.join(", ")
     }
 
-//     mostrarRecorrido(viaje) {
-//         return viaje.recorrido.join(", ")
-//     }
 
-//     asientoReservado(asiento) {
-//         return asiento.estado.nombre == "Reservado"
-//     }
-
-    confirmar() {
+    registrarPago() {
         this.pasaje.viajeId = this.viaje.id
         this.pasaje.username = this.barraSuperiorService.usuarioLogueado.username
         this.pasaje.password = this.barraSuperiorService.usuarioLogueado.password
-        this.pasajeService.confirmar(this.pasaje)
-            .then((response) => {
-                this.notificarMensaje("Pasaje a " +this.viaje.ciudadDestino + " comprado con éxito")
+        this.pasaje.pago.amount = this.viaje.precio
+        this.pagosMercado
+            .iniciarPago(this.pasaje.pago)
+            .then((it) => this.pasajeService.crearPago(this.pasaje, it.data.token))
+            .then((it) => {
+                this.notificarMensaje("Pasaje a " + this.viaje.ciudadDestino + " comprado con éxito")
                 this.state.go("buscarViajes")
             }, this.errorHandler)
     }
 
- }
+
+}

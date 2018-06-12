@@ -32,6 +32,7 @@ import transformer.LocalDateTransformer
 @Controller
 class ViajeBusController {
 	extension JSONUtils = new JSONUtils
+	val pagosMercado = new PagosMercadoClient()
 
 	ViajeBusBootstrap bootstrap = new ViajeBusBootstrap
 	RepoClientes repoClientes = ApplicationContext.instance.getSingleton(typeof(Cliente)) as RepoClientes
@@ -133,7 +134,8 @@ class ViajeBusController {
 	 * Carga un pasaje nuevo al cliente asociado al usuario.
 	 * Los datos de pago por el momento son ignorados.
 	 */
-	def Result comprarPasaje(@Body String body) {
+	def Result comprarPasaje(String token, @Body String body) {
+
 		try {
 			if (body === null || body.trim.equals("")) {
 				return badRequest(getErrorJson("Faltan datos del pasaje a comprar"))
@@ -151,6 +153,9 @@ class ViajeBusController {
 			if (!viaje.nrosAsientosDisponibles.contains(nroAsiento)) {
 				return badRequest(getErrorJson("El asiento ya se encuentra reservado"))
 			}
+						
+			pagosMercado.validarPago(pasajeConUsuario.pago, token)
+			ok(getOkJson("Pago Aprobado"))
 
 			val nuevoPasaje = repoPasajes.create(user.cliente, viaje, nroAsiento)
 			nuevoPasaje.confirmar
@@ -206,6 +211,11 @@ class ViajeBusController {
 			badRequest(getErrorJson(e.message))
 		}
 	}
+	
+// ********************************************************
+// ** PAGOS MERCADO
+// ********************************************************
+
 
 // ********************************************************
 // ** OPCIONALES
@@ -240,6 +250,10 @@ class ViajeBusController {
 		} catch (UserException e) {
 			notFound(getErrorJson(e.message));
 		}
+	}
+	
+	private def String getOkJson(String message) {
+		'''{ "ok" : "«message»" }'''
 	}
 
 	private def String getErrorJson(String message) {

@@ -1,6 +1,7 @@
 package ar.edu.unq.viajebus.adapters
 
 import org.eclipse.xtend.lib.annotations.Accessors
+import ar.edu.unq.viajebus.xtrest.DatosPago
 
 @Accessors
 class PasajeConUsuario {
@@ -9,18 +10,14 @@ class PasajeConUsuario {
 	String password
 	Integer viajeId
 	Integer asiento
-	String numeroTarjeta
-	Integer nroExpiracionTarjeta
-	Integer mesExpiracionTarjeta
+	DatosPago pago
 	
 	new(){
 		this.username = username
 		this.password = password
 		this.viajeId = viajeId
 		this.asiento = asiento
-		this.numeroTarjeta = numeroTarjeta
-		this.nroExpiracionTarjeta = nroExpiracionTarjeta
-		this.mesExpiracionTarjeta = mesExpiracionTarjeta
+		this.pago = new DatosPago()
 	}
 	
 }
