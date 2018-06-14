@@ -58,17 +58,27 @@ class GMailSender {
 	def notificarCompraDePasaje(Pasaje pasaje) {
 		this.sendMail(pasaje.cliente.mail, "ViajeBus: Compra realizada con éxito",
 			"Estimado/a " + pasaje.cliente.nombre +
-				", usted ha efectuado la compra del siguiente pasaje.\n\n Número de asiento:" + pasaje.asiento.numero +
-				"\n\n Fecha de partida:" + pasaje.viaje.fechaPartida.toString(pattern) + "\n\n Precio: $" + pasaje.viaje.precio +
-				"\n\n Muchas gracias por elegirnos!\n\n ViajeBus")
+				", su compra de pasaje con destino " +pasaje.viaje.destino + " se realizó exitosamente.\n\n" + 
+				"Datos del pasaje: \n\n" +
+				"- Ciudad de partida: " + pasaje.viaje.origen + "\n" +
+				"- Ciudad de llegada: " + pasaje.viaje.destino + "\n" +
+				"- Fecha de partida: " + pasaje.viaje.fechaPartida.toString(pattern) + "hs" + "\n" +
+				"- Fecha de llegada: " + pasaje.viaje.fechaLlegada.toString(pattern) + "hs" + "\n" +
+				 "- Número de asiento: " + pasaje.asiento.numero + "\n\n" +
+				"Muchas gracias por elegirnos!\n\n ViajeBus")
 	}
 
 	def notificarCancelacionDePasaje(Pasaje pasaje) {
 		this.sendMail(pasaje.cliente.mail, "ViajeBus: Pasaje cancelado",
 			"Estimado/a " + pasaje.cliente.nombre +
-				", lamentamos informarle que el siguiente pasaje ha sido cancelado: \n\n Número de asiento:" +
-				pasaje.asiento.numero + "\n\n Fecha de partida:" + pasaje.viaje.fechaPartida.toString(pattern) +
-				"\n\n Disculpe las molestias y muchas gracias por elegirnos!\n\n ViajeBus")
+				", lamentamos informarle que su pasaje con destino " +pasaje.viaje.destino + " ha sido cancelado. \n\n" + 
+				 "Datos del pasaje: \n\n" +
+				"- Ciudad de partida: " + pasaje.viaje.origen + "\n" +
+				"- Ciudad de llegada: " + pasaje.viaje.destino + "\n" +
+				"- Fecha de partida: " + pasaje.viaje.fechaPartida.toString(pattern) + "hs" + "\n" +
+				"- Fecha de llegada: " + pasaje.viaje.fechaLlegada.toString(pattern) + "hs" + "\n" +
+				 "- Número de asiento: " + pasaje.asiento.numero + "\n\n" +
+				"Disculpe las molestias y muchas gracias por elegirnos!\n\n ViajeBus")
 	}
 
 }
@@ -86,3 +96,4 @@ class UserPasswordAuthentication extends Authenticator {
 	override protected getPasswordAuthentication() { new PasswordAuthentication(username, password) }
 
 }
+  
